@@ -17,11 +17,12 @@ If you have questions or have knowledge to share, please visit our [forum](https
 Version 3.2.0
 * Supports EPOC (over Emotiv USB dongle)
 * Supports Insight and EPOC+ (over BTLE and Emotiv USB dongle)
-* Emotiv SDK for Win32/64, Mac
+* Emotiv SDK for Win32/64, Mac, Android, iOS
 
 Coming soon:
-* Emotiv SDK for Android, iOS, Ubuntu
+* Emotiv SDK for Ubuntu 64-bit
 * EmoComposer for Win32, Mac
+* EmoKey for Win32, Mac
 
 ## Supported Platforms
 * Insight with Bluetooth SMART (Bluetooth 4.0 or Bluetooth Low Energy) connection currently works with the SDK under:
@@ -47,19 +48,20 @@ http://emotiv.com/api/insight/3.2.0/
 
 ## Known Issues
 * Mac SDK may not work with EPOC+ in 256Hz mode over BTLE and USB dongle properly
+* EPOC+ motion data may not be accurate with firmware 0x614 over BTLE and USB dongle
 
 ## Apps and Tools
 
 #### CPanel
 A web-based Emotiv Control Panel:
 
-https://cpanel.emotivinsight.com/BTLE/
+https://cpanel.emotivinsight.com
 
 Compatible with Insight / EPOC / EPOC+ via BTLE or [Emotiv USB Universal Receiver](https://emotiv.com/store/product_9.html) on:
 * Windows 7 or above, with Firefox
 * Mac OS X 10.8.5 or above, with Safari or Firefox
 
-Please follow the instructions to install the Emotiv browser plugin before using the Control Panel.
+Please follow the instructions to install the Emotiv browser plugin before using the CPanel.
 
 #### Insight App for Android
 Requires Android 4.4 or later
