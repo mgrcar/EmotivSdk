@@ -29,12 +29,12 @@ Coming soon:
   * Windows 8 or above
   * Windows 7, **only with Bluetooth adaptor that uses Broadcom BCM20702 chipset**
     (recommended one: Plugable USB 2.0 Bluetooth Adapter, http://plugable.com/products/usb-bt4le)
-  * Mac OS X 10.8.5 or above (check if Bluetooth LMP Version is 0x6 from System Report)
+  * Mac OS X 10.10 or above (check if Bluetooth LMP Version is 0x6 from System Report)
   * Android 4.4.3 or above
 
 * Insight with Emotiv Universal USB Receiver currently works with the SDK under:
   * Windows 7 or above
-  * Mac OS X 10.8.5 or above
+  * Mac OS X 10.8 or above
   * Android 4.4.3 or above
 
 ## Connecting Your Insight
@@ -57,9 +57,13 @@ A web-based Emotiv Control Panel:
 
 https://cpanel.emotivinsight.com
 
-Compatible with Insight / EPOC / EPOC+ via BTLE or [Emotiv USB Universal Receiver](https://emotiv.com/store/product_9.html) on:
-* Windows 7 or above, with Firefox
-* Mac OS X 10.8.5 or above, with Safari or Firefox
+Compatible with Insight / EPOC / EPOC+ via:
+* BTLE:
+  * Windows 8 or above, with Firefox
+  * Mac OS X 10.10 or above, with Safari or Firefox
+* [Emotiv USB Universal Receiver](https://emotiv.com/store/product_9.html):
+  * Windows 7 or above, with Firefox
+  * Mac OS X 10.8 or above, with Safari or Firefox
 
 Please follow the instructions to install the Emotiv browser plugin before using the CPanel.
 
