@@ -25,7 +25,7 @@ using namespace std;
 int _kbhit(void);
 #endif
 
-int main(int argc,char** argv[])
+int main(int argc,char* argv[])
 {
 	EmoEngineEventHandle hEvent = IEE_EmoEngineEventCreate();
 	EmoStateHandle eState = IEE_EmoStateCreate();

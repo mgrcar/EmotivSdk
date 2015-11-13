@@ -9,8 +9,9 @@
 
 #include <iostream>
 #include <fstream>
+#if _WIN32
 #include <conio.h>
-
+#endif
 
 #include "Iedk.h"
 #include "IedkErrorCode.h"
@@ -18,7 +19,29 @@
 
 using namespace std;
 
-void main()
+#ifdef __linux__
+static int _kbhit(void)
+{
+    struct timeval tv;
+    fd_set read_fd;
+
+    tv.tv_sec=0;
+    tv.tv_usec=0;
+
+    FD_ZERO(&read_fd);
+    FD_SET(0,&read_fd);
+
+    if(select(1, &read_fd,NULL, NULL, &tv) == -1)
+    return 0;
+
+    if(FD_ISSET(0,&read_fd))
+        return 1;
+
+    return 0;
+}
+#endif
+
+int main(int argc, char** argv)
 {
 	EmoEngineEventHandle eEvent = IEE_EmoEngineEventCreate();
 	EmoStateHandle eState = IEE_EmoStateCreate();
@@ -32,8 +55,11 @@ void main()
 	int batteryLevel, maxBatteryLevel = 0;
 	IEE_SignalStrength_t wirelessStrength;
 
-	if (IEE_EngineConnect() != EDK_OK) 
-			throw std::runtime_error("Emotiv Driver start up failed.");
+    if (IEE_EngineConnect() != EDK_OK) {
+            //throw std::runtime_error("Emotiv Driver start up failed.");
+            std::cout << "Emotiv Driver start up failed.";
+            return -1;
+    }
 
 	std::ofstream ofs;
 	ofs.open("test.csv");

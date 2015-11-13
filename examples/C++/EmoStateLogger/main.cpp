@@ -23,9 +23,16 @@
     #include <unistd.h>
 #endif
 
+
+
 #include "IEmoStateDLL.h"
 #include "Iedk.h"
 #include "IedkErrorCode.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 void logEmoState(std::ostream& os, unsigned int userID,
                  EmoStateHandle eState, bool withHeader = false);
@@ -233,5 +240,9 @@ int _kbhit(void)
         return 1;
 
     return 0;
+}
+#endif
+
+#ifdef __cplusplus
 }
 #endif
