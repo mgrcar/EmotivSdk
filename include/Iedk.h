@@ -20,7 +20,6 @@
 #include "FacialExpressionDetection.h"
 #include "MentalCommandDetection.h"
 
-
 #ifndef EDK_STATIC_LIB
     #ifdef EDK_EXPORTS
         #ifdef _WIN32
@@ -59,9 +58,37 @@ extern "C"
      */
     typedef void* EmoEngineEventHandle;
 
+    typedef enum IEE_DataChannels_enum {
+        IED_COUNTER = 0,        //!< Sample counter
+        IED_INTERPOLATED,       //!< Indicate if data is interpolated
+        IED_RAW_CQ,             //!< Raw contact quality value
+        IED_AF3,                //!< Channel AF3
+        IED_F7,                 //!< Channel F7
+        IED_F3,                 //!< Channel F3
+        IED_FC5,                //!< Channel FC5
+        IED_T7,                 //!< Channel T7
+        IED_P7,                 //!< Channel P7
+        IED_Pz,                 //!< Channel Pz
+        IED_O1 = IED_Pz,        //!< Channel O1
+        IED_O2,                 //!< Channel O2
+        IED_P8,                 //!< Channel P8
+        IED_T8,                 //!< Channel T8
+        IED_FC6,                //!< Channel FC6
+        IED_F4,                 //!< Channel F4
+        IED_F8,                 //!< Channel F8
+        IED_AF4,                //!< Channel AF4
+        IED_GYROX,              //!< Gyroscope X-axis
+        IED_GYROY,              //!< Gyroscope Y-axis
+        IED_TIMESTAMP,          //!< System timestamp
+        IED_ES_TIMESTAMP,       //!< EmoState timestamp
+        IED_FUNC_ID,            //!< Reserved function id
+        IED_FUNC_VALUE,         //!< Reserved function value
+        IED_MARKER,             //!< Marker value from hardware
+        IED_SYNC_SIGNAL         //!< Synchronisation signal
+    } IEE_DataChannel_t;
 
 	//! Handle to data placeholder allocated by IEE_MotionDataCreate.
-	/*!
+    /*!
 		\sa IEE_MotionDataCreate()
 	*/
 	typedef void* DataHandle;
@@ -99,16 +126,16 @@ extern "C"
 
 	//! Detection type enumerator
 	typedef enum IEE_Detection_enum {
-        DT_BlinkAndWink     = 0x0001,   //!< Blink and Wink detection
-        DT_FacialExpression = 0x0002,   //!< Other facial expression detection
-        DT_EyeMovement      = 0x0004,   //!< Eye movement detection
-        DT_Excitement       = 0x0008,   //!< Excitement detection (deprecated)
-        DT_Engagement       = 0x0010,   //!< Engagement detection (deprecated)
-        DT_Relaxation       = 0x0020,   //!< Relaxation detection (deprecated)
-        DT_Interest         = 0x0040,   //!< Interest detection (deprecated)
-        DT_Stress           = 0x0080,   //!< Stress detection (deprecated)
-        DT_Focus            = 0x0100,   //!< Focus detection (deprecated)
-        DT_MentalCommand    = 0x0200,   //!< Mental command detection
+		DT_BlinkAndWink     = 0x0001,   //!< Blink and Wink detection
+		DT_FacialExpression = 0x0002,   //!< Other facial expression detection
+		DT_EyeMovement      = 0x0004,   //!< Eye movement detection
+		DT_Excitement       = 0x0008,   //!< Excitement detection (deprecated)
+		DT_Engagement       = 0x0010,   //!< Engagement detection (deprecated)
+		DT_Relaxation       = 0x0020,   //!< Relaxation detection (deprecated)
+		DT_Interest         = 0x0040,   //!< Interest detection (deprecated)
+		DT_Stress           = 0x0080,   //!< Stress detection (deprecated)
+		DT_Focus            = 0x0100,   //!< Focus detection (deprecated)
+		DT_MentalCommand    = 0x0200,   //!< Mental command detection
 		DT_AllDetections    = (DT_BlinkAndWink | DT_FacialExpression | DT_EyeMovement |
 		                       DT_Excitement | DT_Engagement | DT_Relaxation |
 		                       DT_Interest | DT_Stress | DT_Focus |
@@ -132,7 +159,17 @@ extern "C"
         IMD_TIMESTAMP           //!< Timestamp of the motion data stream
     } IEE_MotionDataChannel_t;
     
-
+    
+    //! Windowing types enum for Fast Fourier Transform
+    typedef enum IEE_WindowingTypes_enum {
+        IEE_HANNING   = 0,      //!< Hanning Window
+        IEE_HAMMING   = 1,      //!< Hamming Window
+        IEE_HANN      = 2,      //!< Hann Window
+        IEE_BLACKMAN  = 3,      //!< Blackman-Harris Window
+        IEE_RECTANGLE = 4       //!< Uniform/rectangular Window
+    } IEE_WindowingTypes;
+    
+    
     //! Initialize EmoEngine instance which reads data from the headset.
     /*!
         This function should be called at the beginning of programs that make use of EmoEngine, most probably in initialization routine or constructor.
@@ -520,6 +557,7 @@ extern "C"
 	*/
 	EDK_API int
 		IEE_MotionDataGetBufferSizeInSec(float* pBufferSizeInSecOut);
+    
 
 	//! Get sampling rate of the motion data stream
 	/*!
@@ -556,6 +594,57 @@ extern "C"
      */
     EDK_API void
         IEE_CheckDetectionsEnabled(unsigned long* result);
+
+    
+    //! Get averge band power values for a channel
+    /*!
+        Return the average band power for a specific channel from the latest epoch with
+        0.5 seconds step size and 2 seconds window size.
+     
+        \param userId    - user ID
+        \param channel   - channel that is interested in
+        \param theta     - theta band value (4-8 Hz)
+        \param alpha     - alpha band value (8-12 Hz)
+        \param low_beta  - low-beta value (12-16 Hz)
+        \param high_beta - high-beta value (16-25 Hz)
+        \param gamma     - gamma value (25-45 Hz)
+
+        \return EDK_ERROR_CODE
+                - EDK_OK if successful
+     
+        \sa IedkErrorCode.h, IEE_FFTSetWindowingType
+    */
+    EDK_API int
+        IEE_GetAverageBandPowers(unsigned int userId, IEE_DataChannel_t channel,
+                                 double* theta, double* alpha, double* low_beta, double* high_beta, double* gamma);
+
+    
+    //! Set the current windowing type for band power calculation
+    /*!
+        \param userId - user ID
+        \param type   - windowing type enum from IEE_WindowingTypes
+
+        \return EDK_ERROR_CODE
+                - EDK_OK if successful
+
+        \sa IedkErrorCode.h, IEE_FFTGetWindowingType, IEE_GetAverageBandPowers
+    */
+    EDK_API int
+        IEE_FFTSetWindowingType(unsigned int userId, IEE_WindowingTypes type);
+    
+
+    //! Get the current windowing type for band power calculation
+    /*!
+        \param userId - user ID
+        \param type   - windowing type enum from IEE_WindowingTypes (default: IEE_HANNING)
+
+        \return EDK_ERROR_CODE
+                - EDK_OK if successful
+
+        \sa IedkErrorCode.h, IEE_FFTSetWindowingType, IEE_GetAverageBandPowers
+    */
+    EDK_API int
+        IEE_FFTGetWindowingType(unsigned int userId, IEE_WindowingTypes *type);
     
     
     //!
@@ -564,7 +653,7 @@ extern "C"
     
 #if defined(__APPLE__)
     
-    //! Initialize access to BTLE devices
+    //! Initialize access to devices over BTLE
     /*!
         \remark Available on Mac/iOS only.
      
@@ -579,48 +668,102 @@ extern "C"
     
 #if defined(__APPLE__) || defined(__ANDROID__)
     
-    //! Connect to a particular headset
+    //! Connect to an Insight device
     /*!
         \remark Available on Mac/iOS/Android only.
      
-        \param indexDevice - the index of device in list (start with 0)
+        \param indexDevice - the index of device in list (start from 0)
+     
         \return true if connected successfully
      */
     EDK_API int
-        IEE_EmoConnectDevice(int indexDevice);
+        IEE_ConnectInsightDevice(int indexDevice);
     
     
-    //! Check the signal strength of current connected device
+    //! Get the signal strength of an Insight device
     /*!
-        \remark Available on Mac/iOS/Android only.
-     
         If there are multiple headsets around, you should choose to connect to the one with strongest signal.
      
+        \remark Available on Mac/iOS/Android only.
+     
+        \param indexDevice - the index of device in list (start from 0)
+
         \param value - -30 to 0 (weak to strong)
      */
     EDK_API void
-        IEE_GetSignalStrengthBLEInsight(int& value);
+        IEE_GetInsightSignalStrength(int& value, int indexDevice);
     
     
-    //! Get number of Insight headset in the list
+    //! Get number of Insight devices nearby
     /*!
         \remark Available on Mac/iOS/Android only.
      
         \return number of Insight headsets
-         */
+     */
     EDK_API int
-        IEE_GetNumberDeviceInsight();
+        IEE_GetInsightDeviceCount();
     
     
-    //! Return name of headset in listed devices
+    //! Get the name of an Insight device
+    /*!
+        The device name will include part of the serial number.
+     
+        \remark Available on Mac/iOS/Android only.
+
+        \param index - index in device list
+        \return const char* - name of the headset
+     */
+    EDK_API const char*
+        IEE_GetInsightDeviceName(int index);
+
+    
+    //! Connect to an EPOC+ device
     /*!
         \remark Available on Mac/iOS/Android only.
      
-        \param index - index in list device
-        \return const char* - name of the headset
-    */
+        \param indexDevice  -  the order of device in list (start from 0)
+        \param isSettingMode - if true the get data feature will be disabled
+        
+        \return true if connect successfully
+     */
+    EDK_API int
+        IEE_ConnectEpocPlusDevice(int indexDevice, bool isSettingMode=false);
+    
+    
+    //! Get the signal strength of an EPOC+ device
+    /*!
+        If there are multiple headsets around, you should choose to connect to the one with strongest signal.
+     
+        \remark Available on Mac/iOS/Android only.
+     
+        \param int value
+        \param indexDevice - the index of device in list (start from 0)
+     */
+    EDK_API void
+        IEE_GetEpocPlusSignalStrength(int& value, int indexDevice);
+    
+    
+    //! Get number of EPOC+ devices nearby
+    /*!
+        \remark Available on Mac/iOS/Android only.
+     
+        \return number of EPOC+ headsets
+     */
+    EDK_API int
+        IEE_GetEpocPlusDeviceCount();
+    
+    
+    //! Get the name of an EPOC+ device
+    /*!
+        The device name will include part of the serial number.
+     
+        \remark Available on Mac/iOS/Android only.
+     
+        \param int index in device list
+        \return const char* name of device
+     */
     EDK_API const char*
-        IEE_GetNameDeviceInsightAtIndex(int index);
+        IEE_GetEpocPlusDeviceName(int index);
     
 #endif
     
