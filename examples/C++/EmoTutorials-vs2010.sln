@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EmoStateLogger", "EmoStateLogger\EmoStateLogger.vcxproj", "{5EF7DF22-CF68-47C3-8A79-4D49561F54F8}"
@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MotionDataLogger", "MotionD
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HeadsetInformationLogger", "HeadsetInformationLogger\HeadsetInformationLogger.vcxproj", "{527E75B5-1E28-4D5C-BB2F-4CFCD09E4F47}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SavingAndLoadingProfileCloud", "SavingAndLoadingProfileCloud\SavingAndLoadingProfileCloud.vcxproj", "{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -25,8 +27,7 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5EF7DF22-CF68-47C3-8A79-4D49561F54F8}.Debug|Win32.ActiveCfg = Debug|Win32
 		{5EF7DF22-CF68-47C3-8A79-4D49561F54F8}.Debug|Win32.Build.0 = Debug|Win32
-		{5EF7DF22-CF68-47C3-8A79-4D49561F54F8}.Debug|x64.ActiveCfg = Debug|x64
-		{5EF7DF22-CF68-47C3-8A79-4D49561F54F8}.Debug|x64.Build.0 = Debug|x64
+		{5EF7DF22-CF68-47C3-8A79-4D49561F54F8}.Debug|x64.ActiveCfg = Debug|Win32
 		{5EF7DF22-CF68-47C3-8A79-4D49561F54F8}.Release|Win32.ActiveCfg = Release|Win32
 		{5EF7DF22-CF68-47C3-8A79-4D49561F54F8}.Release|Win32.Build.0 = Release|Win32
 		{5EF7DF22-CF68-47C3-8A79-4D49561F54F8}.Release|x64.ActiveCfg = Release|Win32
@@ -64,8 +65,7 @@ Global
 		{EB30969B-5A96-4415-832E-FC61D0E1F092}.Release|x64.Build.0 = Release|x64
 		{553701F4-926B-42B7-BCC1-D3637B5AC13B}.Debug|Win32.ActiveCfg = Debug|Win32
 		{553701F4-926B-42B7-BCC1-D3637B5AC13B}.Debug|Win32.Build.0 = Debug|Win32
-		{553701F4-926B-42B7-BCC1-D3637B5AC13B}.Debug|x64.ActiveCfg = Debug|x64
-		{553701F4-926B-42B7-BCC1-D3637B5AC13B}.Debug|x64.Build.0 = Debug|x64
+		{553701F4-926B-42B7-BCC1-D3637B5AC13B}.Debug|x64.ActiveCfg = Debug|Win32
 		{553701F4-926B-42B7-BCC1-D3637B5AC13B}.Release|Win32.ActiveCfg = Release|Win32
 		{553701F4-926B-42B7-BCC1-D3637B5AC13B}.Release|Win32.Build.0 = Release|Win32
 		{553701F4-926B-42B7-BCC1-D3637B5AC13B}.Release|x64.ActiveCfg = Release|Win32
@@ -77,6 +77,14 @@ Global
 		{527E75B5-1E28-4D5C-BB2F-4CFCD09E4F47}.Release|Win32.Build.0 = Release|Win32
 		{527E75B5-1E28-4D5C-BB2F-4CFCD09E4F47}.Release|x64.ActiveCfg = Release|x64
 		{527E75B5-1E28-4D5C-BB2F-4CFCD09E4F47}.Release|x64.Build.0 = Release|x64
+		{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}.Debug|Win32.Build.0 = Debug|Win32
+		{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}.Debug|x64.ActiveCfg = Debug|x64
+		{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}.Debug|x64.Build.0 = Debug|x64
+		{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}.Release|Win32.ActiveCfg = Release|Win32
+		{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}.Release|Win32.Build.0 = Release|Win32
+		{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}.Release|x64.ActiveCfg = Release|x64
+		{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EEGLogger-vs2010", "EEGLogger\EEGLogger-vs2010.vcxproj", "{9DCC5DE8-A4B0-4F19-879D-796257635B5A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EmoStateAndEEGLogger-vs2010", "EmoStateAndEEGLogger\EmoStateAndEEGLogger-vs2010.vcxproj", "{E868039E-CDBD-4BD8-B2A7-E5C1A42EB486}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultiDongleEEGLogger-vs2010", "MultiDongleEEGLogger\MultiDongleEEGLogger-vs2010.vcxproj", "{EA64E907-B4A3-40E7-9732-8DBF73348DFD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultilChannelEEGLogger", "MultilChannelEEGLogger\MultilChannelEEGLogger.vcxproj", "{5F383388-148C-4496-824A-2B984D1D50B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DCC5DE8-A4B0-4F19-879D-796257635B5A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9DCC5DE8-A4B0-4F19-879D-796257635B5A}.Debug|Win32.Build.0 = Debug|Win32
+		{9DCC5DE8-A4B0-4F19-879D-796257635B5A}.Debug|x64.ActiveCfg = Debug|x64
+		{9DCC5DE8-A4B0-4F19-879D-796257635B5A}.Debug|x64.Build.0 = Debug|x64
+		{9DCC5DE8-A4B0-4F19-879D-796257635B5A}.Release|Win32.ActiveCfg = Release|Win32
+		{9DCC5DE8-A4B0-4F19-879D-796257635B5A}.Release|Win32.Build.0 = Release|Win32
+		{9DCC5DE8-A4B0-4F19-879D-796257635B5A}.Release|x64.ActiveCfg = Release|x64
+		{9DCC5DE8-A4B0-4F19-879D-796257635B5A}.Release|x64.Build.0 = Release|x64
+		{E868039E-CDBD-4BD8-B2A7-E5C1A42EB486}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E868039E-CDBD-4BD8-B2A7-E5C1A42EB486}.Debug|Win32.Build.0 = Debug|Win32
+		{E868039E-CDBD-4BD8-B2A7-E5C1A42EB486}.Debug|x64.ActiveCfg = Debug|x64
+		{E868039E-CDBD-4BD8-B2A7-E5C1A42EB486}.Debug|x64.Build.0 = Debug|x64
+		{E868039E-CDBD-4BD8-B2A7-E5C1A42EB486}.Release|Win32.ActiveCfg = Release|Win32
+		{E868039E-CDBD-4BD8-B2A7-E5C1A42EB486}.Release|Win32.Build.0 = Release|Win32
+		{E868039E-CDBD-4BD8-B2A7-E5C1A42EB486}.Release|x64.ActiveCfg = Release|x64
+		{E868039E-CDBD-4BD8-B2A7-E5C1A42EB486}.Release|x64.Build.0 = Release|x64
+		{EA64E907-B4A3-40E7-9732-8DBF73348DFD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EA64E907-B4A3-40E7-9732-8DBF73348DFD}.Debug|Win32.Build.0 = Debug|Win32
+		{EA64E907-B4A3-40E7-9732-8DBF73348DFD}.Debug|x64.ActiveCfg = Debug|x64
+		{EA64E907-B4A3-40E7-9732-8DBF73348DFD}.Debug|x64.Build.0 = Debug|x64
+		{EA64E907-B4A3-40E7-9732-8DBF73348DFD}.Release|Win32.ActiveCfg = Release|Win32
+		{EA64E907-B4A3-40E7-9732-8DBF73348DFD}.Release|Win32.Build.0 = Release|Win32
+		{EA64E907-B4A3-40E7-9732-8DBF73348DFD}.Release|x64.ActiveCfg = Release|x64
+		{EA64E907-B4A3-40E7-9732-8DBF73348DFD}.Release|x64.Build.0 = Release|x64
+		{5F383388-148C-4496-824A-2B984D1D50B6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5F383388-148C-4496-824A-2B984D1D50B6}.Debug|Win32.Build.0 = Debug|Win32
+		{5F383388-148C-4496-824A-2B984D1D50B6}.Debug|x64.ActiveCfg = Debug|x64
+		{5F383388-148C-4496-824A-2B984D1D50B6}.Debug|x64.Build.0 = Debug|x64
+		{5F383388-148C-4496-824A-2B984D1D50B6}.Release|Win32.ActiveCfg = Release|Win32
+		{5F383388-148C-4496-824A-2B984D1D50B6}.Release|Win32.Build.0 = Release|Win32
+		{5F383388-148C-4496-824A-2B984D1D50B6}.Release|x64.ActiveCfg = Release|x64
+		{5F383388-148C-4496-824A-2B984D1D50B6}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
