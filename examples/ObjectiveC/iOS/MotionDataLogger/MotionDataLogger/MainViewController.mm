@@ -75,11 +75,11 @@ const char header[] = "TIMESTAMP, COUNTER,GYROX,GYROY,GYROZ, ACCX, ACCY,ACCZ, "
     while (1) {
         if(isConnectBLE){
             
-            int couter = IEE_GetNumberDeviceInsight();
+            int couter = IEE_GetInsightDeviceCount();
             /********Connect with Headset Insight*/
             if(couter > 0){
                 if(!lock){
-                    IEE_EmoConnectDevice(0);
+                    IEE_ConnectInsightDevice(0);
                     //                    IEE_EmoSettingMode(MODE_EPOCPLUS_MOTION);
                     lock =true;
                 }

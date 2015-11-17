@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 EmotivLifeSciences. All rights reserved.
 //
 
+/*The Emotional States Example is only available with SDK Premium version*/
 #import "ES_EngineWidget.h"
 #import <edk_ios/Iedk.h>
 
@@ -42,10 +43,10 @@ bool userAdded = false;
 }
 
 -(void) getNextEvent {
-    int couter_insight = IEE_GetNumberDeviceInsight();
+    int couter_insight = IEE_GetInsightDeviceCount();
     if(couter_insight > 0){
         if(!isConnected){
-            IEE_EmoConnectDevice(0);
+            IEE_ConnectInsightDevice(0);
             isConnected=true;
         }
     }

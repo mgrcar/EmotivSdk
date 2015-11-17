@@ -46,10 +46,10 @@ NSString *profileName;
 }
 
 -(void) getNextEvent {
-    int counter_insight = IEE_GetNumberDeviceInsight();
+    int counter_insight = IEE_GetInsightDeviceCount();
     if(counter_insight > 0){
         if(!isConnected){
-            IEE_EmoConnectDevice(0);
+            IEE_ConnectInsightDevice(0);
             isConnected=true;
         }
     }

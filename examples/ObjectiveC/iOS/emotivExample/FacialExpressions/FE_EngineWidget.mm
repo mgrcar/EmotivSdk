@@ -48,10 +48,10 @@ NSDictionary *dictionaryAction = @{@"Neutral":[NSNumber numberWithInt:Facial_Neu
 }
 
 -(void) getNextEvent {
-    int couter_insight = IEE_GetNumberDeviceInsight();
+    int couter_insight = IEE_GetInsightDeviceCount();
     if(couter_insight > 0){
         if(!isConnected){
-            IEE_EmoConnectDevice(0);
+            IEE_ConnectInsightDevice(0);
             isConnected=true;
         }
     }

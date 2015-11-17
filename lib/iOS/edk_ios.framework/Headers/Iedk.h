@@ -34,6 +34,10 @@
             #define EDK_API
         #endif
     #endif
+#else
+	#include "IEmotivProfile.h"
+	#include "IEmoStatePerformanceMetric.h"
+    #define EDK_API extern
 #endif
 
 #ifdef __cplusplus
@@ -64,12 +68,42 @@ extern "C"
     typedef void* EmoEngineEventHandle;
 
 
-	//! Handle to data placeholder allocated by IEE_MotionDataCreate.
+	//! Handle to data placeholder allocated by IEE_MotionDataCreate, IEE_DataCreate.
 	/*!
-		\sa IEE_MotionDataCreate()
+		\sa IEE_MotionDataCreate(), IEE_DataCreate()
 	*/
 	typedef void* DataHandle;
 
+    //! Data channel specific types
+    
+    typedef enum IEE_DataChannels_enum {
+        IED_COUNTER = 0,        //!< Sample counter
+        IED_INTERPOLATED,       //!< Indicate if data is interpolated
+        IED_RAW_CQ,             //!< Raw contact quality value
+        IED_AF3,                //!< Channel AF3
+        IED_F7,                 //!< Channel F7
+        IED_F3,                 //!< Channel F3
+        IED_FC5,                //!< Channel FC5
+        IED_T7,                 //!< Channel T7
+        IED_P7,                 //!< Channel P7
+        IED_Pz,                 //!< Channel Pz
+        IED_O1 = IED_Pz,        //!< Channel O1
+        IED_O2,                 //!< Channel O2
+        IED_P8,                 //!< Channel P8
+        IED_T8,                 //!< Channel T8
+        IED_FC6,                //!< Channel FC6
+        IED_F4,                 //!< Channel F4
+        IED_F8,                 //!< Channel F8
+        IED_AF4,                //!< Channel AF4
+        IED_GYROX,              //!< Gyroscope X-axis
+        IED_GYROY,              //!< Gyroscope Y-axis
+        IED_TIMESTAMP,          //!< System timestamp
+        IED_ES_TIMESTAMP,       //!< EmoState timestamp
+        IED_FUNC_ID,            //!< Reserved function id
+        IED_FUNC_VALUE,         //!< Reserved function value
+        IED_MARKER,             //!< Marker value from hardware
+        IED_SYNC_SIGNAL         //!< Synchronisation signal
+    } IEE_DataChannel_t;
 
     //! EmoEngine event types
     typedef enum IEE_Event_enum {
@@ -136,7 +170,14 @@ extern "C"
         IMD_TIMESTAMP           //!< Timestamp of the motion data stream
     } IEE_MotionDataChannel_t;
     
-
+    typedef enum IEE_WindowingTypes_enum {
+        IEE_HANNING  = 0,
+        IEE_HAMMING  = 1,
+        IEE_HANN     = 2,
+        IEE_BLACKMAN = 3,
+        IEE_RECTANGLE = 4
+    } IEE_WindowingTypes;
+    
     //! Initialize EmoEngine instance which reads data from the headset.
     /*!
         This function should be called at the beginning of programs that make use of EmoEngine, most probably in initialization routine or constructor.
@@ -570,6 +611,56 @@ extern "C"
     EDK_API void
         IEE_CheckDetectionsEnabled(unsigned long* result);
     
+    //! Get averge band power values for a channel
+    /*!
+     Return the average band power for a specific channel from the latest epoch with
+     0.5 seconds step size and 2 seconds window size.
+     
+     \param userId    - user ID
+     \param channel   - channel that is interested in
+     \param theta     - theta band value (4-8 Hz)
+     \param alpha     - alpha band value (8-12 Hz)
+     \param low_beta  - low-beta value (12-16 Hz)
+     \param high_beta - high-beta value (16-25 Hz)
+     \param gamma     - gamma value (25-45 Hz)
+     
+     \return EDK_ERROR_CODE
+     - EDK_OK if successful
+     
+     \sa IedkErrorCode.h, IEE_FFTSetWindowingType
+     */
+    EDK_API int
+        IEE_GetAverageBandPowers(unsigned int userId, IEE_DataChannel_t channel,
+                             double* theta, double* alpha, double* low_beta, double* high_beta, double* gamma);
+    
+    
+    //! Set the current windowing type for band power calculation
+    /*!
+     \param userId - user ID
+     \param type   - windowing type enum from IEE_WindowingTypes
+     
+     \return EDK_ERROR_CODE
+     - EDK_OK if successful
+     
+     \sa IedkErrorCode.h, IEE_FFTGetWindowingType, IEE_GetAverageBandPowers
+     */
+    EDK_API int
+        IEE_FFTSetWindowingType(unsigned int userId, IEE_WindowingTypes type);
+    
+    
+    //! Get the current windowing type for band power calculation
+    /*!
+     \param userId - user ID
+     \param type   - windowing type enum from IEE_WindowingTypes (default: IEE_HANNING)
+     
+     \return EDK_ERROR_CODE
+     - EDK_OK if successful
+     
+     \sa IedkErrorCode.h, IEE_FFTSetWindowingType, IEE_GetAverageBandPowers
+     */
+    EDK_API int
+        IEE_FFTGetWindowingType(unsigned int userId, IEE_WindowingTypes *type);
+    
     //!
     //! The following API calls are only applicable for certain platforms to establish BTLE connection with the headset.
     //!
@@ -599,7 +690,7 @@ extern "C"
         \return true if connected successfully
      */
     EDK_API int
-        IEE_EmoConnectDevice(int indexDevice);
+        IEE_ConnectInsightDevice(int indexDevice);
     
     
     //! Check the signal strength of current connected device
@@ -611,7 +702,7 @@ extern "C"
         \param value - -30 to 0 (weak to strong)
          */
     EDK_API void
-        IEE_GetSignalStrengthBLEInsight(int& value, int indexDevice);
+        IEE_GetInsightSignalStrength(int& value, int indexDevice);
     
     
     //! Get number of Insight headset in the list
@@ -621,7 +712,7 @@ extern "C"
         \return number of Insight headsets
          */
     EDK_API int
-        IEE_GetNumberDeviceInsight();
+        IEE_GetInsightDeviceCount();
     
     
     //! Return name of Insight headset in listed devices
@@ -632,7 +723,7 @@ extern "C"
         \return const char* - name of the headset
     */
     EDK_API const char*
-        IEE_GetNameDeviceInsightAtIndex(int index);
+        IEE_GetInsightDeviceName(int index);
     
     //! Connect to a particular EPOC+ headset
     /*!
@@ -642,7 +733,7 @@ extern "C"
      \return true if connected successfully
      */
     EDK_API int
-        EE_EmoConnectDevice(int indexDevice,bool isSettingMode = false);
+        IEE_ConnectEpocPlusDevice(int indexDevice,bool isSettingMode = false);
     
     //! Check the signal strength of current connected device
     /*!
@@ -653,7 +744,7 @@ extern "C"
      \param value - -30 to 0 (weak to strong)
      */
     EDK_API void
-        EE_GetSignalStrengthBLEEPOCPLUS(int& value, int indexDevice);
+        IEE_GetEpocPlusSignalStrength(int& value, int indexDevice);
     
     //! Get number of EPOC+ headset in the list
     /*!
@@ -662,7 +753,7 @@ extern "C"
      \return number of Insight headsets
      */
     EDK_API int
-        EE_GetNumberDeviceEpocPlus();
+        IEE_GetEpocPlusDeviceCount();
     
     //! Return name of EPOC+ headset in listed devices
     /*!
@@ -672,7 +763,7 @@ extern "C"
      \return const char* - name of the headset
      */
     EDK_API const char*
-        EE_GetNameDeviceEpocAtIndex(int index);
+        IEE_GetEpocPlusDeviceName(int index);
     
     //! Switch mode of EPOC+ Headset
     /*!
@@ -680,7 +771,7 @@ extern "C"
      \return true if setting succes
      */
     EDK_API int
-        EE_EmoSettingMode(EE_ModeHeadset_t value);
+        IEE_EmoSettingMode(EE_ModeHeadset_t value);
     
 #endif
     
