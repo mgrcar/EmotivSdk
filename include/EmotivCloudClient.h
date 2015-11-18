@@ -1,12 +1,13 @@
 /**
- * Emotiv Insight SDK
+ * Emotiv SDK
  * Copyright (c) 2015 Emotiv Inc.
  *
- * This file is part of the Emotiv Insight SDK.
+ * This file is part of the Emotiv SDK.
  *
- * The main interface that allows interactions between external programs and Emotiv Cloud
+ * The main interface that allows interactions between external programs and Emotiv Cloud.
  *
- * None of these API functions are thread-safe.
+ * All API calls are blocking calls. Consider using the Emotiv Cloud APIs in a different thread
+ * to avoid blocking the main thread.
  *
  * This header file is designed to be included under C and C++ environment.
  *
@@ -16,24 +17,23 @@
 #define EMOTIVCLOUDCLIENT_H
 
 #ifndef EDK_STATIC_LIB
+    #ifdef EMOTIVCLOUDCLIENT_EXPORTS
+        #ifdef WIN32
+            #define EMOTIVCLOUD_API __declspec(dllexport)
+        #else
+            #define EMOTIVCLOUD_API
+        #endif
+    #else
+        #ifdef WIN32
+            #define EMOTIVCLOUD_API __declspec(dllimport)
+        #else
+            #define EMOTIVCLOUD_API
+        #endif
+    #endif
+#else
+    #define EMOTIVCLOUD_API extern
+#endif
 
-#ifdef EMOTIVCLOUDCLIENT_EXPORTS
-#ifdef WIN32
-#define EMOTIVCLOUD_API __declspec(dllexport)
-#else
-#define EMOTIVCLOUD_API
-#endif
-#else
-#ifdef WIN32
-#define EMOTIVCLOUD_API __declspec(dllimport)
-#else
-#define EMOTIVCLOUD_API
-#endif
-#endif
-
-#else
-#define EMOTIVCLOUD_API extern
-#endif
 #define MAX_NUM_OF_BACKUP_PROFILE_VERSION 2
 
 #ifdef __cplusplus
@@ -41,142 +41,203 @@ extern "C"
 {
 #endif
 
-	typedef enum profileType
-	{
-		TRAINING,
-		EMOKEY
-	}profileFileType;
+    //! Profile types
+    typedef enum profileType {
+        TRAINING,
+        EMOKEY
+    } profileFileType;
 
-	typedef struct profileVerInfo
-	{
-		int version;
-		char last_modified[30];
-	}profileVersionInfo;
+    
+    //! Profile version
+    typedef struct profileVerInfo {
+        int version;
+        char last_modified[30];
+    } profileVersionInfo;
 
-    //! Initializes the connection to Emotiv Cloud Server
+    
+    //! Initialize the connection to Emotiv Cloud Server
     /*!
         \return bool
                 - true if connect successfully
-    */
-    EMOTIVCLOUD_API bool EC_Connect();
+     
+        \sa EC_Disconnect()
+     */
+    EMOTIVCLOUD_API bool
+        EC_Connect();
 
-    //! Terminate the connection to Emotiv Cloud server and EmoEngine
+    
+    //! Terminate the connection to Emotiv Cloud server
     /*!
+        \sa EC_Connect()
+     */
+    EMOTIVCLOUD_API void
+        EC_Disconnect();
 
-    */
-    EMOTIVCLOUD_API void EC_Disconnect();
-
-    //! Login on Emotiv Cloud with exist account
+    
+    //! Login Emotiv Cloud with EmotivID
     /*!
-        \param username        - email of account
-        \param password     - password of account
+        To register a new EmotivID please visit https://id.emotivcloud.com/ .
+     
+        \param username  - username
+        \param password  - password
         \return bool
                 - true if login successfully
-    */
-    EMOTIVCLOUD_API bool EC_Login(const char*username, const char*password);
+     
+        \sa EC_Logout()
+     */
+    EMOTIVCLOUD_API bool
+        EC_Login(const char* username, const char* password);
 
-    //! Logout
+    
+    //! Logout Emotiv Cloud
     /*
-     \return bool
-     - 1 if succes, 0 if failed
+        \return bool
+                - true if logout successfully
+     
+        \sa EC_Login()
      */
-    EMOTIVCLOUD_API bool EC_Logout(int userCloudID);
+    EMOTIVCLOUD_API bool
+        EC_Logout(int userCloudID);
 
-    //! Get detail of user after login successfully
+    
+    //! Get user ID after login
     /*!
-         \return bool
-                 - true if get detail successfully and get id from userID param
+        \param userCloudID - return user ID for subsequence requests
+        \return bool
+                - true if fetched successfully
+     
+        \sa EC_Login()
      */
-     EMOTIVCLOUD_API bool EC_GetUserDetail(int *userCloudID);
+    EMOTIVCLOUD_API bool
+        EC_GetUserDetail(int *userCloudID);
 
-	//! Upload profile of user to cloud
+    
+    //! Save user profile to Emotiv Cloud
     /*!
-		\param profileName         -
-		\param filePath
-		\param ptype
-			
-		\return bool s
-										- 1 if succes, 0 if failed
-    */
-    EMOTIVCLOUD_API  bool   EC_SaveUserProfile(int userCloudID, int engineUserID, const char* profileName, profileFileType ptype);
-	//! Update exist profile of user to cloud
+        \param userCloudID  - user ID from EC_GetUserDetail()
+        \param engineUserID - user ID from current EmoEngine (first user will be 0)
+        \param profileName  - profile name to be saved as
+        \param ptype        - profile type
+            
+        \return bool
+                - true if saved successfully
+     
+        \sa EC_UpdateUserProfile(), EC_DeleteUserProfile()
+     */
+    EMOTIVCLOUD_API bool
+        EC_SaveUserProfile(int userCloudID, int engineUserID, const char* profileName, profileFileType ptype);
+    
+    
+    //! Update user profile to Emotiv Cloud
     /*!
-		\param profileId         -
-        \param engineUserID
-        \param profileName
-		\param filePath
+        \param userCloudID  - user ID from EC_GetUserDetail()
+        \param engineUserID - user ID from current EmoEngine (first user will be 0)
+        \param profileId    - profile ID to be updated, from EC_GetProfileId()
+        \param profileName  - profile name to be saved as
 
-		\return bool 
-										- 1 if succes, 0 if failed
-    */
-    EMOTIVCLOUD_API  bool   EC_UpdateUserProfile(int userCloudID, int engineUserID, int profileId, const char* profileName);
-	//! Delete exist profile of user from cloud
+        \return bool 
+                - true if updated successfully
+     
+        \sa EC_SaveUserProfile(), EC_DeleteUserProfile()
+     */
+    EMOTIVCLOUD_API bool
+        EC_UpdateUserProfile(int userCloudID, int engineUserID, int profileId, const char* profileName);
+    
+    
+    //! Delete user profile from Emotiv Cloud
     /*!
-		\param profileId         -
+        \param userCloudID  - user ID from EC_GetUserDetail()
+        \param profileId    - profile ID to be deleted, from EC_GetProfileId()
 
-		\return bool 
-										- 1 if succes, 0 if failed
-    */
-	EMOTIVCLOUD_API  bool   EC_DeleteUserProfile(int userCloudID, int profileId);
+        \return bool
+                - true if updated successfully
+     
+        \sa EC_SaveUserProfile(), EC_UpdateUserProfile()
+     */
+    EMOTIVCLOUD_API bool
+        EC_DeleteUserProfile(int userCloudID, int profileId);
 
-	//! Get info Profile of user
-	/*!
-	    \param profileName
-	    \ return int 
-										- profile id of profile name
-										- 0 if request failed, -1 if not existe profile name 
-   */
-	EMOTIVCLOUD_API  int   EC_GetProfileId(int userCloudID, const char* profileName);
+    
+    //! Get profile ID of a user
+    /*!
+        \param userCloudID  - user ID from EC_GetUserDetail()
+        \param profileName  - profile name to look for
+        \return int - return profile ID if found, otherwise -1
+     */
+    EMOTIVCLOUD_API int
+        EC_GetProfileId(int userCloudID, const char* profileName);
+    
 
-	//! Download profile from cloud
-	/*!
-	    \param profileId
-		\param destPath
-		\param version					- default = -1 for download lastest version
-		\return bool 
-		                                - 1 if succes, 0 if failed
-    */
-	EMOTIVCLOUD_API  bool   EC_LoadUserProfile(int userCloudID, int engineUserID, int profileId, int version = -1);
+    //! Load profile from Emotiv Cloud
+    /*!
+        \remark Time to take to load a profile from Emotiv Cloud depends on network speed and profile size.
+     
+        \param userCloudID  - user ID from EC_GetUserDetail()
+        \param engineUserID - user ID from current EmoEngine (first user will be 0)
+        \param profileId    - profile ID to be loaded, from EC_GetProfileId()
+        \param version      - version of profile to download (default: -1 for lastest version)
+        \return bool
+                - true if loaded successfully
+     */
+    EMOTIVCLOUD_API bool
+        EC_LoadUserProfile(int userCloudID, int engineUserID, int profileId, int version = -1);
 
-	//! Get All Profile Name
-	/*!
-		\return int 
-		                                - Number of Profile Name
-    */
-	EMOTIVCLOUD_API  int   EC_GetAllProfileName(int userCloudID);
+    
+    //! Update all the profile info from Emotiv Cloud
+    /*!
+        This function needs to be called first before calling EC_ProfileIDAtIndex(), EC_ProfileNameAtIndex(),
+        EC_ProfileLastModifiedAtIndex(), EC_ProfileTypeAtIndex()
+     
+        \param userCloudID  - user ID from EC_GetUserDetail()
+     
+        \return int - number of existing profiles (only latest version for each profile are counted)
+     */
+    EMOTIVCLOUD_API int
+        EC_GetAllProfileName(int userCloudID);
 
-	//! Get ProfileIDNameAtIndex
-	/*!
-	    \param index 
-		\return const char* 
-		                                -  Profile Name at index
+    
+    //! Return the profile ID of a profile in cache
+    /*!
+        \param userCloudID  - user ID from EC_GetUserDetail()
+        \param index        - index of profile (starts from 0)
+     
+        \return int - profile ID
+     */
+    EMOTIVCLOUD_API int
+        EC_ProfileIDAtIndex(int userCloudID, int index);
+    
+    
+    //! Return the profile name of a profile in cache
+    /*!
+        \param userCloudID  - user ID from EC_GetUserDetail()
+        \param index        - index of profile (starts from 0)
+        
+        \return const char* - profile name
+     */
+    EMOTIVCLOUD_API const char*
+        EC_ProfileNameAtIndex(int userCloudID, int index);
+    
+    
+    //! Return the last modified timestamp of a profile in cache
+    /*!
+        \param userCloudID  - user ID from EC_GetUserDetail()
+        \param index        - index of profile (starts from 0)
+     
+        \return const char* - last modified timestamp
     */
-	
-	EMOTIVCLOUD_API  int   EC_ProfileIDAtIndex(int userCloudID, int index);
-	//! Get ProfileNameAtIndex
-	/*!
-	    \param index 
-		\return const char* 
-		                                -  Profile Name at index
-    */
-	
-	EMOTIVCLOUD_API  const char*   EC_ProfileNameAtIndex(int userCloudID, int index);
-	//! Get last modified time of Profile
-	/*!
-	    \param index 
-		\return const char* 
-		                                -  last modified time of Profile at index
-    */
-	
-	EMOTIVCLOUD_API  const char*   EC_ProfileLastModifiedAtIndex(int userCloudID, int index);
-	//! Get type of Profile
-	/*!
-	    \param index 
-		\return const char* 
-		                                -  type of Profile at index
-    */
-	
-	EMOTIVCLOUD_API  profileFileType   EC_ProfileTypeAtIndex(int userCloudID, int index);
+    EMOTIVCLOUD_API const char*
+        EC_ProfileLastModifiedAtIndex(int userCloudID, int index);
+    
+    
+    //! Return the type of a profile in cache
+    /*!
+        \param userCloudID  - user ID from EC_GetUserDetail()
+        \param index        - index of profile (starts from 0)
+     
+        \return profileFileType - profile type
+     */
+    EMOTIVCLOUD_API profileFileType
+        EC_ProfileTypeAtIndex(int userCloudID, int index);
 
 #ifdef __cplusplus
 }
