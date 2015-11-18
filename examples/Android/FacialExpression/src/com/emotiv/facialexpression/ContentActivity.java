@@ -498,7 +498,8 @@ public class ContentActivity extends Activity implements EngineInterface{
 			case 0:
 				count ++;
 				int trainningTime=(int)FacialExpressionDetection.IEE_FacialExpressionGetTrainingTime(userId)[1]/1000;
-				barTime.setProgress(count / trainningTime);
+				if(trainningTime > 0)
+					barTime.setProgress(count / trainningTime);
 				if (barTime.getProgress() > 100) {
 					timerTask.cancel();
 					timer.cancel();

@@ -164,7 +164,8 @@ public class ActivityTrainning extends Activity implements EngineInterface {
 			case 0:
 				count ++;
 				int trainningTime=(int)MentalCommandDetection.IEE_MentalCommandGetTrainingTime(userId)[1]/1000;
-				progressBarTime.setProgress(count / trainningTime);
+				if(trainningTime > 0)
+					progressBarTime.setProgress(count / trainningTime);
 				if (progressBarTime.getProgress() >= 100) {
 					timerTask.cancel();
 					timer.cancel();

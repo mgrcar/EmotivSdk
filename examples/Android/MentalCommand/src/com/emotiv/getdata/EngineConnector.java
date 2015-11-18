@@ -67,7 +67,7 @@ public class EngineConnector {
 	}
 
 	private void connectEngine() {
-		IEdk.IEE_EngineConnect(EngineConnector.context);
+		IEdk.IEE_EngineConnect(EngineConnector.context,"");
 		timer = new Timer();
 		timerTask();
 		timer.schedule(timerTask, 0, 10);
@@ -139,11 +139,11 @@ public class EngineConnector {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				int numberDevice=IEdk.IEE_GetNumberDeviceInsight();
+				int numberDevice=IEdk.IEE_GetInsightDeviceCount();
 				if(numberDevice!=0)
 				{
 					if(!isConnected)
-						IEdk.IEE_ConnectDevice(0);
+						IEdk.IEE_ConnectInsightDevice(0);
 				}
 				state = IEdk.IEE_EngineGetNextEvent();
 				if (state == IEdkErrorCode.EDK_OK.ToInt()) {

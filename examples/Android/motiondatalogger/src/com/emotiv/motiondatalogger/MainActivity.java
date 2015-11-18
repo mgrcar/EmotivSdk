@@ -34,8 +34,10 @@ public class MainActivity extends Activity {
 	private boolean isEnableWriteFile = false;
 	int userId;
 	private BufferedWriter motion_writer;
-	private final int WHAT_GET_DATA = 5;
 	Button Start_button,Stop_button;
+	IEdk.IEE_MotionDataChannel_t[] Channel_list = {IEdk.IEE_MotionDataChannel_t.IMD_COUNTER, IEdk.IEE_MotionDataChannel_t.IMD_GYROX,IEdk.IEE_MotionDataChannel_t.IMD_GYROY,
+			IEdk.IEE_MotionDataChannel_t.IMD_GYROZ,IEdk.IEE_MotionDataChannel_t.IMD_ACCX,IEdk.IEE_MotionDataChannel_t.IMD_ACCY,IEdk.IEE_MotionDataChannel_t.IMD_ACCZ,
+			IEdk.IEE_MotionDataChannel_t.IMD_MAGX,IEdk.IEE_MotionDataChannel_t.IMD_MAGY,IEdk.IEE_MotionDataChannel_t.IMD_MAGZ,IEdk.IEE_MotionDataChannel_t.IMD_TIMESTAMP};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,7 +60,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Log.e("EEGLogger","Start Write File");
+				Log.e("MotionLogger","Start Write File");
 				setDataFile();
 				isEnableWriteFile = true;
 			}
@@ -68,14 +70,14 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Log.e("EEGLogger","Stop Write File");
+				Log.e("MotionLogger","Stop Write File");
 				StopWriteFile();
 				isEnableWriteFile = false;
 			}
 		});
 		
 		//Connect to emoEngine
-		IEdk.IEE_EngineConnect(this);
+		IEdk.IEE_EngineConnect(this,"");
 		IEdk.IEE_MotionDataCreate();
 		Thread processingThread=new Thread()
 		{
@@ -125,39 +127,39 @@ public class MainActivity extends Activity {
 				
 				break;
 			case 1:
-				int number = IEdk.IEE_GetNumberDeviceInsight();
+				int number = IEdk.IEE_GetInsightDeviceCount();
 				if(number != 0) {
 					if(!lock){
 						lock = true;
-						IEdk.IEE_ConnectDevice(0);
+						IEdk.IEE_ConnectInsightDevice(0);
 					}
 				}
 				else lock = false;
 				break;
 			case 2:
 				IEdk.IEE_MotionDataUpdateHandle(userId);
-				double[] eeg_data = IEdk.IEE_MotionDataGet();
-				if(eeg_data.length > 1) thandler.sendMessage(thandler.obtainMessage(WHAT_GET_DATA,eeg_data));
+				int sample = IEdk.IEE_MotionDataGetNumberOfSample(userId);
+				if(sample > 0){
+					for(int sampleIdx =0; sampleIdx < sample; sampleIdx++)
+					{
+						for(int j=0;j< Channel_list.length;j++){
+							double[] eeg_data = IEdk.IEE_MotionDataGet(Channel_list[j]);
+							addData(eeg_data[sampleIdx]);
+						}
+						try {
+							motion_writer.newLine();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+				
 				break;
 			}
 
 		}
 
-	};
-
-	Handler thandler = new Handler(){
-		@Override
-		public void handleMessage(Message msg){
-			switch (msg.what) {
-			case WHAT_GET_DATA:
-				double[] data = (double[]) msg.obj;
-				addEEGData(data);
-				break;
-
-			default:
-				break;
-			}
-		} 
 	};
 	
 	private void setDataFile() {
@@ -192,26 +194,21 @@ public class MainActivity extends Activity {
 	 * @param eegs
 	 *            - double array of eeg data
 	 */
-	public void addEEGData(double[] eegs) {
+	public void addData(double data) {
 
 		if (motion_writer == null) {
 			return;
 		}
 
-		for (int i = 0; i < eegs.length/11; i++) {
 			String input = "";
-			for (int j = 0; j < 11; j++) {
-				input += (String.valueOf(eegs[i*11+j]) + ",");
-			}
-			input = input.substring(0, input.length() - 1);
+				input += (String.valueOf(data) + ",");
 			try {
 				motion_writer.write(input);
-				motion_writer.newLine();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 		}
-	}
+
 }
