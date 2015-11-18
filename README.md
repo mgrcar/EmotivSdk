@@ -1,6 +1,9 @@
 # Emotiv SDK - Community Edition
 
 Here is the repository to download the latest Emotiv SDK Community Edition, along with code examples and other development tools.
+* Supports EPOC (over Emotiv USB dongle)
+* Supports Insight and EPOC+ (over BTLE and Emotiv USB dongle)
+* Supports Win32/64, Mac, Android, iOS
 
 If you have questions or have knowledge to share, please visit our [forum](https://emotiv.com/forum/) which is the hub for our developer community.
 
@@ -14,13 +17,17 @@ If you have questions or have knowledge to share, please visit our [forum](https
 7. [Support](#support)
 
 ## Latest Release
-Version 3.2.0
-* Supports EPOC (over Emotiv USB dongle)
-* Supports Insight and EPOC+ (over BTLE and Emotiv USB dongle)
-* Emotiv SDK for Win32/64, Mac, Android, iOS
+Version 3.3.0
+* Supports saving/loading profile to Emotiv Cloud (see EmotivCloudClient.h)
+* New API IEE_GetAverageBandPowers to get average band powers for:
+  * theta (4-8 Hz)
+  * alpha (8-12 Hz)
+  * low-beta (12-16 Hz)
+  * high-beta (16-25 Hz)
+  * gamma (25-45 Hz)
 
 Coming soon:
-* Emotiv SDK for Ubuntu 64-bit
+* Emotiv SDK for Ubuntu 14.04 64-bit
 * EmoComposer for Win32, Mac
 * EmoKey for Win32, Mac
 
@@ -44,7 +51,7 @@ Coming soon:
 ## API Documentation
 The API reference can be found here:
 
-http://emotiv.com/api/insight/3.2.0/
+http://emotiv.com/api/3.3.0/
 
 ## Known Issues
 * Mac SDK may not work with EPOC+ in 256Hz mode over BTLE and USB dongle properly
