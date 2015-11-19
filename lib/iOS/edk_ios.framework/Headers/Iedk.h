@@ -1,8 +1,8 @@
 /**
- * Emotiv Insight SDK
+ * Emotiv SDK
  * Copyright (c) 2015 Emotiv Inc.
  *
- * This file is part of the Emotiv Insight SDK.
+ * This file is part of the Emotiv SDK.
  *
  * The main interface that allows interactions between external programs and the Emotiv detection engine.
  *
@@ -35,8 +35,8 @@
         #endif
     #endif
 #else
-	#include "IEmotivProfile.h"
-	#include "IEmoStatePerformanceMetric.h"
+    #include "IEmotivProfile.h"
+    #include "IEmoStatePerformanceMetric.h"
     #define EDK_API extern
 #endif
 
@@ -45,15 +45,6 @@ extern "C"
 {
 #endif
 
-#ifdef __APPLE__
-    //! Mode of Headset
-    typedef enum EE_ModeHeadset_enum {
-        MODE_EPOC = 0 ,
-        MODE_EPOCPLUS_NOMOTION,
-        MODE_EPOCPLUS_MOTION
-    } EE_ModeHeadset_t;
-#endif
-    
     //! Handle to EmoState structure allocated by IEE_EmoStateCreate.
     /*!
         \sa IEE_EmoStateCreate()
@@ -67,15 +58,8 @@ extern "C"
      */
     typedef void* EmoEngineEventHandle;
 
-
-	//! Handle to data placeholder allocated by IEE_MotionDataCreate, IEE_DataCreate.
-	/*!
-		\sa IEE_MotionDataCreate(), IEE_DataCreate()
-	*/
-	typedef void* DataHandle;
-
-    //! Data channel specific types
     
+    //! EEG and system data channel description
     typedef enum IEE_DataChannels_enum {
         IED_COUNTER = 0,        //!< Sample counter
         IED_INTERPOLATED,       //!< Indicate if data is interpolated
@@ -105,6 +89,14 @@ extern "C"
         IED_SYNC_SIGNAL         //!< Synchronisation signal
     } IEE_DataChannel_t;
 
+    
+    //! Handle to data placeholder allocated by IEE_MotionDataCreate.
+    /*!
+        \sa IEE_MotionDataCreate()
+     */
+    typedef void* DataHandle;
+
+
     //! EmoEngine event types
     typedef enum IEE_Event_enum {
         IEE_UnknownEvent          = 0x0000,     //!< An unknown event.
@@ -124,35 +116,35 @@ extern "C"
     } IEE_Event_t;
 
 
-	//! Input sensor description
-	typedef struct IInputSensorDescriptor_struct {
-		IEE_InputChannels_t channelId;  //!< Logical channel id
-		int                 fExists;    //!< Non-zero if this sensor exists on this headset model
-		const char*         pszLabel;   //!< Text label identifying this sensor
-		double              xLoc;       //!< X coordinate from center of head towards nose
-		double              yLoc;       //!< Y coordinate from center of head towards ears
-		double              zLoc;       //!< Z coordinate from center of head toward top of skull
-	} IInputSensorDescriptor_t;
+    //! Input sensor description
+    typedef struct IInputSensorDescriptor_struct {
+        IEE_InputChannels_t channelId;  //!< Logical channel id
+        int                 fExists;    //!< Non-zero if this sensor exists on this headset model
+        const char*         pszLabel;   //!< Text label identifying this sensor
+        double              xLoc;       //!< X coordinate from center of head towards nose
+        double              yLoc;       //!< Y coordinate from center of head towards ears
+        double              zLoc;       //!< Z coordinate from center of head toward top of skull
+    } IInputSensorDescriptor_t;
 
 
-	//! Detection type enumerator
-	typedef enum IEE_Detection_enum {
-		DT_BlinkAndWink     = 0x0001,
-		DT_FacialExpression = 0x0002,
-		DT_EyeMovement      = 0x0004,
-		DT_Excitement       = 0x0008,
-		DT_Engagement       = 0x0010,
-		DT_Relaxation       = 0x0020,
-		DT_Interest         = 0x0040,
-		DT_Stress           = 0x0080,
-		DT_Focus            = 0x0100,
-		DT_MentalCommand    = 0x0200,
-		DT_AllDetections    = (DT_BlinkAndWink | DT_FacialExpression | DT_EyeMovement |
-		                       DT_Excitement | DT_Engagement | DT_Relaxation |
-		                       DT_Interest | DT_Stress | DT_Focus |
-		                       DT_MentalCommand)
+    //! Detection type enumerator
+    typedef enum IEE_Detection_enum {
+        DT_BlinkAndWink     = 0x0001,   //!< Blink and Wink detection
+        DT_FacialExpression = 0x0002,   //!< Other facial expression detection
+        DT_EyeMovement      = 0x0004,   //!< Eye movement detection
+        DT_Excitement       = 0x0008,   //!< Excitement detection (deprecated)
+        DT_Engagement       = 0x0010,   //!< Engagement detection (deprecated)
+        DT_Relaxation       = 0x0020,   //!< Relaxation detection (deprecated)
+        DT_Interest         = 0x0040,   //!< Interest detection (deprecated)
+        DT_Stress           = 0x0080,   //!< Stress detection (deprecated)
+        DT_Focus            = 0x0100,   //!< Focus detection (deprecated)
+        DT_MentalCommand    = 0x0200,   //!< Mental command detection
+        DT_AllDetections    = (DT_BlinkAndWink | DT_FacialExpression | DT_EyeMovement |
+                               DT_Excitement | DT_Engagement | DT_Relaxation |
+                               DT_Interest | DT_Stress | DT_Focus |
+                               DT_MentalCommand)
 
-	} IEE_Detection_t;
+    } IEE_Detection_t;
 
 
     //! Motion data channel description
@@ -170,13 +162,16 @@ extern "C"
         IMD_TIMESTAMP           //!< Timestamp of the motion data stream
     } IEE_MotionDataChannel_t;
     
+    
+    //! Windowing types enum for Fast Fourier Transform
     typedef enum IEE_WindowingTypes_enum {
-        IEE_HANNING  = 0,
-        IEE_HAMMING  = 1,
-        IEE_HANN     = 2,
-        IEE_BLACKMAN = 3,
-        IEE_RECTANGLE = 4
+        IEE_HANNING   = 0,      //!< Hanning Window
+        IEE_HAMMING   = 1,      //!< Hamming Window
+        IEE_HANN      = 2,      //!< Hann Window
+        IEE_BLACKMAN  = 3,      //!< Blackman-Harris Window
+        IEE_RECTANGLE = 4       //!< Uniform/rectangular Window
     } IEE_WindowingTypes;
+    
     
     //! Initialize EmoEngine instance which reads data from the headset.
     /*!
@@ -250,16 +245,6 @@ extern "C"
     EDK_API EmoEngineEventHandle
         IEE_EmoEngineEventCreate();
 
-
-    //! Return a handle to memory that can hold a profile byte stream.
-    /*!
-        This handle can be reused by the caller to retrieve subsequent profile bytes.
-     
-        \return EmoEngineEventHandle
-    */
-    EDK_API EmoEngineEventHandle
-        IEE_ProfileEventCreate();
-
     
     //! Free memory referenced by an event handle.
     /*!
@@ -297,296 +282,298 @@ extern "C"
         IEE_EmoEngineEventGetType(EmoEngineEventHandle hEvent);
 
 
-	//! Retrieve the user ID for IEE_UserAdded and IEE_UserRemoved events.
-	/*!
-		\param hEvent - a handle returned by IEE_EmoEngineEventCreate()
-		\param pUserIdOut - receives the user ID associated with the current event
+    //! Retrieve the user ID for IEE_UserAdded and IEE_UserRemoved events.
+    /*!
+        \param hEvent - a handle returned by IEE_EmoEngineEventCreate()
+        \param pUserIdOut - receives the user ID associated with the current event
 
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
 
-		\sa IedkErrorCode.h
-	*/
-	EDK_API int
-		IEE_EmoEngineEventGetUserId(EmoEngineEventHandle hEvent,
-		unsigned int *pUserIdOut);
+        \sa IedkErrorCode.h
+    */
+    EDK_API int
+        IEE_EmoEngineEventGetUserId(EmoEngineEventHandle hEvent,
+                                    unsigned int *pUserIdOut);
 
 
-	//! Copy an EmoState returned with a IEE_EmoStateUpdate event to memory referenced by an EmoStateHandle.
-	/*!
-		\param hEvent - a handle returned by IEE_EmoEngineEventCreate() and populated with IEE_EmoEngineGetNextEvent()
-		\param hEmoState - a handle returned by IEE_EmoStateCreate()
+    //! Copy an EmoState returned with a IEE_EmoStateUpdate event to memory referenced by an EmoStateHandle.
+    /*!
+        \param hEvent - a handle returned by IEE_EmoEngineEventCreate() and populated with IEE_EmoEngineGetNextEvent()
+        \param hEmoState - a handle returned by IEE_EmoStateCreate()
 
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
 
-		\sa IedkErrorCode.h
-	*/
-	EDK_API int
-		IEE_EmoEngineEventGetEmoState(EmoEngineEventHandle hEvent,
-		EmoStateHandle hEmoState);
+        \sa IedkErrorCode.h
+    */
+    EDK_API int
+        IEE_EmoEngineEventGetEmoState(EmoEngineEventHandle hEvent,
+                                      EmoStateHandle hEmoState);
 
 
-	//! Retrieve the next EmoEngine event
-	/*!
-		Non-blocking call
+    //! Retrieve the next EmoEngine event
+    /*!
+        Non-blocking call
 
-		\param hEvent - a handle returned by IEE_EmoEngineEventCreate()
+        \param hEvent - a handle returned by IEE_EmoEngineEventCreate()
 
-		\return EDK_ERROR_CODE
-		- EDK_OK if an new event has been retrieved
-		- EDK_NO_EVENT if no new events have been generated by EmoEngine
+        \return EDK_ERROR_CODE
+        - EDK_OK if an new event has been retrieved
+        - EDK_NO_EVENT if no new events have been generated by EmoEngine
 
-		\sa IedkErrorCode.h
-	*/
-	EDK_API int
-		IEE_EngineGetNextEvent(EmoEngineEventHandle hEvent);
+        \sa IedkErrorCode.h
+    */
+    EDK_API int
+        IEE_EngineGetNextEvent(EmoEngineEventHandle hEvent);
 
 
-	//! Clear a specific EmoEngine event type or all events currently inside the event queue.
-	/*!
-		Event flags can be combined together as one argument except for IEE_UnknownEvent and IEE_EmulatorError.
+    //! Clear a specific EmoEngine event type or all events currently inside the event queue.
+    /*!
+        Event flags can be combined together as one argument except for IEE_UnknownEvent and IEE_EmulatorError.
 
-		\param eventTypes - EmoEngine event type (IEE_Event_t), multiple events can be combined such as (IEE_UserAdded | IEE_UserRemoved)
+        \param eventTypes - EmoEngine event type (IEE_Event_t), multiple events can be combined such as (IEE_UserAdded | IEE_UserRemoved)
 
-		\return EDK_ERROR_CODE
-		- EDK_OK if the events have been cleared from the queue
-		- EDK_INVALID_PARAMETER if input event types are invalid
+        \return EDK_ERROR_CODE
+        - EDK_OK if the events have been cleared from the queue
+        - EDK_INVALID_PARAMETER if input event types are invalid
 
-		\sa IEE_Event_t, IedkErrorCode.h
-	*/
-	EDK_API int
-		IEE_EngineClearEventQueue(int eventTypes);
+        \sa IEE_Event_t, IedkErrorCode.h
+    */
+    EDK_API int
+        IEE_EngineClearEventQueue(int eventTypes);
 
 
-	//! Retrieve number of active users (headset) connected to the EmoEngine.
-	/*!
-		\param pNumUserOut - receives number of users
+    //! Retrieve number of active users (headset) connected to the EmoEngine.
+    /*!
+        \param pNumUserOut - receives number of users
 
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful.
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful.
 
-		\sa IedkErrorCode.h
-	*/
-	EDK_API int
-		IEE_EngineGetNumUser(unsigned int* pNumUserOut);
+        \sa IedkErrorCode.h
+    */
+    EDK_API int
+        IEE_EngineGetNumUser(unsigned int* pNumUserOut);
 
 
-	//! Set the player number display.
-	/*!
-		Sets the player number displayed on the physical input device (currently the USB Dongle) that corresponds to the specified user.
+    //! Set the player number display.
+    /*!
+        Sets the player number displayed on the physical input device (currently the USB Dongle) that corresponds to the specified user.
 
-		\param userId - EmoEngine user ID
-		\param playerNum - application assigned player number displayed on input device hardware (must be in the range 1-4)
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
+        \param userId - EmoEngine user ID
+        \param playerNum - application assigned player number displayed on input device hardware (must be in the range 1-4)
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
 
-		\sa IedkErrorCode.h
-	*/
-	EDK_API int
-		IEE_SetHardwarePlayerDisplay(unsigned int userId,
-		unsigned int playerNum);
+        \sa IedkErrorCode.h
+    */
+    EDK_API int
+        IEE_SetHardwarePlayerDisplay(unsigned int userId,
+                                     unsigned int playerNum);
 
 
-	//! Return a struct containing details about a specific channel
-	/*!
-		\param channelId - channel identifier (see IEmoStateDll.h)
-		\param pDescriptorOut - provides detailed sensor location and other info
+    //! Return a struct containing details about a specific channel
+    /*!
+        \param channelId - channel identifier (see IEmoStateDll.h)
+        \param pDescriptorOut - provides detailed sensor location and other info
 
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
 
-		\sa IEmoStateDll.h, IedkErrorCode.h
-	*/
-	EDK_API int
-		IEE_HeadsetGetSensorDetails(IEE_InputChannels_t channelId,
-		IInputSensorDescriptor_t* pDescriptorOut);
-
-
-	//! Return the current hardware version of the headset and dongle (if available).
-	/*!
-		- 0x50XX / 0x90XX - Insight Consumer
-		- 0x08XX / 0x09XX - Insight Premium
-		- 0x30XX / 0x70XX - EPOC+ Consumer
-		- 0x06XX / 0x07XX - EPOC+ Premium
-		- 0x1000 / 0x1E00 - EPOC Consumer
-		- 0x0565          - EPOC Premium
-
-		\param userId - user ID for query
-		\param pHwVersionOut - hardware version for the headset/dongle pair.
-		- Upper 2 bytes: headset version
-		- Lower 2 bytes: dongle version.
-
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
-
-		\sa IEmoStateDll.h, IedkErrorCode.h
-	*/
-	EDK_API int
-		IEE_HardwareGetVersion(unsigned int userId,
-		unsigned long* pHwVersionOut);
-
-
-	//! Return the current version of the Emotiv SDK
-	/*!
-		\param pszVersionOut - SDK software version in X.X.X format.
-		\param nVersionChars - Length of char buffer pointed to by pszVersion argument.
-		\param pBuildNumOut  - Build number. Unique for each release.
-
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
-
-		\sa IedkErrorCode.h
-	*/
-	EDK_API int
-		IEE_SoftwareGetVersion(char* pszVersionOut,
-		unsigned int nVersionChars,
-		unsigned long* pBuildNumOut);
-
-
-	//! Return the delta of the movement of the gyro since the previous call for a particular user
-	/*!
-		\param userId - user ID for query
-		\param pXOut  - horizontal displacement
-		\param pYOut  - vertical displacment
-
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
-
-		\sa IEmoStateDll.h, IedkErrorCode.h
-	*/
-	EDK_API int
-		IEE_HeadsetGetGyroDelta(unsigned int userId,
-		int* pXOut,
-		int* pYOut);
-
-
-	//! Re-zero the gyro for a particular user
-	/*!
-		\param userId - user ID for query
-
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
-
-		\sa IEmoStateDll.h, IedkErrorCode.h
-	*/
-	EDK_API int
-		IEE_HeadsetGyroRezero(unsigned int userId);
-
-
-	//! Return a handle to memory that can hold motion data.
-	//  This handle can be reused by the caller to retrieve subsequent data.
-	/*!
-		\return DataHandle
-	*/
-	EDK_API DataHandle
-		IEE_MotionDataCreate();
-
-
-	//! Free memory referenced by a data handle.
-	/*!
-		\param hData - a handle returned by IEE_MotionDataCreate()
-	*/
-	EDK_API void
-		IEE_MotionDataFree(DataHandle hData);
-
-
-	//! Update the content of the data handle to point to new data since the last call
-	/*!
-		\param userId - user ID
-		\param hData - a handle returned by IEE_MotionDataCreate()
-
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
-	*/
-	EDK_API int
-		IEE_MotionDataUpdateHandle(unsigned int userId,
-		DataHandle hData);
-
-
-	//! Extract data of a particular channel from the data handle
-	/*!
-		\param hData - a handle returned by IEE_MotionDataCreate()
-		\param channel - channel that you are interested in
-		\param buffer - pre-allocated buffer
-		\param bufferSizeInSample - size of the pre-allocated buffer
-
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
-	*/
-	EDK_API int
-		IEE_MotionDataGet(DataHandle hData,
-		IEE_MotionDataChannel_t channel,
-		double buffer[],
-		unsigned int bufferSizeInSample);
-
-
-	//! Extract data of a list of channels from the data handle
-	/*!
-		\param hData - a handle returned by IEE_MotionDataCreate()
-		\param channels - a list of channel that you are interested in
-		\param nChannels - number of channels in the channel list
-		\param buffer - pre-allocated 2 dimensional buffer, has to be nChannels x bufferSizeInSample
-		\param bufferSizeInSample - size of the pre-allocated buffer for each channel
-
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
-	*/
-	EDK_API int
-		IEE_MotionDataGetMultiChannels(DataHandle hData,
-		IEE_MotionDataChannel_t channels[],
-		unsigned int nChannels,
-		double* buffer[],
-		unsigned int bufferSizeInSample);
-
-
-	//! Return number of sample of motion data stored in the data handle
-	/*!
-		\param hData - a handle returned by IEE_MotionDataCreate()
-		\param nSampleOut - receives the number of sample of data stored in the data handle
-
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
-	*/
-	EDK_API int
-		IEE_MotionDataGetNumberOfSample(DataHandle hData,
-		unsigned int* nSampleOut);
-
-
-	//! Set the size of the motion data buffer.
-	/*!
-		The size of the buffer affects how frequent IEE_MotionDataUpdateHandle() needs to be called to prevent data loss.
-
-		\param bufferSizeInSec - buffer size in second
-
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
-	*/
-	EDK_API int
-		IEE_MotionDataSetBufferSizeInSec(float bufferSizeInSec);
-
-
-	//! Return the size of the motion data buffer
-	/*!
-		\param pBufferSizeInSecOut - receives the size of the data buffer
-
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
-	*/
-	EDK_API int
-		IEE_MotionDataGetBufferSizeInSec(float* pBufferSizeInSecOut);
-
-	//! Get sampling rate of the motion data stream
-	/*!
-		\param userId - user ID
-		\param samplingRateOut - receives the sampling rate
-
-		\return EDK_ERROR_CODE
-		- EDK_OK if successful
-	*/
-	EDK_API int
-		IEE_MotionDataGetSamplingRate(unsigned int userId,
-		unsigned int* samplingRateOut);
+        \sa IEmoStateDll.h, IedkErrorCode.h
+    */
+    EDK_API int
+        IEE_HeadsetGetSensorDetails(IEE_InputChannels_t channelId,
+                                    IInputSensorDescriptor_t* pDescriptorOut);
+
+
+    //! Return the current hardware version of the headset and dongle (if available).
+    /*!
+        - 0x50XX / 0x90XX - Insight Consumer
+        - 0x08XX / 0x09XX - Insight Premium
+        - 0x30XX / 0x70XX - EPOC+ Consumer
+        - 0x06XX / 0x07XX - EPOC+ Premium
+        - 0x1000 / 0x1E00 - EPOC Consumer
+        - 0x0565          - EPOC Premium
+
+        \param userId - user ID for query
+        \param pHwVersionOut - hardware version for the headset/dongle pair.
+        - Upper 2 bytes: headset version
+        - Lower 2 bytes: dongle version.
+
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+
+        \sa IEmoStateDll.h, IedkErrorCode.h
+    */
+    EDK_API int
+        IEE_HardwareGetVersion(unsigned int userId,
+                               unsigned long* pHwVersionOut);
+
+
+    //! Return the current version of the Emotiv SDK
+    /*!
+        \param pszVersionOut - SDK software version in X.X.X format.
+        \param nVersionChars - Length of char buffer pointed to by pszVersion argument.
+        \param pBuildNumOut  - Build number. Unique for each release.
+
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+
+        \sa IedkErrorCode.h
+    */
+    EDK_API int
+        IEE_SoftwareGetVersion(char* pszVersionOut,
+                               unsigned int nVersionChars,
+                               unsigned long* pBuildNumOut);
+
+
+    //! Return the delta of the movement of the gyro since the previous call for a particular user
+    /*!
+        \param userId - user ID for query
+        \param pXOut  - horizontal displacement
+        \param pYOut  - vertical displacment
+
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+
+        \sa IEmoStateDll.h, IedkErrorCode.h
+    */
+    EDK_API int
+        IEE_HeadsetGetGyroDelta(unsigned int userId,
+                                int* pXOut,
+                                int* pYOut);
+
+
+    //! Re-zero the gyro for a particular user
+    /*!
+        \param userId - user ID for query
+
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+
+        \sa IEmoStateDll.h, IedkErrorCode.h
+    */
+    EDK_API int
+        IEE_HeadsetGyroRezero(unsigned int userId);
+
+
+    //! Return a handle to memory that can hold motion data.
+    //  This handle can be reused by the caller to retrieve subsequent data.
+    /*!
+        \return DataHandle
+    */
+    EDK_API DataHandle
+        IEE_MotionDataCreate();
+
+
+    //! Free memory referenced by a data handle.
+    /*!
+        \param hData - a handle returned by IEE_MotionDataCreate()
+    */
+    EDK_API void
+        IEE_MotionDataFree(DataHandle hData);
+
+
+    //! Update the content of the data handle to point to new data since the last call
+    /*!
+        \param userId - user ID
+        \param hData - a handle returned by IEE_MotionDataCreate()
+
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+    */
+    EDK_API int
+        IEE_MotionDataUpdateHandle(unsigned int userId,
+                                   DataHandle hData);
+
+
+    //! Extract data of a particular channel from the data handle
+    /*!
+        \param hData - a handle returned by IEE_MotionDataCreate()
+        \param channel - channel that you are interested in
+        \param buffer - pre-allocated buffer
+        \param bufferSizeInSample - size of the pre-allocated buffer
+
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+    */
+    EDK_API int
+        IEE_MotionDataGet(DataHandle hData,
+                          IEE_MotionDataChannel_t channel,
+                          double buffer[],
+                          unsigned int bufferSizeInSample);
+
+
+    //! Extract data of a list of channels from the data handle
+    /*!
+        \param hData - a handle returned by IEE_MotionDataCreate()
+        \param channels - a list of channel that you are interested in
+        \param nChannels - number of channels in the channel list
+        \param buffer - pre-allocated 2 dimensional buffer, has to be nChannels x bufferSizeInSample
+        \param bufferSizeInSample - size of the pre-allocated buffer for each channel
+
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+    */
+    EDK_API int
+        IEE_MotionDataGetMultiChannels(DataHandle hData,
+                                       IEE_MotionDataChannel_t channels[],
+                                       unsigned int nChannels,
+                                       double* buffer[],
+                                       unsigned int bufferSizeInSample);
+
+
+    //! Return number of sample of motion data stored in the data handle
+    /*!
+        \param hData - a handle returned by IEE_MotionDataCreate()
+        \param nSampleOut - receives the number of sample of data stored in the data handle
+
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+    */
+    EDK_API int
+        IEE_MotionDataGetNumberOfSample(DataHandle hData,
+                                        unsigned int* nSampleOut);
+
+
+    //! Set the size of the motion data buffer.
+    /*!
+        The size of the buffer affects how frequent IEE_MotionDataUpdateHandle() needs to be called to prevent data loss.
+
+        \param bufferSizeInSec - buffer size in second
+
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+    */
+    EDK_API int
+        IEE_MotionDataSetBufferSizeInSec(float bufferSizeInSec);
+
+
+    //! Return the size of the motion data buffer
+    /*!
+        \param pBufferSizeInSecOut - receives the size of the data buffer
+
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+    */
+    EDK_API int
+        IEE_MotionDataGetBufferSizeInSec(float* pBufferSizeInSecOut);
+    
+
+    //! Get sampling rate of the motion data stream
+    /*!
+        \param userId - user ID
+        \param samplingRateOut - receives the sampling rate
+
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+    */
+    EDK_API int
+        IEE_MotionDataGetSamplingRate(unsigned int userId,
+                                      unsigned int* samplingRateOut);
+
 
     //! Enable/disable particular detections
     /*!
@@ -610,56 +597,58 @@ extern "C"
      */
     EDK_API void
         IEE_CheckDetectionsEnabled(unsigned long* result);
+
     
     //! Get averge band power values for a channel
     /*!
-     Return the average band power for a specific channel from the latest epoch with
-     0.5 seconds step size and 2 seconds window size.
+        Return the average band power for a specific channel from the latest epoch with
+        0.5 seconds step size and 2 seconds window size.
      
-     \param userId    - user ID
-     \param channel   - channel that is interested in
-     \param theta     - theta band value (4-8 Hz)
-     \param alpha     - alpha band value (8-12 Hz)
-     \param low_beta  - low-beta value (12-16 Hz)
-     \param high_beta - high-beta value (16-25 Hz)
-     \param gamma     - gamma value (25-45 Hz)
+        \param userId    - user ID
+        \param channel   - channel that is interested in
+        \param theta     - theta band value (4-8 Hz)
+        \param alpha     - alpha band value (8-12 Hz)
+        \param low_beta  - low-beta value (12-16 Hz)
+        \param high_beta - high-beta value (16-25 Hz)
+        \param gamma     - gamma value (25-45 Hz)
+
+        \return EDK_ERROR_CODE
+                - EDK_OK if successful
      
-     \return EDK_ERROR_CODE
-     - EDK_OK if successful
-     
-     \sa IedkErrorCode.h, IEE_FFTSetWindowingType
-     */
+        \sa IedkErrorCode.h, IEE_FFTSetWindowingType
+    */
     EDK_API int
         IEE_GetAverageBandPowers(unsigned int userId, IEE_DataChannel_t channel,
-                             double* theta, double* alpha, double* low_beta, double* high_beta, double* gamma);
-    
+                                 double* theta, double* alpha, double* low_beta, double* high_beta, double* gamma);
+
     
     //! Set the current windowing type for band power calculation
     /*!
-     \param userId - user ID
-     \param type   - windowing type enum from IEE_WindowingTypes
-     
-     \return EDK_ERROR_CODE
-     - EDK_OK if successful
-     
-     \sa IedkErrorCode.h, IEE_FFTGetWindowingType, IEE_GetAverageBandPowers
-     */
+        \param userId - user ID
+        \param type   - windowing type enum from IEE_WindowingTypes
+
+        \return EDK_ERROR_CODE
+                - EDK_OK if successful
+
+        \sa IedkErrorCode.h, IEE_FFTGetWindowingType, IEE_GetAverageBandPowers
+    */
     EDK_API int
         IEE_FFTSetWindowingType(unsigned int userId, IEE_WindowingTypes type);
     
-    
+
     //! Get the current windowing type for band power calculation
     /*!
-     \param userId - user ID
-     \param type   - windowing type enum from IEE_WindowingTypes (default: IEE_HANNING)
-     
-     \return EDK_ERROR_CODE
-     - EDK_OK if successful
-     
-     \sa IedkErrorCode.h, IEE_FFTSetWindowingType, IEE_GetAverageBandPowers
-     */
+        \param userId - user ID
+        \param type   - windowing type enum from IEE_WindowingTypes (default: IEE_HANNING)
+
+        \return EDK_ERROR_CODE
+                - EDK_OK if successful
+
+        \sa IedkErrorCode.h, IEE_FFTSetWindowingType, IEE_GetAverageBandPowers
+    */
     EDK_API int
         IEE_FFTGetWindowingType(unsigned int userId, IEE_WindowingTypes *type);
+    
     
     //!
     //! The following API calls are only applicable for certain platforms to establish BTLE connection with the headset.
@@ -667,7 +656,7 @@ extern "C"
     
 #if defined(__APPLE__)
     
-    //! Initialize access to BTLE devices
+    //! Initialize access to devices over BTLE
     /*!
         \remark Available on Mac/iOS only.
      
@@ -682,96 +671,101 @@ extern "C"
     
 #if defined(__APPLE__) || defined(__ANDROID__)
     
-    //! Connect to a particular Insight headset
+    //! Connect to an Insight device
     /*!
         \remark Available on Mac/iOS/Android only.
      
-        \param indexDevice - the index of device in list (start with 0)
+        \param indexDevice - the index of device in list (start from 0)
+     
         \return true if connected successfully
      */
     EDK_API int
         IEE_ConnectInsightDevice(int indexDevice);
     
     
-    //! Check the signal strength of current connected device
-        /*!
+    //! Get the signal strength of an Insight device
+    /*!
+        If there are multiple headsets around, you should choose to connect to the one with strongest signal.
+     
         \remark Available on Mac/iOS/Android only.
-        \param indexDevice - the index of device in list (start with 0)
-         If there are multiple headsets around, you should choose to connect to the one with strongest signal.
-
-        \param value - -30 to 0 (weak to strong)
-         */
+     
+        \param value       - -30 to 0 (weak to strong)
+        \param indexDevice - the index of device in list (start from 0)
+     */
     EDK_API void
         IEE_GetInsightSignalStrength(int& value, int indexDevice);
     
     
-    //! Get number of Insight headset in the list
+    //! Get number of Insight devices nearby
     /*!
         \remark Available on Mac/iOS/Android only.
      
         \return number of Insight headsets
-         */
+     */
     EDK_API int
         IEE_GetInsightDeviceCount();
     
     
-    //! Return name of Insight headset in listed devices
+    //! Get the name of an Insight device
+    /*!
+        The device name will include part of the serial number.
+     
+        \remark Available on Mac/iOS/Android only.
+
+        \param index - index in device list
+        \return const char* - name of the headset
+     */
+    EDK_API const char*
+        IEE_GetInsightDeviceName(int index);
+
+    
+    //! Connect to an EPOC+ device
     /*!
         \remark Available on Mac/iOS/Android only.
      
-        \param index - index in list device
-        \return const char* - name of the headset
-    */
-    EDK_API const char*
-        IEE_GetInsightDeviceName(int index);
-    
-    //! Connect to a particular EPOC+ headset
-    /*!
-     \remark Available on Mac/iOS/Android only.
-     
-     \param indexDevice - the index of device in list (start with 0)
-     \return true if connected successfully
+        \param indexDevice  -  the order of device in list (start from 0)
+        \param isSettingMode - if true the get data feature will be disabled
+        
+        \return true if connect successfully
      */
     EDK_API int
-        IEE_ConnectEpocPlusDevice(int indexDevice,bool isSettingMode = false);
+        IEE_ConnectEpocPlusDevice(int indexDevice, bool isSettingMode=false);
     
-    //! Check the signal strength of current connected device
+    
+    //! Get the signal strength of an EPOC+ device
     /*!
-     \remark Available on Mac/iOS/Android only.
-     \param indexDevice - the index of device in list (start with 0)
-     If there are multiple headsets around, you should choose to connect to the one with strongest signal.
+        If there are multiple headsets around, you should choose to connect to the one with strongest signal.
      
-     \param value - -30 to 0 (weak to strong)
+        \remark Available on Mac/iOS/Android only.
+     
+        \param value       - -30 to 0 (weak to strong)
+        \param indexDevice - the index of device in list (start from 0)
      */
     EDK_API void
         IEE_GetEpocPlusSignalStrength(int& value, int indexDevice);
     
-    //! Get number of EPOC+ headset in the list
+    
+    //! Get number of EPOC+ devices nearby
     /*!
-     \remark Available on Mac/iOS/Android only.
+        \remark Available on Mac/iOS/Android only.
      
-     \return number of Insight headsets
+        \return number of EPOC+ headsets
      */
     EDK_API int
         IEE_GetEpocPlusDeviceCount();
     
-    //! Return name of EPOC+ headset in listed devices
+    
+    //! Get the name of an EPOC+ device
     /*!
-     \remark Available on Mac/iOS/Android only.
+        The device name will include part of the serial number.
      
-     \param index - index in list device
-     \return const char* - name of the headset
+        \remark Available on Mac/iOS/Android only.
+     
+        \param index - index in device list
+        \return const char* - name of device
      */
     EDK_API const char*
         IEE_GetEpocPlusDeviceName(int index);
-    
-    //! Switch mode of EPOC+ Headset
-    /*!
-     \param value - Mode of EPOC+ Headset
-     \return true if setting succes
-     */
-    EDK_API int
-        IEE_EmoSettingMode(EE_ModeHeadset_t value);
     
 #endif
     
