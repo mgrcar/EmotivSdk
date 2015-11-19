@@ -104,24 +104,24 @@ extern "C"
     typedef enum IEE_InputChannels_enum {
         
         IEE_CHAN_CMS = 0,
-		IEE_CHAN_DRL,
-		IEE_CHAN_FP1,
+        IEE_CHAN_DRL,
+        IEE_CHAN_FP1,
         IEE_CHAN_AF3,
-		IEE_CHAN_F7,
-		IEE_CHAN_F3,
-		IEE_CHAN_FC5,
+        IEE_CHAN_F7,
+        IEE_CHAN_F3,
+        IEE_CHAN_FC5,
         IEE_CHAN_T7,
-		IEE_CHAN_P7,
+        IEE_CHAN_P7,
         IEE_CHAN_Pz,
-		IEE_CHAN_O1 = IEE_CHAN_Pz,
-		IEE_CHAN_O2,
-		IEE_CHAN_P8,
+        IEE_CHAN_O1 = IEE_CHAN_Pz,
+        IEE_CHAN_O2,
+        IEE_CHAN_P8,
         IEE_CHAN_T8,
-		IEE_CHAN_FC6,
-		IEE_CHAN_F4,
-		IEE_CHAN_F8,
+        IEE_CHAN_FC6,
+        IEE_CHAN_F4,
+        IEE_CHAN_F8,
         IEE_CHAN_AF4,
-		IEE_CHAN_FP2,
+        IEE_CHAN_FP2,
     } IEE_InputChannels_t;
 
     //! EEG Electrode Contact Quality enumeration
@@ -254,28 +254,28 @@ extern "C"
                                             size_t numChannels);
 
 
-	//! Query of the current wireless signal strength
-	/*!
-		\param state - EmoStateHandle
+    //! Query of the current wireless signal strength
+    /*!
+        \param state - EmoStateHandle
 
-		\return wireless signal strength [No Signal, Bad, Fair, Good, Excellent].
+        \return wireless signal strength [No Signal, Bad, Fair, Good, Excellent].
 
-		\sa IEE_SignalStrength_t
-	*/
-	EMOSTATE_DLL_API IEE_SignalStrength_t
-		IS_GetWirelessSignalStatus(EmoStateHandle state);
+        \sa IEE_SignalStrength_t
+    */
+    EMOSTATE_DLL_API IEE_SignalStrength_t
+        IS_GetWirelessSignalStatus(EmoStateHandle state);
 
 
-	//! Get the level of charge remaining in the headset battery
-	/*!
-		\param state            - EmoStateHandle
-		\param chargeLevel      - the current level of charge in the headset battery
-		\param maxChargeLevel   - the maximum level of charge in the battery
-	*/
-	EMOSTATE_DLL_API void
-		IS_GetBatteryChargeLevel(EmoStateHandle state,
-		                         int* chargeLevel,
-		                         int* maxChargeLevel);
+    //! Get the level of charge remaining in the headset battery
+    /*!
+        \param state            - EmoStateHandle
+        \param chargeLevel      - the current level of charge in the headset battery
+        \param maxChargeLevel   - the maximum level of charge in the battery
+    */
+    EMOSTATE_DLL_API void
+        IS_GetBatteryChargeLevel(EmoStateHandle state,
+                                 int* chargeLevel,
+                                 int* maxChargeLevel);
 
 //DEPLOYMENT::NON_PREMIUM_RELEASE::REMOVE_START
 
@@ -554,16 +554,16 @@ extern "C"
 //DEPLOYMENT::NON_PREMIUM_RELEASE::REMOVE_END
 
 
-	//! Clone EmoStateHandle
-	/*!
-		\param a - Destination of EmoStateHandle
-		\param b - Source of EmoStateHandle
+    //! Clone EmoStateHandle
+    /*!
+        \param a - Destination of EmoStateHandle
+        \param b - Source of EmoStateHandle
 
-		\sa IS_Create
-	*/
-	EMOSTATE_DLL_API void
-		IS_Copy(EmoStateHandle a,
-		EmoStateHandle b);
+        \sa IS_Create
+    */
+    EMOSTATE_DLL_API void
+        IS_Copy(EmoStateHandle a,
+        EmoStateHandle b);
 
     //! Check whether two states are with identical EmoEngine state.
     /*!
