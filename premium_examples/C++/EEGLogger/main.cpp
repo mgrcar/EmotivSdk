@@ -25,7 +25,6 @@
 
 #include "IEmoStateDLL.h"
 #include "Iedk.h"
-#include "IEegData.h"
 #include "IedkErrorCode.h"
 
 void logEmoState(std::ostream& os, unsigned int userID,

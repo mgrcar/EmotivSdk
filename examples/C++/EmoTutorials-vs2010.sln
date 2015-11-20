@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HeadsetInformationLogger", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SavingAndLoadingProfileCloud", "SavingAndLoadingProfileCloud\SavingAndLoadingProfileCloud.vcxproj", "{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AverageBandPowers", "AverageBandPowers\AverageBandPowers.vcxproj", "{377FAE60-8CDE-48BE-AEB1-83064C9CD207}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -85,6 +87,14 @@ Global
 		{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}.Release|Win32.Build.0 = Release|Win32
 		{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}.Release|x64.ActiveCfg = Release|x64
 		{26FC2DD6-D6F6-44E8-B69B-EE244FD279A0}.Release|x64.Build.0 = Release|x64
+		{377FAE60-8CDE-48BE-AEB1-83064C9CD207}.Debug|Win32.ActiveCfg = Debug|Win32
+		{377FAE60-8CDE-48BE-AEB1-83064C9CD207}.Debug|Win32.Build.0 = Debug|Win32
+		{377FAE60-8CDE-48BE-AEB1-83064C9CD207}.Debug|x64.ActiveCfg = Debug|x64
+		{377FAE60-8CDE-48BE-AEB1-83064C9CD207}.Debug|x64.Build.0 = Debug|x64
+		{377FAE60-8CDE-48BE-AEB1-83064C9CD207}.Release|Win32.ActiveCfg = Release|Win32
+		{377FAE60-8CDE-48BE-AEB1-83064C9CD207}.Release|Win32.Build.0 = Release|Win32
+		{377FAE60-8CDE-48BE-AEB1-83064C9CD207}.Release|x64.ActiveCfg = Release|x64
+		{377FAE60-8CDE-48BE-AEB1-83064C9CD207}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
