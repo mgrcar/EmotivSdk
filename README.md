@@ -3,7 +3,7 @@
 Here is the repository to download the latest Emotiv SDK Community Edition, along with code examples and other development tools.
 * Supports EPOC (over Emotiv USB dongle)
 * Supports Insight and EPOC+ (over BTLE and Emotiv USB dongle)
-* Supports Win32/64, Mac, Android, iOS
+* Supports Win32/64, Mac, Linux, Android, iOS
 
 If you have questions or have knowledge to share, please visit our [forum](https://emotiv.com/forum/) which is the hub for our developer community.
 
@@ -25,9 +25,9 @@ Version 3.3.0
   * low-beta (12-16 Hz)
   * high-beta (16-25 Hz)
   * gamma (25-45 Hz)
+* Supports Ubuntu 14.04 64-bit
 
 Coming soon:
-* Emotiv SDK for Ubuntu 14.04 64-bit
 * EmoComposer for Win32, Mac
 * EmoKey for Win32, Mac
 
@@ -38,11 +38,13 @@ Coming soon:
     (recommended one: Plugable USB 2.0 Bluetooth Adapter, http://plugable.com/products/usb-bt4le)
   * Mac OS X 10.10 or above (check if Bluetooth LMP Version is 0x6 from System Report)
   * Android 4.4.3 or above
+  * Ubuntu 14.04 64-bit (see [Ubuntu BTLE with BlueZ](doc/Ubuntu BTLE with BlueZ.md))
 
 * Insight with Emotiv Universal USB Receiver currently works with the SDK under:
   * Windows 7 or above
   * Mac OS X 10.8 or above
   * Android 4.4.3 or above
+  * Ubuntu 14.04 64-bit
 
 ## Connecting Your Insight
 * Windows: Turn on Bluetooth on both Insight and PC, then pair your Insight with Windows built-in Bluetooth service first
