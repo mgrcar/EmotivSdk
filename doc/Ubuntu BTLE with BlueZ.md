@@ -12,13 +12,11 @@ make
 
 #### Configure
    * Add `EnableGatt = true` to file `/etc/bluetooth/main.conf`
-   * Edit `/etc/dbus-1/system.d/bluetooth.conf`, change the last line from:
+   * Backup then edit file `/etc/dbus-1/system.d/bluetooth.conf`, remove `1` from all the lines, such as:
    
-     `<allow send_interface="org.bluez.Agent1"/>`
-   
-     to
-   
-     `<allow send_interface="org.bluez.Agent"/>`
+    `<allow send_interface="org.bluez.Agent1"/>` to `<allow send_interface="org.bluez.Agent"/>`
+    
+    `<allow send_interface="org.bluez.GattDescriptor1"/>`  to `<allow send_interface="org.bluez.GattDescriptor"/>`
 
 ### Run bluez service and test connection
 #### Stop old bluez service
@@ -58,7 +56,7 @@ Open other terminal and run `bluetoothctl`. Use following commands to test conne
   
   `[bluetooth]#info [MAC_Address]`
 
-  > Each Emotiv device has a specific UUID `81072f40-9f3d-11e3-a9dc-0002a5d5c51b`
+  > Each Emotiv device has a specific service UUID `81072f40-9f3d-11e3-a9dc-0002a5d5c51b`
 
 * Connect to an Emotiv device
   
