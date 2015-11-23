@@ -3,7 +3,7 @@
 Here is the repository to download the latest Emotiv SDK Community Edition, along with code examples and other development tools.
 * Supports EPOC (over Emotiv USB dongle)
 * Supports Insight and EPOC+ (over BTLE and Emotiv USB dongle)
-* Supports Win32/64, Mac, Android, iOS
+* Supports Win32/64, Mac, Linux, Android, iOS
 
 If you have questions or have knowledge to share, please visit our [forum](https://emotiv.com/forum/) which is the hub for our developer community.
 
@@ -25,9 +25,9 @@ Version 3.3.0
   * low-beta (12-16 Hz)
   * high-beta (16-25 Hz)
   * gamma (25-45 Hz)
+* Supports Ubuntu 14.04 64-bit
 
 Coming soon:
-* Emotiv SDK for Ubuntu 14.04 64-bit
 * EmoComposer for Win32, Mac
 * EmoKey for Win32, Mac
 
