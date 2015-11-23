@@ -38,7 +38,7 @@ Coming soon:
     (recommended one: Plugable USB 2.0 Bluetooth Adapter, http://plugable.com/products/usb-bt4le)
   * Mac OS X 10.10 or above (check if Bluetooth LMP Version is 0x6 from System Report)
   * Android 4.4.3 or above
-  * Ubuntu 14.04 64-bit (see [Using BlueZ on Ubuntu doc](doc/Ubuntu BTLE with BlueZ.md))
+  * Ubuntu 14.04 64-bit (see [Ubuntu BTLE with BlueZ](doc/Ubuntu BTLE with BlueZ.md))
 
 * Insight with Emotiv Universal USB Receiver currently works with the SDK under:
   * Windows 7 or above
