@@ -27,10 +27,6 @@ Version 3.3.0
   * gamma (25-45 Hz)
 * Supports Ubuntu 14.04 64-bit
 
-Coming soon:
-* EmoComposer for Win32, Mac
-* EmoKey for Win32, Mac
-
 ## Supported Platforms
 * Insight with Bluetooth SMART (Bluetooth 4.0 or Bluetooth Low Energy) connection currently works with the SDK under:
   * Windows 8 or above
@@ -60,6 +56,14 @@ http://emotiv.com/api/3.3.0/
 * EPOC+ motion data may not be accurate with firmware 0x614 over BTLE and USB dongle
 
 ## Apps and Tools
+
+#### Xavier EmoComposer
+ * [Xavier Composer](tools) allows you to send user-defined EmoStates to Emotiv SDK, Xavier EmoKey, or any other application that makes use of the Emotiv API, and simulate the events that could be sent from Emotiv SDK with a real device.
+ * Available for Windows 7 or above and Mac OS X 10.8 or above
+
+#### Xavier EmoKey
+ * [Xavier EmoKey](tools) translates Emotiv detection results to predefined sequences of keystrokes according to logical rules defined by the user.
+ * Available for Windows 7 or above and Mac OS X 10.8 or above
 
 #### CPanel
 A web-based Emotiv Control Panel:
