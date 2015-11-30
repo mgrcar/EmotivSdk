@@ -16,30 +16,35 @@
 #ifndef EMOTIVCLOUDCLIENT_H
 #define EMOTIVCLOUDCLIENT_H
 
-#ifndef EDK_STATIC_LIB
-    #ifdef EMOTIVCLOUDCLIENT_EXPORTS
-        #ifdef WIN32
-            #define EMOTIVCLOUD_API __declspec(dllexport)
-        #else
-            #define EMOTIVCLOUD_API
-        #endif
-    #else
-        #ifdef WIN32
-            #define EMOTIVCLOUD_API __declspec(dllimport)
-        #else
-            #define EMOTIVCLOUD_API
-        #endif
-    #endif
-#else
-    #define EMOTIVCLOUD_API extern
-#endif
-
-#define MAX_NUM_OF_BACKUP_PROFILE_VERSION 2
-
 #ifdef __cplusplus
 extern "C"
 {
 #endif
+
+#ifndef EDK_STATIC_LIB
+#   ifdef EMOTIVCLOUDCLIENT_EXPORTS
+#       ifdef _WIN32
+#           define EMOTIVCLOUD_API __declspec(dllexport)
+#       else
+#           if (defined __GNUC__ && __GNUC__ >= 4) || defined __INTEL_COMPILER || defined __clang__
+#               define EMOTIVCLOUD_API __attribute__ ((visibility("default")))
+#           else
+#               define EMOTIVCLOUD_API
+#           endif
+#       endif
+#   else
+#       ifdef _WIN32
+#           define EMOTIVCLOUD_API __declspec(dllimport)
+#       else
+#           define EMOTIVCLOUD_API
+#       endif
+#   endif
+#else
+#   define EMOTIVCLOUD_API extern
+#endif
+
+#define MAX_NUM_OF_BACKUP_PROFILE_VERSION 2
+
 
     //! Profile types
     typedef enum profileType {

@@ -21,27 +21,37 @@
 #define IEMOSTATE_DLL_H
 #include <sys/types.h>
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #if !defined(EDK_STATIC_LIB) && !defined(EDK_UTILS_ONLY)
-    #ifdef _WIN32
-        #ifdef EMOSTATE_DLL_EXPORTS
-            #define EMOSTATE_DLL_API __declspec(dllexport)
-        #else
-            #define EMOSTATE_DLL_API __declspec(dllimport)
-        #endif
-    #else
-        #define EMOSTATE_DLL_API
-    #endif
+#   ifdef EMOSTATE_DLL_EXPORTS
+#       ifdef _WIN32
+#           define EMOSTATE_DLL_API __declspec(dllexport)
+#       else
+#           if (defined __GNUC__ && __GNUC__ >= 4) || defined __INTEL_COMPILER || defined __clang__
+#               define EMOSTATE_DLL_API __attribute__ ((visibility("default")))
+#           else
+#               define EMOSTATE_DLL_API
+#           endif
+#       endif
+#   else
+#       ifdef _WIN32
+#           define EMOSTATE_DLL_API __declspec(dllimport)
+#       else
+#           define EMOSTATE_DLL_API
+#       endif
+#   endif
 #else
-    #define EMOSTATE_DLL_API extern
+#   define EMOSTATE_DLL_API extern
 #endif
 
 //! Defining EmoStateHandle as a void pointer
 typedef void* EmoStateHandle;
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+
     //! Emotiv Detection Suite enumerator
     typedef enum IEE_EmotivSuite_enum {
 

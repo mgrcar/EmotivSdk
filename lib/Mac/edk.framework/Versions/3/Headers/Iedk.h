@@ -15,35 +15,43 @@
 #ifndef IEDK_H
 #define IEDK_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+#ifndef EDK_STATIC_LIB
+#   ifdef EDK_EXPORTS
+#       ifdef _WIN32
+#           define EDK_API __declspec(dllexport)
+#       else
+#           if (defined __GNUC__ && __GNUC__ >= 4) || defined __INTEL_COMPILER || defined __clang__
+#               define EDK_API __attribute__ ((visibility("default")))
+#           else
+#               define EDK_API
+#           endif
+#       endif
+#   else
+#       ifdef _WIN32
+#           define EDK_API __declspec(dllimport)
+#       else
+#           define EDK_API
+#       endif
+#   endif
+#else
+#   include "IEmotivProfile.h"
+#   include "IEmoStatePerformanceMetric.h"
+#   define EDK_API extern
+#endif
+
 #include "IedkErrorCode.h"
 #include "IEmoStateDLL.h"
 #include "FacialExpressionDetection.h"
 #include "MentalCommandDetection.h"
 
-#ifndef EDK_STATIC_LIB
-    #ifdef EDK_EXPORTS
-        #ifdef _WIN32
-            #define EDK_API __declspec(dllexport)
-        #else
-            #define EDK_API
-        #endif
-    #else
-        #ifdef _WIN32
-            #define EDK_API __declspec(dllimport)
-        #else
-            #define EDK_API
-        #endif
-    #endif
-#else
-    #include "IEmotivProfile.h"
-    #include "IEmoStatePerformanceMetric.h"
-    #define EDK_API extern
-#endif
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+
+
 
     //! Handle to EmoState structure allocated by IEE_EmoStateCreate.
     /*!
