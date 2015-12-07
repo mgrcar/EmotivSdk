@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/Emotiv/Downloads/FacialExpression/app/src/main/res/values/color.xml -->
+    <eat-comment/>
+    <color name="black_50">#90000000</color>
+    <color name="color1">#ff1f1f1f</color>
+    <color name="color2">#ffbf3000</color>
+    <color name="color3">#ffde9000</color>
+    <color name="color4">#ff879900</color>
+    <color name="colorclear">#771f1f1f</color>
+    <color name="white_80">#60ffffff</color>
+    <!-- From: file:/Users/Emotiv/Downloads/FacialExpression/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/Users/Emotiv/Downloads/FacialExpression/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">FacialExpression</string>
+    <string name="hello_world">Hello world!</string>
+    <!-- From: file:/Users/Emotiv/Downloads/FacialExpression/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>
