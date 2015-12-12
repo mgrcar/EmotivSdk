@@ -34,12 +34,14 @@ extern "C"
 {
 #endif
 
-void logEmoState(std::ostream& os, unsigned int userID,
-                 EmoStateHandle eState, bool withHeader = false);
-
 #ifdef __linux__
 int _kbhit(void);
 #endif
+
+void logEmoState(std::ostream& os, unsigned int userID,
+                 EmoStateHandle eState, bool withHeader = false);
+
+
 
 int main(int argc, char** argv) {
 

@@ -6,10 +6,8 @@
 ** 0.5 seconds step size and 2 seconds window size
 ** This example is use for single connection.
 ****************************************************************************/
+#ifdef __cplusplus
 
-#include <iostream>
-#include <string>
-#include <fstream>
 
 #ifdef _WIN32
     #include <conio.h>
@@ -19,6 +17,14 @@
     #include <unistd.h>
 #endif
 
+#include <iostream>
+#include <string>
+#include <fstream>
+
+extern "C"
+{
+#endif
+
 #include "IEmoStateDLL.h"
 #include "Iedk.h"
 #include "IedkErrorCode.h"
@@ -26,7 +32,12 @@
 
 using namespace std;
 
-void  main() {
+#ifdef __linux__
+int _kbhit(void);
+#endif
+
+int  main()
+{
 
 	EmoEngineEventHandle eEvent	= IEE_EmoEngineEventCreate();
 	EmoStateHandle eState       = IEE_EmoStateCreate();
@@ -39,12 +50,12 @@ void  main() {
 
 	std::string ouputFile = "AverageBandPowers.txt";
 	const char header[] = "Theta, Alpha, Low_beta, High_beta, Gamma";
-	std::ofstream ofs(ouputFile, std::ios::trunc);
+    std::ofstream ofs(ouputFile.c_str(), std::ios::trunc);
 	ofs << header << std::endl;
 		
 	if (IEE_EngineConnect() != EDK_OK) {
-                throw std::runtime_error(
-                            "Emotiv Driver start up failed.");
+        std::cout << "Emotiv Driver start up failed.";
+       return -1;
 	}
 
 	std::cout << "==================================================================="
@@ -110,4 +121,31 @@ void  main() {
 	IEE_EngineDisconnect();
 	IEE_EmoStateFree(eState);
 	IEE_EmoEngineEventFree(eEvent);
+    return 0;
 }
+
+#ifdef __linux__
+int _kbhit(void)
+{
+    struct timeval tv;
+    fd_set read_fd;
+
+    tv.tv_sec=0;
+    tv.tv_usec=0;
+
+    FD_ZERO(&read_fd);
+    FD_SET(0,&read_fd);
+
+    if(select(1, &read_fd,NULL, NULL, &tv) == -1)
+    return 0;
+
+    if(FD_ISSET(0,&read_fd))
+        return 1;
+
+    return 0;
+}
+#endif
+
+#ifdef __cplusplus
+}
+#endif

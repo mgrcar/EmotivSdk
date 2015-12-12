@@ -2,8 +2,10 @@
 **
 ** Copyright 2015 by Emotiv. All rights reserved
 ** Example - SavingAndLoadingProfileCloud
-** How to saving and loading prfile from Emotiv Cloud
+** How to save and load prfile from Emotiv Cloud
 ****************************************************************************/
+#include<stdio.h>
+#include<stdlib.h>
 
 #include <iostream>
 #include <string>
@@ -16,13 +18,22 @@
     #include <unistd.h>
 #endif
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+#ifdef __linux__
+int _kbhit(void);
+#endif
+
 #include "IEmoStateDLL.h"
 #include "Iedk.h"
 #include "IedkErrorCode.h"
 #include "EmotivCloudClient.h"
 
 
-void  main() {
+int  main() {
 	std::string userName = "Your account name";
 	std::string password = "Your password";
 	std::string profileName = "EmotivProfile";
@@ -39,8 +50,8 @@ void  main() {
 	int state			= 0;
 		
 	if (IEE_EngineConnect() != EDK_OK) {
-                throw std::runtime_error(
-                            "Emotiv Driver start up failed.");
+        std::cout << "Emotiv Driver start up failed.";
+        return -1;
 	}
 
 	std::cout << "==================================================================="
@@ -61,19 +72,20 @@ void  main() {
 	if(!EC_Connect())
 	{
 		std::cout << "Cannot connect to Emotiv Cloud";
-		return;
+        return -2;
 	}
 
 	if(!EC_Login(userName.c_str(), password.c_str()))
-	{
-			
+	{			
 		std::cout << "Your login attempt has failed. The username or password may be incorrect";
-		_getch();
-		return;
+#ifdef _WIN32
+        _getch();
+#endif
+        return -3;
 	}
 
 	if (!EC_GetUserDetail(&userCloudID))
-		return;
+        return -4;
 
 	while (!_kbhit())
 	{
@@ -106,26 +118,31 @@ void  main() {
 						else std::cout << "Updating failed";
 						}
 					else if (EC_SaveUserProfile(userCloudID, (int)engineUserID, profileName.c_str(),
-						profileFileType::TRAINING))
+                        TRAINING))
 					{
 						std::cout << "Saving finished";
 					}
 					else std::cout << "Saving failed";
-
-					_getch();
-					return;
+#ifdef _WIN32
+                    _getch();
+#endif
+                    return -6;
 				}
 				case 2:{
-					if (getNumberProfile > 0)
+                    if (getNumberProfile > 0){
 						if (EC_LoadUserProfile(userCloudID, (int)engineUserID, EC_ProfileIDAtIndex(userCloudID, 0)))
-						std::cout << "Loading finished";
-						else std::cout << "Loading failed";
+                            std::cout << "Loading finished";
+                        else
+                            std::cout << "Loading failed";
 
-					_getch();
-					return;
+                    }
+#ifdef _WIN32
+                    _getch();
+#endif
+                    return -5;
 				}
 				default:
-					throw std::runtime_error("Invalid option...");
+                    std::cout << "Invalid option...";
 					break;
 			}
 		}
@@ -141,4 +158,32 @@ void  main() {
 	IEE_EngineDisconnect();
 	IEE_EmoStateFree(eState);
 	IEE_EmoEngineEventFree(eEvent);
+    return 0;
 }
+
+
+#ifdef __linux__
+int _kbhit(void)
+{
+    struct timeval tv;
+    fd_set read_fd;
+
+    tv.tv_sec=0;
+    tv.tv_usec=0;
+
+    FD_ZERO(&read_fd);
+    FD_SET(0,&read_fd);
+
+    if(select(1, &read_fd,NULL, NULL, &tv) == -1)
+    return 0;
+
+    if(FD_ISSET(0,&read_fd))
+        return 1;
+
+    return 0;
+}
+#endif
+
+#ifdef __cplusplus
+}
+#endif
