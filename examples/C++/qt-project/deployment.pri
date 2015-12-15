@@ -241,5 +241,6 @@ win32 {
         LIBS+= -L/home/emotiv/working/win/build/bin/linux64 # Development PC
     }
     LIBS += -ledk
+	LIBS += -lcurl
     DESTDIR=/tmp/emotiv/build/bin/linux
 }

@@ -4,7 +4,7 @@ project (mtcmd)
 set ( PROJECT_LINK_LIBS libedk.so )
 
 set ( EXAMPLES_DIR ../../../ )
-link_directories( ${EXAMPLES_DIR}/bin/linux64 )
+link_directories( ${EXAMPLES_DIR}/../bin/linux64 libcurl.so )
 
 include_directories(${EXAMPLES_DIR}/include)
  
