@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6.0)
 project (AverageBandPowers)
 #For the shared library:
-set ( PROJECT_LINK_LIBS libedk.so libcurl.so )
+set ( PROJECT_LINK_LIBS libedk.so )
 
 set ( EXAMPLES_DIR ../../../ )
 link_directories( ${EXAMPLES_DIR}/../bin/linux64 )
