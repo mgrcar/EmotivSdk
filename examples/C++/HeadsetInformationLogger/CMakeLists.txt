@@ -4,7 +4,7 @@ project (hinfo)
 set ( PROJECT_LINK_LIBS libedk.so )
 
 set ( EXAMPLES_DIR ../../../ )
-link_directories( ${EXAMPLES_DIR}/bin/linux64 )
+link_directories( ${EXAMPLES_DIR}/../bin/linux64 )
 
 include_directories(${EXAMPLES_DIR}/include)
  
