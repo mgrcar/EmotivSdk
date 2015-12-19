@@ -1,11 +1,16 @@
 # Emotiv SDK - Community Edition
 
-Here is the repository to download the latest Emotiv SDK Community Edition, along with code examples and other development tools.
+Here is the repository of the Emotiv SDK Community Edition, along with code examples and other development tools.
 * Supports EPOC (over Emotiv USB dongle)
 * Supports Insight and EPOC+ (over BTLE and Emotiv USB dongle)
 * Supports Win32/64, Mac, Linux, Android, iOS
 
 If you have questions or have knowledge to share, please visit our [forum](https://emotiv.com/forum/) which is the hub for our developer community.
+
+To get the SDK you can either:
+* clone this repository with `git` command line tool or a GUI client like [SourceTree](https://www.sourcetreeapp.com); or
+* click on the "Download ZIP" button (above, on the right) to get the zip archive of the latest version; or
+* go to [releases](releases) and download the archive of a particular release
 
 ## Table of Contents
 1. [Latest Release](#latest-release)
