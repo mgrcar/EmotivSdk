@@ -2,17 +2,16 @@
 
 ## Table of Contents
 
-[Emotiv Xavier Tools](#0)
-
-[1. Introduction to XavierEmoKey](#1)
-* [1.1 Connecting XavierEmoKey to Emotiv EmoEngine](#1.1)
-* [1.2 Configuring XavierEmoKey Rules](#1.2)
-* [1.3 XavierEmoKey Keyboard Emulation](#1.3)
-* [1.4 Configuring XavierEmoKey Rule Trigger Conditions](#1.4)
-* [1.5 Saving Rules to an XavierEmoKey Mapping file](#1.5)
-[2. Xavier Composer usage](#2)
-* [2.1 Interactive Mode](#2.1)
-* [2.2 EmoScript Mode](#2.2)
+* [Emotiv Xavier Tools](#0)
+* 1. [Introduction to XavierEmoKey](#1)
+ * 1.1 [Connecting XavierEmoKey to Emotiv EmoEngine](#1.1)
+ * 1.2 [Configuring XavierEmoKey Rules](#1.2)
+ * 1.3 [XavierEmoKey Keyboard Emulation](#1.3)
+ * 1.4 [Configuring XavierEmoKey Rule Trigger Conditions](#1.4)
+ * 1.5 [Saving Rules to an XavierEmoKey Mapping file](#1.5)
+* 2. [Xavier Composer usage](#2)
+  * 2.1 [Interactive Mode](#2.1)
+  * 2.2 [EmoScript Mode](#2.2)
 
 ## <a name="0"></a> Emotiv Xavier Tools
 
