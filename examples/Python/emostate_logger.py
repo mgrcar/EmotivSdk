@@ -3,6 +3,12 @@ import os
 import time
 import ctypes
 
+if sys.platform.startswith('win32'):
+    import msvcrt
+elif sys.platform.startswith('linux'):
+    import atexit
+    from select import select
+
 from ctypes import *
 
 try:
@@ -113,19 +119,28 @@ def logEmoState(userID, eState):
     print >>f, IS_MentalCommandGetCurrentAction(eState), ",",
     print >>f, IS_MentalCommandGetCurrentActionPower(eState)
     print >>f, '\n'
+    
+def kbhit():
+    ''' Returns True if keyboard character was hit, False otherwise.
+    '''
+    if sys.platform.startswith('win32'):
+        return msvcrt.kbhit()   
+    else:
+        dr,dw,de = select([sys.stdin], [], [], 0)
+        return dr != []
 # -------------------------------------------------------------------------
 
 userID = c_uint(0)
-user = pointer(userID)
-composerPort = c_uint(1726)
-timestamp = c_float(0.0)
+user   = pointer(userID)
 option = c_int(0)
-state = c_int(0)
+state  = c_int(0)
+composerPort = c_uint(1726)
+timestamp    = c_float(0.0)
 
 FE_SUPPRISE = 0x0020
-FE_FROWN = 0x0040
-FE_SMILE = 0x0080
-FE_CLENCH = 0x0100
+FE_FROWN    = 0x0040
+FE_SMILE    = 0x0080
+FE_CLENCH   = 0x0100
 
 
 # -------------------------------------------------------------------------
@@ -144,8 +159,8 @@ print ">> "
 
 # -------------------------------------------------------------------------
 
-
 option = int(raw_input())
+
 if option == 1:
     if libEDK.IEE_EngineConnect("Emotiv Systems-5") != 0:
         print "Emotiv Engine start up failed."
@@ -161,6 +176,10 @@ f = open('ES.csv', 'w')
 print >> f, header
 
 while (1):
+    
+    if kbhit():
+        break
+    
     state = libEDK.IEE_EngineGetNextEvent(eEvent)
     if state == 0:
         eventType = libEDK.IEE_EmoEngineEventGetType(eEvent)
@@ -175,6 +194,7 @@ while (1):
         print "Internal error in Emotiv Engine ! "
     time.sleep(1)
 # -------------------------------------------------------------------------
+f.close()
 libEDK.IEE_EngineDisconnect()
 libEDK.IEE_EmoStateFree(eState)
 libEDK.IEE_EmoEngineEventFree(eEvent)
