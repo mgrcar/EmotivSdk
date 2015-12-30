@@ -139,6 +139,46 @@ public interface Edk extends Library {
 		}
 	}
 	
+	public enum IEE_DataChannels_t {
+		IED_COUNTER(0),            //!< Sample counter
+		IED_INTERPOLATED(1),       //!< Indicate if data is interpolated
+		IED_RAW_CQ(2),             //!< Raw contact quality value
+		IED_AF3(3),                //!< Channel AF3
+		IED_F7(4),                 //!< Channel F7
+		IED_F3(5),                 //!< Channel F3
+		IED_FC5(6),                //!< Channel FC5
+		IED_T7(7),                 //!< Channel T7
+		IED_P7(8),                 //!< Channel P7
+		IED_Pz(9),                 //!< Channel Pz
+		IED_O1(9),        		   //!< Channel O1 = Pz
+		IED_O2(10),                //!< Channel O2
+		IED_P8(11),                //!< Channel P8
+		IED_T8(12),                //!< Channel T8
+		IED_FC6(13),               //!< Channel FC6
+		IED_F4(14),                //!< Channel F4
+		IED_F8(15),                //!< Channel F8
+		IED_AF4(16),               //!< Channel AF4
+		IED_GYROX(17),             //!< Gyroscope X-axis
+		IED_GYROY(18),             //!< Gyroscope Y-axis
+		IED_TIMESTAMP(19),         //!< System timestamp
+		IED_ES_TIMESTAMP(20),      //!< EmoState timestamp
+		IED_FUNC_ID(21),           //!< Reserved function id
+		IED_FUNC_VALUE(22),        //!< Reserved function value
+		IED_MARKER(23),            //!< Marker value from hardware
+		IED_SYNC_SIGNAL(24);       //!< Synchronisation signal
+					
+		private int cType;
+
+		IEE_DataChannels_t(int val) {
+			cType = val;
+		}
+
+		public int getType() {
+			return cType;
+		}
+	}
+	
+	
 	public enum IEE_MotionDataChannel_t {
         IMD_COUNTER,        	//!< Sample counter
         IMD_GYROX,              //!< Gyroscope X-axis
@@ -829,52 +869,100 @@ public interface Edk extends Library {
 	 */
 	int IEE_HeadsetGyroRezero(int userId);
 	
-	 //! Return a handle to memory that can hold motion data.
+	
+	//! Get headset settings from EPOC+ headset
+	/*!
+	 *  \param userId - user ID
+	 *  \param EPOCmode	    - If 0, EPOC mode is EPOC.
+	 *                      - If 1, EPOC mode is EPOC+.
+	 *  \param eegRate      - If 0, EEG sample rate is 128Hz.
+	 *                      - If 1, EEG sample rate is 256Hz.
+	 *                      - If 2, no signals.
+	 *  \param eegRes       - If 0, EEG Resolution is 14bit.
+	 *                      - If 1, EEG Resolution is 16bit.
+	 *                      - If 2, no signals.
+	 *  \param memsRate     - If 0, MEMS sample rate is OFF.
+	 *                      - If 1, MEMS sample rate is 32Hz.
+	 *                      - If 2, MEMS sample rate is 64Hz.
+	 *                      - If 3, MEMS sample rate is 128Hz.
+	 *  \param memsRes      - If 0, MEMS Resolution is 12bit.
+	 *                      - If 1, MEMS Resolution is 14bit.
+	 *                      - If 2, MEMS Resolution is 16bit.
+	 *                      - If 3, no signals.
+	 *  \return EDK_ERROR_CODE
+	 *                      - EDK_ERROR_CODE = EDK_OK if the command successful
+	*/
+	int IEE_GetHeadsetSettings(int userId, IntByReference EPOCmode, IntByReference eegRate, IntByReference eegRes, IntByReference memsRate, IntByReference memsRes);
+	
+	
+	//! Set headset setting for EPOC+ headset
+	/*!
+	 *  \param userId       - user ID
+	 *  \param EPOCmode     - If 0, then EPOC mode is EPOC.
+	 *                      - If 1, then EPOC mode is EPOC+.
+	 *  \param eegRate      - If 0, then EEG sample rate is 128Hz.
+	 *                      - If 1, then EEG sample rate is 256Hz.
+	 *  \param eegRes       - If 0, then EEG Resolution is 14bit.
+	 *                      - If 1, then EEG Resolution is 16bit.
+	 *  \param memsRate     - If 0, then MEMS sample rate is OFF.
+	 *                      - If 1, then MEMS sample rate is 32Hz.
+	 *                      - If 2, then MEMS sample rate is 64Hz.
+	 *                      - If 3, then MEMS sample rate is 128Hz.
+	 *  \param memsRes      - If 0, then MEMS Resolution is 12bit.
+	 *                      - If 1, then MEMS Resolution is 14bit.
+	 *                      - If 2, then MEMS Resolution is 16bit.
+	 *  \return EDK_ERROR_CODE 
+	 *                      - EDK_ERROR_CODE = EDK_OK if the command successful
+	*/
+	int IEE_SetHeadsetSettings(int userId, int EPOCmode, int eegRate, int eegRes, int memsRate, int memsRes);
+	
+	
+	//! Return a handle to memory that can hold motion data.
     //  This handle can be reused by the caller to retrieve subsequent data.
     /*!
-        \return DataHandle
+     * \return DataHandle
      */
 	Pointer	IEE_MotionDataCreate();
     
     
     //! Free memory referenced by a data handle.
     /*!
-        \param hData - a handle returned by IEE_MotionDataCreate()
+     *  \param hData - a handle returned by IEE_MotionDataCreate()
      */
     void IEE_MotionDataFree(Pointer hData);
     
     
     //! Update the content of the data handle to point to new data since the last call
     /*!
-        \param userId - user ID
-        \param hData - a handle returned by IEE_MotionDataCreate()
-        \return EDK_ERROR_CODE
-                - EDK_OK if successful
+     *  \param userId - user ID
+     *  \param hData - a handle returned by IEE_MotionDataCreate()
+     *  \return EDK_ERROR_CODE
+     *                - EDK_OK if successful
      */
     int	IEE_MotionDataUpdateHandle(int userId, Pointer hData);
     
     
     //! Extract data of a particular channel from the data handle
     /*!
-        \param hData - a handle returned by IEE_MotionDataCreate()
-        \param channel - channel that you are interested in
-        \param buffer - pre-allocated buffer
-        \param bufferSizeInSample - size of the pre-allocated buffer
-        \return EDK_ERROR_CODE
-                - EDK_OK if successful
+     *  \param hData - a handle returned by IEE_MotionDataCreate()
+     *  \param channel - channel that you are interested in
+     *  \param buffer - pre-allocated buffer
+     *  \param bufferSizeInSample - size of the pre-allocated buffer
+     *  \return EDK_ERROR_CODE
+     *                 - EDK_OK if successful
      */
     int IEE_MotionDataGet(Pointer hData, int channel, double[] buffer, 
     		int bufferSizeInSample);
 	
     //! Extract data of a list of channels from the data handle
     /*!
-        \param hData - a handle returned by IEE_MotionDataCreate()
-        \param channels - a list of channel that you are interested in
-        \param nChannels - number of channels in the channel list
-        \param buffer - pre-allocated 2 dimensional buffer, has to be nChannels x bufferSizeInSample
-        \param bufferSizeInSample - size of the pre-allocated buffer for each channel
-        \return EDK_ERROR_CODE
-                - EDK_OK if successful
+     *  \param hData - a handle returned by IEE_MotionDataCreate()
+     *  \param channels - a list of channel that you are interested in
+     *  \param nChannels - number of channels in the channel list
+     *  \param buffer - pre-allocated 2 dimensional buffer, has to be nChannels x bufferSizeInSample
+     *  \param bufferSizeInSample - size of the pre-allocated buffer for each channel
+     *  \return EDK_ERROR_CODE
+     *                  - EDK_OK if successful
      */
     int IEE_MotionDataGetMultiChannels(Pointer hData, int[] channels, int nChannels,
     		DoubleByReference[] buffer, int bufferSizeInSample);
@@ -882,40 +970,77 @@ public interface Edk extends Library {
     
     //! Return number of sample of motion data stored in the data handle
     /*!
-        \param hData - a handle returned by IEE_MotionDataCreate()
-        \param nSampleOut - receives the number of sample of data stored in the data handle
-        \return EDK_ERROR_CODE
-                - EDK_OK if successful
+     *  \param hData - a handle returned by IEE_MotionDataCreate()
+     *  \param nSampleOut - receives the number of sample of data stored in the data handle
+     *  \return EDK_ERROR_CODE
+     *                 - EDK_OK if successful
      */
     int IEE_MotionDataGetNumberOfSample(Pointer hData, IntByReference nSampleOut);
     
     
     //! Set the size of the motion data buffer.
     /*!
-        The size of the buffer affects how frequent IEE_MotionDataUpdateHandle() needs to be called to prevent data loss.
-     
-        \param bufferSizeInSec - buffer size in second
-        \return EDK_ERROR_CODE
-                - EDK_OK if successful
+     *   The size of the buffer affects how frequent IEE_MotionDataUpdateHandle() needs to be called to prevent data loss.
+     *   \param bufferSizeInSec - buffer size in second
+     *   \return EDK_ERROR_CODE
+     *                 - EDK_OK if successful
      */
     int IEE_MotionDataSetBufferSizeInSec(float bufferSizeInSec);
     
     
     //! Return the size of the motion data buffer
     /*!
-        \param pBufferSizeInSecOut - receives the size of the data buffer
-        \return EDK_ERROR_CODE
-                - EDK_OK if successful
+     *  \param pBufferSizeInSecOut - receives the size of the data buffer
+     *  \return EDK_ERROR_CODE
+     *                 - EDK_OK if successful
      */
     int IEE_MotionDataGetBufferSizeInSec(FloatByReference pBufferSizeInSecOut);
     
     
     //! Get sampling rate of the motion data stream
     /*!
-        \param userId - user ID
-        \param samplingRateOut - receives the sampling rate
-        \return EDK_ERROR_CODE
-                - EDK_OK if successful
+     *  \param userId - user ID
+     *  \param samplingRateOut - receives the sampling rate
+     *  \return EDK_ERROR_CODE
+     *                 - EDK_OK if successful
      */
     int IEE_MotionDataGetSamplingRate(int userId, IntByReference samplingRateOut);
+    
+    
+    //! Get averge band power values for a channel
+    /*!
+     *  Return the average band power for a specific channel from the latest epoch with
+     *  0.5 seconds step size and 2 seconds window size.
+     *  \param userId    - user ID
+     *  \param channel   - channel that is interested in
+     *  \param theta     - theta band value (4-8 Hz)
+     *  \param alpha     - alpha band value (8-12 Hz)
+     *  \param low_beta  - low-beta value (12-16 Hz)
+     *  \param high_beta - high-beta value (16-25 Hz)
+     *  \param gamma     - gamma value (25-45 Hz)
+     *  \return EDK_ERROR_CODE
+     *                   - EDK_OK if successful
+    */
+    int IEE_GetAverageBandPowers(int userId, int channel, DoubleByReference theta, DoubleByReference alpha, DoubleByReference low_beta, 
+    		DoubleByReference high_beta, DoubleByReference gamma);
+
+    
+    //! Set the current windowing type for band power calculation
+    /*!
+     *  \param userId - user ID
+     *  \param type   - windowing type enum from IEE_WindowingTypes
+     *  \return EDK_ERROR_CODE
+     *                   - EDK_OK if successful
+    */
+    int IEE_FFTSetWindowingType(int userId, int type);
+    
+
+    //! Get the current windowing type for band power calculation
+    /*! 
+     *  \param userId - user ID
+     *  \param type   - windowing type enum from IEE_WindowingTypes (default: IEE_HANNING)
+     *  \return EDK_ERROR_CODE
+     *                - EDK_OK if successful
+    */
+    int IEE_FFTGetWindowingType(int userId, IntByReference type);
 }

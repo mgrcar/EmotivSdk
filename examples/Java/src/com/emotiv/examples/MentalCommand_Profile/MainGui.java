@@ -146,7 +146,7 @@ public class MainGui extends JFrame {
 				int eventType = Edk.INSTANCE.IEE_EmoEngineEventGetType(eEvent);
 				Edk.INSTANCE.IEE_EmoEngineEventGetUserId(eEvent, userID);
 				if (eventType == Edk.IEE_Event_t.IEE_UserAdded.ToInt()) {
-					EmoProfileManagement.AddNewProfile("3");
+					//EmoProfileManagement.AddNewProfile("3");
 					JOptionPane.showMessageDialog(new JFrame(), "User add",
 							"Dialog", JOptionPane.ERROR_MESSAGE);
 				}
@@ -279,8 +279,8 @@ public class MainGui extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				EmoProfileManagement.SaveCurrentProfile();
-				EmoProfileManagement.SaveProfilesToFile();
+				//EmoProfileManagement.SaveCurrentProfile();
+				//EmoProfileManagement.SaveProfilesToFile();
 			}
 		});
 		add(saveBtt);
@@ -291,12 +291,12 @@ public class MainGui extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EmoProfileManagement.LoadProfilesFromFile();
-				EmoProfileManagement.SetUserProfile("1");
-				String actionList = EmoProfileManagement.CheckCurrentProfile();
-				long MentalCommandActions = Long.valueOf(actionList);
-				Edk.INSTANCE.IEE_MentalCommandSetActiveActions(0,
-						MentalCommandActions);
+				//EmoProfileManagement.LoadProfilesFromFile();
+				//EmoProfileManagement.SetUserProfile("1");
+				//String actionList = EmoProfileManagement.CheckCurrentProfile();
+				//long MentalCommandActions = Long.valueOf(actionList);
+				//Edk.INSTANCE.IEE_MentalCommandSetActiveActions(0, MentalCommandActions);
+				Edk.INSTANCE.IEE_MentalCommandSetActiveActions(0, 1);
 			}
 		});
 		add(loadBtt);

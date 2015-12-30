@@ -20,8 +20,7 @@ public class EEGLogger {
 
 		switch (option) {
 		case 1: {
-			if (Edk.INSTANCE.IEE_EngineConnect("Emotiv Systems-5") != EdkErrorCode.EDK_OK
-					.ToInt()) {
+			if (Edk.INSTANCE.IEE_EngineConnect("Emotiv Systems-5") != EdkErrorCode.EDK_OK.ToInt()) {
 				System.out.println("Emotiv Engine start up failed.");
 				return;
 			}
@@ -44,8 +43,8 @@ public class EEGLogger {
 			return;
 		}
 
-		Pointer hData = Edk.INSTANCE.IEE_DataCreate();
-		Edk.INSTANCE.IEE_DataSetBufferSizeInSec(secs);
+		Pointer hData = IEegData.INSTANCE.IEE_DataCreate();
+		IEegData.INSTANCE.IEE_DataSetBufferSizeInSec(secs);
 		System.out.print("Buffer size in secs: ");
 		System.out.println(secs);
 
@@ -62,8 +61,7 @@ public class EEGLogger {
 				if (eventType == Edk.IEE_Event_t.IEE_UserAdded.ToInt())
 					if (userID != null) {
 						System.out.println("User added");
-						Edk.INSTANCE.IEE_DataAcquisitionEnable(
-								userID.getValue(), true);
+						IEegData.INSTANCE.IEE_DataAcquisitionEnable(userID.getValue(), true);
 						readytocollect = true;
 					}
 			} else if (state != EdkErrorCode.EDK_NO_EVENT.ToInt()) {
@@ -72,9 +70,9 @@ public class EEGLogger {
 			}
 
 			if (readytocollect) {
-				Edk.INSTANCE.IEE_DataUpdateHandle(0, hData);
+				IEegData.INSTANCE.IEE_DataUpdateHandle(0, hData);
 
-				Edk.INSTANCE.IEE_DataGetNumberOfSample(hData, nSamplesTaken);
+				IEegData.INSTANCE.IEE_DataGetNumberOfSample(hData, nSamplesTaken);
 
 				if (nSamplesTaken != null) {
 					if (nSamplesTaken.getValue() != 0) {
@@ -83,12 +81,11 @@ public class EEGLogger {
 						System.out.println(nSamplesTaken.getValue());
 
 						double[] data = new double[nSamplesTaken.getValue()];
-						for (int sampleIdx = 0; sampleIdx < nSamplesTaken
-								.getValue(); ++sampleIdx) {
+						for (int sampleIdx = 0; sampleIdx < nSamplesTaken.getValue(); ++sampleIdx) {
 							for (int i = 0; i < 17; i++) {
 
-								Edk.INSTANCE.IEE_DataGet(hData, i, data,
-										nSamplesTaken.getValue());
+								IEegData.INSTANCE.IEE_DataGet(hData, i, data, nSamplesTaken.getValue());
+								
 								System.out.print(data[sampleIdx]);
 								System.out.print(",");
 							}

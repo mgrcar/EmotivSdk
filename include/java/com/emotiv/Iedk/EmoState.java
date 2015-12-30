@@ -492,7 +492,7 @@ public interface EmoState extends Library {
 	 * 
 	 * \return 1: Equal, 0: Different
 	 * 
-	 * \sa IS_PerformanceMetricEqual, IS_FacialExpressionEqual,
+	 * \sa IS_FacialExpressionEqual,
 	 * IS_MentalCommandEqual, IS_Equal
 	 */
 	int IS_EmoEngineEqual(Pointer a, Pointer b);
@@ -503,7 +503,7 @@ public interface EmoState extends Library {
 	 * 
 	 * \return 1: Equal, 0: Different
 	 * 
-	 * \sa IS_PerformanceMetricEqual, IS_FacialExpressionEqual,
+	 * \IS_FacialExpressionEqual,
 	 * IS_EmoEngineEqual
 	 */
 	int IS_Equal(Pointer a, Pointer b);
