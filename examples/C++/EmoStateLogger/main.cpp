@@ -23,8 +23,6 @@
     #include <unistd.h>
 #endif
 
-
-
 #include "IEmoStateDLL.h"
 #include "Iedk.h"
 #include "IedkErrorCode.h"
@@ -211,10 +209,10 @@ void logEmoState(std::ostream& os, unsigned int userID,
 	expressivStates[ upperFaceAction ] = upperFacePower;
 	expressivStates[ lowerFaceAction ] = lowerFacePower;
 	
-	os << expressivStates[ FE_SURPRISE     ] << ","; // eyebrow
-	os << expressivStates[ FE_FROWN      ] << ","; // furrow
-	os << expressivStates[ FE_SMILE       ] << ","; // smile
-	os << expressivStates[ FE_CLENCH      ] << ","; // clench
+	os << expressivStates[ FE_SURPRISE] << ","; // eyebrow
+	os << expressivStates[ FE_FROWN   ] << ","; // furrow
+	os << expressivStates[ FE_SMILE   ] << ","; // smile
+	os << expressivStates[ FE_CLENCH  ] << ","; // clench
 
 	// MentalCommand Suite results
 	os << static_cast<int>(IS_MentalCommandGetCurrentAction(eState)) << ",";

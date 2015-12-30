@@ -52,16 +52,11 @@ int main(int argc, char** argv) {
 
 	EmoEngineEventHandle eEvent			= IEE_EmoEngineEventCreate();
 	EmoStateHandle eState				= IEE_EmoStateCreate();
-	unsigned int userID					= 0;
-	const unsigned short composerPort	= 1726;
+	unsigned int userID					= 0;	
 	float secs							= 1;
 	unsigned int datarate				= 0;
 	bool readytocollect					= false;
-	int option							= 0;
 	int state							= 0;
-
-
-	std::string input;
 
 	try {
 
@@ -72,7 +67,7 @@ int main(int argc, char** argv) {
 
         std::cout << "==================================================================="
                   << std::endl;
-        std::cout << "Example to show how to log Motion Data from EmoDriver/EmoComposer."
+        std::cout << "Example to show how to log Motion Data from EmoDriver."
                   << std::endl;
         std::cout << "==================================================================="
                   << std::endl;
@@ -120,8 +115,7 @@ int main(int argc, char** argv) {
                 if (nSamplesTaken != 0) {
 
                     double* data = new double[nSamplesTaken];
-                    for (int sampleIdx=0 ; sampleIdx<(int)nSamplesTaken ;
-                         ++ sampleIdx) {
+                    for (int sampleIdx=0 ; sampleIdx<(int)nSamplesTaken ; ++ sampleIdx) {
                         for (int i = 0 ;
                              i<sizeof(targetChannelList)/sizeof(IEE_MotionDataChannel_t) ;
                              i++) {

@@ -1,9 +1,8 @@
 /****************************************************************************
-**
 ** Copyright 2015 by Emotiv. All rights reserved
-** Example - MultichanelIEEGLogger
-** This example is similar with the exaple 5( IEEGLogger ) , except using the
-** IEE_DataGetMultiChannels function instead for EE_DataGet().
+** Example - MultilChannelEEGLogger
+** This example is similar with the example EEGLogger, except using the
+** IEE_DataGetMultiChannels function instead for IEE_DataGet().
 ** It gets all data from all channels in channel list and logs to file
 ** (ie mydata.csv)
 ****************************************************************************/

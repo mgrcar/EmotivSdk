@@ -1,5 +1,4 @@
 /****************************************************************************
-**
 ** Copyright 2015 by Emotiv. All rights reserved
 ** Example - Multi Dongle EEGLogger
 ** This sample is to get synchronized eeg data from two headsets.
@@ -72,18 +71,19 @@ int main(int argc,char** argv[])
 	// Initialize the users
 	// NOTE: Only expecting two for now
 	unsigned int userID = -1;
-	int userList[2] = {-1,-1};
+	int userList[2]     = {-1,-1};
 	int totalSamples[2] = {0,0};		
-	int fileNumbers[2] = {1,1};
-	int numUsers = 0;
+	int fileNumbers[2]  = {1,1};
+	int numUsers        = 0;
+
 	std::ofstream ofs[2];
 
 	// Initialize some parameter
-	float secs							= 1;
-	unsigned int datarate				= 0;
-	bool readytocollect					= false;
-	int option							= 0;
-	int state							= 0;
+	float secs            = 1;
+	unsigned int datarate = 0;
+	bool readytocollect   = false;
+	int option            = 0;
+	int state             = 0;
 
 	// Make sure we're connect
 	if( IEE_EngineConnect() == EDK_OK )
@@ -124,7 +124,6 @@ int main(int argc,char** argv[])
 					IEE_DataAcquisitionEnable(userID,true);
 					userList[numUsers++] = userID;
 
-					// Check
 					if (numUsers > 2)
 					{
                         throw std::runtime_error("Too many users on demo!");
@@ -242,7 +241,7 @@ int main(int argc,char** argv[])
 	}
 	ofs1.close();
 	ofs2.close();
-	// Clean things up
+
 	IEE_EngineDisconnect();
 	IEE_EmoStateFree(eState);
 	IEE_EmoEngineEventFree(eEvent);	

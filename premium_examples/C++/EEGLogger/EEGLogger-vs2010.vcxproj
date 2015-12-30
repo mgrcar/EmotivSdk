@@ -21,6 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9DCC5DE8-A4B0-4F19-879D-796257635B5A}</ProjectGuid>
     <RootNamespace>EEGLoggervs2010</RootNamespace>
+    <ProjectName>EEGLogger-vs2010</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

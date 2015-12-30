@@ -30,8 +30,7 @@
 
 #define PI 3.1418
 
-bool  oneTime    = true,
-      outOfBound = false;
+bool  outOfBound = false;
 float currX      = 0,
       currY      = 0;
 float xmax       = 0,
@@ -139,8 +138,8 @@ void changeXY(int x) // x = 0 : idle
 
 void updateDisplay(void)
 {	  
-   int gyroX = 0,gyroY = 0;
-   IEE_HeadsetGetGyroDelta(0,&gyroX,&gyroY);
+   int gyroX = 0, gyroY = 0;
+   IEE_HeadsetGetGyroDelta(0, &gyroX, &gyroY);
    xmax += gyroX;
    ymax += gyroY;
 
@@ -235,21 +234,68 @@ double GetTickCount()
  */
 int main(int argc, char** argv)
 {
-   EmoEngineEventHandle hEvent = IEE_EmoEngineEventCreate();
-   EmoStateHandle eState = IEE_EmoStateCreate();
-   unsigned int userID = -1;
-   IEE_EngineConnect();	
-   if(oneTime)
-   {
-      std::cout << "Start after 8 seconds\n";
+	EmoEngineEventHandle hEvent = IEE_EmoEngineEventCreate();
+	EmoStateHandle eState = IEE_EmoStateCreate();
+	unsigned int userID = -1;
+	int state           = 0;
+	bool ready          = false;
+	
+	if (IEE_EngineConnect() != EDK_OK) {
+		std::cout << "Emotiv Driver start up failed.";
+		return -1;
+	}
+	
+	std::cout << "Please make sure your headset is on and don't move your head.";
+	std::cout << std::endl;
+
+	while(true)
+	{
+
+		state = IEE_EngineGetNextEvent(hEvent);
+
+		if (state == EDK_OK) 
+		{
+		    IEE_Event_t eventType = IEE_EmoEngineEventGetType(hEvent);
+			IEE_EmoEngineEventGetUserId(hEvent, &userID);
+
+			if (eventType == IEE_UserAdded) {
+		         std::cout << "User added" << std::endl << std::endl;
+				 userID = 0;
+		         ready = true;
+			}
+		}
+
+		if(!ready) continue;
+
+		int gyroX = 0, gyroY = 0;
+		int err = IEE_HeadsetGetGyroDelta(userID, &gyroX, &gyroY);
+				
+		if (err == EDK_OK){
+			std::cout << std::endl;
+			std::cout << "You can move your head now." << std::endl;
+
 #ifdef _WIN32
-      Sleep(8000);
+			Sleep(1000);
 #endif
 #ifdef __linux__
-      sleep(8);
+			sleep(1);
 #endif
-	  oneTime = false;
-   }
+			break;
+		}else if (err == EDK_GYRO_NOT_CALIBRATED){
+			std::cout << "Gyro is not calibrated. Please stay still." << std::endl;
+		}else if (err == EDK_CANNOT_ACQUIRE_DATA){
+			std::cout << "Cannot acquire data" << std::endl;
+		}else{
+			std::cout << "No headset is connected" << std::endl;
+		}
+
+#ifdef _WIN32
+		Sleep(100);
+#endif
+#ifdef __linux__
+		sleep(1);
+#endif
+	}
 
 #ifdef _WIN32
    globalElapsed = GetTickCount();

@@ -4,7 +4,8 @@
 ** Example - AverageBandPowers
 ** The average band power for a specific channel from the latest epoch with
 ** 0.5 seconds step size and 2 seconds window size
-** This example is use for single connection.
+** This example is used for single connection.
+**
 ****************************************************************************/
 #ifdef __cplusplus
 
@@ -28,7 +29,6 @@ extern "C"
 #include "IEmoStateDLL.h"
 #include "Iedk.h"
 #include "IedkErrorCode.h"
-#include "EmotivCloudClient.h"
 
 using namespace std;
 

@@ -2,10 +2,11 @@
 **
 ** Copyright 2015 by Emotiv. All rights reserved
 ** Example - SavingAndLoadingProfileCloud
-** How to save and load prfile from Emotiv Cloud
+** How to saving and loading prfile from Emotiv Cloud
+**
 ****************************************************************************/
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include <iostream>
 #include <string>
@@ -56,7 +57,7 @@ int  main() {
 
 	std::cout << "==================================================================="
                 << std::endl;
-    std::cout << "Example to saving and loading profile from Emotiv Cloud "
+    std::cout << "Example to saving and loading profile from Emotiv Cloud. "
                 << std::endl;
     std::cout << "==================================================================="
                 << std::endl;
@@ -84,6 +85,8 @@ int  main() {
         return -3;
 	}
 
+	std::cout<<"Logged in as " << userName << std::endl;
+
 	if (!EC_GetUserDetail(&userCloudID))
         return -4;
 
@@ -93,13 +96,13 @@ int  main() {
 
 		if (state == EDK_OK) {
 
-		IEE_Event_t eventType = IEE_EmoEngineEventGetType(eEvent);
-		IEE_EmoEngineEventGetUserId(eEvent, &engineUserID);
+		    IEE_Event_t eventType = IEE_EmoEngineEventGetType(eEvent);
+		    IEE_EmoEngineEventGetUserId(eEvent, &engineUserID);
 
-		if (eventType == IEE_UserAdded) {
-		std::cout << "User added" << std::endl;
-		ready = true;
-		}
+		    if (eventType == IEE_UserAdded) {
+		        std::cout << "User added" << std::endl;
+		        ready = true;
+		    }
 		}
 
 		if (ready)
@@ -111,18 +114,17 @@ int  main() {
 					int profileID = EC_GetProfileId(userCloudID, profileName.c_str());
 
 					if (profileID >= 0) {
-						std::cout << "Profile with " << profileName << " is existed" << std::endl;
-						if (EC_UpdateUserProfile(userCloudID, engineUserID, profileID, profileName.c_str())) {
-						std::cout << "Updating finished";      
-						}
-						else std::cout << "Updating failed";
-						}
-					else if (EC_SaveUserProfile(userCloudID, (int)engineUserID, profileName.c_str(),
-                        TRAINING))
-					{
-						std::cout << "Saving finished";
-					}
-					else std::cout << "Saving failed";
+						    std::cout << "Profile with " << profileName << " is existed" << std::endl;
+						    if (EC_UpdateUserProfile(userCloudID, engineUserID, profileID, profileName.c_str())) {
+						        std::cout << "Updating finished";      
+						    }
+						    else std::cout << "Updating failed";
+				    }
+					else if (EC_SaveUserProfile(userCloudID, (int)engineUserID, profileName.c_str(), TRAINING))
+					     {
+						     std::cout << "Saving finished";
+					     }
+					     else std::cout << "Saving failed";
 #ifdef _WIN32
                     _getch();
 #endif

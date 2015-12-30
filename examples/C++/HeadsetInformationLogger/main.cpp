@@ -112,14 +112,6 @@ int main(int argc, char** argv)
 				ofs << IS_GetContactQuality(eState, IEE_CHAN_T8) << ", ";
 				ofs << IS_GetContactQuality(eState, IEE_CHAN_AF4) << ", ";
 
-				// or
-				/*IS_GetContactQualityFromAllChannels(eState, contactQuality, 18);
-				ofs << contactQuality[1] << ", ";
-				ofs << contactQuality[2] << ", ";
-				ofs << contactQuality[3] << ", ";
-				ofs << contactQuality[4] << ", ";
-				ofs << contactQuality[5] << ", ";*/
-
 				ofs << std::endl;
 			}
 		}
