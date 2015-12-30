@@ -1297,7 +1297,37 @@ namespace Emotiv
         {
             errorHandler(EdkDll.IEE_HeadsetGyroRezero(userId));
         }
-      
+
+        /// <summary>
+        /// Get headset settings from EPOC+ headset
+        /// </summary>
+        /// <param name="userId">user ID</param>
+        /// <param name="EPOCmode">Mode of headset</param>
+        /// <param name="eegRate">EEG sample rate</param>
+        /// <param name="eegRes">EEG resolution</param>
+        /// <param name="memsRate">Motion sample rate</param>
+        /// <param name="memsRes">Motion resolution</param>
+        /// <returns>EDK_ERROR_CODE</returns>
+        public void GetHeadsetSettings(UInt32 userId, out UInt32 EPOCmode, out UInt32 eegRate, out UInt32 eegRes, out UInt32 memsRate, out UInt32 memsRes)
+        {
+            errorHandler(EdkDll.IEE_GetHeadsetSettings(userId, out EPOCmode, out eegRate, out eegRes, out memsRate, out memsRes));
+        }
+
+        /// <summary>
+        /// Set headset settings for EPOC+ headset
+        /// </summary>
+        /// <param name="userId">user ID</param>
+        /// <param name="EPOCmode">Mode of headset</param>
+        /// <param name="eegRate">EEG sample rate</param>
+        /// <param name="eegRes">EEG resolution</param>
+        /// <param name="memsRate">Motion sample rate</param>
+        /// <param name="memsRes">Motion resolution</param>
+        /// <returns>EDK_ERROR_CODE</returns>
+        public void SetHeadsetSettings(UInt32 userId, UInt32 EPOCmode, UInt32 eegRate, UInt32 eegRes, UInt32 memsRate, UInt32 memsRes)
+        {
+            errorHandler(EdkDll.IEE_SetHeadsetSettings(userId, EPOCmode, eegRate, eegRes, memsRate, memsRes));
+        }
+
         //Motion Data-------------
 
         /// <summary>
@@ -1362,6 +1392,55 @@ namespace Emotiv
             UInt32 samplingRate = 0;
             errorHandler(EdkDll.IEE_MotionDataGetSamplingRate(userId, out samplingRate));
             return samplingRate;
+        }
+
+        /// <summary>
+        /// Get averge band power values for a channel
+        /// </summary>
+        /// <param name="userId">user ID</param>            
+        /// <param name="channel">channel that is interested in</param>
+        /// <param name="theta">theta band value (4-8 Hz)</param>
+        /// <param name="alpha">alpha band value (8-12 Hz)</param>
+        /// <param name="low_beta">low-beta value (12-16 Hz)</param>
+        /// <param name="high_beta">high-beta value (16-25 Hz)</param>
+        /// <param name="gamma">gamma value (25-45 Hz)</param>
+        /// <returns>EDK_ERROR_CODE</returns>
+        public Int32 IEE_GetAverageBandPowers(UInt32 userId, EdkDll.IEE_DataChannel_t channel, Double[] theta, Double[] alpha, Double[] low_beta, Double[] high_beta, Double[] gamma)
+        {
+            return EdkDll.IEE_GetAverageBandPowers(userId, channel, theta, alpha, low_beta, high_beta, gamma);
+        }
+
+        //! Set the current windowing type for band power calculation
+        /*!
+            \param userId - user ID
+            \param type   - windowing type enum from IEE_WindowingTypes
+
+            \return EDK_ERROR_CODE
+                    - EDK_OK if successful
+
+            \sa IedkErrorCode.h, IEE_FFTGetWindowingType, IEE_GetAverageBandPowers
+        */
+
+        /// <summary>
+        /// Set the current windowing type for band power calculation
+        /// </summary>
+        /// <param name="userId">user ID</param>            
+        /// <param name="type">windowing type enum from IEE_WindowingTypes</param>
+        /// <returns>EDK_ERROR_CODE</returns>
+        public void IEE_FFTSetWindowingType(UInt32 userId, EdkDll.IEE_WindowingTypes type)
+        {
+            errorHandler(EdkDll.IEE_FFTSetWindowingType(userId, type));
+        }
+
+        /// <summary>
+        /// Get the current windowing type for band power calculation
+        /// </summary>
+        /// <param name="userId">user ID</param>            
+        /// <param name="type">windowing type enum from IEE_WindowingTypes (default: IEE_HANNING)</param>
+        /// <returns>EDK_ERROR_CODE</returns>
+        public void IEE_FFTGetWindowingType(UInt32 userId, EdkDll.IEE_WindowingTypes type)
+        {
+            errorHandler(EdkDll.IEE_FFTGetWindowingType(userId, type));
         }
     }
 }

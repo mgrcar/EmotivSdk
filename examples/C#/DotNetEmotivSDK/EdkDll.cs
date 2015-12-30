@@ -199,8 +199,8 @@ namespace Emotiv
             IEE_CHAN_FC5,
             IEE_CHAN_T7,
             IEE_CHAN_P7,
-            IEE_CHAN_Pz,
-            IEE_CHAN_O1 = IEE_CHAN_Pz,
+            //IEE_CHAN_Pz,
+            IEE_CHAN_O1,            //IEE_CHAN_O1 = IEE_CHAN_Pz
             IEE_CHAN_O2,
             IEE_CHAN_P8,
             IEE_CHAN_T8,
@@ -209,6 +209,44 @@ namespace Emotiv
             IEE_CHAN_F8,
             IEE_CHAN_AF4,
             IEE_CHAN_FP2,
+        } ;
+
+            //! EEG and system data channel description
+        public enum IEE_DataChannel_t {
+            IED_COUNTER = 0,        //!< Sample counter
+            IED_INTERPOLATED,       //!< Indicate if data is interpolated
+            IED_RAW_CQ,             //!< Raw contact quality value
+            IED_AF3,                //!< Channel AF3
+            IED_F7,                 //!< Channel F7
+            IED_F3,                 //!< Channel F3
+            IED_FC5,                //!< Channel FC5
+            IED_T7,                 //!< Channel T7
+            IED_P7,                 //!< Channel P7
+            IED_O1,                 //!< Channel O1 = Pz
+            IED_O2,                 //!< Channel O2
+            IED_P8,                 //!< Channel P8
+            IED_T8,                 //!< Channel T8
+            IED_FC6,                //!< Channel FC6
+            IED_F4,                 //!< Channel F4
+            IED_F8,                 //!< Channel F8
+            IED_AF4,                //!< Channel AF4
+            IED_GYROX,              //!< Gyroscope X-axis
+            IED_GYROY,              //!< Gyroscope Y-axis
+            IED_TIMESTAMP,          //!< System timestamp
+            IED_ES_TIMESTAMP,       //!< EmoState timestamp
+            IED_FUNC_ID,            //!< Reserved function id
+            IED_FUNC_VALUE,         //!< Reserved function value
+            IED_MARKER,             //!< Marker value from hardware
+            IED_SYNC_SIGNAL         //!< Synchronisation signal
+        } ;
+
+        //! Windowing types enum for Fast Fourier Transform
+        public enum IEE_WindowingTypes {
+            IEE_HANNING   = 0,      //!< Hanning Window
+            IEE_HAMMING   = 1,      //!< Hamming Window
+            IEE_HANN      = 2,      //!< Hann Window
+            IEE_BLACKMAN  = 3,      //!< Blackman-Harris Window
+            IEE_RECTANGLE = 4       //!< Uniform/rectangular Window
         } ;
 
         public enum IEE_EEG_ContactQuality_t
@@ -279,6 +317,13 @@ namespace Emotiv
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_HeadsetGyroRezero")]
         static extern Int32 Unmanged_IEE_HeadsetGyroRezero(UInt32 userId);
+
+        //Set/Get headset setting for EPOC+ headset
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_GetHeadsetSettings")]
+        static extern Int32 Unmanaged_IEE_GetHeadsetSettings(UInt32 userId, out UInt32 EPOCmode, out UInt32 eegRate, out UInt32 eegRes, out UInt32 memsRate, out UInt32 memsRes);
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_SetHeadsetSettings")]
+        static extern Int32 Unmanaged_IEE_SetHeadsetSettings(UInt32 userId, UInt32 EPOCmode, UInt32 eegRate, UInt32 eegRes, UInt32 memsRate, UInt32 memsRes);
 
         //Motion Data
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_MotionDataCreate")]
@@ -406,6 +451,16 @@ namespace Emotiv
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_MentalCommandGetSignatureCacheSize")]
         static extern Int32 Unmanged_IEE_MentalCommandGetSignatureCacheSize(UInt32 userId, out UInt32 pSizeOut);
 
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_GetAverageBandPowers")]
+        static extern Int32 Unmanged_IEE_GetAverageBandPowers(UInt32 userId, IEE_DataChannel_t channel, Double[] theta, Double[] alpha, Double[] low_beta, Double[] high_beta, Double[] gamma);
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_FFTSetWindowingType")]
+        static extern Int32 Unmanged_IEE_FFTSetWindowingType(UInt32 userId, IEE_WindowingTypes type);
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_FFTGetWindowingType")]
+        static extern Int32 Unmanged_IEE_FFTGetWindowingType(UInt32 userId, out IEE_WindowingTypes type);
+
+
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IS_FacialExpressionIsBlink")]
         static extern Boolean Unmanaged_IS_FacialExpressionIsBlink(IntPtr state);
 
@@ -507,7 +562,7 @@ namespace Emotiv
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IS_GetBatteryChargeLevel")]
         static extern void Unmanaged_IS_GetBatteryChargeLevel(IntPtr state, out Int32 chargeLevel, out Int32 maxChargeLevel);
-
+        
 
 
         public static Int32 IEE_EngineConnect(String security)
@@ -609,6 +664,17 @@ namespace Emotiv
         {
             return Unmanged_IEE_HeadsetGyroRezero(userId);
         }
+
+        public static Int32 IEE_GetHeadsetSettings(UInt32 userId, out UInt32 EPOCmode, out UInt32 eegRate, out UInt32 eegRes, out UInt32 memsRate, out UInt32 memsRes)
+        {
+            return Unmanaged_IEE_GetHeadsetSettings(userId, out EPOCmode, out eegRate, out eegRes, out memsRate, out memsRes);
+        }
+
+        public static Int32 IEE_SetHeadsetSettings(UInt32 userId, UInt32 EPOCmode, UInt32 eegRate, UInt32 eegRes, UInt32 memsRate, UInt32 memsRes)
+        {
+            return Unmanaged_IEE_SetHeadsetSettings(userId, EPOCmode, eegRate, eegRes, memsRate, memsRes);
+        }
+
 
         public static IntPtr IEE_MotionDataCreate()
         {
@@ -881,6 +947,22 @@ namespace Emotiv
         {
             return Unmanged_IEE_MentalCommandGetSignatureCacheSize(userId, out pSizeOut);
         }
+
+        public static Int32 IEE_GetAverageBandPowers(UInt32 userId, IEE_DataChannel_t channel, Double[] theta, Double[] alpha, Double[] low_beta, Double[] high_beta, Double[] gamma)
+        {
+            return Unmanged_IEE_GetAverageBandPowers(userId, channel, theta, alpha, low_beta, high_beta, gamma);
+        }
+
+        public static Int32 IEE_FFTSetWindowingType(UInt32 userId, IEE_WindowingTypes type)
+        {
+            return Unmanged_IEE_FFTSetWindowingType(userId, type);
+        }
+
+        public static Int32 IEE_FFTGetWindowingType(UInt32 userId, IEE_WindowingTypes type)
+        {
+            return Unmanged_IEE_FFTGetWindowingType(userId, out type);
+        }
+      
 
         public static Boolean IS_FacialExpressionIsBlink(IntPtr state)
         {

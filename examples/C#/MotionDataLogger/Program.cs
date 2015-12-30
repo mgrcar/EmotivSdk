@@ -1,4 +1,14 @@
-﻿using System;
+﻿/****************************************************************************
+**
+** Copyright 2015 by Emotiv. All rights reserved
+** Example - MotionDataLogger
+** This example demonstrates how to extract live Motion data using the EmoEngineTM
+** Data is read from the headset and sent to an output file for
+** later analysis
+**
+****************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using Emotiv;
 using System.IO;
@@ -9,25 +19,12 @@ namespace MotionDataLogger
 {
     class MotionDataLogger
     {
-        EmoEngine engine;   // Access to the EDK is via the EmoEngine 
-        int userID = -1;    // userID is used to uniquely identify a user's headset
-        string filename = "motionDataLogger.csv"; // output filename
+        static int userID = -1;
+        static EmoEngine engine;
+        static string filename = "motionDataLogger.csv";
+        static TextWriter file = new StreamWriter(filename, false);
 
-
-        MotionDataLogger()
-        {
-            // create the engine
-            engine = EmoEngine.Instance;
-            engine.UserAdded += new EmoEngine.UserAddedEventHandler(engine_UserAdded_Event);
-
-            // connect to Emoengine.            
-            engine.Connect();
-
-            // create a header for our output file
-            WriteHeader();
-        }
-
-        void engine_UserAdded_Event(object sender, EmoEngineEventArgs e)
+        static void engine_UserAdded_Event(object sender, EmoEngineEventArgs e)
         {
             Console.WriteLine("User Added Event has occured");
 
@@ -39,10 +36,7 @@ namespace MotionDataLogger
         }
 
         void Run()
-        {
-            // Handle any waiting events
-            engine.ProcessEvents();
-
+        {           
             // If the user has not yet connected, do not proceed
             if ((int)userID == -1)
                 return;
@@ -59,7 +53,6 @@ namespace MotionDataLogger
             Console.WriteLine("Writing " + _bufferSize.ToString() + " lines of data ");
 
             // Write the data to a file
-            TextWriter file = new StreamWriter(filename, true);
 
             for (int i = 0; i < _bufferSize; i++)
             {
@@ -67,34 +60,43 @@ namespace MotionDataLogger
                 foreach (EdkDll.IEE_MotionDataChannel_t channel in data.Keys)
                     file.Write(data[channel][i] + ",");
                 file.WriteLine("");
-
             }
-            file.Close();
-
         }
 
-        public void WriteHeader()
+        static void Main(string[] args)
         {
-            TextWriter file = new StreamWriter(filename, false);
+            Console.WriteLine("===========================================================================");
+            Console.WriteLine("Example to show how to log Motion Data from EmoDriver/EmoComposer.");
+            Console.WriteLine("===========================================================================");
+
+            MotionDataLogger p = new MotionDataLogger();
+
+            // create the engine
+            engine = EmoEngine.Instance;
+            engine.UserAdded += new EmoEngine.UserAddedEventHandler(engine_UserAdded_Event);
+
+            // connect to Emoengine.            
+            engine.Connect();
 
             string header = "COUNTER, GYROX, GYROY, GYROZ, ACCX, " +
                 "ACCY, ACCZ, MAGX, MAGY, MAGZ, TIMESTAMP";
 
             file.WriteLine(header);
-            file.Close();
-        }
 
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Motion Data Reader Example");
-
-            MotionDataLogger p = new MotionDataLogger();
-
-            for (int i = 0; i < 100; i++)
+            while (true)
             {
+                if (Console.KeyAvailable)
+                    break;
+
+                // Handle any waiting events
+                engine.ProcessEvents();
+
                 p.Run();
-                Thread.Sleep(100);
+                Thread.Sleep(10);
             }
+
+            file.Close();
+            engine.Disconnect();
         }
     }
 }
