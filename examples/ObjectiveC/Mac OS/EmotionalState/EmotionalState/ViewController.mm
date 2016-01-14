@@ -44,9 +44,9 @@ BOOL isConnected = false;
 }
 
 -(void) getNextEvent {
-    int numberDevice = IEE_GetNumberDeviceInsight();
+    int numberDevice = IEE_GetInsightDeviceCount();
     if(numberDevice > 0 && !isConnected) {
-        IEE_EmoConnectDevice(0);
+        IEE_ConnectInsightDevice(0);
     }
     int state = IEE_EngineGetNextEvent(eEvent);
     unsigned int userID = 0;

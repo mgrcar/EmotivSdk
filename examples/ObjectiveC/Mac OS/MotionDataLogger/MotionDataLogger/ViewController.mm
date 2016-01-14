@@ -64,9 +64,9 @@ NSMutableData *data;
 }
 
 -(void) getNextEvent {
-    int numberDevice = IEE_GetNumberDeviceInsight();
+    int numberDevice = IEE_GetInsightDeviceCount();
     if(numberDevice > 0 && !isConnect) {
-        IEE_EmoConnectDevice(0);
+        IEE_ConnectInsightDevice(0);
         isConnect = YES;
     }
     int state = IEE_EngineGetNextEvent(eEvent);
