@@ -77,11 +77,11 @@ https://cpanel.emotivinsight.com
 
 Compatible with Insight / EPOC / EPOC+ via:
 * BTLE:
-  * Windows 8 or above, with Firefox
-  * Mac OS X 10.10 or above, with Safari or Firefox
+  * Windows 8 or above, with Firefox 43.0
+  * Mac OS X 10.10 or above, with Safari 9.0 / Firefox 43.0 / Opera 34.0
 * [Emotiv USB Universal Receiver](https://emotiv.com/store/product_9.html):
-  * Windows 7 or above, with Firefox
-  * Mac OS X 10.8 or above, with Safari or Firefox
+  * Windows 7 or above, with Firefox 43.0
+  * Mac OS X 10.8 or above, with Safari 9.0 / Firefox 43.0 / Opera 34.0
 
 Please follow the instructions to install the Emotiv browser plugin before using the CPanel.
 
