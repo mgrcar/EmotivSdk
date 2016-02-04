@@ -1,8 +1,8 @@
 /**
- * Emotiv Insight SDK
- * Copyright (c) 2015 Emotiv Inc.
+ * Emotiv SDK
+ * Copyright (c) 2016 Emotiv Inc.
  *
- * This file is part of the Emotiv Insight SDK.
+ * This file is part of the Emotiv SDK.
  *
  * All the error codes that are returned by IEE_ functions are listed here.
  */

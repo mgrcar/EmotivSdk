@@ -135,12 +135,22 @@ bool userAdded                      = false;
 }
 
 -(void) getNextEvent {
+    /*Connect Insight headset in Mode Bluetooth*/
     int couter_insight = IEE_GetInsightDeviceCount();
     if(couter_insight > 0){
         if(!headsetConnected){
             headsetConnected = IEE_ConnectInsightDevice(0);
         }
     }
+    /*******************************************/
+//    /*Connect Epoc Plus headset in Mode Bluetooth*/
+//    int couter_epoc = IEE_GetEpocPlusDeviceCount();
+//    if(couter_epoc > 0){
+//        if(!headsetConnected){
+//            headsetConnected = IEE_ConnectEpocPlusDevice(0);
+//        }
+//    }
+    /*******************************************/
     state = IEE_EngineGetNextEvent(eEvent);
     if(state == EDK_OK)
     {

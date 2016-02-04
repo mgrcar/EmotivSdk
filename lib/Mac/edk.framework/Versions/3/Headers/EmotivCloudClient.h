@@ -1,6 +1,6 @@
 /**
  * Emotiv SDK
- * Copyright (c) 2015 Emotiv Inc.
+ * Copyright (c) 2016 Emotiv Inc.
  *
  * This file is part of the Emotiv SDK.
  *
@@ -60,7 +60,7 @@ extern "C"
     } profileVersionInfo;
 
     
-    //! Initialize the connection to Emotiv Cloud Server
+    //! Initialize connection to Emotiv Cloud Server
     /*!
         \return bool
                 - true if connect successfully
@@ -69,14 +69,36 @@ extern "C"
      */
     EMOTIVCLOUD_API bool
         EC_Connect();
-
     
-    //! Terminate the connection to Emotiv Cloud server
+    
+    //! Terminate connection to Emotiv Cloud server
     /*!
         \sa EC_Connect()
      */
     EMOTIVCLOUD_API void
         EC_Disconnect();
+
+
+	//! Reconnect Emotiv engine
+	/*!
+	    \return bool
+	            - true if Reconnect successfully
+
+	    \sa EC_DisconnectEngine()
+	*/
+	EMOTIVCLOUD_API bool
+		EC_ReconnectEngine();
+
+
+	//! Disconnect Emotiv engine
+	/*!
+	    \return bool
+	           - true if Reconnect successfully
+
+	     \sa EC_ReconnectEngine()
+	*/
+	EMOTIVCLOUD_API bool
+        EC_DisconnectEngine();
 
     
     //! Login Emotiv Cloud with EmotivID
@@ -138,7 +160,6 @@ extern "C"
         \param userCloudID  - user ID from EC_GetUserDetail()
         \param engineUserID - user ID from current EmoEngine (first user will be 0)
         \param profileId    - profile ID to be updated, from EC_GetProfileId()
-        \param profileName  - profile name to be saved as
 
         \return bool 
                 - true if updated successfully
@@ -146,7 +167,7 @@ extern "C"
         \sa EC_SaveUserProfile(), EC_DeleteUserProfile()
      */
     EMOTIVCLOUD_API bool
-        EC_UpdateUserProfile(int userCloudID, int engineUserID, int profileId, const char* profileName);
+        EC_UpdateUserProfile(int userCloudID, int engineUserID, int profileId);
     
     
     //! Delete user profile from Emotiv Cloud

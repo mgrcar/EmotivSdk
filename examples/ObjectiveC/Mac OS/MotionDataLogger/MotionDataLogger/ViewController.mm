@@ -15,7 +15,7 @@ IEE_MotionDataChannel_t targetChannelList_Insight[] = {
     IMD_ACCY, IMD_ACCZ, IMD_MAGX,IMD_MAGY,IMD_MAGZ,IMD_TIMESTAMP
 };
 
-BOOL isConnect = NO;
+BOOL isConnected = NO;
 const char *headerStr_Insight = "COUNTER_MEMS, GYROX, GYROY, GYROZ, ACCX, ACCY, ACCZ, MAGX,MAGY,MAGZ,TIMESTAMP,";
 
 const char *newLine = "\n";
@@ -64,11 +64,21 @@ NSMutableData *data;
 }
 
 -(void) getNextEvent {
+    /*Connect with Insight headset in mode Bluetooth*/
     int numberDevice = IEE_GetInsightDeviceCount();
-    if(numberDevice > 0 && !isConnect) {
+    if(numberDevice > 0 && !isConnected) {
         IEE_ConnectInsightDevice(0);
-        isConnect = YES;
+        isConnected = YES;
     }
+    /************************************************/
+    //    /*Connect with Epoc Plus headset in mode Bluetooth*/
+    //    int numberDevice = IEE_GetEpocPlusDeviceCount();
+    //    if(numberDevice > 0 && !isConnected) {
+    //        IEE_ConnectEpocPlusDevice(0);
+    //        isConnected = YES;
+    //    }
+    /************************************************/
+    else isConnected = NO;
     int state = IEE_EngineGetNextEvent(eEvent);
     unsigned int userID = 0;
     
@@ -90,7 +100,6 @@ NSMutableData *data;
             NSLog(@"User Removed");
             self.labelStatus.stringValue = @"Disconnected";
             readytocollect = FALSE;
-            isConnect = NO;
         }
         else if (eventType == IEE_EmoStateUpdated)
         {

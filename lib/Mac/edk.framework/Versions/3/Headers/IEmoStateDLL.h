@@ -1,8 +1,8 @@
 /**
- * Emotiv Insight SDK
- * Copyright (c) 2015 Emotiv Inc.
+ * Emotiv SDK
+ * Copyright (c) 2016 Emotiv Inc.
  *
- * This file is part of the Emotiv Insight SDK.
+ * This file is part of the Emotiv SDK.
  * 
  * Header file to define constants and interfaces to access the EmoState structure.
  *
@@ -55,11 +55,11 @@ typedef void* EmoStateHandle;
     //! Emotiv Detection Suite enumerator
     typedef enum IEE_EmotivSuite_enum {
 
-        IEE_FACIALEXPRESSION = 0, IEE_PERFORMANCEMETRIC, IEE_MENTALCOMMAND
+        IEE_FACIALEXPRESSION = 0, 
+		IEE_PERFORMANCEMETRIC, 
+		IEE_MENTALCOMMAND
 
     } IEE_EmotivSuite_t;
-
-//DEPLOYMENT::NON_PREMIUM_RELEASE::REMOVE_START
 
     //! FacialExpression facial expression type enumerator
     typedef enum IEE_FacialExpressionAlgo_enum {
@@ -73,6 +73,10 @@ typedef void* EmoStateHandle;
         FE_FROWN      = 0x0040,
         FE_SMILE      = 0x0080,
         FE_CLENCH     = 0x0100,
+	
+		FE_LAUGH      = 0x0200,
+		FE_SMIRK_LEFT = 0x0400,
+		FE_SMIRK_RIGHT= 0x0800
 
     } IEE_FacialExpressionAlgo_t;
     
@@ -96,7 +100,6 @@ typedef void* EmoStateHandle;
 
     } IEE_MentalCommandAction_t;
 
-//DEPLOYMENT::NON_PREMIUM_RELEASE::REMOVE_END
     
     //! Wireless Signal Strength enumerator
     typedef enum IEE_SignalStrength_enum {
@@ -287,7 +290,6 @@ typedef void* EmoStateHandle;
                                  int* chargeLevel,
                                  int* maxChargeLevel);
 
-//DEPLOYMENT::NON_PREMIUM_RELEASE::REMOVE_START
 
     //! Query whether the user is blinking at the time the EmoState is captured.
     /*!
@@ -357,6 +359,34 @@ typedef void* EmoStateHandle;
     */
     EMOSTATE_DLL_API int
         IS_FacialExpressionIsLookingDown(EmoStateHandle state);
+
+
+	//! Query whether the user is looking left at the time the EmoState is captured with EPOC/EPOC+ headset.
+	/*!
+	    \remark Available with EPOC/EPOC+ headset.
+     
+	    \param state - EmoStatehandle
+
+	    \return eye position (1: looking left, 0: not looking left)
+
+	    \sa IS_FacialExpressionIsLookingLeft
+	*/
+	EMOSTATE_DLL_API int
+        IS_FacialExpressionIsLookingLeft(EmoStateHandle state);
+
+
+	//! Query whether the user is looking right at the time the EmoState is captured with EPOC/EPOC+ headset.
+	/*!
+	    \remark Available with EPOC/EPOC+ headset.
+     
+	    \param state - EmoStatehandle
+
+	    \return eye position (1: looking right, 0: not looking right)
+
+	    \sa IS_FacialExpressionIsLookingRight
+	*/
+	EMOSTATE_DLL_API int
+        IS_FacialExpressionIsLookingRight(EmoStateHandle state);
 
 
     //! Query the eyelids state of the user
@@ -560,8 +590,6 @@ typedef void* EmoStateHandle;
     EMOSTATE_DLL_API int
         IS_MentalCommandEqual(EmoStateHandle a,
                               EmoStateHandle b);
-
-//DEPLOYMENT::NON_PREMIUM_RELEASE::REMOVE_END
 
 
     //! Clone EmoStateHandle

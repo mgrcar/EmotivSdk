@@ -1,12 +1,12 @@
 /**
-* Emotiv SDK
-* Copyright (c) 2015 Emotiv Inc.
-*
-* This file is part of the Emotiv SDK.
-*
-* Header file for Facial Expression related API.
-*
-*/
+ * Emotiv SDK
+ * Copyright (c) 2016 Emotiv Inc.
+ *
+ * This file is part of the Emotiv SDK.
+ *
+ * Header file for Facial Expression related API.
+ *
+ */
 
 
 #ifndef FACIALEXPRESSIONDETECTION_H

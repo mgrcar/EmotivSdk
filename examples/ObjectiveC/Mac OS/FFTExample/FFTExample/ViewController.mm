@@ -73,11 +73,20 @@ NSMutableData *data;
 }
 
 -(void) getNextEvent {
+    /*Connect with Insight headset in mode Bluetooth*/
     int numberDevice = IEE_GetInsightDeviceCount();
     if(numberDevice > 0 && !isConnected) {
         IEE_ConnectInsightDevice(0);
         isConnected = YES;
     }
+    /************************************************/
+    //    /*Connect with Epoc Plus headset in mode Bluetooth*/
+    //    int numberDevice = IEE_GetEpocPlusDeviceCount();
+    //    if(numberDevice > 0 && !isConnected) {
+    //        IEE_ConnectEpocPlusDevice(0);
+    //        isConnected = YES;
+    //    }
+    /************************************************/
     else isConnected = NO;
     int state = IEE_EngineGetNextEvent(eEvent);
     unsigned int userID = 0;

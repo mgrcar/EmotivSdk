@@ -17,6 +17,7 @@ int state                           = 0;
 unsigned int userID                 = 0;
 unsigned long trainedAction         = 0;
 bool isConnected = false;
+bool isUserAdd   = false;
 
 -(id) init {
     self = [super init];
@@ -42,13 +43,22 @@ bool isConnected = false;
 }
 
 -(void) getNextEvent {
-    int couter_insight = IEE_GetInsightDeviceCount();
-    if(couter_insight > 0){
-        if(!isConnected){
-            IEE_ConnectInsightDevice(0);
-            isConnected=true;
-        }
+    /*Connect with Insight headset in mode Bluetooth*/
+    int numberDevice = IEE_GetInsightDeviceCount();
+    if(numberDevice > 0 && !isConnected) {
+        IEE_ConnectInsightDevice(0);
+        isConnected = YES;
     }
+    /************************************************/
+    //    /*Connect with Epoc Plus headset in mode Bluetooth*/
+    //    int numberDevice = IEE_GetEpocPlusDeviceCount();
+    //    if(numberDevice > 0 && !isConnected) {
+    //        IEE_ConnectEpocPlusDevice(0);
+    //        isConnected = YES;
+    //    }
+    /************************************************/
+    else isConnected = NO;
+
     state = IEE_EngineGetNextEvent(eEvent);
     if(state == EDK_OK)
     {
@@ -70,7 +80,7 @@ bool isConnected = false;
         if(eventType == IEE_UserAdded)
         {
             NSLog(@"User Added");
-            isConnected = true;
+            isUserAdd = true;
             if(self.delegate)
             {
                 [self.delegate onHeadsetConnected];
@@ -78,7 +88,7 @@ bool isConnected = false;
         }
         if(eventType == IEE_UserRemoved){
             NSLog(@"user remove");
-            isConnected = false;
+            isUserAdd = false;
             if(self.delegate)
             {
                 [self.delegate onHeadsetRemoved];
@@ -163,7 +173,7 @@ bool isConnected = false;
 }
 
 -(BOOL) isHeadsetConnected {
-    return isConnected;
+    return isUserAdd;
 }
 
 -(void) checkSignature
