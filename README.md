@@ -22,9 +22,33 @@ To get the SDK you can either:
 7. [Support](#support)
 
 ## Latest Release
-Version 3.3.0
+#### Version 3.3.1
+* *Available for Windows and Mac; other platforms to follow*
+* New features and improvement:
+  * Improved BTLE connection on all platforms
+  * Improved noise tolerance for Mental Commands with Insight
+  * Added `IEE_GetHeadsetSettings` and `IEE_SetHeadsetSettings` for EPOC+
+  * Added `EC_ReconnectEngine` and `EC_DisconnectEngine` in EmotivCloudClient.h
+  * Added `FE_LAUGH`, `FE_SMIRK_LEFT`, `FE_SMIRK_RIGHT` into detection list of Facial Expression
+  * Added `IS_FacialExpressionIsLookingLeft`, `IS_FacialExpressionIsLookingRight` for EPOC/EPOC+.
+  * Removed param `profileName` from `EC_UpdateUserProfile`
+  * Added `IEE_GetInsightDeviceState` and `IEE_GetEpocPlusDeviceState` (Mac, iOS, Android)
+  * Added multi-app support (Mac, iOS, Android)
+* Bug fixes:
+  * Fixed bug when uploading/downloading profile on 64-bit platform
+  * Fixed incorrect battery level display with Insight (require new firmware )
+  * Fixed bug with Surprise and Frown detections
+  * Fixed motion data values retrieved from EPOC+
+  * Fixed bug that prevent Insight to work with Extender on Mac
+  * Fixed bug that prevent connecting to headset via BTLE on Linux
+  * Swapped Gyro Y and Z in motion data with Insight
+* Note:
+  * EPOC+ only works with dongle version `0x06ff`, not with `0x1fff` or `0x0565`
+  * Changing the settings on EPOC+ with firmware `0x610` may fail and eventually turns the headset into a brick (!). Please contact hello@emotiv.com to arrange for a firmware upgrade
+
+#### Version 3.3.0
 * Supports saving/loading profile to Emotiv Cloud (see EmotivCloudClient.h)
-* New API IEE_GetAverageBandPowers to get average band powers for:
+* New API `IEE_GetAverageBandPowers` to get average band powers for:
   * theta (4-8 Hz)
   * alpha (8-12 Hz)
   * low-beta (12-16 Hz)
@@ -54,7 +78,7 @@ Version 3.3.0
 ## API Documentation
 The API reference can be found here:
 
-http://emotiv.com/api/3.3.0/
+http://emotiv.com/api/3.3.1/
 
 ## Known Issues
 * Mac SDK may not work with EPOC+ in 256Hz mode over BTLE and USB dongle properly
