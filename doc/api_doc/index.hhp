@@ -1,5 +1,5 @@
 [OPTIONS]
-Compiled file=INSIGHT_APIREF.chm
+Compiled file=emotiv_sdk_3.3_community.chm
 Compatibility=1.1
 Full-text search=Yes
 Contents file=index.hhc
@@ -8,10 +8,10 @@ Default topic=index.html
 Index file=index.hhk
 Language=0x409 English (United States)
 Binary TOC=YES
-Title=Emotiv SDK
+Title=Emotiv SDK Community Edition
 
 [WINDOWS]
-main="Emotiv SDK","index.hhc","index.hhk","index.html","index.html",,,,,0x23520,,0x70387e,,,,,,,,0
+main="Emotiv SDK Community Edition","index.hhc","index.hhk","index.html","index.html",,,,,0x23520,,0x70387e,,,,,,,,0
 
 [FILES]
 _emotiv_cloud_client_8h_source.html
@@ -67,9 +67,3 @@ open.png
 bdwn.png
 sync_on.png
 sync_off.png
-doc.png
-folderopen.png
-folderclosed.png
-arrowdown.png
-arrowright.png
-splitbar.png

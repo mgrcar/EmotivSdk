@@ -21,6 +21,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a88f492d70f54f7d0497d3834c4b59e32"><param name="Name" value="EC_Connect"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#aad3c2742489ddaa25e19d40c723c3573"><param name="Name" value="EC_DeleteUserProfile"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a9fe13f4ac55566d83adc87d6b88cfa19"><param name="Name" value="EC_Disconnect"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a22b4e15132c23f5e8f021d1060f07353"><param name="Name" value="EC_DisconnectEngine"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#aa78da1aa1c368417191bc123e31362b2"><param name="Name" value="EC_GetAllProfileName"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a54aa11ef59a466f7148ef4b859c59b5b"><param name="Name" value="EC_GetProfileId"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a41e11af5c24d9faf2c91faa4057e34cf"><param name="Name" value="EC_GetUserDetail"></OBJECT>
@@ -31,8 +32,9 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a896ebcc64c10ec64c0a6a2e274d3df10"><param name="Name" value="EC_ProfileLastModifiedAtIndex"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a3f7c5b889d0fa571bdc450ed53c71254"><param name="Name" value="EC_ProfileNameAtIndex"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#af407c38c829dacafc1b010f77dd5a3d3"><param name="Name" value="EC_ProfileTypeAtIndex"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#ae3cbd387be04bcf7521213b98e6efbfa"><param name="Name" value="EC_ReconnectEngine"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#aff98da76ea027ad6e11e07d96c470565"><param name="Name" value="EC_SaveUserProfile"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a4eb89d65efe293083a008d0647ec3c03"><param name="Name" value="EC_UpdateUserProfile"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a3599d95fe45ca1f538f9e3f949afbb7c"><param name="Name" value="EC_UpdateUserProfile"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_facial_expression_detection_8h.html#a71f2f924934ca9d7f770bc458493c4a8"><param name="Name" value="EDK_API"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_facial_expression_detection_8h.html#a71f2f924934ca9d7f770bc458493c4a8"><param name="Name" value="FacialExpressionDetection.h"></OBJECT>
@@ -82,6 +84,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a88f492d70f54f7d0497d3834c4b59e32"><param name="Name" value="EC_Connect"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#aad3c2742489ddaa25e19d40c723c3573"><param name="Name" value="EC_DeleteUserProfile"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a9fe13f4ac55566d83adc87d6b88cfa19"><param name="Name" value="EC_Disconnect"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a22b4e15132c23f5e8f021d1060f07353"><param name="Name" value="EC_DisconnectEngine"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#aa78da1aa1c368417191bc123e31362b2"><param name="Name" value="EC_GetAllProfileName"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a54aa11ef59a466f7148ef4b859c59b5b"><param name="Name" value="EC_GetProfileId"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a41e11af5c24d9faf2c91faa4057e34cf"><param name="Name" value="EC_GetUserDetail"></OBJECT>
@@ -92,8 +95,9 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a896ebcc64c10ec64c0a6a2e274d3df10"><param name="Name" value="EC_ProfileLastModifiedAtIndex"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a3f7c5b889d0fa571bdc450ed53c71254"><param name="Name" value="EC_ProfileNameAtIndex"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#af407c38c829dacafc1b010f77dd5a3d3"><param name="Name" value="EC_ProfileTypeAtIndex"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#ae3cbd387be04bcf7521213b98e6efbfa"><param name="Name" value="EC_ReconnectEngine"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#aff98da76ea027ad6e11e07d96c470565"><param name="Name" value="EC_SaveUserProfile"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a4eb89d65efe293083a008d0647ec3c03"><param name="Name" value="EC_UpdateUserProfile"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a3599d95fe45ca1f538f9e3f949afbb7c"><param name="Name" value="EC_UpdateUserProfile"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a2568f07452bbc31fdd95f799cf6aa511ae62dc633b3ca0802db2e9609c954c43a"><param name="Name" value="EMOKEY"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a3de8838840d8e7b1a14792aeaa6b2b0e"><param name="Name" value="EMOTIVCLOUD_API"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_emotiv_cloud_client_8h.html#a295963f8528e52d3c9725939dba02887"><param name="Name" value="MAX_NUM_OF_BACKUP_PROFILE_VERSION"></OBJECT>
@@ -144,6 +148,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_facial_expression_detection_8h.html#a28114473630369b6633d0a72854a90fba5783b265f03d2344b13f96026c86b4a4"><param name="Name" value="FE_ERASE"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9af0a0c1206346164fb540a8988e1c32d1"><param name="Name" value="FE_FROWN"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a5f8f40eeb722ff2df7080960b9ee6599"><param name="Name" value="FE_HORIEYE"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a37371fe685a08b0b35ff927cafc5a69e"><param name="Name" value="FE_LAUGH"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a2ae4b2dafa6015223fc1456abd718eda"><param name="Name" value="FE_NEUTRAL"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_facial_expression_detection_8h.html#a28114473630369b6633d0a72854a90fbaa1ad3146aa59e86e0c0ae53a61236402"><param name="Name" value="FE_NONE"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_facial_expression_detection_8h.html#a28114473630369b6633d0a72854a90fba25cb1f4a183b3f69c1d8009dd43b7c0c"><param name="Name" value="FE_REJECT"></OBJECT>
@@ -152,6 +157,8 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_facial_expression_detection_8h.html#a42c56a73701c7502daff11e2d2170522a091ac407a43790deb9f0e623fde7210e"><param name="Name" value="FE_SIG_TRAINED"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_facial_expression_detection_8h.html#a42c56a73701c7502daff11e2d2170522a053bb75ac3a32187ddbbe43aa4b16583"><param name="Name" value="FE_SIG_UNIVERSAL"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a4840ffc28c85122807e03c54b48ef5e6"><param name="Name" value="FE_SMILE"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a3b881b8057c44c8d33e9ed584bc79f35"><param name="Name" value="FE_SMIRK_LEFT"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a1129db14aa9eb1fa0eb211ccd40eaccd"><param name="Name" value="FE_SMIRK_RIGHT"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_facial_expression_detection_8h.html#a28114473630369b6633d0a72854a90fbac5eacc95711e149e20c5ebc4617cc35c"><param name="Name" value="FE_START"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a16145397581d465706b696f6c33ffa24"><param name="Name" value="FE_SURPRISE"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a568842b1b17872e09c1dfc06dc06c594"><param name="Name" value="FE_WINK_LEFT"></OBJECT>
@@ -259,9 +266,12 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#adca76c66323f250713e4e1f44e80aabe"><param name="Name" value="IEE_GetAverageBandPowers"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#aa251481e0e0ebd34753203a8c73795cd"><param name="Name" value="IEE_GetEpocPlusDeviceCount"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a7b8c72ddc12b586f30a0911a429f0802"><param name="Name" value="IEE_GetEpocPlusDeviceName"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a8bc0c25fd3ee8882bd9d04dc3518a01b"><param name="Name" value="IEE_GetEpocPlusDeviceState"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a35a8ba5982e802405a25c99af2a6e658"><param name="Name" value="IEE_GetEpocPlusSignalStrength"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a18f92eb37087dd5ef36503a08625e7d1"><param name="Name" value="IEE_GetHeadsetSettings"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#af7baab1c1bf24757740cb42fabb0535d"><param name="Name" value="IEE_GetInsightDeviceCount"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a64438a1e17fc9575be394269523ec498"><param name="Name" value="IEE_GetInsightDeviceName"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a8a744707b06cf1a9689d032f98e7707f"><param name="Name" value="IEE_GetInsightDeviceState"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a0e26fc1942228bed8ebc0cecf388ede7"><param name="Name" value="IEE_GetInsightSignalStrength"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#abe632505ca171bea676e7a4d9922225aac55f19e8253c163664ce644cbc897785"><param name="Name" value="IEE_HAMMING"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#abe632505ca171bea676e7a4d9922225aa297a8266f815f608300ae60e70d4127e"><param name="Name" value="IEE_HANN"></OBJECT>
@@ -286,6 +296,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#abe632505ca171bea676e7a4d9922225aa8335638c24dcbfe1e7ff9448bb23d77c"><param name="Name" value="IEE_RECTANGLE"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a3c0fa9e0b17d6c62de69102251b70c54a57c8d2491d3099f0bd8f7d0eb3a0b86e"><param name="Name" value="IEE_ReservedEvent"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a5b66e61c45eda8aae28364d1e59bf230"><param name="Name" value="IEE_SetHardwarePlayerDisplay"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a3a01a8835ce6d12e9bf96e5653c31552"><param name="Name" value="IEE_SetHeadsetSettings"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a81986c97801633c62f69b5f4564fcaf5"><param name="Name" value="IEE_SoftwareGetVersion"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a3c0fa9e0b17d6c62de69102251b70c54a5d0fa2371b0c1c2bd36708bbcbaae294"><param name="Name" value="IEE_UnknownEvent"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a3c0fa9e0b17d6c62de69102251b70c54aedb0b8c4e47482b4efb61cc7ec00c333"><param name="Name" value="IEE_UserAdded"></OBJECT>
@@ -409,9 +420,12 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#adca76c66323f250713e4e1f44e80aabe"><param name="Name" value="IEE_GetAverageBandPowers"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#aa251481e0e0ebd34753203a8c73795cd"><param name="Name" value="IEE_GetEpocPlusDeviceCount"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a7b8c72ddc12b586f30a0911a429f0802"><param name="Name" value="IEE_GetEpocPlusDeviceName"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a8bc0c25fd3ee8882bd9d04dc3518a01b"><param name="Name" value="IEE_GetEpocPlusDeviceState"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a35a8ba5982e802405a25c99af2a6e658"><param name="Name" value="IEE_GetEpocPlusSignalStrength"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a18f92eb37087dd5ef36503a08625e7d1"><param name="Name" value="IEE_GetHeadsetSettings"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#af7baab1c1bf24757740cb42fabb0535d"><param name="Name" value="IEE_GetInsightDeviceCount"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a64438a1e17fc9575be394269523ec498"><param name="Name" value="IEE_GetInsightDeviceName"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a8a744707b06cf1a9689d032f98e7707f"><param name="Name" value="IEE_GetInsightDeviceState"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a0e26fc1942228bed8ebc0cecf388ede7"><param name="Name" value="IEE_GetInsightSignalStrength"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#abe632505ca171bea676e7a4d9922225aac55f19e8253c163664ce644cbc897785"><param name="Name" value="IEE_HAMMING"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#abe632505ca171bea676e7a4d9922225aa297a8266f815f608300ae60e70d4127e"><param name="Name" value="IEE_HANN"></OBJECT>
@@ -472,6 +486,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#abe632505ca171bea676e7a4d9922225aa8335638c24dcbfe1e7ff9448bb23d77c"><param name="Name" value="IEE_RECTANGLE"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a3c0fa9e0b17d6c62de69102251b70c54a57c8d2491d3099f0bd8f7d0eb3a0b86e"><param name="Name" value="IEE_ReservedEvent"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a5b66e61c45eda8aae28364d1e59bf230"><param name="Name" value="IEE_SetHardwarePlayerDisplay"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a3a01a8835ce6d12e9bf96e5653c31552"><param name="Name" value="IEE_SetHeadsetSettings"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a69daa3afd0de059df769983e1955fe97"><param name="Name" value="IEE_SignalStrength_t"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a81986c97801633c62f69b5f4564fcaf5"><param name="Name" value="IEE_SoftwareGetVersion"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_iedk_8h.html#a3c0fa9e0b17d6c62de69102251b70c54a5d0fa2371b0c1c2bd36708bbcbaae294"><param name="Name" value="IEE_UnknownEvent"></OBJECT>
@@ -492,8 +507,11 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9ae31ad266731c5538b51eb77e877ccb38"><param name="Name" value="FE_CLENCH"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9af0a0c1206346164fb540a8988e1c32d1"><param name="Name" value="FE_FROWN"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a5f8f40eeb722ff2df7080960b9ee6599"><param name="Name" value="FE_HORIEYE"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a37371fe685a08b0b35ff927cafc5a69e"><param name="Name" value="FE_LAUGH"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a2ae4b2dafa6015223fc1456abd718eda"><param name="Name" value="FE_NEUTRAL"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a4840ffc28c85122807e03c54b48ef5e6"><param name="Name" value="FE_SMILE"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a3b881b8057c44c8d33e9ed584bc79f35"><param name="Name" value="FE_SMIRK_LEFT"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a1129db14aa9eb1fa0eb211ccd40eaccd"><param name="Name" value="FE_SMIRK_RIGHT"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a16145397581d465706b696f6c33ffa24"><param name="Name" value="FE_SURPRISE"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a568842b1b17872e09c1dfc06dc06c594"><param name="Name" value="FE_WINK_LEFT"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a08c56889521a7c205ca5e0896ac0f0d9a05b5c38f4e050ddd92406a8474b0abd3"><param name="Name" value="FE_WINK_RIGHT"></OBJECT>
@@ -550,6 +568,8 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a0c58f4ff8ad64e7a90dd9fee41c66121"><param name="Name" value="IS_FacialExpressionIsEyesOpen"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#abc5105628946494a3eda4d9d70d74b58"><param name="Name" value="IS_FacialExpressionIsLeftWink"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#af0b1fa249b1e2bec7edcb831c0405302"><param name="Name" value="IS_FacialExpressionIsLookingDown"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a4bdbdd1c2a236967a5876955d0d37c09"><param name="Name" value="IS_FacialExpressionIsLookingLeft"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#ad8b65343d985bd7aa7df245050c9df21"><param name="Name" value="IS_FacialExpressionIsLookingRight"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a9c35338ea397656b9b89b876ee6c5b46"><param name="Name" value="IS_FacialExpressionIsLookingUp"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#ad42e4a53e8ca5ec24d4a54dfe3854365"><param name="Name" value="IS_FacialExpressionIsRightWink"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a9be3eb0a6b601d81eeea6cd7834b99cc"><param name="Name" value="IS_Free"></OBJECT>
@@ -621,6 +641,8 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a0c58f4ff8ad64e7a90dd9fee41c66121"><param name="Name" value="IS_FacialExpressionIsEyesOpen"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#abc5105628946494a3eda4d9d70d74b58"><param name="Name" value="IS_FacialExpressionIsLeftWink"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#af0b1fa249b1e2bec7edcb831c0405302"><param name="Name" value="IS_FacialExpressionIsLookingDown"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a4bdbdd1c2a236967a5876955d0d37c09"><param name="Name" value="IS_FacialExpressionIsLookingLeft"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#ad8b65343d985bd7aa7df245050c9df21"><param name="Name" value="IS_FacialExpressionIsLookingRight"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a9c35338ea397656b9b89b876ee6c5b46"><param name="Name" value="IS_FacialExpressionIsLookingUp"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#ad42e4a53e8ca5ec24d4a54dfe3854365"><param name="Name" value="IS_FacialExpressionIsRightWink"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_i_emo_state_d_l_l_8h.html#a9be3eb0a6b601d81eeea6cd7834b99cc"><param name="Name" value="IS_Free"></OBJECT>
