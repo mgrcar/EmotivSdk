@@ -1,6 +1,6 @@
 /**
  * Emotiv SDK
- * Copyright (c) 2015 Emotiv Inc.
+ * Copyright (c) 2016 Emotiv Inc.
  *
  * This file is part of the Emotiv SDK.
  *
@@ -15,35 +15,41 @@
 #ifndef IEDK_H
 #define IEDK_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+#ifndef EDK_STATIC_LIB
+#   ifdef EDK_EXPORTS
+#       ifdef _WIN32
+#           define EDK_API __declspec(dllexport)
+#       else
+#           if (defined __GNUC__ && __GNUC__ >= 4) || defined __INTEL_COMPILER || defined __clang__
+#               define EDK_API __attribute__ ((visibility("default")))
+#           else
+#               define EDK_API
+#           endif
+#       endif
+#   else
+#       ifdef _WIN32
+#           define EDK_API __declspec(dllimport)
+#       else
+#           define EDK_API
+#       endif
+#   endif
+#else
+#   include "IEmotivProfile.h"
+#   include "IEmoStatePerformanceMetric.h"
+#   include "IedkOptimization.h"
+#   define EDK_API extern
+#endif
+
 #include "IedkErrorCode.h"
 #include "IEmoStateDLL.h"
 #include "FacialExpressionDetection.h"
 #include "MentalCommandDetection.h"
 
-#ifndef EDK_STATIC_LIB
-    #ifdef EDK_EXPORTS
-        #ifdef _WIN32
-            #define EDK_API __declspec(dllexport)
-        #else
-            #define EDK_API
-        #endif
-    #else
-        #ifdef _WIN32
-            #define EDK_API __declspec(dllimport)
-        #else
-            #define EDK_API
-        #endif
-    #endif
-#else
-    #include "IEmotivProfile.h"
-    #include "IEmoStatePerformanceMetric.h"
-    #define EDK_API extern
-#endif
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
 
     //! Handle to EmoState structure allocated by IEE_EmoStateCreate.
     /*!
@@ -371,6 +377,71 @@ extern "C"
     EDK_API int
         IEE_SetHardwarePlayerDisplay(unsigned int userId,
                                      unsigned int playerNum);
+
+
+	//! Get headset settings from EPOC+ headset.
+	/*!
+	    \remark Available for EPOC+ headset only. Headset settings can only be retrieved via USB connection.
+     
+	    \param userId       - user ID
+	    \param EPOCmode	    - If 0, EPOC mode is EPOC.
+	                        - If 1, EPOC mode is EPOC+.
+	    \param eegRate      - If 0, EEG sample rate is 128Hz.
+	                        - If 1, EEG sample rate is 256Hz.
+	                        - If 2, no signal.
+	    \param eegRes       - If 0, EEG resolution is 14bit.
+	                        - If 1, EEG resolution is 16bit.
+	                        - If 2, no signal.
+	    \param memsRate     - If 0, motion sample rate is OFF.
+	                        - If 1, motion sample rate is 32Hz.
+	                        - If 2, motion sample rate is 64Hz.
+	                        - If 3, motion sample rate is 128Hz.
+	   \param memsRes       - If 0, motion resolution is 12bit.
+	                        - If 1, motion resolution is 14bit.
+	                        - If 2, motion resolution is 16bit.
+	                        - If 3, no signal.
+
+	    \return EDK_ERROR_CODE
+                - EDK_OK if successful
+	*/
+	EDK_API int 
+		IEE_GetHeadsetSettings(unsigned int userId, 
+		                       unsigned int* EPOCmode, 
+							   unsigned int* eegRate, 
+							   unsigned int* eegRes, 
+							   unsigned int* memsRate, 
+							   unsigned int* memsRes);
+
+
+	//! Set headset setting for EPOC+ headset
+	/*!
+	    \remark Available for EPOC+ headset only. Headset settings can only be set via USB connection.
+     
+	    \param userId       - user ID
+	    \param EPOCmode     - If 0, then EPOC mode is EPOC.
+	                        - If 1, then EPOC mode is EPOC+.
+	    \param eegRate      - If 0, then EEG sample rate is 128Hz.
+	                        - If 1, then EEG sample rate is 256Hz.
+	    \param eegRes       - If 0, then EEG resolution is 14bit.
+	                        - If 1, then EEG resolution is 16bit.
+	    \param memsRate     - If 0, then motion sample rate is OFF.
+	                        - If 1, then motion sample rate is 32Hz.
+	                        - If 2, then motion sample rate is 64Hz.
+	                        - If 3, then motion sample rate is 128Hz.
+	    \param memsRes      - If 0, then motion resolution is 12bit.
+	                        - If 1, then motion resolution is 14bit.
+	                        - If 2, then motion resolution is 16bit.
+
+	    \return EDK_ERROR_CODE
+	            - EDK_OK if successful
+	*/
+	EDK_API int 
+		IEE_SetHeadsetSettings(unsigned int userId, 
+		                       unsigned int EPOCmode, 
+							   unsigned int eegRate, 
+							   unsigned int eegRes, 
+							   unsigned int memsRate, 
+							   unsigned int memsRes);
 
 
     //! Return a struct containing details about a specific channel
@@ -719,6 +790,18 @@ extern "C"
         IEE_GetInsightDeviceName(int index);
 
     
+    //! Get current state of an Insight device
+    /*!
+        \remark Available on Mac/iOS/Android only.
+
+        \param state - 0: if device not connect
+                       1: if device is connected with another app in system
+        \param index - index in device list
+     */
+    EDK_API void
+        IEE_GetInsightDeviceState(int& state, int index);
+
+    
     //! Connect to an EPOC+ device
     /*!
         \remark Available on Mac/iOS/Android only.
@@ -762,10 +845,23 @@ extern "C"
         \remark Available on Mac/iOS/Android only.
      
         \param index - index in device list
+     
         \return const char* - name of device
      */
     EDK_API const char*
         IEE_GetEpocPlusDeviceName(int index);
+
+    
+    //! Get current state of an EPOC+ device
+    /*!
+        \remark Available on Mac/iOS/Android only.
+     
+        \param state - 0: if device not connect
+                       1: if device is connected with another app in system
+        \param index - index in device list
+     */
+    EDK_API void
+        IEE_GetEpocPlusDeviceState(int& state, int index);
     
 #endif
     

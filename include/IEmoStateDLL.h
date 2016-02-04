@@ -1,8 +1,8 @@
 /**
- * Emotiv Insight SDK
- * Copyright (c) 2015 Emotiv Inc.
+ * Emotiv SDK
+ * Copyright (c) 2016 Emotiv Inc.
  *
- * This file is part of the Emotiv Insight SDK.
+ * This file is part of the Emotiv SDK.
  * 
  * Header file to define constants and interfaces to access the EmoState structure.
  *
@@ -21,31 +21,43 @@
 #define IEMOSTATE_DLL_H
 #include <sys/types.h>
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #if !defined(EDK_STATIC_LIB) && !defined(EDK_UTILS_ONLY)
-    #ifdef _WIN32
-        #ifdef EMOSTATE_DLL_EXPORTS
-            #define EMOSTATE_DLL_API __declspec(dllexport)
-        #else
-            #define EMOSTATE_DLL_API __declspec(dllimport)
-        #endif
-    #else
-        #define EMOSTATE_DLL_API
-    #endif
+#   ifdef EMOSTATE_DLL_EXPORTS
+#       ifdef _WIN32
+#           define EMOSTATE_DLL_API __declspec(dllexport)
+#       else
+#           if (defined __GNUC__ && __GNUC__ >= 4) || defined __INTEL_COMPILER || defined __clang__
+#               define EMOSTATE_DLL_API __attribute__ ((visibility("default")))
+#           else
+#               define EMOSTATE_DLL_API
+#           endif
+#       endif
+#   else
+#       ifdef _WIN32
+#           define EMOSTATE_DLL_API __declspec(dllimport)
+#       else
+#           define EMOSTATE_DLL_API
+#       endif
+#   endif
 #else
-    #define EMOSTATE_DLL_API extern
+#   define EMOSTATE_DLL_API extern
 #endif
 
 //! Defining EmoStateHandle as a void pointer
 typedef void* EmoStateHandle;
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+
     //! Emotiv Detection Suite enumerator
     typedef enum IEE_EmotivSuite_enum {
 
-        IEE_FACIALEXPRESSION = 0, IEE_PERFORMANCEMETRIC, IEE_MENTALCOMMAND
+        IEE_FACIALEXPRESSION = 0, 
+		IEE_PERFORMANCEMETRIC, 
+		IEE_MENTALCOMMAND
 
     } IEE_EmotivSuite_t;
 
@@ -61,6 +73,10 @@ extern "C"
         FE_FROWN      = 0x0040,
         FE_SMILE      = 0x0080,
         FE_CLENCH     = 0x0100,
+	
+		FE_LAUGH      = 0x0200,
+		FE_SMIRK_LEFT = 0x0400,
+		FE_SMIRK_RIGHT= 0x0800
 
     } IEE_FacialExpressionAlgo_t;
     
@@ -83,6 +99,7 @@ extern "C"
         MC_DISAPPEAR                = 0x2000
 
     } IEE_MentalCommandAction_t;
+
     
     //! Wireless Signal Strength enumerator
     typedef enum IEE_SignalStrength_enum {
@@ -273,6 +290,7 @@ extern "C"
                                  int* chargeLevel,
                                  int* maxChargeLevel);
 
+
     //! Query whether the user is blinking at the time the EmoState is captured.
     /*!
         \param state - EmoStateHandle
@@ -341,6 +359,34 @@ extern "C"
     */
     EMOSTATE_DLL_API int
         IS_FacialExpressionIsLookingDown(EmoStateHandle state);
+
+
+	//! Query whether the user is looking left at the time the EmoState is captured with EPOC/EPOC+ headset.
+	/*!
+	    \remark Available with EPOC/EPOC+ headset.
+     
+	    \param state - EmoStatehandle
+
+	    \return eye position (1: looking left, 0: not looking left)
+
+	    \sa IS_FacialExpressionIsLookingLeft
+	*/
+	EMOSTATE_DLL_API int
+        IS_FacialExpressionIsLookingLeft(EmoStateHandle state);
+
+
+	//! Query whether the user is looking right at the time the EmoState is captured with EPOC/EPOC+ headset.
+	/*!
+	    \remark Available with EPOC/EPOC+ headset.
+     
+	    \param state - EmoStatehandle
+
+	    \return eye position (1: looking right, 0: not looking right)
+
+	    \sa IS_FacialExpressionIsLookingRight
+	*/
+	EMOSTATE_DLL_API int
+        IS_FacialExpressionIsLookingRight(EmoStateHandle state);
 
 
     //! Query the eyelids state of the user

@@ -110,7 +110,7 @@ public interface EmotivCloudClient extends Library {
      *  \return bool 
      *               - true if updated successfully
      */
-    boolean EC_UpdateUserProfile(int userCloudID, int engineUserID, int profileId, String profileName);
+    boolean EC_UpdateUserProfile(int userCloudID, int engineUserID, int profileId);
     
     
     //! Delete user profile from Emotiv Cloud

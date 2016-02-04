@@ -81,7 +81,7 @@ public class SavingAndLoadingProfileCloud {
 
 						if (profileID >= 0) {
 							System.out.println("Profile with " + profileName + " is existed");
-							if (EmotivCloudClient.INSTANCE.EC_UpdateUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileID, profileName)) {
+							if (EmotivCloudClient.INSTANCE.EC_UpdateUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileID)) {
 								System.out.println("Updating finished");  
 							}
 							else System.out.println("Updating failed");
@@ -96,7 +96,7 @@ public class SavingAndLoadingProfileCloud {
 					}
 					case 2:{
 	                    if (getNumberProfile > 0){
-	                    	int profileID = EmotivCloudClient.INSTANCE.EC_ProfileIDAtIndex(userCloudID.getValue(), 0);
+	                    	int profileID = EmotivCloudClient.INSTANCE.EC_GetProfileId(userCloudID.getValue(), profileName);
 
 							if (EmotivCloudClient.INSTANCE.EC_LoadUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileID, version))
 								System.out.println("Loading finished");

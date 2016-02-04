@@ -223,6 +223,24 @@ namespace Emotiv
         }
 
         /// <summary>
+        /// Query whether the user is looking left at the time the EmoState is captured with EPOC/EPOC+ headset.
+        /// </summary>
+        /// <returns>return eye position (1: looking left, 0: not looking left)</returns>
+        public Int32 FacialExpressionIsLookingLeft()
+        {
+            return EdkDll.IS_FacialExpressionIsLookingLeft(hEmoState);
+        }
+
+        /// <summary>
+        /// Query whether the user is looking right at the time the EmoState is captured with EPOC/EPOC+ headset.
+        /// </summary>
+        /// <returns>return eye position (1: looking right, 0: not looking right)</returns>
+        public Int32 FacialExpressionIsLookingRight()
+        {
+            return EdkDll.IS_FacialExpressionIsLookingRight(hEmoState);
+        }
+
+        /// <summary>
         /// Query the eyelids state of the user
         /// </summary>
         /// <remarks>

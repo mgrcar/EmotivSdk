@@ -43,7 +43,7 @@ namespace SavingAndLoadingProfileCloud
                 
                 if (profileID >= 0) {
                     Console.WriteLine("Profile with " + profileName + " is existed");
-                    if (EmotivCloudClient.EC_UpdateUserProfile(userCloudID, engineUserID, profileID, profileName)) {
+                    if (EmotivCloudClient.EC_UpdateUserProfile(userCloudID, engineUserID, profileID)) {
                         Console.WriteLine("Updating finished");
                     }
                     else Console.WriteLine("Updating failed");                    
@@ -60,7 +60,7 @@ namespace SavingAndLoadingProfileCloud
             if (mode == 1)
             { 
                 if (getNumberProfile > 0){
-                    if (EmotivCloudClient.EC_LoadUserProfile(userCloudID, engineUserID, EmotivCloudClient.EC_ProfileIDAtIndex(userCloudID, 0), version))
+                    if (EmotivCloudClient.EC_LoadUserProfile(userCloudID, engineUserID, EmotivCloudClient.EC_GetProfileId(userCloudID, profileName), version))
                         Console.WriteLine("Loading finished");
                     else
                         Console.WriteLine("Loading failed");

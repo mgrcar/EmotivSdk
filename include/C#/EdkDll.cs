@@ -134,6 +134,10 @@ namespace Emotiv
             FE_FROWN      = 0x0040,
             FE_SMILE      = 0x0080,
             FE_CLENCH     = 0x0100,
+
+            FE_LAUGH      = 0x0200,
+            FE_SMIRK_LEFT = 0x0400,
+            FE_SMIRK_RIGHT = 0x0800
         } ;
 
         public enum IEE_MentalCommandAction_t
@@ -478,6 +482,12 @@ namespace Emotiv
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IS_FacialExpressionIsLookingDown")]
         static extern Boolean Unmanaged_IS_FacialExpressionIsLookingDown(IntPtr state);
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IS_FacialExpressionIsLookingLeft")]
+        static extern Int32 Unmanaged_IS_FacialExpressionIsLookingLeft(IntPtr state);
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IS_FacialExpressionIsLookingRight")]
+        static extern Int32 Unmanaged_IS_FacialExpressionIsLookingRight(IntPtr state);
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IS_FacialExpressionGetEyelidState")]
         static extern void Unmanaged_IS_FacialExpressionGetEyelidState(IntPtr state, out Single leftEye, out Single rightEye);
@@ -993,6 +1003,16 @@ namespace Emotiv
         {
             return Unmanaged_IS_FacialExpressionIsLookingDown(state);
         }
+
+        public static Int32 IS_FacialExpressionIsLookingLeft(IntPtr state)
+        {
+            return Unmanaged_IS_FacialExpressionIsLookingLeft(state);
+        }
+
+        public static Int32 IS_FacialExpressionIsLookingRight(IntPtr state)
+        {
+            return Unmanaged_IS_FacialExpressionIsLookingRight(state);
+        }       
 
         public static void IS_FacialExpressionGetEyelidState(IntPtr state, out Single leftEye, out Single rightEye)
         {

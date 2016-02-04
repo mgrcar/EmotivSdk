@@ -27,8 +27,12 @@ public interface EmoState extends Library {
 		FE_SURPRISE(0x0020), 
 		FE_FROWN(0x0040), 
 		FE_SMILE(0x0080), 
-		FE_CLENCH(0x0100);
+		FE_CLENCH(0x0100),
 
+		FE_LAUGH(0x0200),
+		FE_SMIRK_LEFT(0x0400),
+		FE_SMIRK_RIGHT(0x0800);
+		
 		private int bit;
 
 		IEE_FacialExpressionAlgo_t(int bitNumber) {
@@ -292,17 +296,42 @@ public interface EmoState extends Library {
 	 * \sa IS_FacialExpressionIsLookingUp
 	 */
 	int IS_FacialExpressionIsLookingDown(Pointer state);
+	
+    // ! Query whether the user is looking left at the time the EmoState is 
+	// captured with EPOC/EPOC+ headset.
+	/*
+	 * ! \remark Available EPOC/EPOC+ headset.
+	 * ! \param state - Pointer
+	 * 
+	 * \return eyes position (1: looking right, 0: not looking right)
+	 * 
+	 * \sa IS_FacialExpressionIsLookingLeft
+	 */
+	int IS_FacialExpressionIsLookingLeft(Pointer state);
 
-	// ! Query whether the user is looking left at the time the EmoState is
+	// ! Query whether the user is looking down at the time the EmoState is
 	// captured.
 	/*
-	 * ! \param state - EmoStatehandle
+	 * ! \remark Available EPOC/EPOC+ headset.
+	 * ! \param state - Pointer
 	 * 
-	 * \return eye position (1: looking left, 0: not looking left)
+	 * \return eyes position (1: looking down, 0: not looking down)
 	 * 
-	 * \sa IS_FacialExpressionIsLookingRight
+	 * \sa IS_FacialExpressionIsLookingUp
 	 */
+	int IS_FacialExpressionIsLookingRight(Pointer state);
 
+	// ! The left and right eyelid state are stored in the parameter leftEye and rightEye
+    //  respectively. They are floating point values ranging from 0.0 to 1.0.
+    //  0.0 indicates that the eyelid is fully opened while 1.0 indicates that the
+    //  eyelid is fully closed.
+	/*
+	 * ! \param state - EmoStatehandle
+	 * ! \param leftEye - the left eyelid state (0.0 to 1.0)
+     * ! \param rightEye - the right eyelid state (0.0 to 1.0)
+	 * 
+	 * \sa IS_FacialExpressionGetEyelidState
+	 */
 	void IS_FacialExpressionGetEyelidState(Pointer state,
 			FloatByReference leftEye, FloatByReference rightEye);
 
@@ -321,7 +350,8 @@ public interface EmoState extends Library {
 	 * This function assumes that both eyes have the same horizontal or vertical
 	 * positions. (i.e. no cross eyes)
 	 * 
-	 * \param state - Pointer \param x - the horizontal position of the eyes
+	 * \param state - Pointer 
+	 * \param x - the horizontal position of the eyes
 	 * \param y - the veritcal position of the eyes
 	 */
 	void IS_FacialExpressionGetEyeLocation(Pointer state, FloatByReference x,

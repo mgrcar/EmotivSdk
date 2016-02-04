@@ -45,7 +45,7 @@ namespace Emotiv
         public static extern bool EC_SaveUserProfile(int userCloudID, int engineUserID, String profileName, profileFileType ptype);
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EC_UpdateUserProfile")]
-        public static extern bool EC_UpdateUserProfile(int userCloudID, int engineUserID, int profileId, String profileName);
+        public static extern bool EC_UpdateUserProfile(int userCloudID, int engineUserID, int profileId);
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EC_DeleteUserProfile")]
         public static extern bool EC_DeleteUserProfile(int userCloudID, int profileId);
