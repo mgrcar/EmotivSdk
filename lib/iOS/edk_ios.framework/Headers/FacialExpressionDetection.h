@@ -1,43 +1,46 @@
 /**
-* Emotiv SDK
-* Copyright (c) 2015 Emotiv Inc.
-*
-* This file is part of the Emotiv SDK.
-*
-* Header file for Facial Expression related API.
-*
-*/
+ * Emotiv SDK
+ * Copyright (c) 2016 Emotiv Inc.
+ *
+ * This file is part of the Emotiv SDK.
+ *
+ * Header file for Facial Expression related API.
+ *
+ */
 
 
 #ifndef FACIALEXPRESSIONDETECTION_H
 #define FACIALEXPRESSIONDETECTION_H
-
-
-#include "IEmoStateDLL.h"
-
-#ifndef EDK_STATIC_LIB
-    #ifdef EDK_EXPORTS
-        #ifdef _WIN32
-            #define EDK_API __declspec(dllexport)
-        #else
-            #define EDK_API
-        #endif
-    #else
-        #ifdef _WIN32
-            #define EDK_API __declspec(dllimport)
-        #else
-            #define EDK_API
-        #endif
-    #endif
-#else
-    #define EDK_API extern
-#endif
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
+
+#ifndef EDK_STATIC_LIB
+#   ifdef EDK_EXPORTS
+#       ifdef _WIN32
+#           define EDK_API __declspec(dllexport)
+#       else
+#           if (defined __GNUC__ && __GNUC__ >= 4) || defined __INTEL_COMPILER || defined __clang__
+#               define EDK_API __attribute__ ((visibility("default")))
+#           else
+#               define EDK_API
+#           endif
+#       endif
+#   else
+#       ifdef _WIN32
+#           define EDK_API __declspec(dllimport)
+#       else
+#           define EDK_API
+#       endif
+#   endif
+#else
+#   define EDK_API extern
+#endif
+
+#include "IEmoStateDLL.h"
 
     //! Handle to EmoEngine event structure allocated by IEE_EmoEngineEventCreate.
     /*!
