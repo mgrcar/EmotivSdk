@@ -23,7 +23,7 @@ To get the SDK you can either:
 
 ## Latest Release
 #### Version 3.3.1
-* *Available for Windows and Mac; other platforms to follow*
+* *Available for Windows, Mac and iOS; other platforms to follow*
 * New features and improvement:
   * Improved BTLE connection on all platforms
   * Improved noise tolerance for Mental Commands with Insight
