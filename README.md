@@ -17,13 +17,12 @@ To get the SDK you can either:
 2. [Supported Platforms](#supported-platforms)
 3. [Connecting Your Insight](#connecting-your-insight)
 4. [API Documentation](#api-documentation)
-5. [Known Issues](#known-issues)
-6. [Apps and Tools](#apps-and-tools)
-7. [Support](#support)
+5. [Apps and Tools](#apps-and-tools)
+6. [Support](#support)
 
 ## Latest Release
 #### Version 3.3.1
-* *Available for Windows, Mac and iOS; other platforms to follow*
+* *Available for Windows, Mac, iOS and Android; other platforms to follow*
 * New features and improvement:
   * Improved BTLE connection on all platforms
   * Improved noise tolerance for Mental Commands with Insight
@@ -42,7 +41,8 @@ To get the SDK you can either:
   * Fixed bug that prevent Insight to work with Extender on Mac
   * Fixed bug that prevent connecting to headset via BTLE on Linux
   * Swapped Gyro Y and Z in motion data with Insight
-* Note:
+* Known Issues:
+  * EPOC+ motion data may have packet lost on Android
   * EPOC+ only works with dongle version `0x06ff`, not with `0x1fff` or `0x0565`
   * Changing the settings on EPOC+ with firmware `0x610` may fail and eventually turns the headset into a brick (!). Please contact hello@emotiv.com to arrange for a firmware upgrade
 
@@ -79,10 +79,6 @@ To get the SDK you can either:
 The API reference can be found here:
 
 http://emotiv.com/api/3.3.1/
-
-## Known Issues
-* Mac SDK may not work with EPOC+ in 256Hz mode over BTLE and USB dongle properly
-* EPOC+ motion data may not be accurate with firmware 0x614 over BTLE and USB dongle
 
 ## Apps and Tools
 
