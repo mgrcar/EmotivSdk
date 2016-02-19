@@ -4,6 +4,7 @@ public interface EngineInterface {
 	//train
 	public void trainStarted();
 	public void trainSucceed();
+	public void trainFailed();
 	public void trainCompleted();
 	public void trainRejected();
 	public void trainReset();

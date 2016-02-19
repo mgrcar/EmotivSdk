@@ -339,13 +339,40 @@ public class ActivityTrainning extends Activity implements EngineInterface {
 						})
 				.setNegativeButton("No",
 						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,int id) {
-								engineConnector.setTrainControl(IEE_MentalCommandTrainingControl_t.MC_REJECT.getType()); 
+							public void onClick(DialogInterface dialog, int id) {
+								engineConnector.setTrainControl(IEE_MentalCommandTrainingControl_t.MC_REJECT.getType());
 							}
 						});
 
 		AlertDialog alertDialog = alertDialogBuilder.create();
 		alertDialog.show();
+	}
+
+	@Override
+	public  void trainFailed(){
+		progressBarTime.setVisibility(View.INVISIBLE);
+		btnTrain.setText("Train");
+		enableClick();
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				ActivityTrainning.this);
+		// set title
+		alertDialogBuilder.setTitle("Training Failed");
+		// set dialog message
+		alertDialogBuilder
+				.setMessage("Signal is noisy. Can't training")
+				.setCancelable(false)
+				.setIcon(R.drawable.ic_launcher)
+				.setPositiveButton("OK",
+						new DialogInterface.OnClickListener() {
+							public void onClick(
+									DialogInterface dialog, int which) {
+
+							}
+						});
+
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		alertDialog.show();
+		isTrainning = false;
 	}
 
 	@Override
@@ -355,6 +382,7 @@ public class ActivityTrainning extends Activity implements EngineInterface {
 		data.setChecked(true);
 		model.set(indexAction, data);
 		spinAdapter.notifyDataSetChanged();
+		isTrainning = false;
 	}
 
 	@Override

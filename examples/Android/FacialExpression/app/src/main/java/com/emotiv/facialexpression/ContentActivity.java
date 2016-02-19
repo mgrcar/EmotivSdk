@@ -446,6 +446,7 @@ public class ContentActivity extends Activity implements EngineInterface{
 	     })
 	    .setIcon(android.R.drawable.ic_dialog_alert)
 	     .show();
+		isTrainning = false;
 	}
 	
 	@Override

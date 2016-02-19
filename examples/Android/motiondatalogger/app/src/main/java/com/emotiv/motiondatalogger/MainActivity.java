@@ -127,6 +127,7 @@ public class MainActivity extends Activity {
 				
 				break;
 			case 1:
+				/*Connect device with Insight headset*/
 				int number = IEdk.IEE_GetInsightDeviceCount();
 				if(number != 0) {
 					if(!lock){
@@ -134,6 +135,16 @@ public class MainActivity extends Activity {
 						IEdk.IEE_ConnectInsightDevice(0);
 					}
 				}
+				/**************************************/
+				/*Connect device with EPOC Plus headset*/
+//				int number = IEdk.IEE_GetEpocPlusDeviceCount();
+//				if(number != 0) {
+//					if(!lock){
+//						lock = true;
+//						IEdk.IEE_ConnectEpocPlusDevice(0,false);
+//					}
+//				}
+				/**************************************/
 				else lock = false;
 				break;
 			case 2:

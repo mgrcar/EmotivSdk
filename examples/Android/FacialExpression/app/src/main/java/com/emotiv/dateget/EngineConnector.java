@@ -35,7 +35,7 @@ public class EngineConnector {
 	protected static final int HANDLER_TRAINED_START    = 1;
 	protected static final int HANDLER_TRAINED_SUCCEED  = 2;
 	protected static final int HANDLER_TRAINED_COMPLETE = 3;
-	protected static final int HANDLER_DETECT_NEUTRAL   = 4;
+	protected static final int HANDLER_DETECT_REJECT   = 4;
 	protected static final int HANDLER_DETECT_LOWER_FACE= 5;
 	protected static final int HANDLER_TRAINED_ERASED   = 6;
 	protected static final int HANDLER_USER_ADDED 		= 7;
@@ -116,24 +116,34 @@ public class EngineConnector {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub`
+			/*Connect device with Insight headset*/
 			 int numberDevice = IEdk.IEE_GetInsightDeviceCount();
 				
 			  if (numberDevice != 0){
 			  if (!isConnected) 
 			           IEdk.IEE_ConnectInsightDevice(0);
 			  }
+			/*************************************/
+			/*Connect device with Epoc Plus headset*/
+//			int numberDevice = IEdk.IEE_GetEpocPlusDeviceCount();
+//
+//			if (numberDevice != 0){
+//				if (!isConnected)
+//					IEdk.IEE_ConnectEpocPlusDevice(0,false);
+//			}
+			/*************************************/
 			  	state = IEdk.IEE_EngineGetNextEvent();
 			    if (state == IEdkErrorCode.EDK_OK.ToInt()) {
 			    	   int eventType = IEdk.IEE_EmoEngineEventGetType();
 			    	   switch (eventType) {
 			    	   		case TYPE_USER_ADD:
-			    	   			Log.e("engine connect", "connect");
+			    	   			Log.e("FacialExpression", "User Added");
 			    	   			isConnected = true;
 			    	   			userId=IEdk.IEE_EmoEngineEventGetUserId();
 			    	   			mHandler.sendMessage(mHandler.obtainMessage(HANDLER_USER_ADDED));
 			    	   		     break;
 			    	   		case TYPE_USER_REMOVE:
-			    	   			Log.e("engine connect", "disconnect");
+			    	   			Log.e("FacialExpression", "User Removed");
 			    	   			isConnected = false;
 			    	   			userId=-1;
 			    	   	        mHandler.sendMessage(mHandler.obtainMessage(HANDLER_USER_REMOVED));
@@ -143,7 +153,7 @@ public class EngineConnector {
 			    	   			IEdk.IEE_EmoEngineEventGetEmoState();
 			    	   	        
 			    	   			if (IEmoStateDLL.IS_FacialExpressionIsBlink() == 1) {
-			    	   				Log.e("blink", "Blink");
+			    	   				Log.e("FacialExpression", "Blink");
 			    	   			}
 			    	   			if (IEmoStateDLL.IS_FacialExpressionIsEyesOpen() == 1){			
 			    	   			}
@@ -154,36 +164,36 @@ public class EngineConnector {
 			    	   			int type = FacialExpressionDetection.IEE_FacialExpressionEventGetType();
 			    	   		
 			    	   			if (type ==IEE_FacialExpressionEvent_t.IEE_FacialExpressionTrainingCompleted.getType()){
-			    	   				Log.e("log engine", "trained completed");
+			    	   				Log.e("FacialExpression", "training completed");
 			    	   				mHandler.sendMessage(mHandler.obtainMessage(HANDLER_TRAINED_COMPLETE));
 			    	   			}
 			    	   			else 
 			    	   			if (type ==IEE_FacialExpressionEvent_t.IEE_FacialExpressionTrainingDataErased.getType()){
-				    	   				Log.e("log engine", "trained erased");
+				    	   				Log.e("FacialExpression", "training erased");
 				    	   				mHandler.sendMessage(mHandler.obtainMessage(HANDLER_TRAINED_ERASED));
 				    	   		}
 			    	   			else 
 			    	   			if (type ==IEE_FacialExpressionEvent_t.IEE_FacialExpressionTrainingFailed.getType()){
-				    	   				Log.e("log engine", "trained failed");
+				    	   				Log.e("FacialExpression", "training failed");
 				    	   		}
 			    	   			else 
 			    	   			if (type ==IEE_FacialExpressionEvent_t.IEE_FacialExpressionTrainingRejected.getType()){
-				    	   				Log.e("log engine", "trained rejected");
-				    	   			 	mHandler.sendMessage(mHandler.obtainMessage(HANDLER_TRAINED_SUCCEED));
+				    	   				Log.e("FacialExpression", "training rejected");
+				    	   			 	mHandler.sendMessage(mHandler.obtainMessage(HANDLER_DETECT_REJECT));
 				    	   		}
 			    	   			else 
 				    	   		if (type ==IEE_FacialExpressionEvent_t.IEE_FacialExpressionTrainingReset.getType()){
-					    	   		Log.e("log engine", "trained reseted");
+					    	   		Log.e("FacialExpression", "training reseted");
 					    	   		mHandler.sendMessage(mHandler.obtainMessage(HANDLER_TRAIN_RESET));
 					    	   	}
 				    	   		else 
 					    	   	if (type ==IEE_FacialExpressionEvent_t.IEE_FacialExpressionTrainingStarted.getType()){
-						    	   	Log.e("log engine", "trained started");
+						    	   	Log.e("FacialExpression", "training started");
 						    	   	mHandler.sendMessage(mHandler.obtainMessage(HANDLER_TRAINED_START));
 						      	}
 					    	   	else 
 					    	   	if (type ==IEE_FacialExpressionEvent_t.IEE_FacialExpressionTrainingSucceeded.getType()){
-						    	   	Log.e("log engine", "trained succeeded");
+						    	   	Log.e("FacialExpression", "training succeeded");
 						    	   	mHandler.sendMessage(mHandler.obtainMessage(HANDLER_TRAINED_SUCCEED));
 						    	   	
 						       	}
@@ -217,7 +227,13 @@ public class EngineConnector {
 				if (delegate!= null) {
 	   	        	delegate.trainErased(); 
 				}
-				break;	
+				break;
+		   case HANDLER_DETECT_REJECT:
+			   if(delegate != null)
+			   {
+				   delegate.trainRejected();
+			   }
+			   break;
 			case HANDLER_TRAINED_COMPLETE:
 				if (delegate!= null) {
 	   	        	delegate.trainCompleted();
