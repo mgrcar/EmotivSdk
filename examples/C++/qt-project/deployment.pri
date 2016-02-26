@@ -238,7 +238,7 @@ win32 {
     contains(QT_ARCH,x86_64) {
         ARCH_EXT="64"
         LIBS+=-L$${EXAMPLES_ROOT}/bin/linux64
-        LIBS+= -L/home/emotiv/working/win/build/bin/linux64 # Development PC
+        LIBS+= -L/home/emotiv/working/win/build/bin/3.3.1/linux64 # Development PC
     }
     LIBS += -ledk
     DESTDIR=/tmp/emotiv/build/bin/linux
