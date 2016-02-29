@@ -1,5 +1,6 @@
 from Insight import *
 from arduinoCom import *
+from datetime import datetime
 
 # -------------------------------------------------------------------------
 # Make dictionary for logEmoState
@@ -81,6 +82,7 @@ print "Start receiving Emostate! Press any key to stop logging...\n"
 
 # connect insight instance to Xavier composer or EmoEngine
 insight.connect()
+last_command = None
 
 # event loop to update Insight state
 while (1):
@@ -96,7 +98,16 @@ while (1):
             timestamp = insight.get_time_from_start(insight.eState)
             print "%10.3f New EmoState from user %d ...\r" % (timestamp,
                                                               user_ID)
-            send_emo_state_to_arduino()
+                
+            # Limit the command rate so that we won't overflow the buffer
+            if not last_command:
+                last_command = datetime.now()
+                send_emo_state_to_arduino()
+            else:
+                diff = datetime.now()-last_command
+                if (diff.microseconds/1000.0 > 500.0):
+                    last_command = datetime.now()
+                    send_emo_state_to_arduino()
 
     elif state != 0x0600:
         print "Internal error in Emotiv Engine ! "
