@@ -115,7 +115,7 @@ int  main() {
 
 					if (profileID >= 0) {
 						    std::cout << "Profile with " << profileName << " is existed" << std::endl;
-						    if (EC_UpdateUserProfile(userCloudID, engineUserID, profileID, profileName.c_str())) {
+                            if (EC_UpdateUserProfile(userCloudID, engineUserID, profileID)) {
 						        std::cout << "Updating finished";      
 						    }
 						    else std::cout << "Updating failed";

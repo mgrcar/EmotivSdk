@@ -9,6 +9,9 @@
     #include <netdb.h>
     #include <memory.h>
     #include <sys/ioctl.h>
+    #include <sys/socket.h>
+    #include <netinet/in.h>
+    #include <arpa/inet.h>
 #endif
 
 #include "Socket.h"
@@ -63,7 +66,7 @@ Socket::Socket(SocketStream stream) : s_(0) {
 	if (s_ == INVALID_SOCKET) {
 		throw SocketException("INVALID_SOCKET");
 	}
-
+    _mType = stream;
 	refCounter_ = new int(1);
 }
 
@@ -90,7 +93,8 @@ Socket::Socket(const Socket& o) {
 	refCounter_=o.refCounter_;
 	(*refCounter_)++;
 	s_         =o.s_;
-
+    _mType = o._mType;
+    memcpy(&peer_addr, &o.peer_addr, sizeof(sockaddr_in));
 	nofSockets_++;
 }
 
@@ -100,7 +104,8 @@ Socket& Socket::operator=(Socket& o) {
 
 	refCounter_=o.refCounter_;
 	s_         =o.s_;
-
+    _mType = o._mType;
+    memcpy(&peer_addr, &o.peer_addr, sizeof(sockaddr_in));
 	nofSockets_++;
 
 	return *this;
@@ -317,12 +322,36 @@ SocketClient::SocketClient(const string& host, int port, SocketStream stream) :
 	addr.sin_port = htons(port);
 	addr.sin_addr = *((in_addr *)he->h_addr);
 	memset(&(addr.sin_zero), 0, 8); 
+    _mType = stream;
+    if (_mType == UDP) {
+        memcpy(&peer_addr, &addr, sizeof(sockaddr_in));
+    }
 
 	if (::connect(s_, (sockaddr *) &addr, sizeof(sockaddr))) {
         error << "cannot connection to host [" << host << "] on port "
               << port << ".";
 		throw SocketException(error.str());
 	}
+}
+void SocketClient::SendBytes(const string& s) {
+
+    u_long totalSent = 0;
+
+    if (s.length()) {
+        if (_mType == UDP) {
+            sendto(s_,s.c_str(), s.size(), 0, (sockaddr*)&peer_addr, sizeof(sockaddr_in));
+            //std::cout << " Sent UDP package to " << inet_ntoa(peer_addr.sin_addr) << ":"<< ntohs(peer_addr.sin_port) << ":" << s.size() << ":" << s << std::endl;
+        } else {
+            while (totalSent != s.length()) {
+                int sent = 0;
+                sent = send(s_, (s.c_str())+totalSent, (int)s.length()-totalSent, 0);
+                if (sent <= 0)
+                    throw SocketException("error in SendBytes()");
+
+                totalSent += sent;
+            }
+        }
+    }
 }
 
 

@@ -173,7 +173,7 @@ int main(int argc, char **argv) {
     Sleep(15);
 #endif
 #ifdef __linux__
-        sleep(1);
+        usleep(10000);
 #endif
 		}
 	}
@@ -329,8 +329,11 @@ bool handleUserInput() {
 	static std::string inputBuffer;
 
 	char c = _getch();
-
+#if __linux__
+    if (c == '\n') {
+#else
 	if (c == '\r') {
+#endif
 		std::cout << std::endl;
 		std::string command;
 

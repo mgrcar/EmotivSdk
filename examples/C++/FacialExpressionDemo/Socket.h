@@ -1,16 +1,19 @@
+#ifndef _EMO_SOCKET_H
+#define _EMO_SOCKET_H
+
 #include <string>
 #include <vector>
 #include <cstdio>
+
 #ifdef _WIN32
     #include <WinSock2.h>
 #endif
-#ifdef __linux__
-    #include <sys/socket.h>
+#ifdef __linux__    
     #include <sys/types.h>
+    #include <sys/socket.h>
 #endif
 
-#ifndef SOCKET_H
-#define SOCKET_H
+#include <netinet/in.h>
 
 #ifdef __linux__
     typedef uint SOCKET;
@@ -55,7 +58,7 @@ public:
 
 	void   Close();
 	void   SendLine (const string&, char delim = '\n');
-	void   SendBytes(const string&);
+    virtual void  SendBytes(const string&);
 
 protected:
 
@@ -69,8 +72,11 @@ protected:
 	SOCKET s_;
 
 	int* refCounter_;
+    SocketStream _mType;
+    sockaddr_in peer_addr;
 
 	private:
+
 	static void Start();
 	static void End();
 	static int  nofSockets_;
@@ -80,6 +86,8 @@ protected:
 class SocketClient : public Socket {
 public:
 	SocketClient(const string& host, int port, SocketStream stream=TCP);
+
+    virtual void  SendBytes(const string&);
 };
 
 

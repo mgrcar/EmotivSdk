@@ -164,7 +164,7 @@ int main(int argc, char** argv) {
     Sleep(15);
 #endif
 #ifdef __linux__
-        sleep(1);
+        usleep(15000);
 #endif
 		}
 	}

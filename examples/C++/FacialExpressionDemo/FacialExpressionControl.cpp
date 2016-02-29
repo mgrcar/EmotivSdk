@@ -83,7 +83,7 @@ bool parseCommand(const std::string& input, std::ostream& output) {
 
 	if (input.length()) {
 
-		bool wrongArgument = true;
+        int wrongArgument = 0;
 		std::vector<std::string> commands;
 		split(input, commands);
 
