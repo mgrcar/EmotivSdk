@@ -135,7 +135,7 @@ int main(int argc, char** argv) {
             Sleep(1);
 #endif
 #ifdef __linux__
-            sleep(1);
+            usleep(10000);
 #endif
 		}
 

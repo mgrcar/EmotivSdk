@@ -50,13 +50,21 @@ int main(int argc, char** argv) {
 	int option = 0;
 	int state  = 0;
 	std::string input;
-
+    std::string filename;
 	try {
 
 		if (argc != 2) {
+#if __linux__
+            filename="/tmp/EmoStateLog.txt";
+            std::cout << "Write log to file " << filename
+                      << std::endl;
+#else
             throw std::runtime_error("Please supply the log file name.\n"
                                      "Usage: EmoStateLogger [log_file_name].");
-		}
+#endif
+        } else {
+            filename = argv[1];
+        }
 
         std::cout << "==================================================================="
                   << std::endl;
@@ -106,7 +114,7 @@ int main(int argc, char** argv) {
         std::cout << "Start receiving EmoState! Press any key to stop logging...\n"
                   << std::endl;
 
-		std::ofstream ofs(argv[1]);
+        std::ofstream ofs(filename.c_str());
 		bool writeHeader = true;
 		
 		while (!_kbhit()) {
@@ -141,7 +149,7 @@ int main(int argc, char** argv) {
             Sleep(1);
 #endif
 #ifdef __linux__
-            sleep(1);
+            usleep(10000);
 #endif
 		}
 

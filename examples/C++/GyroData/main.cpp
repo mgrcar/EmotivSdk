@@ -188,7 +188,7 @@ void updateDisplay(void)
       Sleep(15);
 #endif
 #ifdef __linux__
-      sleep(1);
+      usleep(10000);
 #endif
    glutPostRedisplay(); 
 }
@@ -278,7 +278,7 @@ int main(int argc, char** argv)
 			Sleep(1000);
 #endif
 #ifdef __linux__
-			sleep(1);
+            usleep(10000);
 #endif
 			break;
 		}else if (err == EDK_GYRO_NOT_CALIBRATED){
@@ -293,7 +293,7 @@ int main(int argc, char** argv)
 		Sleep(100);
 #endif
 #ifdef __linux__
-		sleep(1);
+        usleep(10000);
 #endif
 	}
 

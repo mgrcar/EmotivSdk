@@ -153,7 +153,7 @@ void Socket::ReceiveBytes(string& byteStream) {
 			Sleep(1);
 #endif
 #ifdef __linux__
-            sleep(0.1);
+            usleep(10000);
 #endif
 			// check whether the connection still alive or not
 			int alive = recv(s_, buf, 1, 0);

@@ -112,7 +112,7 @@ int  main()
         Sleep(1);
 #endif
 #ifdef linux
-        sleep(1);
+        usleep(10000);
 #endif
 	}
 
