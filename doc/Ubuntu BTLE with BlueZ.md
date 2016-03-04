@@ -1,4 +1,4 @@
-## Connecting Emotiv device via BTLE on Ubuntu 14.04/15.10 with BlueZ library
+## Connecting Emotiv device via BTLE on Ubuntu 14.04/15.10 and Debian 8.3 with BlueZ library
 ### Install and configure lastest bluez
 #### Build bluez
 ```shell
