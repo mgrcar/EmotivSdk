@@ -1,7 +1,9 @@
-## Connecting Emotiv device via BTLE on Ubuntu 15.10 with BlueZ library
+## Connecting Emotiv device via BTLE on Ubuntu 14.04/15.10 with BlueZ library
 ### Install and configure lastest bluez
 #### Build bluez
 ```shell
+sudo apt-get update
+sudo apt-get install libglib2.0-dev libdbus-1-dev libudev-dev libical-dev libreadline-dev
 mkdir -p ~/tmp/bluez && cd ~/tmp/bluez
 wget -c https://www.kernel.org/pub/linux/bluetooth/bluez-5.37.tar.gz
 tar -xvzf bluez-5.37.tar.gz
