@@ -237,9 +237,13 @@ win32 {
     }
     contains(QT_ARCH,x86_64) {
         ARCH_EXT="64"
-        LIBS+=-L$${EXAMPLES_ROOT}/bin/linux64
+        #LIBS+=-L/home/emotiv/working/win/build_debug/bin/3.3.1/linux64
+        #LIBS+=-L$${EXAMPLES_ROOT}/bin/linux64
         LIBS+= -L/home/emotiv/working/win/build/bin/3.3.1/linux64 # Development PC
     }
     LIBS += -ledk
     DESTDIR=/tmp/emotiv/build/bin/linux
+    QMAKE_CFLAGS   +=-g
+    QMAKE_CXXFLAGS +=-g
+    QMAKE_LFLAGS   +=-g
 }

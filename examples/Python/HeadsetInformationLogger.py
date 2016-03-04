@@ -1,5 +1,6 @@
 import sys
 import os
+import platform
 import time
 import ctypes
 
@@ -17,7 +18,10 @@ try:
         libEDK = cdll.LoadLibrary("../../bin/win32/edk.dll")
     elif sys.platform.startswith('linux'):
         srcDir = os.getcwd()
-        libPath = srcDir + "/../../bin/linux64/libedk.so"
+	if platform.machine().startswith('arm'):
+            libPath = srcDir + "/../../bin/armhf/libedk.so"
+	else:
+            libPath = srcDir + "/../../bin/linux64/libedk.so"
         libEDK = CDLL(libPath)
     else:
         raise Exception('System not supported.')

@@ -17,7 +17,7 @@ try :
         libEDK = cdll.LoadLibrary("edk.dll")
     if sys.platform.startswith('linux'):
         srcDir = os.getcwd()    
-        libPath = srcDir + "/libedk.so.1.0.0"        
+        libPath = srcDir + "/libedk.so"        
         libEDK = CDLL(libPath)
 except :
     print 'Error : cannot load dll lib' 
