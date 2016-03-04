@@ -32,6 +32,7 @@ To get the SDK you can either:
   * Removed param `profileName` from `EC_UpdateUserProfile`
   * Added `IEE_GetInsightDeviceState` and `IEE_GetEpocPlusDeviceState` (Mac, iOS, Android)
   * Added multi-app support (Mac, iOS, Android)
+  * Supports Ubuntu 15.10 64-bit
 * Bug fixes:
   * Fixed bug when uploading/downloading profile on 64-bit platform
   * Fixed incorrect battery level display with Insight (require new firmware )
@@ -62,13 +63,13 @@ To get the SDK you can either:
     (recommended one: Plugable USB 2.0 Bluetooth Adapter, http://plugable.com/products/usb-bt4le)
   * Mac OS X 10.10 or above (check if Bluetooth LMP Version is 0x6 from System Report)
   * Android 4.4.3 or above
-  * Ubuntu 14.04 64-bit (see [Ubuntu BTLE with BlueZ](doc/Ubuntu BTLE with BlueZ.md))
+  * Ubuntu 14.04 / 15.10 64-bit (see [Ubuntu BTLE with BlueZ](doc/Ubuntu BTLE with BlueZ.md))
 
 * Insight with Emotiv Universal USB Receiver currently works with the SDK under:
   * Windows 7 or above
   * Mac OS X 10.8 or above
   * Android 4.4.3 or above
-  * Ubuntu 14.04 64-bit
+  * Ubuntu 14.04 / 15.10 64-bit
 
 ## Connecting Your Insight
 * Windows: Turn on Bluetooth on both Insight and PC, then pair your Insight with Windows built-in Bluetooth service first

@@ -184,9 +184,6 @@ void logEmoState(std::ostream& os, unsigned int userID,
 		os << "Frown,";
 		os << "Smile,";
 		os << "Clench,";
-		os << "Instantaneous Excitement,";
-		os << "Long Term Excitement,";
-		os << "Engagement/Boredom,";
 		os << "MentalCommand Action,";
 		os << "MentalCommand Power,";
 		os << std::endl;
