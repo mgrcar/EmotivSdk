@@ -3,7 +3,7 @@
 Here is the repository of the Emotiv SDK Community Edition, along with code examples and other development tools.
 * Supports EPOC (over Emotiv USB dongle)
 * Supports Insight and EPOC+ (over BTLE and Emotiv USB dongle)
-* Supports Win32/64, Mac, Linux, Android, iOS
+* Supports Win32/64, Mac, Linux, Android, iOS, Debian 8.3 Jessie (armhf)
 
 If you have questions or have knowledge to share, please visit our [forum](https://emotiv.com/forum/) which is the hub for our developer community.
 
@@ -33,6 +33,7 @@ To get the SDK you can either:
   * Added `IEE_GetInsightDeviceState` and `IEE_GetEpocPlusDeviceState` (Mac, iOS, Android)
   * Added multi-app support (Mac, iOS, Android)
   * Supports Ubuntu 15.10 64-bit
+  * Supports Debian 8.3 Jessie (armhf) on Raspberry Pi 2
 * Bug fixes:
   * Fixed bug when uploading/downloading profile on 64-bit platform
   * Fixed incorrect battery level display with Insight (require new firmware )
