@@ -64,8 +64,8 @@ To get the SDK you can either:
     (recommended one: Plugable USB 2.0 Bluetooth Adapter, http://plugable.com/products/usb-bt4le)
   * Mac OS X 10.10 or above (check if Bluetooth LMP Version is 0x6 from System Report)
   * Android 4.4.3 or above
-  * Ubuntu 14.04 / 15.10 64-bit (see [Ubuntu BTLE with BlueZ](doc/Ubuntu BTLE with BlueZ.md))
-  * Debian 8.3 Jessie (armhf) (see [Ubuntu BTLE with BlueZ](doc/Ubuntu BTLE with BlueZ.md))
+  * Ubuntu 14.04 / 15.10 64-bit (see [Connecting on Ubuntu and Debian](doc/Connecting on Ubuntu and Debian.md))
+  * Debian 8.3 Jessie (armhf) (see [Connecting on Ubuntu and Debian](doc/Connecting on Ubuntu and Debian.md))
 
 * Insight with Emotiv Universal USB Receiver currently works with the SDK under:
   * Windows 7 or above
@@ -77,7 +77,7 @@ To get the SDK you can either:
 ## Connecting with BTLE
 * Windows: Turn on Bluetooth on both Insight and PC, then pair your Insight with Windows built-in Bluetooth service first
 * Mac, Android and iOS: Turn on Bluetooth on both Insight and Mac/Android device, then start Emotiv app to use (without first pairing)
-* Ubuntu and Debian: See [Ubuntu BTLE with BlueZ](doc/Ubuntu BTLE with BlueZ.md)
+* Ubuntu and Debian: See [Connecting on Ubuntu and Debian](doc/Connecting on Ubuntu and Debian.md)
 
 ## API Documentation
 The API reference can be found here:
