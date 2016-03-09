@@ -2,7 +2,7 @@
 
 ### Install HID configure for Emotiv USB dongle
 ```shell
-sudo cp etc/udev/rules.d/70-emotiv.rules /etc/udev/rules.d/`
+sudo cp etc/udev/rules.d/70-emotiv.rules /etc/udev/rules.d/
 sudo service udev restart
 ```
 
