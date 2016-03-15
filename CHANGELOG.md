@@ -1,4 +1,4 @@
-Emotiv SDK Community Edition Changelog:
+## Emotiv SDK Community Edition Changelog
 
 #### Version 3.3.1
 * New features and improvement:
@@ -26,7 +26,7 @@ Emotiv SDK Community Edition Changelog:
   * EPOC+ only works with dongle version `0x06ff`, not with `0x1fff` or `0x0565`
   * Changing the settings on EPOC+ with firmware `0x610` may fail and eventually turns the headset into a brick (!). Please contact hello@emotiv.com to arrange for a firmware upgrade
 
-## Version 3.3.0
+#### Version 3.3.0
 * Supports saving/loading profile to Emotiv Cloud (see EmotivCloudClient.h)
 * New API `IEE_GetAverageBandPowers` to get average band powers for:
   * theta (4-8 Hz)
@@ -36,6 +36,6 @@ Emotiv SDK Community Edition Changelog:
   * gamma (25-45 Hz)
 * Supports Ubuntu 14.04 64-bit
 
-## Version 3.2.0
+#### Version 3.2.0
 * Supports EPOC (over Emotiv USB dongle)
 * Supports Insight and EPOC+ (over BTLE and Emotiv USB dongle)
