@@ -340,7 +340,7 @@ void SocketClient::SendBytes(const string& s) {
     if (s.length()) {
         if (_mType == UDP) {
             sendto(s_,s.c_str(), s.size(), 0, (sockaddr*)&peer_addr, sizeof(sockaddr_in));
-            #std::cout << "Send Mental Command UDP package to " << inet_ntoa(peer_addr.sin_addr) << ":"<< ntohs(peer_addr.sin_port) << " size:" << s.size() << ": " << s << std::endl;
+            //std::cout << "Send Mental Command UDP package to " << inet_ntoa(peer_addr.sin_addr) << ":"<< ntohs(peer_addr.sin_port) << " size:" << s.size() << ": " << s << std::endl;
         } else {
             while (totalSent != s.length()) {
                 int sent = 0;

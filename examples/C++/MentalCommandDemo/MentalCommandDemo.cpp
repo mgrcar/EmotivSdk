@@ -31,6 +31,8 @@
 #ifdef __linux__
     #include <unistd.h>
     #include <termios.h>
+    int _kbhit(void);
+    int _getch( void );
 #endif
 
 void sendMentalCommandAnimation(SocketClient& sock, EmoStateHandle eState);
@@ -288,7 +290,12 @@ bool handleUserInput() {
 
 	char c = _getch();
 
-	if (c == '\r') {
+#if __linux__
+    if ((c == '\n'))
+#else
+    if (c == '\r')
+#endif
+    {
 		std::cout << std::endl;
 		std::string command;
 
