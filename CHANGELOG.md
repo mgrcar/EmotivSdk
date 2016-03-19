@@ -1,5 +1,11 @@
 ## Emotiv SDK Community Edition Changelog
 
+#### Version 3.3.2
+* Bug fixes:
+  * Fixed unexpected failure in Mental Commands training
+* Improvement:
+  * Support cmake on Ubuntu and Debian/armhf in examples
+
 #### Version 3.3.1
 * New features and improvement:
   * Improved BTLE connection on all platforms
