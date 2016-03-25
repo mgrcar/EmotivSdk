@@ -34,7 +34,7 @@
 #include <conio.h>
 #pragma comment(lib, "Ws2_32.lib")
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
     #include <unistd.h>
     #include <termios.h>
 #endif
@@ -45,9 +45,39 @@ void handleFacialExpressionEvent(std::ostream& , EmoEngineEventHandle );
 bool handleUserInput();
 void promptUser();
 
-#ifdef __linux__
+#if __linux__ || __APPLE__
 int _kbhit(void);
 int _getch( void );
+#endif
+#ifdef __APPLE__
+int _kbhit (void)
+{
+    struct timeval tv;
+    fd_set rdfs;
+
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+
+    FD_ZERO(&rdfs);
+    FD_SET (STDIN_FILENO, &rdfs);
+
+    select(STDIN_FILENO+1, &rdfs, NULL, NULL, &tv);
+    return FD_ISSET(STDIN_FILENO, &rdfs);
+}
+
+int _getch()
+{
+    int r;
+    unsigned char c;
+    if((r = read(0, &c, sizeof(c))) < 0 )
+    {
+        return r;
+    }
+    else
+    {
+        return c;
+    }
+}
 #endif
 
 int main(int argc, char **argv) {
@@ -73,10 +103,17 @@ int main(int argc, char **argv) {
 	
 	try {
 
-        // Connect directly to EmoEngine
+        /*Connect with EmoEngine*/
         if (IEE_EngineConnect() != EDK_OK) {
             throw std::runtime_error("Emotiv Driver start up failed.");
-		}
+        }
+        /*************************************************************/
+        /*Connect with Emocomposer app on port 1726*/
+        /*Connect with Control Panel app on port 3008*/
+//        if (IEE_EngineRemoteConnect("127.0.0.1",1726) != EDK_OK) {
+//            throw std::runtime_error("Emotiv Driver start up failed.");
+//        }
+        /*************************************************************/
 		else {
 			std::cout << "Emotiv Driver started!" << std::endl;
 		}
@@ -172,7 +209,7 @@ int main(int argc, char **argv) {
 #ifdef _WIN32
     Sleep(15);
 #endif
-#ifdef __linux__
+#if __linux__  || __APPLE__
         usleep(10000);
 #endif
 		}
@@ -329,7 +366,7 @@ bool handleUserInput() {
 	static std::string inputBuffer;
 
 	char c = _getch();
-#if __linux__
+#if __linux__ || __APPLE__
     if (c == '\n') {
 #else
 	if (c == '\r') {

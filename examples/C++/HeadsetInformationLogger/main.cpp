@@ -41,6 +41,23 @@ static int _kbhit(void)
 }
 #endif
 
+#ifdef __APPLE__
+int _kbhit (void)
+{
+    struct timeval tv;
+    fd_set rdfs;
+
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+
+    FD_ZERO(&rdfs);
+    FD_SET (STDIN_FILENO, &rdfs);
+
+    select(STDIN_FILENO+1, &rdfs, NULL, NULL, &tv);
+    return FD_ISSET(STDIN_FILENO, &rdfs);
+}
+#endif
+
 int main(int argc, char** argv)
 {
 	EmoEngineEventHandle eEvent = IEE_EmoEngineEventCreate();
@@ -62,7 +79,17 @@ int main(int argc, char** argv)
     }
 
 	std::ofstream ofs;
-	ofs.open("test.csv");
+    std::string filePath;
+#ifndef __APPLE__
+    filePath = "test.csv";
+#else
+    std::string home_path;
+    const char* home = getenv("HOME");
+    home_path.assign(home);
+    home_path.append("/Desktop/test.csv");
+    filePath = home_path;
+#endif
+    ofs.open(filePath.c_str());
 	ofs << "Time, Wireless Strength, Battery Level, AF3, T7, Pz, T8, AF4" << std::endl;
 
 	while (!_kbhit()) {

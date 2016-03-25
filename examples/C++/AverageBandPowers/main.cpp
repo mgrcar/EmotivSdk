@@ -14,7 +14,7 @@
     #include <conio.h>
     #include <windows.h>
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
     #include <unistd.h>
 #endif
 
@@ -32,8 +32,24 @@ extern "C"
 
 using namespace std;
 
-#ifdef __linux__
+#if __linux__ || __APPLE__
 int _kbhit(void);
+#endif
+#ifdef __APPLE__
+int _kbhit (void)
+{
+    struct timeval tv;
+    fd_set rdfs;
+
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+
+    FD_ZERO(&rdfs);
+    FD_SET (STDIN_FILENO, &rdfs);
+
+    select(STDIN_FILENO+1, &rdfs, NULL, NULL, &tv);
+    return FD_ISSET(STDIN_FILENO, &rdfs);
+}
 #endif
 
 int  main()
@@ -47,8 +63,15 @@ int  main()
 	int state  = 0;
 
 	IEE_DataChannel_t channelList[] = { IED_AF3, IED_AF4, IED_T7, IED_T8, IED_Pz };
-
+#ifndef __APPLE__
 	std::string ouputFile = "AverageBandPowers.txt";
+#else
+    std::string home_path;
+    const char* home = getenv("HOME");
+    home_path.assign(home);
+    home_path.append("/Desktop/AverageBandPowers.csv");
+    std::string ouputFile = home_path;
+#endif
 	const char header[] = "Theta, Alpha, Low_beta, High_beta, Gamma";
     std::ofstream ofs(ouputFile.c_str(), std::ios::trunc);
 	ofs << header << std::endl;
@@ -111,7 +134,7 @@ int  main()
 #ifdef _WIN32
         Sleep(1);
 #endif
-#ifdef linux
+#if linux || __APPLE__
         usleep(10000);
 #endif
 	}

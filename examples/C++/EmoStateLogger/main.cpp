@@ -19,7 +19,7 @@
     #include <conio.h>
     #include <windows.h>
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
     #include <unistd.h>
 #endif
 
@@ -32,7 +32,7 @@ extern "C"
 {
 #endif
 
-#ifdef __linux__
+#if __linux__ || __APPLE__
 int _kbhit(void);
 #endif
 
@@ -57,10 +57,18 @@ int main(int argc, char** argv) {
 #if __linux__
             filename="/tmp/EmoStateLog.txt";
             std::cout << "Write log to file " << filename
-                      << std::endl;
+                      << std::endl;         
+#else
+#ifdef __APPLE__
+            std::string home_path;
+            const char* home = getenv("HOME");
+            home_path.assign(home);
+            home_path.append("/Desktop/EmoStateLog.csv");
+            filename = home_path;
 #else
             throw std::runtime_error("Please supply the log file name.\n"
                                      "Usage: EmoStateLogger [log_file_name].");
+#endif
 #endif
         } else {
             filename = argv[1];
@@ -133,8 +141,7 @@ int main(int argc, char** argv) {
 					IEE_EmoEngineEventGetEmoState(eEvent, eState);
 					const float timestamp = IS_GetTimeFromStart(eState);
 
-                    printf("%10.3fs : New EmoState from user %d ...\r",
-                           timestamp, userID);
+                    std::cout << timestamp << ": " << "New EmoState from user " << userID << std::endl;
 					
 					logEmoState(ofs, userID, eState, writeHeader);
 					writeHeader = false;
@@ -148,7 +155,7 @@ int main(int argc, char** argv) {
 #ifdef _WIN32
             Sleep(1);
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
             usleep(10000);
 #endif
 		}
@@ -247,7 +254,22 @@ int _kbhit(void)
     return 0;
 }
 #endif
+#ifdef __APPLE__
+int _kbhit (void)
+{
+    struct timeval tv;
+    fd_set rdfs;
 
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+
+    FD_ZERO(&rdfs);
+    FD_SET (STDIN_FILENO, &rdfs);
+
+    select(STDIN_FILENO+1, &rdfs, NULL, NULL, &tv);
+    return FD_ISSET(STDIN_FILENO, &rdfs);
+}
+#endif
 #ifdef __cplusplus
 }
 #endif

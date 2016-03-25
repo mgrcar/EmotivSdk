@@ -9,14 +9,14 @@
 #ifdef _WIN32
     #include <WinSock2.h>
 #endif
-#ifdef __linux__    
+#if __linux__ || __APPLE__
     #include <sys/types.h>
     #include <sys/socket.h>
 	#include <netinet/in.h>
 #endif
 
 
-#ifdef __linux__
+#if __linux__ || __APPLE__
     typedef uint SOCKET;
 #endif
 

@@ -228,6 +228,7 @@ win32 {
     LIBS += -ledk
 }else:ios {
 }else:macx{
+    LIBS += -framework edk
 }else:unix{
     contains(QT_ARCH,arm){
         ARCH_EXT="arm"

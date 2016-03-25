@@ -19,7 +19,7 @@
     #include <conio.h>
     #include <windows.h>
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
     #include <unistd.h>
 #endif
 
@@ -44,7 +44,7 @@ IEE_MotionDataChannel_t targetChannelList[] = {
 const char header[] = "COUNTER, GYROX, GYROY, GYROZ, ACCX, ACCY, ACCZ, MAGX, "
 	"MAGY, MAGZ, TIMESTAMP";
 
-#ifdef __linux__
+#if __linux__ || __APPLE__
 int _kbhit(void);
 #endif
 
@@ -57,13 +57,32 @@ int main(int argc, char** argv) {
 	unsigned int datarate				= 0;
 	bool readytocollect					= false;
 	int state							= 0;
+    std::string filename;
 
 	try {
 
 		if (argc != 2) {
+#if __linux__
+            filename="/tmp/MotionDataLog.txt";
+            std::cout << "Write log to file " << filename
+                      << std::endl;
+#else
+#ifdef __APPLE__
+            std::string home_path;
+            const char* home = getenv("HOME");
+            home_path.assign(home);
+            home_path.append("/Desktop/MotionDataLog.csv");
+            filename = home_path;
+            std::cout << "Write log to file " << filename
+                      << std::endl;
+#else
             throw std::runtime_error("Please supply the log file name.\n"
-                                     "Usage: MotionDataLogger [log_file_name].");
-		}
+                                     "Usage: EmoStateLogger [log_file_name].");
+#endif
+#endif
+        } else {
+            filename = argv[1];
+        }
 
         std::cout << "==================================================================="
                   << std::endl;
@@ -80,7 +99,7 @@ int main(int argc, char** argv) {
                   << "Press any key to stop logging...\n"
                   << std::endl;
 
-    	std::ofstream ofs(argv[1],std::ios::trunc);
+        std::ofstream ofs(filename.c_str(),std::ios::trunc);
 		ofs << header << std::endl;
 		
 		DataHandle hMotionData = IEE_MotionDataCreate();
@@ -134,7 +153,7 @@ int main(int argc, char** argv) {
 #ifdef _WIN32
             Sleep(1);
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
             usleep(10000);
 #endif
 		}
@@ -176,5 +195,21 @@ int _kbhit(void)
         return 1;
 
     return 0;
+}
+#endif
+#ifdef __APPLE__
+int _kbhit (void)
+{
+    struct timeval tv;
+    fd_set rdfs;
+
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+
+    FD_ZERO(&rdfs);
+    FD_SET (STDIN_FILENO, &rdfs);
+
+    select(STDIN_FILENO+1, &rdfs, NULL, NULL, &tv);
+    return FD_ISSET(STDIN_FILENO, &rdfs);
 }
 #endif

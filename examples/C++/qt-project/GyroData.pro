@@ -27,6 +27,8 @@ win32{
 
 }else:ios {
 }else:macx{
+    LIBS += -framework OpenGL
+    LIBS += -framework GLUT
 }else:unix{
     LIBS += -L/usr/lib/x86_64-linux-gnu/mesa -lGL
     LIBS += -L/usr/lib/x86_64-linux-gnu -lGLU

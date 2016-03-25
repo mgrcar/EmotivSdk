@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 
-#ifdef __linux__
+#if __linux__ || __APPLE__
     #include <unistd.h>
     #include <errno.h>
     #include <netdb.h>
@@ -21,7 +21,7 @@ using namespace std;
 int Socket::nofSockets_= 0;
 
 #define BUF_SIZE 4096
-#ifdef __linux__
+#if __linux__ || __APPLE__
     #define INVALID_SOCKET -1
     #define SOCKET_ERROR -1
     #define BUF_SIZE 4096
@@ -116,7 +116,7 @@ void Socket::Close() {
 #ifdef _WIN32
 	closesocket(s_);
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
     close(s_);
 #endif
 }
@@ -140,7 +140,7 @@ void Socket::ReceiveBytes(string& byteStream) {
 #ifdef _WIN32
 		if (ioctlsocket(s_, FIONREAD, &arg) != 0)
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
             if (ioctl(s_, FIONREAD, &arg) != 0)
 #endif
                 throw SocketException("error in ReceiveBytes()");
@@ -152,7 +152,7 @@ void Socket::ReceiveBytes(string& byteStream) {
 #ifdef _WIN32
 			Sleep(1);
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
             usleep(10000);
 #endif
 			// check whether the connection still alive or not
@@ -261,7 +261,7 @@ SocketServer::SocketServer(int port, int connections, SocketStream stream,
 #ifdef _WIN32
 		ioctlsocket(s_, FIONBIO, &arg);
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
         ioctl(s_, FIONBIO, &arg);
 #endif
 	}
@@ -271,7 +271,7 @@ SocketServer::SocketServer(int port, int connections, SocketStream stream,
 #ifdef _WIN32
         closesocket(s_);
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
         close(s_);
 #endif
 
@@ -296,7 +296,7 @@ Socket* SocketServer::Accept() {
 			throw SocketException("INVALID_SOCKET");
 		}
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
         throw SocketException("INVALID_SOCKET");
 #endif
 	}
@@ -327,11 +327,15 @@ SocketClient::SocketClient(const string& host, int port, SocketStream stream) :
         memcpy(&peer_addr, &addr, sizeof(sockaddr_in));
     }
 
-	if (::connect(s_, (sockaddr *) &addr, sizeof(sockaddr))) {
-        error << "cannot connection to host [" << host << "] on port "
-              << port << ".";
-		throw SocketException(error.str());
-	}
+    if(_mType == TCP)
+    {
+        if (::connect(s_, (sockaddr *) &addr, sizeof(sockaddr)))
+        {
+            error << "cannot connection to host [" << host << "] on port "
+                << port << ".";
+            throw SocketException(error.str());
+        }
+    }
 }
 void SocketClient::SendBytes(const string& s) {
 
@@ -367,7 +371,7 @@ SocketSelect::SocketSelect(Socket const * const s1, Socket const * const s2,
 	TIMEVAL tval;
     TIMEVAL *ptval;
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
     timeval tval;
     timeval *ptval;
 #endif

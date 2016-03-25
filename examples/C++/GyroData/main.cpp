@@ -14,12 +14,20 @@
 #include <conio.h>
 #endif
 
+#ifndef __APPLE__
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <glut.h>
+#else
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <GLUT/glut.h>
+#include <mach/clock.h>
+#include <mach/mach.h>
+#endif
 #include <iostream>
 
-#ifdef __linux__
+#if __linux__|| __APPLE__
 #include <unistd.h>
 #endif
 #include <cmath>
@@ -187,7 +195,7 @@ void updateDisplay(void)
 #ifdef _WIN32
       Sleep(15);
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
       usleep(10000);
 #endif
    glutPostRedisplay(); 
@@ -217,13 +225,27 @@ void mouse(int button, int state, int x, int y)
    } 	
 }
 
-#ifdef __linux__
+#if __linux__
 double GetTickCount()
 {
     struct timespec now;
     if (clock_gettime(CLOCK_MONOTONIC, &now))
       return 0;
     return now.tv_sec * 1000.0 + now.tv_nsec / 1000000.0;
+}
+#endif
+#ifdef __APPLE__
+double GetTickCount()
+{
+    struct timespec ts;
+    clock_serv_t cclock;
+    mach_timespec_t mts;
+    host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
+    clock_get_time(cclock, &mts);
+    mach_port_deallocate(mach_task_self(), cclock);
+    ts.tv_sec = mts.tv_sec;
+    ts.tv_nsec = mts.tv_nsec;
+    return ts.tv_sec * 1000.0 + ts.tv_nsec / 1000000.0;
 }
 #endif
 
@@ -277,7 +299,7 @@ int main(int argc, char** argv)
 #ifdef _WIN32
 			Sleep(1000);
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
             usleep(10000);
 #endif
 			break;
@@ -292,7 +314,7 @@ int main(int argc, char** argv)
 #ifdef _WIN32
 		Sleep(100);
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
         usleep(10000);
 #endif
 	}
@@ -300,7 +322,7 @@ int main(int argc, char** argv)
 #ifdef _WIN32
    globalElapsed = GetTickCount();
 #endif
-#ifdef __linux__
+#if __linux__|| __APPLE__
    globalElapsed = ( unsigned long ) GetTickCount();
 #endif
 

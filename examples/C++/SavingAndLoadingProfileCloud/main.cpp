@@ -15,7 +15,7 @@
     #include <conio.h>
     #include <windows.h>
 #endif
-#ifdef __linux__
+#if __linux__ || __APPLE__
     #include <unistd.h>
 #endif
 
@@ -24,7 +24,7 @@ extern "C"
 {
 #endif
 
-#ifdef __linux__
+#if __linux__ || __APPLE__
 int _kbhit(void);
 #endif
 
@@ -152,7 +152,7 @@ int  main() {
 #ifdef _WIN32
 	Sleep(1);
 #endif
-#ifdef linux
+#if __linux__ || __APPLE__
     usleep(10000);
 #endif
 	}
@@ -185,7 +185,22 @@ int _kbhit(void)
     return 0;
 }
 #endif
+#ifdef __APPLE__
+int _kbhit (void)
+{
+    struct timeval tv;
+    fd_set rdfs;
 
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+
+    FD_ZERO(&rdfs);
+    FD_SET (STDIN_FILENO, &rdfs);
+
+    select(STDIN_FILENO+1, &rdfs, NULL, NULL, &tv);
+    return FD_ISSET(STDIN_FILENO, &rdfs);
+}
+#endif
 #ifdef __cplusplus
 }
 #endif
