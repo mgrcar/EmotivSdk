@@ -1,6 +1,7 @@
 ## Emotiv SDK Community Edition Changelog
 
 #### Version 3.3.2
+*Available for Windows and Linux, other platforms to be followed.*
 * Bug fixes:
   * Fixed unexpected failure in Mental Commands training
 * Improvement:
