@@ -71,8 +71,7 @@ public class EmoStateLogger {
 					if (EmoState.INSTANCE
 							.IS_FacialExpressionIsRightWink(eState) == 1)
 						System.out.println("RightWink");
-
-					System.out.print("ExcitementScore: ");
+                    
 					System.out.print("MentalCommandGetCurrentAction: ");
 					System.out.println(EmoState.INSTANCE
 							.IS_MentalCommandGetCurrentAction(eState));

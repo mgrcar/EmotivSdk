@@ -1,11 +1,12 @@
 ## Emotiv SDK Community Edition Changelog
 
 #### Version 3.3.2
-*Available for Windows and Linux, other platforms to be followed.*
 * Bug fixes:
   * Fixed unexpected failure in Mental Commands training
+  * Fixed connection error for examples on Mac
 * Improvement:
   * Support cmake on Ubuntu and Debian/armhf in examples
+  * Add BlueAvatar and EmoCube for examples on Mac
 
 #### Version 3.3.1
 * New features and improvement:
