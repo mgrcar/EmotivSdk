@@ -18,7 +18,7 @@ extern "C"
 #endif
 
 
-#ifndef EDK_STATIC_LIB
+#if (!EDK_STATIC_LIB)
 #   ifdef EDK_EXPORTS
 #       ifdef _WIN32
 #           define EDK_API __declspec(dllexport)

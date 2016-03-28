@@ -21,7 +21,7 @@ extern "C"
 {
 #endif
 
-#ifndef EDK_STATIC_LIB
+#if (!EDK_STATIC_LIB)
 #   ifdef EMOTIVCLOUDCLIENT_EXPORTS
 #       ifdef _WIN32
 #           define EMOTIVCLOUD_API __declspec(dllexport)

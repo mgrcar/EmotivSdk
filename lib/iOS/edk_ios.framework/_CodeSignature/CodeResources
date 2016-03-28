@@ -6,19 +6,19 @@
 	<dict>
 		<key>Headers/EmotivCloudClient.h</key>
 		<data>
-		51Q17WqBQPfSy0cCnBNY+Tvd6cQ=
+		8mK05ZzEGKDjzamEIfmPwe8WwcE=
 		</data>
 		<key>Headers/FacialExpressionDetection.h</key>
 		<data>
-		hqRIO5bRZx5a36q3Bpcw7Y87sdE=
+		ww27Rkfgn6cHMlV6nJfshslqYrM=
 		</data>
 		<key>Headers/IEmoStateDLL.h</key>
 		<data>
-		LE1uGcLSqPbALPItA0RbdNqAc+Q=
+		9OlykgXoa6T3LteVIc+SWGC2CPk=
 		</data>
 		<key>Headers/Iedk.h</key>
 		<data>
-		9FIjXC5IryYhmtOIQ4f5Me3dZkM=
+		eBtCZTQhz4M49yZOykBOV4XVjZ8=
 		</data>
 		<key>Headers/IedkErrorCode.h</key>
 		<data>
@@ -26,30 +26,30 @@
 		</data>
 		<key>Headers/MentalCommandDetection.h</key>
 		<data>
-		eRCH7ca4gQ6mZ/r74Ihvklzz8lg=
+		SPGb9OrFmDy8oy3XiGEwPBCMfMg=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		F89aLYkkzS91loW2wzOQj/69kOk=
+		tGx+gNp1PETp06YQEep13DOgfw0=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>Headers/EmotivCloudClient.h</key>
 		<data>
-		51Q17WqBQPfSy0cCnBNY+Tvd6cQ=
+		8mK05ZzEGKDjzamEIfmPwe8WwcE=
 		</data>
 		<key>Headers/FacialExpressionDetection.h</key>
 		<data>
-		hqRIO5bRZx5a36q3Bpcw7Y87sdE=
+		ww27Rkfgn6cHMlV6nJfshslqYrM=
 		</data>
 		<key>Headers/IEmoStateDLL.h</key>
 		<data>
-		LE1uGcLSqPbALPItA0RbdNqAc+Q=
+		9OlykgXoa6T3LteVIc+SWGC2CPk=
 		</data>
 		<key>Headers/Iedk.h</key>
 		<data>
-		9FIjXC5IryYhmtOIQ4f5Me3dZkM=
+		eBtCZTQhz4M49yZOykBOV4XVjZ8=
 		</data>
 		<key>Headers/IedkErrorCode.h</key>
 		<data>
@@ -57,7 +57,7 @@
 		</data>
 		<key>Headers/MentalCommandDetection.h</key>
 		<data>
-		eRCH7ca4gQ6mZ/r74Ihvklzz8lg=
+		SPGb9OrFmDy8oy3XiGEwPBCMfMg=
 		</data>
 	</dict>
 	<key>rules</key>

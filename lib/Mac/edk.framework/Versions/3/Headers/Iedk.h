@@ -20,7 +20,7 @@ extern "C"
 {
 #endif
 
-#ifndef EDK_STATIC_LIB
+#if (!EDK_STATIC_LIB)
 #   ifdef EDK_EXPORTS
 #       ifdef _WIN32
 #           define EDK_API __declspec(dllexport)
@@ -88,10 +88,11 @@ extern "C"
         IED_GYROX,              //!< Gyroscope X-axis
         IED_GYROY,              //!< Gyroscope Y-axis
         IED_TIMESTAMP,          //!< System timestamp
+        IED_MARKER_HARDWARE,    //!< Marker value from hardware
         IED_ES_TIMESTAMP,       //!< EmoState timestamp
         IED_FUNC_ID,            //!< Reserved function id
         IED_FUNC_VALUE,         //!< Reserved function value
-        IED_MARKER,             //!< Marker value from hardware
+        IED_MARKER,             //!< Marker value from software
         IED_SYNC_SIGNAL         //!< Synchronisation signal
     } IEE_DataChannel_t;
 
