@@ -1,5 +1,7 @@
 package com.emotiv.Iedk;
 
+import java.util.List;
+
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
@@ -201,6 +203,11 @@ public interface Edk extends Library {
 		double xLoc; // x coordinate from center of head towards nose
 		double yLoc; // y coordinate from center of head towards ears
 		double zLoc; // z coordinate from center of head toward top of skull
+		@Override
+		protected List getFieldOrder() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 
 	// ! Initializes the connection to EmoEngine. This function should be called

@@ -1,5 +1,7 @@
 package com.emotiv.Iedk;
 
+import java.util.List;
+
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
@@ -28,6 +30,11 @@ public interface EmotivCloudClient extends Library {
     public static class profileVerInfo extends Structure{
         int version;
         char[] last_modified;
+		@Override
+		protected List getFieldOrder() {
+			// TODO Auto-generated method stub
+			return null;
+		}
     }
     
     
