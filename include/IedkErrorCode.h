@@ -7,6 +7,8 @@
  * All the error codes that are returned by IEE_ functions are listed here.
  */
 
+//! \file IedkErrorCode.h
+
 #ifndef IEDK_ERROR_CODE_H
 #define IEDK_ERROR_CODE_H
 

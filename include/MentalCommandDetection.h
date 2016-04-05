@@ -8,6 +8,7 @@
  *
  */
 
+//! \file MentalCommandDetection.h
 
 #ifndef MENTALCOMMANDDETECTION_H
 #define MENTALCOMMANDDETECTION_H
@@ -17,7 +18,7 @@ extern "C"
 {
 #endif
 
-#ifndef EDK_STATIC_LIB
+#if (!EDK_STATIC_LIB)
 #   ifdef EDK_EXPORTS
 #       ifdef _WIN32
 #           define EDK_API __declspec(dllexport)
@@ -388,6 +389,8 @@ extern "C"
     EDK_API int
         IEE_MentalCommandGetSignatureCacheSize(unsigned int userId,
                                                unsigned int* pSizeOut);
-};
+#ifdef __cplusplus
+}
+#endif
 
 #endif // MENTALCOMMANDDETECTION_H

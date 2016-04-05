@@ -16,6 +16,7 @@
  * This header file is designed to be included under C and C++ environment.
  *
  */
+//! \file IEmoStateDLL.h
 
 #ifndef IEMOSTATE_DLL_H
 #define IEMOSTATE_DLL_H
@@ -26,7 +27,7 @@ extern "C"
 {
 #endif
 
-#if !defined(EDK_STATIC_LIB) && !defined(EDK_UTILS_ONLY)
+#if (!EDK_STATIC_LIB)
 #   ifdef EMOSTATE_DLL_EXPORTS
 #       ifdef _WIN32
 #           define EMOSTATE_DLL_API __declspec(dllexport)
@@ -633,7 +634,7 @@ typedef void* EmoStateHandle;
                  EmoStateHandle b);
 
 #ifdef __cplusplus
-};
+}
 #endif
 #endif // EMOSTATE_DLL_H
 
