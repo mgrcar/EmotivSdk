@@ -18,9 +18,9 @@ try:
     elif sys.platform.startswith('linux'):
         srcDir = os.getcwd()
 	if platform.machine().startswith('arm'):
-            libPath = srcDir + "/../../bin/armhf/libedk.so"
+            libPath = srcDir + "../../bin/armhf/libedk.so"
 	else:
-            libPath = srcDir + "/../../bin/linux64/libedk.so"
+            libPath = srcDir + "../../bin/linux64/libedk.so"
         libEDK = CDLL(libPath)
     else:
         raise Exception('System not supported.')
