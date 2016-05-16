@@ -47,9 +47,7 @@ See [changelog](CHANGELOG.md)
 * Ubuntu and Debian: See [Connecting on Ubuntu and Debian](doc/Connecting on Ubuntu and Debian.md)
 
 ## API Documentation
-The API reference can be found here:
-
-http://emotiv.com/api/3.3.1/
+http://emotiv.github.io/community-sdk/
 
 ## Apps and Tools
 
