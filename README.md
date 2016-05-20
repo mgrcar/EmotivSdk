@@ -11,6 +11,7 @@ To get the SDK you can either:
 * clone this repository with `git` command line tool or a GUI client like [SourceTree](https://www.sourcetreeapp.com); or
 * click on the "Download ZIP" button (above, on the right) to get the zip archive of the latest version; or
 * go to [releases](https://github.com/Emotiv/community-sdk/releases) and download the archive of a particular release
+* Android SDK will be updated on jcenter . You can see at [here](https://bintray.com/nguoithichkhampha/maven/community)
 
 ## Table of Contents
 1. [Changelog](#changelog)
