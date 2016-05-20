@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "com.emotiv.mentalcommand"
-        minSdkVersion 8
-        targetSdkVersion 18
+        minSdkVersion 19
+        targetSdkVersion 23
     }
 
     buildTypes {
@@ -19,6 +19,6 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.0'
-    compile files('libs/bedk.jar')
+    compile 'com.android.support:support-v4:23.0.1'
+    compile 'com.emotiv.sdk:community:3.3.2@aar'
 }
