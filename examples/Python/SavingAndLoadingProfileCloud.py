@@ -85,17 +85,17 @@ if libEDK.IEE_EngineConnect("Emotiv Systems-5") != 0:
 
 option = int(raw_input())
 
-if libEDK.EC_Connect() != True:
+if libEDK.EC_Connect() != 0:
     print "Cannot connect to Emotiv Cloud"
     exit()
 
-if libEDK.EC_Login(userName, password) != True:
+if libEDK.EC_Login(userName, password) != 0:
     print "Your login attempt has failed. The username or password may be incorrect"
     exit()
 
 print "Logged in as %s" % userName
 
-if libEDK.EC_GetUserDetail(userCloudIDP) != True:
+if libEDK.EC_GetUserDetail(userCloudIDP) != 0:
     exit()
 
 while True:    
@@ -117,11 +117,11 @@ while True:
                 
                 if profileID >= 0:
                     print "Profile with %s is existed" % profileName
-                    if libEDK.EC_UpdateUserProfile(userCloudID.value, userEngineID.value, profileID, profileName):
+                    if libEDK.EC_UpdateUserProfile(userCloudID.value, userEngineID.value, profileID, profileName) == 0:
                         print "Updating finished"      
                     else:
                         print "Updating failed"
-                elif libEDK.EC_SaveUserProfile(userCloudID.value, userEngineID.value, profileName, 0):  # 0: libEDK.profileType.TRAINING
+                elif libEDK.EC_SaveUserProfile(userCloudID.value, userEngineID.value, profileName, 0) == 0:  # 0: libEDK.profileType.TRAINING
                     print "Saving finished"
                 else:
                     print "Saving failed"
@@ -132,7 +132,7 @@ while True:
             if option == 2:                                    
                     if getNumberProfile > 0:
                         profileID = libEDK.EC_ProfileIDAtIndex(userCloudID.value, 0)
-                        if libEDK.EC_LoadUserProfile(userCloudID.value, userEngineID.value, profileID, version):
+                        if libEDK.EC_LoadUserProfile(userCloudID.value, userEngineID.value, profileID, version) == 0:
                             print "Loading finished"
                         else:
                             print "Loading failed"

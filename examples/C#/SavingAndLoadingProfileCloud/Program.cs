@@ -43,12 +43,14 @@ namespace SavingAndLoadingProfileCloud
                 
                 if (profileID >= 0) {
                     Console.WriteLine("Profile with " + profileName + " is existed");
-                    if (EmotivCloudClient.EC_UpdateUserProfile(userCloudID, engineUserID, profileID)) {
+                    if (EmotivCloudClient.EC_UpdateUserProfile(userCloudID, engineUserID, profileID) != EmotivCloudClient.EC_OK ) 
+                    {
                         Console.WriteLine("Updating finished");
                     }
                     else Console.WriteLine("Updating failed");                    
                 }
-                else if (EmotivCloudClient.EC_SaveUserProfile(userCloudID, (int)engineUserID, profileName, EmotivCloudClient.profileFileType.TRAINING))
+                else if (EmotivCloudClient.EC_SaveUserProfile(userCloudID, (int)engineUserID, profileName, 
+                    EmotivCloudClient.profileFileType.TRAINING) != EmotivCloudClient.EC_OK)
                 {
                     Console.WriteLine("Saving finished");
                 }
@@ -60,7 +62,8 @@ namespace SavingAndLoadingProfileCloud
             if (mode == 1)
             { 
                 if (getNumberProfile > 0){
-                    if (EmotivCloudClient.EC_LoadUserProfile(userCloudID, engineUserID, EmotivCloudClient.EC_GetProfileId(userCloudID, profileName), version))
+                    if (EmotivCloudClient.EC_LoadUserProfile(userCloudID, engineUserID, 
+                        EmotivCloudClient.EC_GetProfileId(userCloudID, profileName), version) != EmotivCloudClient.EC_OK)
                         Console.WriteLine("Loading finished");
                     else
                         Console.WriteLine("Loading failed");
@@ -89,14 +92,14 @@ namespace SavingAndLoadingProfileCloud
 
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
 
-            if(!EmotivCloudClient.EC_Connect())
+            if (EmotivCloudClient.EC_Connect() != EmotivCloudClient.EC_OK)
             {
                 Console.WriteLine("Cannot connect to Emotiv Cloud.");
                 Thread.Sleep(2000);
                 return;
             }
-            
-            if(!EmotivCloudClient.EC_Login(userName, password))
+
+            if (EmotivCloudClient.EC_Login(userName, password) != EmotivCloudClient.EC_OK)
             {			
                 Console.WriteLine("Your login attempt has failed. The username or password may be incorrect");
                 Thread.Sleep(2000);
@@ -105,7 +108,7 @@ namespace SavingAndLoadingProfileCloud
 
             Console.WriteLine("Logged in as " + userName);
 
-            if (!EmotivCloudClient.EC_GetUserDetail(ref userCloudID))
+            if (EmotivCloudClient.EC_GetUserDetail(ref userCloudID) != EmotivCloudClient.EC_OK)
                 return;            
 
             while (true)

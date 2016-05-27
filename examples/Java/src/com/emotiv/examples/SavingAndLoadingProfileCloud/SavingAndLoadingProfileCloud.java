@@ -34,13 +34,13 @@ public class SavingAndLoadingProfileCloud {
 		
 		
 		
-		if(!EmotivCloudClient.INSTANCE.EC_Connect())
+		if(EmotivCloudClient.INSTANCE.EC_Connect() != EdkCloudErrorCode.EC_OK)
 		{
 			System.out.println("Cannot connect to Emotiv Cloud");
 	        return;
 		}
 
-		if(!EmotivCloudClient.INSTANCE.EC_Login(userName, password))
+		if(EmotivCloudClient.INSTANCE.EC_Login(userName, password) != EdkCloudErrorCode.EC_OK)
 		{			
 			System.out.println("Your login attempt has failed. The username or password may be incorrect");
 	        return;
@@ -48,7 +48,7 @@ public class SavingAndLoadingProfileCloud {
 		
 		System.out.println("Logged in as " + userName);
 
-		if (!EmotivCloudClient.INSTANCE.EC_GetUserDetail(userCloudID))
+		if (EmotivCloudClient.INSTANCE.EC_GetUserDetail(userCloudID) != EdkCloudErrorCode.EC_OK)
 	        return;
 
 		while (true)
@@ -81,12 +81,13 @@ public class SavingAndLoadingProfileCloud {
 
 						if (profileID >= 0) {
 							System.out.println("Profile with " + profileName + " is existed");
-							if (EmotivCloudClient.INSTANCE.EC_UpdateUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileID)) {
+							if (EmotivCloudClient.INSTANCE.EC_UpdateUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileID) == EdkCloudErrorCode.EC_OK) 
+							{
 								System.out.println("Updating finished");  
 							}
 							else System.out.println("Updating failed");
 					    }
-						else if (EmotivCloudClient.INSTANCE.EC_SaveUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileName, 0))  // Training
+						else if (EmotivCloudClient.INSTANCE.EC_SaveUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileName, 0) == EdkCloudErrorCode.EC_OK)  // Training
 						     {
 							    System.out.println("Saving finished");
 						     }
@@ -98,7 +99,7 @@ public class SavingAndLoadingProfileCloud {
 	                    if (getNumberProfile > 0){
 	                    	int profileID = EmotivCloudClient.INSTANCE.EC_GetProfileId(userCloudID.getValue(), profileName);
 
-							if (EmotivCloudClient.INSTANCE.EC_LoadUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileID, version))
+							if (EmotivCloudClient.INSTANCE.EC_LoadUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileID, version) == EdkCloudErrorCode.EC_OK)
 								System.out.println("Loading finished");
 	                        else
 	                        	System.out.println("Loading failed");

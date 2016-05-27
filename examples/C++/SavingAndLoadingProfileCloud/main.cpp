@@ -32,6 +32,7 @@ int _kbhit(void);
 #include "Iedk.h"
 #include "IedkErrorCode.h"
 #include "EmotivCloudClient.h"
+#include "EmotivCloudErrorCode.h"
 
 
 int  main() {
@@ -70,13 +71,13 @@ int  main() {
 	std::getline(std::cin, input, '\n');
 	option = atoi(input.c_str());
 
-	if(!EC_Connect())
+	if(EC_Connect() != EC_OK)
 	{
 		std::cout << "Cannot connect to Emotiv Cloud";
         return -2;
 	}
 
-	if(!EC_Login(userName.c_str(), password.c_str()))
+	if(EC_Login(userName.c_str(), password.c_str()) != EC_OK)
 	{			
 		std::cout << "Your login attempt has failed. The username or password may be incorrect";
 #ifdef _WIN32
@@ -87,7 +88,7 @@ int  main() {
 
 	std::cout<<"Logged in as " << userName << std::endl;
 
-	if (!EC_GetUserDetail(&userCloudID))
+	if (EC_GetUserDetail(&userCloudID) != EC_OK)
         return -4;
 
 	while (!_kbhit())
@@ -115,12 +116,12 @@ int  main() {
 
 					if (profileID >= 0) {
 						    std::cout << "Profile with " << profileName << " is existed" << std::endl;
-                            if (EC_UpdateUserProfile(userCloudID, engineUserID, profileID)) {
+                            if (EC_UpdateUserProfile(userCloudID, engineUserID, profileID) == EC_OK) {
 						        std::cout << "Updating finished";      
 						    }
 						    else std::cout << "Updating failed";
 				    }
-					else if (EC_SaveUserProfile(userCloudID, (int)engineUserID, profileName.c_str(), TRAINING))
+					else if (EC_SaveUserProfile(userCloudID, (int)engineUserID, profileName.c_str(), TRAINING) == EC_OK)
 					     {
 						     std::cout << "Saving finished";
 					     }
@@ -132,7 +133,7 @@ int  main() {
 				}
 				case 2:{
                     if (getNumberProfile > 0){
-						if (EC_LoadUserProfile(userCloudID, (int)engineUserID, EC_ProfileIDAtIndex(userCloudID, 0)))
+						if (EC_LoadUserProfile(userCloudID, (int)engineUserID, EC_ProfileIDAtIndex(userCloudID, 0)) == EC_OK)
                             std::cout << "Loading finished";
                         else
                             std::cout << "Loading failed";
