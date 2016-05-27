@@ -16,11 +16,10 @@
 #define IEDK_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-#ifndef EDK_STATIC_LIB
+#if (!EDK_STATIC_LIB)
 #   ifdef EDK_EXPORTS
 #       ifdef _WIN32
 #           define EDK_API __declspec(dllexport)
@@ -482,7 +481,6 @@ extern "C"
         IEE_HardwareGetVersion(unsigned int userId,
                                unsigned long* pHwVersionOut);
 
-
     //! Return the current version of the Emotiv SDK
     /*!
         \param pszVersionOut - SDK software version in X.X.X format.
@@ -498,6 +496,21 @@ extern "C"
         IEE_SoftwareGetVersion(char* pszVersionOut,
                                unsigned int nVersionChars,
                                unsigned long* pBuildNumOut);
+
+
+    //! Return the current serial number of the headset (if available).
+    /*!
+        \param userId - user ID for query
+        \param pHwSerialOut - serial number for the headset pair.
+       
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+
+        \sa IedkErrorCode.h
+    */
+	EDK_API int
+		IEE_HeadsetGetSerialNumber(unsigned int userId, 
+			                        char** pHwSerialOut);
 
 
     //! Return the delta of the movement of the gyro since the previous call for a particular user
@@ -764,7 +777,7 @@ extern "C"
         \param indexDevice - the index of device in list (start from 0)
      */
     EDK_API void
-        IEE_GetInsightSignalStrength(int& value, int indexDevice);
+        IEE_GetInsightSignalStrength(int* value, int indexDevice);
     
     
     //! Get number of Insight devices nearby
@@ -799,7 +812,7 @@ extern "C"
         \param index - index in device list
      */
     EDK_API void
-        IEE_GetInsightDeviceState(int& state, int index);
+        IEE_GetInsightDeviceState(int* state, int index);
 
     
     //! Connect to an EPOC+ device
@@ -825,7 +838,7 @@ extern "C"
         \param indexDevice - the index of device in list (start from 0)
      */
     EDK_API void
-        IEE_GetEpocPlusSignalStrength(int& value, int indexDevice);
+        IEE_GetEpocPlusSignalStrength(int* value, int indexDevice);
     
     
     //! Get number of EPOC+ devices nearby
@@ -861,7 +874,7 @@ extern "C"
         \param index - index in device list
      */
     EDK_API void
-        IEE_GetEpocPlusDeviceState(int& state, int index);
+        IEE_GetEpocPlusDeviceState(int* state, int index);
     
 #endif
     
