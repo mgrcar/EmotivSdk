@@ -1,11 +1,10 @@
 ﻿/****************************************************************************
 **
-** Copyright 2015 by Emotiv. All rights reserved
-** Example - EmoStateLogger
-** This example demonstrates the use of the core Emotiv API functions.
-** It logs all Emotiv detection results for the attached users after
-** successfully establishing a connection to Emotiv EmoEngineTM or
-** EmoComposerTM
+** Copyright 2016 by Emotiv. All rights reserved
+** Example - Mental command with  cloud profile
+** This example demonstrates how to detect mental command detection with 
+** a profile.
+** This example work on single connection
 ****************************************************************************/
 
 using System;
@@ -14,13 +13,17 @@ using Emotiv;
 using System.IO;
 using System.Threading;
 
-namespace EmoStateLogger
+namespace MentalCommandWithCloudProfile
 {
-    class EmoStateLogger
+    class Program
     {
-        static System.IO.StreamWriter engineLog = new System.IO.StreamWriter("engineLog.log");
-        static System.IO.StreamWriter expLog = new System.IO.StreamWriter("FacialExpression.log");
         static System.IO.StreamWriter cogLog = new System.IO.StreamWriter("MentalCommand.log");
+
+        static int userCloudID = 0;
+        static string userName = "Your account name";
+        static string password = "Your password";        
+        static string profileName = "Profile_1";
+        static int version = -1; // Lastest version
 
         static Boolean enableLoger = false;
 
@@ -47,7 +50,6 @@ namespace EmoStateLogger
             EmoState es = e.emoState;
 
             Single timeFromStart = es.GetTimeFromStart();
-            //Console.WriteLine("new emostate {0}", timeFromStart);
         }
 
         static void engine_EmoEngineEmoStateUpdated(object sender, EmoStateUpdatedEventArgs e)
@@ -61,16 +63,8 @@ namespace EmoStateLogger
             EdkDll.IEE_SignalStrength_t signalStrength = es.GetWirelessSignalStatus();
             Int32 chargeLevel = 0;
             Int32 maxChargeLevel = 0;
-            es.GetBatteryChargeLevel(out chargeLevel, out maxChargeLevel);
-
-            engineLog.Write(
-                "{0},{1},{2},{3},{4},",
-                timeFromStart,
-                headsetOn, signalStrength, chargeLevel, maxChargeLevel);
-            
-            engineLog.WriteLine("");
-            engineLog.Flush();
-        }  
+            es.GetBatteryChargeLevel(out chargeLevel, out maxChargeLevel);            
+        }
 
         static void engine_MentalCommandEmoStateUpdated(object sender, EmoStateUpdatedEventArgs e)
         {
@@ -82,68 +76,10 @@ namespace EmoStateLogger
             Single power = es.MentalCommandGetCurrentActionPower();
             Boolean isActive = es.MentalCommandIsActive();
 
-            cogLog.WriteLine("{0},{1},{2},{3}", timeFromStart, cogAction, power, isActive);
+            cogLog.WriteLine( "{0},{1},{2},{3}", timeFromStart, cogAction, power, isActive);
             cogLog.Flush();
-            if (enableLoger)
-                Console.WriteLine("{0},{1},{2},{3}", timeFromStart, cogAction, power, isActive);
-        }
-
-        static void engine_FacialExpressionEmoStateUpdated(object sender, EmoStateUpdatedEventArgs e)
-        {
-            EmoState es = e.emoState;
-
-            Single timeFromStart = es.GetTimeFromStart();
-
-            EdkDll.IEE_FacialExpressionAlgo_t[] expAlgoList = { 
-                                                      EdkDll.IEE_FacialExpressionAlgo_t.FE_BLINK, 
-                                                      EdkDll.IEE_FacialExpressionAlgo_t.FE_CLENCH, 
-                                                      EdkDll.IEE_FacialExpressionAlgo_t.FE_SUPRISE, 
-                                                      EdkDll.IEE_FacialExpressionAlgo_t.FE_FROWN, 
-                                                      EdkDll.IEE_FacialExpressionAlgo_t.FE_HORIEYE, 
-                                                      EdkDll.IEE_FacialExpressionAlgo_t.FE_NEUTRAL, 
-                                                      EdkDll.IEE_FacialExpressionAlgo_t.FE_SMILE, 
-                                                      EdkDll.IEE_FacialExpressionAlgo_t.FE_WINK_LEFT, 
-                                                      EdkDll.IEE_FacialExpressionAlgo_t.FE_WINK_RIGHT
-                                                      };
-            Boolean[] isExpActiveList = new Boolean[expAlgoList.Length];
-
-            Boolean isBlink = es.FacialExpressionIsBlink();
-            Boolean isLeftWink = es.FacialExpressionIsLeftWink();
-            Boolean isRightWink = es.FacialExpressionIsRightWink();
-            Boolean isEyesOpen = es.FacialExpressionIsEyesOpen();
-            Boolean isLookingUp = es.FacialExpressionIsLookingUp();
-            Boolean isLookingDown = es.FacialExpressionIsLookingDown();
-            Single leftEye = 0.0F;
-            Single rightEye = 0.0F;
-            Single x = 0.0F;
-            Single y = 0.0F;
-            es.FacialExpressionGetEyelidState(out leftEye, out rightEye);
-            es.FacialExpressionGetEyeLocation(out x, out y);
-            Single eyebrowExtent = es.FacialExpressionGetEyebrowExtent();
-            Single smileExtent = es.FacialExpressionGetSmileExtent();
-            Single clenchExtent = es.FacialExpressionGetClenchExtent();
-            EdkDll.IEE_FacialExpressionAlgo_t upperFaceAction = es.FacialExpressionGetUpperFaceAction();
-            Single upperFacePower = es.FacialExpressionGetUpperFaceActionPower();
-            EdkDll.IEE_FacialExpressionAlgo_t lowerFaceAction = es.FacialExpressionGetLowerFaceAction();
-            Single lowerFacePower = es.FacialExpressionGetLowerFaceActionPower();
-            for (int i = 0; i < expAlgoList.Length; ++i)
-            {
-                isExpActiveList[i] = es.FacialExpressionIsActive(expAlgoList[i]);
-            }
-
-            expLog.Write(
-                "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},",
-                timeFromStart,
-                isBlink, isLeftWink, isRightWink, isEyesOpen, isLookingUp,
-                isLookingDown, leftEye, rightEye,
-                x, y, eyebrowExtent, smileExtent, upperFaceAction,
-                upperFacePower, lowerFaceAction, lowerFacePower);
-            for (int i = 0; i < expAlgoList.Length; ++i)
-            {
-                expLog.Write("{0},", isExpActiveList[i]);
-            }
-            expLog.WriteLine("");
-            expLog.Flush();
+            if(enableLoger)
+                 Console.WriteLine("{0},{1},{2},{3}", timeFromStart, cogAction, power, isActive);
         }
 
         static void engine_MentalCommandTrainingStarted(object sender, EmoEngineEventArgs e)
@@ -176,34 +112,54 @@ namespace EmoStateLogger
             Console.WriteLine("MentalCommand Training Rejected.");
         }
 
-        static void engine_FacialExpressionTrainingStarted(object sender, EmoEngineEventArgs e)
+        static void SavingLoadingFunction(int mode)
         {
-            Console.WriteLine("Start FacialExpression Training");
-        }
+            int getNumberProfile = EmotivCloudClient.EC_GetAllProfileName(userCloudID);
 
-        static void engine_FacialExpressionTrainingSucceeded(object sender, EmoEngineEventArgs e)
-        {
-            Console.WriteLine("FacialExpression Training Success. (A)ccept/Reject?");
-            ConsoleKeyInfo cki = Console.ReadKey(true);
-            if (cki.Key == ConsoleKey.A)
+            if (mode == 0)
             {
-                Console.WriteLine("Accept!!!");
-                EmoEngine.Instance.FacialExpressionSetTrainingControl(0, EdkDll.IEE_FacialExpressionTrainingControl_t.FE_ACCEPT);
-            }
-            else
-            {
-                EmoEngine.Instance.FacialExpressionSetTrainingControl(0, EdkDll.IEE_FacialExpressionTrainingControl_t.FE_REJECT);
-            }
-        }
+                int profileID = EmotivCloudClient.EC_GetProfileId(userCloudID, profileName);
 
-        static void engine_FacialExpressionTrainingCompleted(object sender, EmoEngineEventArgs e)
-        {
-            Console.WriteLine("FacialExpressione Training Completed.");
-        }
+                if (profileID >= 0)
+                {
+                    Console.WriteLine("Profile with " + profileName + " is existed");
+                    Console.WriteLine("Updating....");
+                    if (EmotivCloudClient.EC_UpdateUserProfile(userCloudID, 0, profileID) == EmotivCloudClient.EC_OK)
+                    {
+                        Console.WriteLine("Updating finished");
+                    }
+                    else Console.WriteLine("Updating failed");
+                }
+                else
+                {
+                    Console.WriteLine("Saving...");
 
-        static void engine_FacialExpressionTrainingRejected(object sender, EmoEngineEventArgs e)
-        {
-            Console.WriteLine("FacialExpression Training Rejected.");
+                    if (EmotivCloudClient.EC_SaveUserProfile(userCloudID, (int)0, profileName,
+                    EmotivCloudClient.profileFileType.TRAINING) == EmotivCloudClient.EC_OK)
+                    {
+                        Console.WriteLine("Saving finished");
+                    }
+                    else Console.WriteLine("Saving failed");
+                }
+
+                return;
+            }
+            if (mode == 1)
+            {                
+                if (getNumberProfile > 0)
+                {
+                    Console.WriteLine("Loading...");
+
+                    if (EmotivCloudClient.EC_LoadUserProfile(userCloudID, 0,
+                        EmotivCloudClient.EC_GetProfileId(userCloudID, profileName), version) == EmotivCloudClient.EC_OK)
+                        Console.WriteLine("Loading finished");
+                    else
+                        Console.WriteLine("Loading failed");
+
+                }
+
+                return;
+            }
         }
 
         static void keyHandler(ConsoleKey key)
@@ -238,19 +194,14 @@ namespace EmoStateLogger
                     Console.WriteLine("Get the current overall skill rating: {0}", EmoEngine.Instance.MentalCommandGetOverallSkillRating(0));
                     break;
                 case ConsoleKey.F8:
-                    EmoEngine.Instance.FacialExpressionSetTrainingAction(0, EdkDll.IEE_FacialExpressionAlgo_t.FE_CLENCH);
-                    EmoEngine.Instance.FacialExpressionSetTrainingControl(0, EdkDll.IEE_FacialExpressionTrainingControl_t.FE_START);
+                    SavingLoadingFunction(0);
                     break;
-                case ConsoleKey.F9:                    
-                    String version;
-                    UInt32 buildNum;
-                    EmoEngine.Instance.SoftwareGetVersion(out version, out buildNum);
-                    Console.WriteLine("Software Version: {0}, {1}", version, buildNum);
+                case ConsoleKey.F9:
+                    SavingLoadingFunction(1);
                     break;
                 case ConsoleKey.F10:
                     enableLoger = !enableLoger;
                     break;
-
                 default:
                     break;
             }
@@ -264,18 +215,19 @@ namespace EmoStateLogger
                 new EmoEngine.EmoEngineConnectedEventHandler(engine_EmoEngineConnected);
             engine.EmoEngineDisconnected +=
                 new EmoEngine.EmoEngineDisconnectedEventHandler(engine_EmoEngineDisconnected);
+
             engine.UserAdded +=
                 new EmoEngine.UserAddedEventHandler(engine_UserAdded);
             engine.UserRemoved +=
                 new EmoEngine.UserRemovedEventHandler(engine_UserRemoved);
+
             engine.EmoStateUpdated +=
-                new EmoEngine.EmoStateUpdatedEventHandler(engine_EmoStateUpdated);
-            engine.FacialExpressionEmoStateUpdated +=
-                new EmoEngine.FacialExpressionEmoStateUpdatedEventHandler(engine_FacialExpressionEmoStateUpdated);
-            engine.MentalCommandEmoStateUpdated +=
-                new EmoEngine.MentalCommandEmoStateUpdatedEventHandler(engine_MentalCommandEmoStateUpdated);            
+                new EmoEngine.EmoStateUpdatedEventHandler(engine_EmoStateUpdated);                       
             engine.EmoEngineEmoStateUpdated +=
                 new EmoEngine.EmoEngineEmoStateUpdatedEventHandler(engine_EmoEngineEmoStateUpdated);
+
+            engine.MentalCommandEmoStateUpdated +=
+                new EmoEngine.MentalCommandEmoStateUpdatedEventHandler(engine_MentalCommandEmoStateUpdated);            
             engine.MentalCommandTrainingStarted +=
                 new EmoEngine.MentalCommandTrainingStartedEventEventHandler(engine_MentalCommandTrainingStarted);
             engine.MentalCommandTrainingSucceeded +=
@@ -283,23 +235,34 @@ namespace EmoStateLogger
             engine.MentalCommandTrainingCompleted +=
                 new EmoEngine.MentalCommandTrainingCompletedEventHandler(engine_MentalCommandTrainingCompleted);
             engine.MentalCommandTrainingRejected +=
-                new EmoEngine.MentalCommandTrainingRejectedEventHandler(engine_MentalCommandTrainingRejected);
-            engine.FacialExpressionTrainingStarted +=
-                new EmoEngine.FacialExpressionTrainingStartedEventEventHandler(engine_FacialExpressionTrainingStarted);
-            engine.FacialExpressionTrainingSucceeded +=
-                new EmoEngine.FacialExpressionTrainingSucceededEventHandler(engine_FacialExpressionTrainingSucceeded);
-            engine.FacialExpressionTrainingCompleted +=
-                new EmoEngine.FacialExpressionTrainingCompletedEventHandler(engine_FacialExpressionTrainingCompleted);
-            engine.FacialExpressionTrainingRejected +=
-                new EmoEngine.FacialExpressionTrainingRejectedEventHandler(engine_FacialExpressionTrainingRejected);
+                new EmoEngine.MentalCommandTrainingRejectedEventHandler(engine_MentalCommandTrainingRejected);            
 
             engine.Connect();
 
             Console.WriteLine("===========================================================================");
-            Console.WriteLine("Example to show how to log the EmoState from EmoEngine.");
+            Console.WriteLine("Example to show how to detect mental command detection with a profile.");
             Console.WriteLine("===========================================================================");
 
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
+                       
+            if (EmotivCloudClient.EC_Connect() != EmotivCloudClient.EC_OK)
+            {
+                Console.WriteLine("Cannot connect to Emotiv Cloud.");
+                Thread.Sleep(2000);
+                return;
+            }
+
+            if (EmotivCloudClient.EC_Login(userName, password) != EmotivCloudClient.EC_OK)
+            {
+                Console.WriteLine("Your login attempt has failed. The username or password may be incorrect");
+                Thread.Sleep(2000);
+                return;
+            }
+
+            Console.WriteLine("Logged in as " + userName);
+
+            if (EmotivCloudClient.EC_GetUserDetail(ref userCloudID) != EmotivCloudClient.EC_OK)
+                return;            
 
             while (true)
             {

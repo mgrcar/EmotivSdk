@@ -42,33 +42,42 @@ namespace SavingAndLoadingProfileCloud
                 int profileID = EmotivCloudClient.EC_GetProfileId(userCloudID, profileName);
                 
                 if (profileID >= 0) {
+                    Console.WriteLine("Updating...");
+
                     Console.WriteLine("Profile with " + profileName + " is existed");
-                    if (EmotivCloudClient.EC_UpdateUserProfile(userCloudID, engineUserID, profileID) != EmotivCloudClient.EC_OK ) 
+                    if (EmotivCloudClient.EC_UpdateUserProfile(userCloudID, engineUserID, profileID) == EmotivCloudClient.EC_OK ) 
                     {
                         Console.WriteLine("Updating finished");
                     }
                     else Console.WriteLine("Updating failed");                    
                 }
-                else if (EmotivCloudClient.EC_SaveUserProfile(userCloudID, (int)engineUserID, profileName, 
-                    EmotivCloudClient.profileFileType.TRAINING) != EmotivCloudClient.EC_OK)
-                {
-                    Console.WriteLine("Saving finished");
+                else{
+                    Console.WriteLine("Saving...");
+
+                    if (EmotivCloudClient.EC_SaveUserProfile(userCloudID, 0, profileName,
+                    EmotivCloudClient.profileFileType.TRAINING) == EmotivCloudClient.EC_OK)
+                    {
+                        Console.WriteLine("Saving finished");
+                    }
+                    else Console.WriteLine("Saving failed");
                 }
-                else Console.WriteLine("Saving failed");
 
                 Thread.Sleep(5000);
                 return;
             }
             if (mode == 1)
-            { 
-                if (getNumberProfile > 0){
-                    if (EmotivCloudClient.EC_LoadUserProfile(userCloudID, engineUserID, 
-                        EmotivCloudClient.EC_GetProfileId(userCloudID, profileName), version) != EmotivCloudClient.EC_OK)
+            {
+                if (getNumberProfile > 0)
+                {
+                    Console.WriteLine("Loading...");
+
+                    if (EmotivCloudClient.EC_LoadUserProfile(userCloudID, 0,
+                        EmotivCloudClient.EC_GetProfileId(userCloudID, profileName), version) == EmotivCloudClient.EC_OK)
                         Console.WriteLine("Loading finished");
                     else
                         Console.WriteLine("Loading failed");
 
-                    }
+                }
 
                 Thread.Sleep(5000);
                 return;
