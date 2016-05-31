@@ -13,6 +13,8 @@
 #include <map>
 #include <cstdlib>
 #include <stdexcept>
+#include <thread>
+#include <chrono>
 
 #ifdef _WIN32
     #include <conio.h>
@@ -178,12 +180,7 @@ int main(int argc, char** argv) {
 
 			}
 
-#ifdef _WIN32
-            Sleep(1);
-#endif
-#ifdef __linux__
-            sleep(1);
-#endif
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		}
 
 		ofs.close();

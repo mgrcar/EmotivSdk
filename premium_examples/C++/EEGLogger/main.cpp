@@ -12,6 +12,8 @@
 #include <map>
 #include <cstdlib>
 #include <stdexcept>
+#include <thread>
+#include <chrono>
 
 #ifdef _WIN32
     #include <conio.h>
@@ -123,12 +125,7 @@ int main()
 					
 					delete[] data;
 				}
-#ifdef _WIN32
-				Sleep(1);
-#endif
-#ifdef __linux__
-				sleep(1);
-#endif
+                std::this_thread::sleep_for(std::chrono::milliseconds(500));
 			}			
 		}
 
@@ -146,3 +143,24 @@ int main()
 
 	return 0;
 }
+#ifdef __linux__
+int _kbhit(void)
+{
+    struct timeval tv;
+    fd_set read_fd;
+
+    tv.tv_sec=0;
+    tv.tv_usec=0;
+
+    FD_ZERO(&read_fd);
+    FD_SET(0,&read_fd);
+
+    if(select(1, &read_fd,NULL, NULL, &tv) == -1)
+    return 0;
+
+    if(FD_ISSET(0,&read_fd))
+        return 1;
+
+    return 0;
+}
+#endif
