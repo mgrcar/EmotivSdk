@@ -2,7 +2,7 @@
 
 #### Version 3.3.3
 * Bug fixes:
-  * Fixed bug in `IS_GetHeadsetOn` and `IS_GetBatteryChargeLevel` which always return 0
+  * Fixed bug in `IS_GetHeadsetOn` and `IS_GetBatteryChargeLevel` which always return 1
   * Fixed bug that prevents connecting headset with firmware version `0x5xx`
 * New features and improvement:
   * New API: `IEE_HeadsetGetSerialNumber`
