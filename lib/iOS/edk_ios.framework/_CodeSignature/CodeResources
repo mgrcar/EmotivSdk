@@ -6,58 +6,66 @@
 	<dict>
 		<key>Headers/EmotivCloudClient.h</key>
 		<data>
-		8mK05ZzEGKDjzamEIfmPwe8WwcE=
+		aFmmnOx1pDPCo3WHQnycM2D9giU=
+		</data>
+		<key>Headers/EmotivCloudErrorCode.h</key>
+		<data>
+		P8c8QsMFfqG/hrKUHmdwczAr02Q=
 		</data>
 		<key>Headers/FacialExpressionDetection.h</key>
 		<data>
-		ww27Rkfgn6cHMlV6nJfshslqYrM=
+		aC26isqDln9bKEeawFgubLcIPNM=
 		</data>
 		<key>Headers/IEmoStateDLL.h</key>
 		<data>
-		9OlykgXoa6T3LteVIc+SWGC2CPk=
+		S2So/zny/BlTFQrBnri/eUZ5NAc=
 		</data>
 		<key>Headers/Iedk.h</key>
 		<data>
-		eBtCZTQhz4M49yZOykBOV4XVjZ8=
+		P7UYgIM0b/jn9uUaeMom1DooLe4=
 		</data>
 		<key>Headers/IedkErrorCode.h</key>
 		<data>
-		pSE7UPHwbmHUqh8Slt/gCjhjTKs=
+		hpaJgCo23Ts1Uk4qh+US1wRjdGY=
 		</data>
 		<key>Headers/MentalCommandDetection.h</key>
 		<data>
-		SPGb9OrFmDy8oy3XiGEwPBCMfMg=
+		1pCkNWUkt71icA1eew2Iykbyl7E=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		tGx+gNp1PETp06YQEep13DOgfw0=
+		APkYUr77jajj1qyUINGs9pNKX1Q=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>Headers/EmotivCloudClient.h</key>
 		<data>
-		8mK05ZzEGKDjzamEIfmPwe8WwcE=
+		aFmmnOx1pDPCo3WHQnycM2D9giU=
+		</data>
+		<key>Headers/EmotivCloudErrorCode.h</key>
+		<data>
+		P8c8QsMFfqG/hrKUHmdwczAr02Q=
 		</data>
 		<key>Headers/FacialExpressionDetection.h</key>
 		<data>
-		ww27Rkfgn6cHMlV6nJfshslqYrM=
+		aC26isqDln9bKEeawFgubLcIPNM=
 		</data>
 		<key>Headers/IEmoStateDLL.h</key>
 		<data>
-		9OlykgXoa6T3LteVIc+SWGC2CPk=
+		S2So/zny/BlTFQrBnri/eUZ5NAc=
 		</data>
 		<key>Headers/Iedk.h</key>
 		<data>
-		eBtCZTQhz4M49yZOykBOV4XVjZ8=
+		P7UYgIM0b/jn9uUaeMom1DooLe4=
 		</data>
 		<key>Headers/IedkErrorCode.h</key>
 		<data>
-		pSE7UPHwbmHUqh8Slt/gCjhjTKs=
+		hpaJgCo23Ts1Uk4qh+US1wRjdGY=
 		</data>
 		<key>Headers/MentalCommandDetection.h</key>
 		<data>
-		SPGb9OrFmDy8oy3XiGEwPBCMfMg=
+		1pCkNWUkt71icA1eew2Iykbyl7E=
 		</data>
 	</dict>
 	<key>rules</key>

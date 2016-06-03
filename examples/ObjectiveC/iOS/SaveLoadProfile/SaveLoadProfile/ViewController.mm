@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import <edk_ios/Iedk.h>
 #import <edk_ios/EmotivCloudClient.h>
+#import <edk_ios/EmotivCloudErrorCode.h>
+
 @interface ViewController ()
 
 @end
@@ -41,7 +43,7 @@ bool userAdded                      = false;
     [self.textName resignFirstResponder];
     [self.textPass resignFirstResponder];
     if(!cloudConnected) {
-        cloudConnected = EC_Connect();
+        cloudConnected = (EC_Connect() == EC_OK );
         if(!cloudConnected) {
             [self.labelStatus setText:@"Status : Please check internet connection and connect again"];
             return;
@@ -51,10 +53,10 @@ bool userAdded                      = false;
         [self.labelStatus setText:@"Status : Enter username and password"];
         return;
     }
-    if(EC_Login([self.textName.text cStringUsingEncoding:NSUTF8StringEncoding], [self.textPass.text cStringUsingEncoding:NSUTF8StringEncoding])) {
+    if(EC_Login([self.textName.text cStringUsingEncoding:NSUTF8StringEncoding], [self.textPass.text cStringUsingEncoding:NSUTF8StringEncoding]) == EC_OK) {
         [self.labelStatus setText:@"Status : Login successfully"];
         userCloudID = -1;
-        if(EC_GetUserDetail(&userCloudID)) {
+        if(EC_GetUserDetail(&userCloudID) == EC_OK) {
             self.btSave.enabled = true;
             self.btLoad.enabled = true;
         }
@@ -77,11 +79,15 @@ bool userAdded                      = false;
         return;
     }
     
-    if(EC_SaveUserProfile(userCloudID, engineUserID, "test", TRAINING)) {
+    int error = EC_SaveUserProfile(userCloudID, engineUserID, "test", TRAINING);
+    if(error == EC_OK) {
         [self.labelStatus setText:@"Status : Save new profile successfully"];
     }
+    else if (error == EC_PROFILE_CLOUD_EXISTED) {
+        [self.labelStatus setText:@"Status : Profile is existed "];
+    }
     else {
-        [self.labelStatus setText:@"Status : Profile is existed or can't create new profile"];
+        [self.labelStatus setText:@"Status : Can't create new profile"];
     }
 }
 
@@ -99,7 +105,7 @@ bool userAdded                      = false;
         [self.labelStatus setText:@"Status : Profile isnt existed"];
         return;
     }
-    if(EC_LoadUserProfile(userCloudID, engineUserID, profileID)) {
+    if(EC_LoadUserProfile(userCloudID, engineUserID, profileID) == EC_OK) {
         [self.labelStatus setText:@"Status : Load profile successfully"];
     }
     else {
@@ -113,7 +119,7 @@ bool userAdded                      = false;
         [self.labelStatus setText:@"Status : Connect Engine failed"];
     }
     else {
-        cloudConnected = EC_Connect();
+        cloudConnected = (EC_Connect() == EC_OK);
         if(!cloudConnected) {
             [self.labelStatus setText:@"Status : Please check internet connection and connect again"];
         }

@@ -16,8 +16,7 @@
 #define IEDK_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 #if (!EDK_STATIC_LIB)
@@ -88,11 +87,10 @@ extern "C"
         IED_GYROX,              //!< Gyroscope X-axis
         IED_GYROY,              //!< Gyroscope Y-axis
         IED_TIMESTAMP,          //!< System timestamp
-        IED_MARKER_HARDWARE,    //!< Marker value from hardware
         IED_ES_TIMESTAMP,       //!< EmoState timestamp
         IED_FUNC_ID,            //!< Reserved function id
         IED_FUNC_VALUE,         //!< Reserved function value
-        IED_MARKER,             //!< Marker value from software
+        IED_MARKER,             //!< Marker value from hardware
         IED_SYNC_SIGNAL         //!< Synchronisation signal
     } IEE_DataChannel_t;
 
@@ -483,7 +481,6 @@ extern "C"
         IEE_HardwareGetVersion(unsigned int userId,
                                unsigned long* pHwVersionOut);
 
-
     //! Return the current version of the Emotiv SDK
     /*!
         \param pszVersionOut - SDK software version in X.X.X format.
@@ -499,6 +496,21 @@ extern "C"
         IEE_SoftwareGetVersion(char* pszVersionOut,
                                unsigned int nVersionChars,
                                unsigned long* pBuildNumOut);
+
+
+    //! Return the current serial number of the headset (if available).
+    /*!
+        \param userId - user ID for query
+        \param pHwSerialOut - serial number for the headset pair.
+       
+        \return EDK_ERROR_CODE
+        - EDK_OK if successful
+
+        \sa IedkErrorCode.h
+    */
+	EDK_API int
+		IEE_HeadsetGetSerialNumber(unsigned int userId, 
+			                        char** pHwSerialOut);
 
 
     //! Return the delta of the movement of the gyro since the previous call for a particular user
@@ -765,7 +777,7 @@ extern "C"
         \param indexDevice - the index of device in list (start from 0)
      */
     EDK_API void
-        IEE_GetInsightSignalStrength(int& value, int indexDevice);
+        IEE_GetInsightSignalStrength(int* value, int indexDevice);
     
     
     //! Get number of Insight devices nearby
@@ -800,7 +812,7 @@ extern "C"
         \param index - index in device list
      */
     EDK_API void
-        IEE_GetInsightDeviceState(int& state, int index);
+        IEE_GetInsightDeviceState(int* state, int index);
 
     
     //! Connect to an EPOC+ device
@@ -826,7 +838,7 @@ extern "C"
         \param indexDevice - the index of device in list (start from 0)
      */
     EDK_API void
-        IEE_GetEpocPlusSignalStrength(int& value, int indexDevice);
+        IEE_GetEpocPlusSignalStrength(int* value, int indexDevice);
     
     
     //! Get number of EPOC+ devices nearby
@@ -862,7 +874,7 @@ extern "C"
         \param index - index in device list
      */
     EDK_API void
-        IEE_GetEpocPlusDeviceState(int& state, int index);
+        IEE_GetEpocPlusDeviceState(int* state, int index);
     
 #endif
     

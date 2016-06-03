@@ -7,14 +7,13 @@
  * Header file for Facial Expression related API.
  *
  */
-
+//! \file
 
 #ifndef FACIALEXPRESSIONDETECTION_H
 #define FACIALEXPRESSIONDETECTION_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 
@@ -273,6 +272,8 @@ extern "C"
     EDK_API int
         IEE_FacialExpressionGetSignatureType(unsigned int userId,
                                              IEE_FacialExpressionSignature_t* pSigTypeOut);
-};
+#ifdef __cplusplus
+}
+#endif
 
 #endif // FACIALEXPRESSIONDETECTION_H
