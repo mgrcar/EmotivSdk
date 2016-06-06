@@ -1,6 +1,7 @@
 package com.example.profilecloudexample;
 
 import com.emotiv.emotivcloud.EmotivCloudClient;
+import com.emotiv.emotivcloud.EmotivCloudErrorCode;
 import com.emotiv.insight.IEdk;
 import com.emotiv.insight.IEdkErrorCode;
 import com.emotiv.insight.IEdk.IEE_Event_t;
@@ -77,7 +78,7 @@ public class MainActivity extends Activity {
 				        return;
 				    }
 				    
-				    if(EmotivCloudClient.EC_SaveUserProfile(userCloudID, engineUserID, "test", EmotivCloudClient.profileFileType.TRAINING.ToInt() )) {
+				    if(EmotivCloudClient.EC_SaveUserProfile(userCloudID, engineUserID, "test", EmotivCloudClient.profileFileType.TRAINING.ToInt() ) == EmotivCloudErrorCode.EC_OK.ToInt()) {
 				    	status.setText("Save new profile successfully");
 				    }
 				    else {
@@ -104,7 +105,7 @@ public class MainActivity extends Activity {
 			    	status.setText("Profile isnt existed");
 			        return;
 			    }
-			    if(EmotivCloudClient.EC_LoadUserProfile(userCloudID, engineUserID, profileID,-1)) {
+			    if(EmotivCloudClient.EC_LoadUserProfile(userCloudID, engineUserID, profileID,-1) == EmotivCloudErrorCode.EC_OK.ToInt()) {
 			    	status.setText("Load profile successfully");
 			    }
 			    else {
@@ -131,7 +132,7 @@ public class MainActivity extends Activity {
 			    	status.setText("Profile isnt existed");
 			        return;
 			    }
-			    if(EmotivCloudClient.EC_DeleteUserProfile(userCloudID, profileID)){
+			    if(EmotivCloudClient.EC_DeleteUserProfile(userCloudID, profileID) == EmotivCloudErrorCode.EC_OK.ToInt()){
 			    	status.setText("Remove profile successfully");
 			    }
 			    else {
@@ -145,7 +146,7 @@ public class MainActivity extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				if(!cloudConnected) {
-			        cloudConnected = EmotivCloudClient.EC_Connect(MainActivity.this);
+			        cloudConnected = (EmotivCloudClient.EC_Connect(MainActivity.this) == EmotivCloudErrorCode.EC_OK.ToInt());
 			        if(!cloudConnected) {
 			            status.setText("Please check internet connection and connect again");
 			            return;
@@ -158,7 +159,7 @@ public class MainActivity extends Activity {
 			    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 	            imm.hideSoftInputFromWindow(Login_btn.getWindowToken(), 
 	                                      InputMethodManager.RESULT_UNCHANGED_SHOWN);
-			    if(EmotivCloudClient.EC_Login(user_name.getText().toString(),pass_word.getText().toString())) {
+			    if(EmotivCloudClient.EC_Login(user_name.getText().toString(),pass_word.getText().toString()) == EmotivCloudErrorCode.EC_OK.ToInt()) {
 			    	status.setText("Login successfully");
 			        userCloudID = EmotivCloudClient.EC_GetUserDetail();
 			        if(EmotivCloudClient.EC_GetUserDetail() != -1) {
