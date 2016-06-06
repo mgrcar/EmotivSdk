@@ -4,9 +4,11 @@
 * Bug fixes:
   * Fixed bug in `IS_GetHeadsetOn` and `IS_GetBatteryChargeLevel` which always return 1
   * Fixed bug that prevents connecting headset with firmware version `0x5xx`
+  * Fixed `IEE_EngineRemoteConnect()` connection from iOS to Mac (pending on other platforms)
 * New features and improvement:
   * New API: `IEE_HeadsetGetSerialNumber`
   * Speed optimization with EmotivCloudClient API and it now returns error code for easier debugging
+  * Support iOS Simulator (x86_64 and i386 architectures)
 
 #### Version 3.3.2
 * Bug fixes:
