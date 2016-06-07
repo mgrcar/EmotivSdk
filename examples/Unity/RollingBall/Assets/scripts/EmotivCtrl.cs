@@ -87,11 +87,11 @@ public class EmotivCtrl : MonoBehaviour {
 
 	public bool CloudConnected()
 	{
-		if (EmotivCloudClient.EC_Connect ()) {
+		if (EmotivCloudClient.EC_Connect () == Emotiv.EmotivCloudClient.EC_OK) {
 			message_box.text = "Connection to server OK";
-			if (EmotivCloudClient.EC_Login (userName.text, password.text)) {
+			if (EmotivCloudClient.EC_Login (userName.text, password.text)== Emotiv.EmotivCloudClient.EC_OK) {
 				message_box.text = "Login as " + userName.text;
-				if (EmotivCloudClient.EC_GetUserDetail (ref userCloudID)) {
+				if (EmotivCloudClient.EC_GetUserDetail (ref userCloudID) == Emotiv.EmotivCloudClient.EC_OK) {
 					message_box.text = "CloudID: " + userCloudID;
 					return true;
 				}
@@ -112,13 +112,15 @@ public class EmotivCtrl : MonoBehaviour {
 		if (CloudConnected ()) {
 			int profileId = EmotivCloudClient.EC_GetProfileId (userCloudID, profileName.text);
 			if (profileId >= 0) {
-				if (EmotivCloudClient.EC_UpdateUserProfile (userCloudID, (int)engineUserID, profileId)) {
+				if (EmotivCloudClient.EC_UpdateUserProfile (userCloudID, (int)engineUserID, profileId) == Emotiv.EmotivCloudClient.EC_OK) {
 					message_box.text = "Profile updated";
 				} else {
 					message_box.text = "Error saving profile, aborting";
 				}
 			} else {
-				if (EmotivCloudClient.EC_SaveUserProfile (userCloudID, engineUserID, profileName.text, EmotivCloudClient.profileFileType.TRAINING)) {
+				if (EmotivCloudClient.EC_SaveUserProfile (
+					userCloudID, engineUserID, profileName.text, 
+					EmotivCloudClient.profileFileType.TRAINING) == Emotiv.EmotivCloudClient.EC_OK) {
 					message_box.text = "Profiled saved successfully";
 				} else {
 					message_box.text = "Error saving profile, aborting";
@@ -130,7 +132,10 @@ public class EmotivCtrl : MonoBehaviour {
 
 	public void LoadProfile(){
 		if (CloudConnected ()) {
-			if (EmotivCloudClient.EC_LoadUserProfile (userCloudID, (int)engineUserID, EmotivCloudClient.EC_GetProfileId(userCloudID, profileName.text), (int)version)) {
+			if (EmotivCloudClient.EC_LoadUserProfile (
+				userCloudID, (int)engineUserID, 
+				EmotivCloudClient.EC_GetProfileId(userCloudID, profileName.text), 
+				(int)version) == Emotiv.EmotivCloudClient.EC_OK) {
 				message_box.text = "Load finished";
 			} 
 			else {
