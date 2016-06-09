@@ -167,10 +167,14 @@ namespace MentalCommandWithCloudProfile
             switch (key)
             {
                 case ConsoleKey.F1:
-                    EmoEngine.Instance.MentalCommandSetActiveActions(0, (uint)EdkDll.IEE_MentalCommandAction_t.MC_LEFT);
-                    EmoEngine.Instance.MentalCommandSetActiveActions(0, (uint)EdkDll.IEE_MentalCommandAction_t.MC_RIGHT);
-                    Console.WriteLine("Setting MentalCommand active actions for user");
-                    break;
+                    {
+                        ulong action1 = (ulong)EdkDll.IEE_MentalCommandAction_t.MC_LEFT;
+                        ulong action2 = (ulong)EdkDll.IEE_MentalCommandAction_t.MC_RIGHT;
+                        ulong listAction = action1 | action2;
+                        EmoEngine.Instance.MentalCommandSetActiveActions(0, listAction);
+                        Console.WriteLine("Setting MentalCommand active actions for user");
+                        break;
+                    }
                 case ConsoleKey.F2:
                     EmoEngine.Instance.MentalCommandSetTrainingAction(0, EdkDll.IEE_MentalCommandAction_t.MC_NEUTRAL);
                     EmoEngine.Instance.MentalCommandSetTrainingControl(0, EdkDll.IEE_MentalCommandTrainingControl_t.MC_START);

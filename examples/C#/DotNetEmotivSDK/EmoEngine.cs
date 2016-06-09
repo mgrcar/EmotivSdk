@@ -1029,7 +1029,7 @@ namespace Emotiv
         /// </summary>
         /// <param name="userId">user ID</param>
         /// <param name="activeActions">a bit vector composed of IEE_MentalCommandAction_t contants</param>
-        public void MentalCommandSetActiveActions(UInt32 userId, UInt32 activeActions)
+        public void MentalCommandSetActiveActions(UInt32 userId, ulong activeActions)
         {
             errorHandler(EdkDll.IEE_MentalCommandSetActiveActions(userId, activeActions));
         }

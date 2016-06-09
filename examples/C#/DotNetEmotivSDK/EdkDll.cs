@@ -395,7 +395,7 @@ namespace Emotiv
         static extern Int32 Unmanged_IEE_FacialExpressionGetSignatureType(UInt32 userId, out IEE_FacialExpressionSignature_t pSigTypeOut);
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_MentalCommandSetActiveActions")]
-        static extern Int32 Unmanged_IEE_MentalCommandSetActiveActions(UInt32 userId, UInt32 activeActions);
+        static extern Int32 Unmanged_IEE_MentalCommandSetActiveActions(UInt32 userId, ulong activeActions);
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_MentalCommandGetActiveActions")]
         static extern Int32 Unmanged_IEE_MentalCommandGetActiveActions(UInt32 userId, out UInt32 pActiveActionsOut);
@@ -858,7 +858,7 @@ namespace Emotiv
             return Unmanged_IEE_FacialExpressionGetSignatureType(userId, out pSigTypeOut);
         }
 
-        public static Int32 IEE_MentalCommandSetActiveActions(UInt32 userId, UInt32 activeActions)
+        public static Int32 IEE_MentalCommandSetActiveActions(UInt32 userId, ulong activeActions)
         {
             return Unmanged_IEE_MentalCommandSetActiveActions(userId, activeActions);
         }
