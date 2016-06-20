@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE EML>
+<EML version="1.0" language="en_US">
+<sequence>
+	<time value ="1s17t">
+		<signal_quality value="1,1,1,1,1,1,0.0909091,0.0909091,1,1,1,1,0.0909091,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="1s22t">
+		<expressiv_eye event="wink_right" value="1" />
+		<signal_quality value="1,1,1,1,1,1,0.0909091,0.0909091,1,1,1,1,0.0909091,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="1s26t">
+		<expressiv_eye event="wink_right" value="1" />
+		<signal_quality value="1,1,1,1,1,1,0.0909091,0.0909091,1,1,1,1,0.0909091,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="1s27t">
+		<expressiv_eye event="wink_right" value="1" />
+		<signal_quality value="1,1,1,1,1,1,0.0909091,0.0909091,1,1,1,1,0.0909091,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value="2s0t">
+		<expressiv_eye event="wink_right" value="1" />
+		<signal_quality value="1,1,1,1,1,1,0.0909091,0.0909091,1,1,1,1,0.0909091,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="2s3t">
+		<expressiv_eye event="wink_right" value="0" />
+		<signal_quality value="1,1,1,1,1,1,0.0909091,0.0909091,1,1,1,1,0.0909091,1,0.727273,1,0.909091,1" />
+	</time>
+</sequence>
+</EML>

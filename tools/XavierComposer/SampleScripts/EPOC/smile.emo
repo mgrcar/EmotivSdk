@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE EML>
+<EML version="1.0" language="en_US">
+<sequence>
+	<time value ="0s">
+		<expressiv_lowerface event="smile" value="0" />
+	</time>
+	<time value ="0s21t">
+		<signal_quality value="1,1,1,1,0.909091,0.727273,1,1,1,1,0.909091,0.818182,1,0.818182,1,1,1,1" />
+	</time>
+	<time value ="0s29t">
+		<expressiv_lowerface event="smile" value="0.03" />
+	</time>
+	<time value ="1s">
+		<expressiv_lowerface event="smile" value="0.2" />
+	</time>
+	<time value ="1s11t">
+		<expressiv_lowerface event="smile" value="0.66" />
+	</time>
+	<time value ="1s14t">
+		<expressiv_lowerface event="smile" value="0.65" />
+	</time>
+	<time value ="1s17t">
+		<expressiv_lowerface event="smile" value="1" />
+	</time>
+	<time value ="1s21t">
+		<signal_quality value="1,1,1,1,0.909091,0.545455,1,1,1,1,0.727273,0.818182,1,0.818182,1,1,1,1" />
+	</time>
+	<time value ="2s8t">
+		<expressiv_lowerface event="smile" value="0.86" />
+	</time>
+	<time value ="2s13t">
+		<expressiv_lowerface event="smile" value="0.5" />
+	</time>
+	<time value ="2s16t">
+		<expressiv_lowerface event="smile" value="0.24" />
+	</time>
+	<time value ="2s21t">
+		<expressiv_lowerface event="smile" value="0.01" />
+	</time>
+	<time value ="2s22t">
+		<signal_quality value="1,1,1,1,0.909091,0.727273,1,1,1,1,0.818182,0.727273,1,0.727273,1,1,1,1" />
+	</time>
+	<time value ="2s24t">
+		<expressiv_lowerface event="smile" value="0" />
+	</time>
+	<time value ="3s21t">
+		<signal_quality value="1,1,1,1,0.909091,0.818182,1,1,0.909091,1,0.909091,1,1,0.818182,1,1,1,1" />
+	</time>
+</sequence>
+</EML>

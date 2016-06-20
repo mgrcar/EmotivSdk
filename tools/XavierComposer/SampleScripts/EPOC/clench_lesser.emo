@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE EML>
+<EML version="1.0" language="en_US">
+<sequence>
+	<time value ="0s4t">
+		<expressiv_lowerface event="clench" value="0.85" />
+		<signal_quality value="1,1,0.636364,0.545455,0.363636,1,0.727273,0.0909091,0.727273,0.818182,0.909091,0.909091,0.636364,0.727273,0.636364,0.727273,1,0.909091" />
+	</time>
+	<time value ="0s8t">
+		<expressiv_lowerface event="clench" value="0.85" />
+		<signal_quality value="1,1,0.636364,0.545455,0.363636,1,0.727273,0.0909091,0.727273,0.818182,0.909091,0.909091,0.636364,0.727273,0.636364,0.727273,1,0.909091" />
+	</time>
+	<time value ="0s10t">
+		<expressiv_lowerface event="clench" value="0.89" />
+		<signal_quality value="1,1,0.636364,0.545455,0.363636,1,0.727273,0.0909091,0.727273,0.818182,0.909091,0.909091,0.636364,0.727273,0.636364,0.727273,1,0.909091" />
+	</time>
+	<time value ="0s12t">
+		<expressiv_lowerface event="clench" value="0.76" />
+		<signal_quality value="1,1,0.636364,0.545455,0.363636,1,0.727273,0.0909091,0.727273,0.818182,0.909091,0.909091,0.636364,0.727273,0.636364,0.727273,1,0.909091" />
+	</time>
+	<time value ="0s17t">
+		<expressiv_lowerface event="clench" value="0.87" />
+		<signal_quality value="1,1,0.636364,0.545455,0.363636,1,0.727273,0.0909091,0.727273,0.818182,0.909091,0.909091,0.636364,0.727273,0.636364,0.727273,1,0.909091" />
+	</time>
+	<time value ="0s21t">
+		<expressiv_lowerface event="clench" value="0.86" />
+		<signal_quality value="1,1,0.636364,0.545455,0.363636,1,0.727273,0.0909091,0.727273,0.818182,0.909091,0.909091,0.636364,0.727273,0.636364,0.727273,1,0.909091" />
+	</time>
+	<time value ="0s24t">
+		<expressiv_lowerface event="clench" value="0.86" />
+		<signal_quality value="1,1,0.909091,1,0.636364,1,0.818182,0.545455,0.636364,1,1,0.818182,0.727273,0.727273,0.636364,0.818182,1,0.909091" />
+	</time>
+	<time value ="0s25t">
+		<expressiv_lowerface event="clench" value="0.75" />
+		<signal_quality value="1,1,0.909091,1,0.636364,1,0.818182,0.545455,0.636364,1,1,0.818182,0.727273,0.727273,0.636364,0.818182,1,0.909091" />
+	</time>
+	<time value ="0s28t">
+		<expressiv_lowerface event="clench" value="0.74" />
+		<signal_quality value="1,1,0.909091,1,0.636364,1,0.818182,0.545455,0.636364,1,1,0.818182,0.727273,0.727273,0.636364,0.818182,1,0.909091" />
+	</time>
+	<time value ="1s1t">
+		<expressiv_lowerface event="clench" value="0.78" />
+		<signal_quality value="1,1,0.909091,1,0.636364,1,0.818182,0.0909091,0.636364,1,1,0.818182,0.727273,0.727273,0.636364,0.818182,1,0.909091" />
+	</time>
+	<time value ="1s4t">
+		<expressiv_lowerface event="clench" value="0.75" />
+		<signal_quality value="1,1,0.909091,1,0.636364,1,0.818182,0.0909091,0.636364,1,1,0.818182,0.727273,0.727273,0.636364,0.818182,1,0.909091" />
+	</time>
+	<time value ="1s8t">
+		<expressiv_lowerface event="clench" value="0.81" />
+		<signal_quality value="1,1,0.909091,1,0.636364,1,0.818182,0.0909091,0.636364,1,1,0.818182,0.727273,0.727273,0.636364,0.818182,1,0.909091" />
+	</time>
+	<time value ="1s12t">
+		<expressiv_lowerface event="clench" value="0.81" />
+		<signal_quality value="1,1,0.909091,1,0.636364,1,0.818182,0.0909091,0.636364,1,1,0.818182,0.727273,0.727273,0.636364,0.818182,1,0.909091" />
+	</time>
+	<time value ="1s16t">
+		<expressiv_lowerface event="clench" value="0.75" />
+		<signal_quality value="1,1,0.909091,1,0.636364,1,0.818182,0.0909091,0.636364,1,1,0.818182,0.727273,0.727273,0.636364,0.818182,1,0.909091" />
+	</time>
+	<time value ="1s17t">
+		<expressiv_lowerface event="clench" value="0.75" />
+		<signal_quality value="1,1,0.909091,1,0.636364,1,0.818182,0.545455,0.636364,1,1,0.818182,0.727273,0.727273,0.636364,0.818182,1,0.909091" />
+	</time>
+	<time value ="1s20t">
+		<expressiv_lowerface event="clench" value="0.63" />
+		<signal_quality value="1,1,0.909091,1,0.636364,1,0.818182,0.545455,0.636364,1,1,0.818182,0.727273,0.727273,0.636364,0.818182,1,0.909091" />
+	</time>
+	<time value ="1s24t">
+		<expressiv_lowerface event="clench" value="0.64" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.727273,0.545455,0.818182,0.909091,1,0.909091,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value ="1s28t">
+		<expressiv_lowerface event="clench" value="0.63" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.727273,0.545455,0.818182,0.909091,1,0.909091,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value="2s0t">
+		<expressiv_lowerface event="clench" value="0.6" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.727273,0.545455,0.818182,0.909091,1,0.909091,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value ="2s4t">
+		<expressiv_lowerface event="clench" value="0.63" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.727273,0.545455,0.818182,0.909091,1,0.909091,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value ="2s9t">
+		<expressiv_lowerface event="clench" value="0.59" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.727273,0.0909091,0.818182,0.909091,1,0.909091,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value ="2s12t">
+		<expressiv_lowerface event="clench" value="0.65" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.727273,0.0909091,0.818182,0.909091,1,0.909091,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value ="2s16t">
+		<expressiv_lowerface event="clench" value="0.65" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.727273,0.0909091,0.818182,0.909091,1,0.909091,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value ="2s20t">
+		<expressiv_lowerface event="clench" value="0.56" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.727273,0.0909091,0.818182,0.909091,1,0.909091,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value ="2s24t">
+		<expressiv_lowerface event="clench" value="0.52" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.818182,0.636364,0.818182,1,1,1,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value ="2s29t">
+		<expressiv_lowerface event="clench" value="0.44" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.818182,0.636364,0.818182,1,1,1,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value ="3s1t">
+		<expressiv_lowerface event="clench" value="0.45" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.818182,0.636364,0.818182,1,1,1,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value ="3s5t">
+		<expressiv_lowerface event="clench" value="0.46" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.818182,0.636364,0.818182,1,1,1,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value ="3s9t">
+		<expressiv_lowerface event="clench" value="0.37" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.818182,0.636364,0.818182,1,1,1,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+	<time value ="3s13t">
+		<expressiv_lowerface event="clench" value="0.18" />
+		<signal_quality value="1,1,1,1,0.727273,1,0.818182,0.636364,0.818182,1,1,1,0.727273,0.818182,0.636364,0.909091,1,0.909091" />
+	</time>
+</sequence>
+</EML>

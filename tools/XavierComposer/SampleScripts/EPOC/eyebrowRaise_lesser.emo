@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE EML>
+<EML version="1.0" language="en_US">
+<sequence>
+	<time value ="0s2t">
+		<signal_quality value="1,1,1,1,1,0,1,1,1,1,1,1,1,1,0.545455,1,0.454545,1" />
+	</time>
+	<time value ="0s6t">
+		<signal_quality value="1,1,1,1,1,0,1,1,1,1,1,1,1,1,0.545455,1,0.454545,1" />
+	</time>
+	<time value ="0s12t">
+		<expressiv_upperface event="eyebrow_raised" value="0.11" />
+		<signal_quality value="1,1,1,1,1,0,1,1,1,1,1,1,1,1,0.545455,1,0.454545,1" />
+	</time>
+	<time value ="0s17t">
+		<expressiv_upperface event="eyebrow_raised" value="0.19" />
+		<signal_quality value="1,1,1,1,1,0,1,1,1,1,1,1,1,1,0.545455,1,0.454545,1" />
+	</time>
+	<time value ="0s21t">
+		<expressiv_upperface event="eyebrow_raised" value="0.17" />
+		<signal_quality value="1,1,1,1,1,0,1,1,1,1,1,1,1,1,0.545455,1,0.454545,1" />
+	</time>
+	<time value ="0s26t">
+		<expressiv_upperface event="eyebrow_raised" value="0.11" />
+		<signal_quality value="1,1,1,1,1,0,1,1,1,1,1,1,1,1,0.545455,1,0.454545,1" />
+	</time>
+	<time value="1s0t">
+		<expressiv_upperface event="eyebrow_raised" value="0.18" />
+		<signal_quality value="1,1,1,1,1,0,1,1,1,1,1,1,1,1,0.545455,1,0.454545,1" />
+	</time>
+	<time value ="1s4t">
+		<expressiv_upperface event="eyebrow_raised" value="0.16" />
+		<signal_quality value="1,1,1,1,1,0,1,1,1,1,1,1,1,1,0.545455,1,0.454545,1" />
+	</time>
+	<time value ="1s8t">
+		<expressiv_upperface event="eyebrow_raised" value="0.25" />
+		<signal_quality value="1,1,1,1,1,0,1,1,1,1,1,1,1,1,0.545455,1,0.454545,1" />
+	</time>
+	<time value ="1s14t">
+		<expressiv_upperface event="eyebrow_raised" value="0.08" />
+		<signal_quality value="1,1,1,1,1,0,1,1,1,1,1,1,1,1,0.545455,1,0.454545,1" />
+	</time>
+	<time value ="1s29t">
+		<signal_quality value="1,1,1,1,1,0,1,1,1,1,1,1,1,1,0.545455,1,0.454545,1" />
+	</time>	
+</sequence>
+</EML>

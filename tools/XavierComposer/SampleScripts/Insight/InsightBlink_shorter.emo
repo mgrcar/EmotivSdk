@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE EML>
+<EML version="1.0" language="en_US">
+<sequence>
+	<time value ="0s12t">
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.636364,1,0.0909091,1" />
+	</time>
+	<time value ="0s16t">
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.636364,1,0.0909091,1" />
+	</time>
+	<time value ="0s17t">
+		<facialExpression_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.636364,1,0.0909091,1" />
+	</time>
+	<time value ="0s22t">
+		<facialExpression_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.636364,1,0.0909091,0.0909091" />
+	</time>
+	<time value ="0s26t">
+		<facialExpression_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.636364,1,0.0909091,0.0909091" />
+	</time>
+	<time value ="0s28t">
+		<facialExpression_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.636364,1,0.0909091,0.0909091" />
+	</time>
+	<time value ="0s31t">
+		<facialExpression_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.636364,0.909091,0.636364,0.0909091" />
+	</time>
+	<time value="1s0t">
+		<facialExpression_eye event="blink" value="0" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.636364,0.909091,0.636364,0.0909091" />
+	</time>
+	<time value ="1s4t">
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.636364,0.909091,0.636364,0.0909091" />
+	</time>
+</sequence>
+</EML>

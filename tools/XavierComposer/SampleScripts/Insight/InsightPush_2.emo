@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE EML>
+<EML version="1.0" language="en_US">
+<sequence>
+	<time value="0s0t">
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s4t">
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s9t">
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s12t">
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s16t">
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s21t">
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s24t">
+		<mentalCommand event="push" value ="0.0439162" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s28t">
+		<mentalCommand event="push" value ="0.113538" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s31t">
+		<mentalCommand event="push" value ="0.113538" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s1t">
+		<mentalCommand event="push" value ="0.186508" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s5t">
+		<mentalCommand event="push" value ="0.260887" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s8t">
+		<mentalCommand event="push" value ="0.335093" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s14t">
+		<mentalCommand event="push" value ="0.407845" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s17t">
+		<mentalCommand event="push" value ="0.478089" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s20t">
+		<mentalCommand event="push" value ="0.545014" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s24t">
+		<mentalCommand event="push" value ="0.608025" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s28t">
+		<mentalCommand event="push" value ="0.666455" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value="2s0t">
+		<mentalCommand event="push" value ="0.718352" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s2t">
+		<mentalCommand event="push" value ="0.718352" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s4t">
+		<mentalCommand event="push" value ="0.762713" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s8t">
+		<mentalCommand event="push" value ="0.801209" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s10t">
+		<mentalCommand event="push" value ="0.801209" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s12t">
+		<mentalCommand event="push" value ="0.835552" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s16t">
+		<mentalCommand event="push" value ="0.859404" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s20t">
+		<mentalCommand event="push" value ="0.875867" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s24t">
+		<mentalCommand event="push" value ="0.875867" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s28t">
+		<mentalCommand event="push" value ="0.905266" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value="3s0t">
+		<mentalCommand event="push" value ="0.91867" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="3s1t">
+		<mentalCommand event="push" value ="0.91867" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="3s4t">
+		<mentalCommand event="push" value ="0.931112" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="3s8t">
+		<mentalCommand event="push" value ="0.94254" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="3s14t">
+		<mentalCommand event="push" value ="0.952933" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="3s17t">
+		<mentalCommand event="push" value ="0.962291" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="3s20t">
+		<mentalCommand event="push" value ="0.970633" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="3s24t">
+		<mentalCommand event="push" value ="0.977919" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="3s27t">
+		<mentalCommand event="push" value ="0.977919" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="3s29t">
+		<mentalCommand event="push" value ="0.98406" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value="4s0t">
+		<mentalCommand event="push" value ="0.988505" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="4s2t">
+		<mentalCommand event="push" value ="0.988505" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="4s4t">
+		<mentalCommand event="push" value ="0.991282" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="4s8t">
+		<mentalCommand event="push" value ="0.993272" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="4s12t">
+		<mentalCommand event="push" value ="0.994507" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="4s16t">
+		<mentalCommand event="push" value ="0.99522" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="4s20t">
+		<mentalCommand event="push" value ="0.995829" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="4s24t">
+		<mentalCommand event="push" value ="0.996402" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="4s28t">
+		<mentalCommand event="push" value ="0.996936" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value="5s0t">
+		<mentalCommand event="push" value ="0.997428" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="5s4t">
+		<mentalCommand event="push" value ="0.997878" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="5s8t">
+		<mentalCommand event="push" value ="0.998284" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="5s14t">
+		<mentalCommand event="push" value ="0.998648" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="5s16t">
+		<mentalCommand event="push" value ="0.998971" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="5s20t">
+		<mentalCommand event="push" value ="0.999254" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="5s21t">
+		<mentalCommand event="push" value ="0.999254" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="5s24t">
+		<mentalCommand event="push" value ="0.999499" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="5s28t">
+		<mentalCommand event="push" value ="0.999709" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value="6s0t">
+		<mentalCommand event="push" value ="0.999882" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="6s4t">
+		<mentalCommand event="push" value ="0.999989" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="6s8t">
+		<mentalCommand event="push" value ="0.99971" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="6s12t">
+		<mentalCommand event="push" value ="0.997018" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="6s16t">
+		<mentalCommand event="push" value ="0.99105" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="6s20t">
+		<mentalCommand event="push" value ="0.983666" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="6s23t">
+		<mentalCommand event="push" value ="0.976862" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="6s28t">
+		<mentalCommand event="push" value ="0.97075" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value="7s0t">
+		<mentalCommand event="push" value ="0.965385" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="7s3t">
+		<mentalCommand event="push" value ="0.961314" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="7s8t">
+		<mentalCommand event="push" value ="0.958647" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="7s14t">
+		<mentalCommand event="push" value ="0.957205" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="7s16t">
+		<mentalCommand event="push" value ="0.957205" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="7s17t">
+		<mentalCommand event="push" value ="0.956793" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="7s20t">
+		<mentalCommand event="push" value ="0.957229" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="7s24t">
+		<mentalCommand event="push" value ="0.958329" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="7s28t">
+		<mentalCommand event="push" value ="0.959928" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value="8s0t">
+		<mentalCommand event="push" value ="0.951976" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="8s4t">
+		<mentalCommand event="push" value ="0.927452" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="8s8t">
+		<mentalCommand event="push" value ="0.897066" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="8s12t">
+		<mentalCommand event="push" value ="0.871444" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="8s16t">
+		<mentalCommand event="push" value ="0.85252" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="8s20t">
+		<mentalCommand event="push" value ="0.837944" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="8s24t">
+		<mentalCommand event="push" value ="0.816853" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="8s28t">
+		<mentalCommand event="push" value ="0.790685" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value="9s0t">
+		<mentalCommand event="push" value ="0.751125" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="9s3t">
+		<mentalCommand event="push" value ="0.708236" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="9s8t">
+		<mentalCommand event="push" value ="0.674828" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="9s13t">
+		<mentalCommand event="push" value ="0.651846" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="9s16t">
+		<mentalCommand event="push" value ="0.621765" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="9s20t">
+		<mentalCommand event="push" value ="0.573235" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="9s24t">
+		<mentalCommand event="push" value ="0.50969" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="9s28t">
+		<mentalCommand event="push" value ="0.45182" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="9s31t">
+		<mentalCommand event="push" value ="0.411743" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="10s3t">
+		<mentalCommand event="push" value ="0.377658" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="10s8t">
+		<mentalCommand event="push" value ="0.339996" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="10s12t">
+		<mentalCommand event="push" value ="0.291316" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,0.0909091,1,1,1,1" />
+	</time>
+	<time value ="10s16t">
+		<mentalCommand event="push" value ="0.228825" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,0.0909091,1,1,1,1" />
+	</time>
+	<time value ="10s20t">
+		<mentalCommand event="push" value ="0.155525" />
+		<signal_quality value="1,1,1,1,1,1,1,0.0909091,1,1,1,1,1,0.0909091,1,1,1,1" />
+	</time>
+	<time value ="10s24t">
+		<mentalCommand event="push" value ="0.0746853" />
+		<signal_quality value="1,1,1,1,1,1,1,0.0909091,1,1,1,1,1,0.0909091,1,1,1,1" />
+	</time>
+	<time value ="10s28t">
+		<signal_quality value="1,1,1,1,1,1,0.0909091,0.0909091,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value="11s0t">
+		<signal_quality value="1,1,1,1,1,1,0.0909091,0.0909091,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="11s4t">
+		<signal_quality value="1,1,1,1,0.0909091,1,0.0909091,0.0909091,1,1,1,1,1,0.0909091,1,1,1,1" />
+	</time>
+	<time value ="11s8t">
+		<signal_quality value="1,1,1,1,0.0909091,1,0.0909091,0.0909091,1,1,1,1,1,0.0909091,1,1,1,1" />
+	</time>
+	<time value ="11s13t">
+		<signal_quality value="1,1,1,1,0.0909091,1,0.0909091,0.0909091,1,1,1,1,0.818182,0.0909091,1,1,1,1" />
+	</time>
+	</sequence>
+</EML>

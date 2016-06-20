@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE EML>
+<EML version="1.0" language="en_US">
+<sequence>
+	<time value ="1s4t">
+		<signal_quality value="1,1,1,1,1,1,0.454545,0.818182,1,1,1,1,1,0.818182,0.636364,1,0.818182,1" />
+	</time>
+	<time value ="1s10t">
+		<facialExpression_upperface event="surprise" value="0.05" />
+		<signal_quality value="1,1,1,1,1,1,0.454545,0.818182,1,1,1,1,1,0.818182,0.636364,1,0.818182,1" />
+	</time>
+	<time value ="1s15t">
+		<facialExpression_upperface event="surprise" value="0.22" />
+		<signal_quality value="1,1,1,1,1,1,0.454545,0.818182,1,1,1,1,1,0.818182,0.636364,1,0.818182,1" />
+	</time>
+	<time value ="1s20t">
+		<facialExpression_upperface event="surprise" value="0.25" />
+		<signal_quality value="1,1,1,1,1,1,0.454545,0.818182,1,1,1,1,1,0.818182,0.636364,1,0.818182,1" />
+	</time>
+	<time value ="1s25t">
+		<facialExpression_upperface event="surprise" value="0.31" />
+		<signal_quality value="1,1,1,1,1,1,0.454545,0.818182,1,1,1,1,1,0.818182,0.636364,1,0.818182,1" />
+	</time>
+	<time value ="1s29t">
+		<facialExpression_upperface event="surprise" value="0.24" />
+		<signal_quality value="1,1,1,1,1,1,0.454545,0.818182,1,1,1,1,1,0.818182,0.636364,1,0.818182,1" />
+	</time>
+	<time value ="2s2t">
+		<facialExpression_upperface event="surprise" value="0.24" />
+		<signal_quality value="1,1,1,1,1,1,0.545455,0.636364,1,1,1,1,1,0.818182,0.636364,0.818182,0.818182,1" />
+	</time>
+	<time value ="2s3t">
+		<facialExpression_upperface event="surprise" value="0.26" />
+		<signal_quality value="1,1,1,1,1,1,0.545455,0.636364,1,1,1,1,1,0.818182,0.636364,0.818182,0.818182,1" />
+	</time>
+	<time value ="2s8t">
+		<facialExpression_upperface event="surprise" value="0.58" />
+		<signal_quality value="1,1,1,1,1,1,0.545455,0.636364,1,1,1,1,1,0.818182,0.636364,0.818182,0.818182,1" />
+	</time>
+	<time value ="2s12t">
+		<facialExpression_upperface event="surprise" value="0.52" />
+		<signal_quality value="1,1,1,1,1,1,0.545455,0.636364,1,1,1,1,1,0.818182,0.636364,0.818182,0.818182,1" />
+	</time>
+	<time value ="2s17t">
+		<facialExpression_upperface event="surprise" value="0.41" />
+		<signal_quality value="1,1,1,1,1,1,0.545455,0.636364,1,1,1,1,1,0.818182,0.636364,0.818182,0.818182,1" />
+	</time>
+	<time value ="2s22t">
+		<facialExpression_upperface event="surprise" value="0.45" />
+		<signal_quality value="1,1,1,1,1,1,0.545455,0.636364,1,1,1,1,1,0.818182,0.636364,0.818182,0.818182,1" />
+	</time>
+	<time value ="2s27t">
+		<facialExpression_upperface event="surprise" value="0.35" />
+		<signal_quality value="1,1,1,1,1,1,0.545455,0.636364,1,1,1,1,1,0.818182,0.636364,0.818182,0.818182,1" />
+	</time>
+	<time value="3s0t">
+		<facialExpression_upperface event="surprise" value="0.24" />
+		<signal_quality value="1,1,1,1,1,1,0.545455,0.636364,1,1,1,1,1,0.818182,0.636364,0.818182,0.818182,1" />
+	</time>
+	<time value ="3s5t">
+		<facialExpression_upperface event="surprise" value="0.07" />
+		<signal_quality value="1,1,1,1,1,1,0.545455,0.636364,1,1,1,1,1,0.818182,0.636364,0.818182,0.818182,1" />
+	</time>
+	<time value ="3s9t">
+		<facialExpression_upperface event="surprise" value="0.07" />
+		<signal_quality value="1,1,1,1,1,1,0.909091,0.636364,1,1,1,1,1,0.909091,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="3s10t">
+		<signal_quality value="1,1,1,1,1,1,0.909091,0.636364,1,1,1,1,1,0.909091,0.727273,1,0.818182,1" />
+	</time>
+</sequence>
+</EML>

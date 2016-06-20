@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE EML>
+<EML version="1.0" language="en_US">
+<sequence>
+	<time value ="0s3t">
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s6t">
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s10t">
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s14t">
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s18t">
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s23t">
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s24t">
+		<mentalCommand event="rotate_left" value ="0.0109971" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s27t">
+		<mentalCommand event="rotate_left" value ="0.0109971" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s29t">
+		<mentalCommand event="rotate_left" value ="0.0921329" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s30t">
+		<mentalCommand event="rotate_left" value ="0.0921329" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value="1s0t">
+		<mentalCommand event="rotate_left" value ="0.172465" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s2t">
+		<mentalCommand event="rotate_left" value ="0.172465" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s5t">
+		<mentalCommand event="rotate_left" value ="0.234456" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s7t">
+		<mentalCommand event="rotate_left" value ="0.234456" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s9t">
+		<mentalCommand event="rotate_left" value ="0.266378" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s11t">
+		<mentalCommand event="rotate_left" value ="0.266378" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s12t">
+		<mentalCommand event="rotate_left" value ="0.289062" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s16t">
+		<mentalCommand event="rotate_left" value ="0.299875" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s20t">
+		<mentalCommand event="rotate_left" value ="0.299875" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s23t">
+		<mentalCommand event="rotate_left" value ="0.304338" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s24t">
+		<mentalCommand event="rotate_left" value ="0.298436" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s27t">
+		<mentalCommand event="rotate_left" value ="0.298436" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s29t">
+		<mentalCommand event="rotate_left" value ="0.272007" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s30t">
+		<mentalCommand event="rotate_left" value ="0.272007" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value="2s0t">
+		<mentalCommand event="rotate_left" value ="0.227519" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s2t">
+		<mentalCommand event="rotate_left" value ="0.227519" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s4t">
+		<mentalCommand event="rotate_left" value ="0.169" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s7t">
+		<mentalCommand event="rotate_left" value ="0.169" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s8t">
+		<mentalCommand event="rotate_left" value ="0.100031" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s12t">
+		<mentalCommand event="rotate_left" value ="0.100031" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s13t">
+		<mentalCommand event="rotate_left" value ="0.024522" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s14t">
+		<mentalCommand event="rotate_left" value ="0.024522" />
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="2s16t">
+		<signal_quality value="1,1,1,1,1,0.727273,1,1,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+</sequence>
+</EML>

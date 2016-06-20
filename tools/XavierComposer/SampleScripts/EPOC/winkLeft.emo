@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE EML>
+<EML version="1.0" language="en_US">
+<sequence>
+	<time value ="1s24t">
+		<signal_quality value="1,1,1,1,1,1,1,0.818182,1,0.909091,1,1,0.909091,1,0.636364,0.909091,0.0909091,0.0909091" />
+	</time>
+	<time value ="1s25t">
+		<expressiv_eye event="wink_left" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,0.818182,1,0.909091,1,1,0.909091,1,0.636364,0.909091,0.0909091,0.0909091" />
+	</time>
+	<time value ="1s29t">
+		<expressiv_eye event="wink_left" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,0.818182,1,0.909091,1,1,0.909091,1,0.636364,0.909091,0.454545,0.363636" />
+	</time>
+	<time value ="2s2t">
+		<expressiv_eye event="wink_left" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,0.818182,1,0.909091,1,1,0.909091,1,0.636364,0.909091,0.454545,0.363636" />
+	</time>
+	<time value ="2s6t">
+		<expressiv_eye event="wink_left" value="0" />
+		<signal_quality value="1,1,1,1,1,1,1,0.818182,1,0.909091,1,1,0.909091,1,0.636364,0.909091,0.454545,0.363636" />
+	</time>
+</sequence>
+</EML>

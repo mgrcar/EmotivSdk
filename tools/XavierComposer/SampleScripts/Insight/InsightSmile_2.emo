@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE EML>
+<EML version="1.0" language="en_US">
+<sequence>
+	<time value ="0s4t">
+		<signal_quality value="1,1,1,1,1,1,1,0.909091,1,1,1,1,1,0.909091,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="0s12t">
+		<signal_quality value="1,1,1,1,1,1,1,0.909091,1,1,1,1,1,0.909091,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="0s17t">
+		<facialExpression_lowerface event="smile" value="0.19" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="0s22t">
+		<facialExpression_lowerface event="smile" value="0.46" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="0s26t">
+		<facialExpression_lowerface event="smile" value="0.46" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value="1s0t">
+		<facialExpression_lowerface event="smile" value="0.52" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,0.909091,0.818182,1" />
+	</time>
+	<time value ="1s4t">
+		<facialExpression_lowerface event="smile" value="0.55" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,0.909091,0.818182,1" />
+	</time>
+	<time value ="1s10t">
+		<facialExpression_lowerface event="smile" value="0.51" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,0.909091,0.818182,1" />
+	</time>
+	<time value ="1s14t">
+		<facialExpression_lowerface event="smile" value="0.45" />
+		<signal_quality value="1,1,1,1,1,1,0.0909091,0.818182,1,1,1,1,0.818182,0.909091,0.727273,0.909091,0.818182,1" />
+	</time>
+	<time value ="1s20t">
+		<facialExpression_lowerface event="smile" value="0.59" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,0.909091,0.818182,1" />
+	</time>
+	<time value ="1s24t">
+		<facialExpression_lowerface event="smile" value="0.52" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,0.909091,0.818182,1" />
+	</time>
+	<time value ="1s29t">
+		<facialExpression_lowerface event="smile" value="0.66" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,0.909091,0.818182,1" />
+	</time>
+	<time value ="2s2t">
+		<facialExpression_lowerface event="smile" value="0.55" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,0.909091,0.818182,1" />
+	</time>
+	<time value ="2s8t">
+		<facialExpression_lowerface event="smile" value="0.44" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="2s12t">
+		<facialExpression_lowerface event="smile" value="0.54" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="2s17t">
+		<facialExpression_lowerface event="smile" value="0.64" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="2s22t">
+		<facialExpression_lowerface event="smile" value="0.66" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="2s27t">
+		<facialExpression_lowerface event="smile" value="0.56" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,1,0.818182,1" />
+	</time>
+	<time value="3s0t">
+		<facialExpression_lowerface event="smile" value="0.82" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="3s4t">
+		<facialExpression_lowerface event="smile" value="0.73" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="3s10t">
+		<facialExpression_lowerface event="smile" value="0.82" />
+		<signal_quality value="1,1,1,1,1,1,1,1,0.909091,1,1,1,1,0.909091,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="3s14t">
+		<facialExpression_lowerface event="smile" value="0.72" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="3s20t">
+		<facialExpression_lowerface event="smile" value="0.73" />
+		<signal_quality value="1,1,1,1,1,1,0.0909091,0.818182,1,1,1,1,0.818182,0.909091,0.727273,0.909091,0.818182,1" />
+	</time>
+	<time value ="3s24t">
+		<facialExpression_lowerface event="smile" value="0.68" />
+		<signal_quality value="1,1,1,1,1,1,0.0909091,0.818182,1,1,1,1,0.818182,0.909091,0.727273,0.909091,0.818182,1" />
+	</time>
+	<time value ="3s29t">
+		<facialExpression_lowerface event="smile" value="0.61" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="4s3t">
+		<facialExpression_lowerface event="smile" value="0.69" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="4s8t">
+		<facialExpression_lowerface event="smile" value="0.73" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="4s12t">
+		<facialExpression_lowerface event="smile" value="0.94" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="4s17t">
+		<facialExpression_lowerface event="smile" value="0.82" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="4s22t">
+		<facialExpression_lowerface event="smile" value="0.79" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.818182,1" />
+	</time>
+	<time value ="4s27t">
+		<facialExpression_lowerface event="smile" value="0.94" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value="5s0t">
+		<facialExpression_lowerface event="smile" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="5s4t">
+		<facialExpression_lowerface event="smile" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="5s10t">
+		<facialExpression_lowerface event="smile" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="5s14t">
+		<facialExpression_lowerface event="smile" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="5s20t">
+		<facialExpression_lowerface event="smile" value="0.85" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="5s24t">
+		<facialExpression_lowerface event="smile" value="0.54" />
+		<signal_quality value="1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="5s28t">
+		<facialExpression_lowerface event="smile" value="0.54" />
+		<signal_quality value="1,1,1,1,1,1,0.0909091,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="5s30t">
+		<facialExpression_lowerface event="smile" value="0.23" />
+		<signal_quality value="1,1,1,1,1,1,0.0909091,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>
+	<time value ="6s0t">
+		<facialExpression_lowerface event="smile" value="0." />
+		<signal_quality value="1,1,1,1,1,1,0.0909091,1,1,1,1,1,1,1,0.727273,1,0.909091,1" />
+	</time>	
+</sequence>
+</EML>

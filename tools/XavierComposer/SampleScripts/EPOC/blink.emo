@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE EML>
+<EML version="1.0" language="en_US">
+<sequence>
+	<time value ="0s23t">
+		<signal_quality value="1,1,1,1,1,1,1,0.909091,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s25t">
+		<expressiv_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,0.909091,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="0s28t">
+		<expressiv_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,0.909091,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value="1s0t">
+		<expressiv_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,0.909091,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s5t">
+		<expressiv_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,0.909091,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s7t">
+		<expressiv_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,0.909091,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s10t">
+		<expressiv_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,0.909091,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s12t">
+		<expressiv_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,0.909091,1,1,1,1,1,1,1,1,1,1" />
+	</time>
+	<time value ="1s15t">
+		<expressiv_eye event="blink" value="1" />
+		<signal_quality value="1,1,1,1,1,1,1,0.909091,1,1,1,1,1,1,1,1,1,1" />
+	</time>	
+	<time value ="1s20t">
+		<expressiv_eye event="blink" value="0" />
+		<signal_quality value="1,1,1,1,1,1,1,0.1,1,1,1,1,1,1,1,1,1,1" />
+	</time>		
+</sequence>
+</EML>
