@@ -8,11 +8,8 @@ public class SavingAndLoadingProfileCloud {
 		Pointer eEvent = Edk.INSTANCE.IEE_EmoEngineEventCreate();
 		Pointer eState = Edk.INSTANCE.IEE_EmoStateCreate();
 		
-//		String userName    = "Your account name";
-//		String password    = "Your password";
-		
-		String userName    = "thuyminh";
-		String password    = "Tnt140583";
+		String userName    = "Your account name";
+		String password    = "Your password";		
 		
 		String profileName = "EmotivProfile4";
 		int version	= -1;        // Lastest version

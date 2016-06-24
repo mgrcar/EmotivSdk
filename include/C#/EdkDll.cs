@@ -237,6 +237,7 @@ namespace Emotiv
             IED_GYROX,              //!< Gyroscope X-axis
             IED_GYROY,              //!< Gyroscope Y-axis
             IED_TIMESTAMP,          //!< System timestamp
+			IED_MARKER_HARDWARE,    //!< Marker from extender
             IED_ES_TIMESTAMP,       //!< EmoState timestamp
             IED_FUNC_ID,            //!< Reserved function id
             IED_FUNC_VALUE,         //!< Reserved function value

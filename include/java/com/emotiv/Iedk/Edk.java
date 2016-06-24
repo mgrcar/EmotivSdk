@@ -163,11 +163,12 @@ public interface Edk extends Library {
 		IED_GYROX(17),             //!< Gyroscope X-axis
 		IED_GYROY(18),             //!< Gyroscope Y-axis
 		IED_TIMESTAMP(19),         //!< System timestamp
-		IED_ES_TIMESTAMP(20),      //!< EmoState timestamp
-		IED_FUNC_ID(21),           //!< Reserved function id
-		IED_FUNC_VALUE(22),        //!< Reserved function value
-		IED_MARKER(23),            //!< Marker value from hardware
-		IED_SYNC_SIGNAL(24);       //!< Synchronisation signal
+		IED_MARKER_HARDWARE(20),   //!< Marker from extender
+		IED_ES_TIMESTAMP(21),      //!< EmoState timestamp
+		IED_FUNC_ID(22),           //!< Reserved function id
+		IED_FUNC_VALUE(23),        //!< Reserved function value
+		IED_MARKER(24),            //!< Marker value from hardware
+		IED_SYNC_SIGNAL(25);       //!< Synchronisation signal
 					
 		private int cType;
 
