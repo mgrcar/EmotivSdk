@@ -58,7 +58,7 @@ public enum EdkCloudErrorCode {
 	
 	private int bit;
 
-	EdkErrorCode(int bitNumber) {
+	EdkCloudErrorCode(int bitNumber) {
 		bit = bitNumber;
 	}
 
