@@ -1,7 +1,7 @@
 package com.emotiv.Iedk;
 
 
-public enum EdkCloudErrorCode {
+public enum EmotivCloudErrorCode {
 	// ! Default success value.
 	EC_OK(0x0000),
 
@@ -58,7 +58,7 @@ public enum EdkCloudErrorCode {
 	
 	private int bit;
 
-	EdkCloudErrorCode(int bitNumber) {
+	EmotivCloudErrorCode(int bitNumber) {
 		bit = bitNumber;
 	}
 
