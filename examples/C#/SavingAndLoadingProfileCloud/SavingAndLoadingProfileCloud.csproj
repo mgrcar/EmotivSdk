@@ -114,9 +114,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DotNetEmotivSDK\DotNetEmotivSDK-vs2010.csproj">
-      <Project>{dcbdecc2-071e-4ffe-a2ae-5147a0fe08ee}</Project>
-      <Name>DotNetEmotivSDK-vs2010</Name>
+    <ProjectReference Include="..\DotNetEmotivSDK\DotNetEmotivSDK.csproj">
+      <Project>{d3337309-9682-425e-8edc-2ecfacf79565}</Project>
+      <Name>DotNetEmotivSDK</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
