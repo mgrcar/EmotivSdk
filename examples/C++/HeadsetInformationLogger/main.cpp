@@ -63,7 +63,6 @@ int main(int argc, char** argv)
 	EmoEngineEventHandle eEvent = IEE_EmoEngineEventCreate();
 	EmoStateHandle eState = IEE_EmoStateCreate();
 	unsigned int userID = 0;
-	bool readytocollect = false;
 	bool onStateChanged = false;
 	int state = 0;
 	IEE_EEG_ContactQuality_t* contactQuality = new IEE_EEG_ContactQuality_t;
@@ -104,11 +103,9 @@ int main(int argc, char** argv)
 			{
 				case IEE_UserAdded:
 					std::cout << "User added" << std::endl;
-					readytocollect = true;
 					break;
 				case IEE_UserRemoved:
 					std::cout << "User removed" << std::endl;
-					readytocollect = false; //single connection
 					break;
 				case IEE_EmoStateUpdated:
 					onStateChanged = true;
@@ -119,7 +116,7 @@ int main(int argc, char** argv)
 			}
 		}
 
-		if (readytocollect && onStateChanged)
+		if (onStateChanged)
 		{
 			onStateChanged = false;
 			systemUpTime = IS_GetTimeFromStart(eState);
