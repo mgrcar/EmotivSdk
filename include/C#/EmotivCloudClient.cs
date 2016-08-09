@@ -118,12 +118,23 @@ namespace Emotiv
         public static extern int EC_ProfileIDAtIndex(int userCloudID, int index);
         
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EC_ProfileNameAtIndex")]
-        public static extern String EC_ProfileNameAtIndex(int userCloudID, int index);
+        private static extern IntPtr _EC_ProfileNameAtIndex(int userCloudID, int index);
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EC_ProfileLastModifiedAtIndex")]
-        public static extern String EC_ProfileLastModifiedAtIndex(int userCloudID, int index);
+        private static extern IntPtr _EC_ProfileLastModifiedAtIndex(int userCloudID, int index);
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "EC_ProfileTypeAtIndex")]
         public static extern profileFileType EC_ProfileTypeAtIndex(int userCloudID, int index);
+
+        public static string EC_ProfileNameAtIndex(int userCloudId, int index)
+        {
+            IntPtr ptr = _EC_ProfileNameAtIndex(userCloudId, index);
+            return Marshal.PtrToStringAnsi(ptr);
+        }
+        public static string Plugin_EC_ProfileLastModifiedAtIndex(int userCloudId, int index)
+        {
+            IntPtr ptr = _EC_ProfileLastModifiedAtIndex(userCloudId, index);
+            return Marshal.PtrToStringAnsi(ptr);
+        }
     }
 }
