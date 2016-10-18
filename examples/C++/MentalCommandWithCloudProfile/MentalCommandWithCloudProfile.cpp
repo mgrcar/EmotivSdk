@@ -16,7 +16,6 @@
 #include "Iedk.h"
 #include "IedkErrorCode.h"
 #include "EmotivCloudClient.h"
-#include "EmotivCloudErrorCode.h"
 #include "MentalCommandDetection.h"
 
 #ifdef _WIN32
@@ -53,12 +52,12 @@ void SavingLoadingFunction(int userCloudID, bool save = true)
 
 			if (profileID >= 0) {
 				std::cout << "Profile with " << profileName << " is existed." << std::endl;
-				if (EC_UpdateUserProfile(userCloudID, userID, profileID) == EC_OK)
+                if (EC_UpdateUserProfile(userCloudID, userID, profileID) == EDK_OK)
 					std::cout << "Updating finished" << std::endl;
 				else 
 					std::cout << "Updating failed" << std::endl;
 			}
-			else if (EC_SaveUserProfile(userCloudID, userID, profileName.c_str(), TRAINING) == EC_OK)
+            else if (EC_SaveUserProfile(userCloudID, userID, profileName.c_str(), TRAINING) == EDK_OK)
 			{
 				std::cout << "Saving finished" << std::endl;
 			}
@@ -66,7 +65,7 @@ void SavingLoadingFunction(int userCloudID, bool save = true)
 			return;
 	} else { // Load profile from cloud
 			if (getNumberProfile > 0){
-				if (EC_LoadUserProfile(userCloudID, userID, EC_ProfileIDAtIndex(userCloudID, 0)) == EC_OK)
+                if (EC_LoadUserProfile(userCloudID, userID, EC_ProfileIDAtIndex(userCloudID, 0)) == EDK_OK)
 					std::cout << "Loading finished" << std::endl;
 				else
 					std::cout << "Loading failed" << std::endl;
@@ -166,6 +165,21 @@ static bool handleUserInput()
 	{
 	case '1':
 	{
+        int profileOK = false;
+        int profileID = EC_GetProfileId(userCloudID, profileName.c_str());
+        if (profileID >= 0) {
+            if (EC_LoadUserProfile(userCloudID, userID, profileID) == EDK_OK) {
+                profileOK = true;
+            }
+        }
+        if (profileOK == false) {
+            if (EC_SaveUserProfile(userCloudID, userID, profileName.c_str(), TRAINING) == EDK_OK)
+            {
+                std::cout << "Saving finished" << std::endl;
+            }
+            else std::cout << "Saving failed" << std::endl;
+        }
+
 		ulong action1 = (ulong)IEE_MentalCommandAction_t::MC_LEFT;
 		ulong action2 = (ulong)IEE_MentalCommandAction_t::MC_RIGHT;
 		ulong listAction = action1 | action2;
@@ -242,7 +256,7 @@ static bool handleUserInput()
 
 
 
-void main()
+int main(int argc, char** argv)
 {
 	int option	= 0;
 	std::string input;
@@ -255,7 +269,7 @@ void main()
 		
 	if (IEE_EngineConnect() != EDK_OK) {
         std::cout << "Emotiv Driver start up failed.";
-        return;
+        return -1;
 	}
 
 	std::cout << "===================================================================" << std::endl;
@@ -263,27 +277,23 @@ void main()
     std::cout << "===================================================================" << std::endl;
 	std::cout << "Connecting to cloud ..." << std::endl;
 
-	if(EC_Connect() != EC_OK)
+    if(EC_Connect() != EDK_OK)
 	{
 		std::cout << "Cannot connect to Emotiv Cloud";
-        return;
+        return -1;
 	}
 
-	if(EC_Login(userName.c_str(), password.c_str()) != EC_OK)
+    if(EC_Login(userName.c_str(), password.c_str()) != EDK_OK)
 	{			
 		std::cout << "Your login attempt has failed. The username or password may be incorrect" << std::endl;
 #ifdef _WIN32
         _getch();
 #endif
-        return;
+        return -1;
 	}
 
 	std::cout<<"Logged in as " << userName << std::endl;
 
-	if (EC_GetUserDetail(&userCloudID) != EC_OK) {
-		std::cout << "Error: Cannot get detail info, exit " << userName << std::endl;
-		return;
-	}
 	help();
 
 	while (true) {
@@ -337,7 +347,7 @@ void main()
 	IEE_EngineDisconnect();
 	IEE_EmoStateFree(eState);
 	IEE_EmoEngineEventFree(eEvent);
-    return;
+    return -1;
 }
 
 

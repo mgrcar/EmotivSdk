@@ -32,7 +32,6 @@ int _kbhit(void);
 #include "Iedk.h"
 #include "IedkErrorCode.h"
 #include "EmotivCloudClient.h"
-#include "EmotivCloudErrorCode.h"
 
 
 int  main() {
@@ -71,13 +70,13 @@ int  main() {
 	std::getline(std::cin, input, '\n');
 	option = atoi(input.c_str());
 
-	if(EC_Connect() != EC_OK)
+    if(EC_Connect() != EDK_OK)
 	{
 		std::cout << "Cannot connect to Emotiv Cloud";
         return -2;
 	}
 
-	if(EC_Login(userName.c_str(), password.c_str()) != EC_OK)
+    if(EC_Login(userName.c_str(), password.c_str()) != EDK_OK)
 	{			
 		std::cout << "Your login attempt has failed. The username or password may be incorrect";
 #ifdef _WIN32
@@ -88,7 +87,7 @@ int  main() {
 
 	std::cout<<"Logged in as " << userName << std::endl;
 
-	if (EC_GetUserDetail(&userCloudID) != EC_OK)
+    if (EC_GetUserDetail(&userCloudID) != EDK_OK)
         return -4;
 
 	while (!_kbhit())
@@ -116,12 +115,12 @@ int  main() {
 
 					if (profileID >= 0) {
 						    std::cout << "Profile with " << profileName << " is existed" << std::endl;
-                            if (EC_UpdateUserProfile(userCloudID, engineUserID, profileID) == EC_OK) {
+                            if (EC_UpdateUserProfile(userCloudID, engineUserID, profileID) == EDK_OK) {
 						        std::cout << "Updating finished";      
 						    }
 						    else std::cout << "Updating failed";
 				    }
-					else if (EC_SaveUserProfile(userCloudID, (int)engineUserID, profileName.c_str(), TRAINING) == EC_OK)
+                    else if (EC_SaveUserProfile(userCloudID, (int)engineUserID, profileName.c_str(), TRAINING) == EDK_OK)
 					     {
 						     std::cout << "Saving finished";
 					     }
@@ -133,7 +132,7 @@ int  main() {
 				}
 				case 2:{
                     if (getNumberProfile > 0){
-						if (EC_LoadUserProfile(userCloudID, (int)engineUserID, EC_ProfileIDAtIndex(userCloudID, 0)) == EC_OK)
+                        if (EC_LoadUserProfile(userCloudID, (int)engineUserID, EC_ProfileIDAtIndex(userCloudID, 0)) == EDK_OK)
                             std::cout << "Loading finished";
                         else
                             std::cout << "Loading failed";

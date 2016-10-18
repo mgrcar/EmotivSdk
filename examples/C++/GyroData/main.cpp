@@ -14,16 +14,18 @@
 #include <conio.h>
 #endif
 
-#ifndef __APPLE__
+#ifdef _WIN32
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <glut.h>
-#else
+#elif _APPLE_
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
 #include <mach/clock.h>
 #include <mach/mach.h>
+#else
+#include <GL/glut.h>
 #endif
 #include <iostream>
 
@@ -344,10 +346,3 @@ int main(int argc, char** argv)
    return 0;
 }
 
-
-while (true) {
-	if (kbkit) {
-	}
-	else {
-	}
-}
