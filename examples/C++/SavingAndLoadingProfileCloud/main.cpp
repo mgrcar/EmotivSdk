@@ -70,9 +70,10 @@ int  main() {
 	std::getline(std::cin, input, '\n');
 	option = atoi(input.c_str());
 
-    if(EC_Connect() != EDK_OK)
+    int result = EC_Connect();
+    if( result != EDK_OK)
 	{
-		std::cout << "Cannot connect to Emotiv Cloud";
+		std::cout << "Cannot connect to Emotiv Cloud, curl error:" << result & 0xFF << std::endl;
         return -2;
 	}
 
