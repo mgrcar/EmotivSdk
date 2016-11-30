@@ -73,7 +73,7 @@ int  main() {
     int result = EC_Connect();
     if( result != EDK_OK)
 	{
-		std::cout << "Cannot connect to Emotiv Cloud, curl error:" << result & 0xFF << std::endl;
+		std::cout << "Cannot connect to Emotiv Cloud, curl error:" << (result & 0xFF) << std::endl;
         return -2;
 	}
 

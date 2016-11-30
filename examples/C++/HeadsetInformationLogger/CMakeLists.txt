@@ -14,7 +14,7 @@ if (WIN32)
            link_directories( ${EXAMPLES_DIR}/../bin/winarm )
         endif()
 elseif(APPLE)
-
+        set ( PROJECT_LINK_LIBS "-framework edk" )
 elseif(UNIX)
         set ( PROJECT_LINK_LIBS libedk.so )
         if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86_64")
@@ -30,6 +30,9 @@ include_directories(${EXAMPLES_DIR}/include)
  
 add_executable(hinfo main.cpp)
 target_link_libraries(hinfo ${PROJECT_LINK_LIBS} )
+if (APPLE)
+  set_target_properties(hinfo PROPERTIES LINK_FLAGS "-F/Library/Frameworks")
+endif(APPLE)
 
 
 

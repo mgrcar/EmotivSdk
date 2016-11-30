@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.0)
 
 project (AverageBandPowers)
 
-set ( EXAMPLES_DIR ../../../ )
+set ( EXAMPLES_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../ )
 
 if (WIN32)
         set ( PROJECT_LINK_LIBS edk.lib)
@@ -14,7 +14,7 @@ if (WIN32)
            link_directories( ${EXAMPLES_DIR}/../bin/winarm )
         endif()
 elseif(APPLE)
-
+		set ( PROJECT_LINK_LIBS "-framework edk" )
 elseif(UNIX)
         set ( PROJECT_LINK_LIBS libedk.so )
         if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86_64")
@@ -30,6 +30,9 @@ include_directories(${EXAMPLES_DIR}/include)
  
 add_executable(AverageBandPowers main.cpp)
 target_link_libraries(AverageBandPowers ${PROJECT_LINK_LIBS} )
+if (APPLE)
+	set_target_properties(AverageBandPowers PROPERTIES LINK_FLAGS "-F/Library/Frameworks")
+endif(APPLE)
 
 
 

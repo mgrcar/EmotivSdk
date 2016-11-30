@@ -15,7 +15,7 @@ if (WIN32)
            link_directories( ${EXAMPLES_DIR}/../bin/winarm )
         endif()
 elseif(APPLE)
-
+        set ( PROJECT_LINK_LIBS "-framework edk" )
 elseif(UNIX)
         set ( PROJECT_LINK_LIBS libedk.so libglut.so libGLU.so libGL.so)
         if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86_64")
@@ -31,6 +31,11 @@ include_directories(${EXAMPLES_DIR}/include)
  
 add_executable(gyro main.cpp)
 target_link_libraries(gyro ${PROJECT_LINK_LIBS} )
+if (APPLE)
+  set_target_properties(gyro PROPERTIES LINK_FLAGS "-F/Library/Frameworks")
+  target_link_libraries(gyro "-framework OpenGL" )
+  target_link_libraries(gyro "-framework GLUT" )
+endif(APPLE)
 
 
 
