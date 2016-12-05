@@ -6,6 +6,12 @@ import com.emotiv.insight.IEdk;
 import com.emotiv.insight.IEdkErrorCode;
 import com.emotiv.insight.IEdk.IEE_Event_t;
 
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.app.ActivityCompat;
+import android.content.pm.PackageManager;
+import android.Manifest;
+import android.widget.Toast;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -26,7 +32,9 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
+	private Thread processingThread;
 	private static final int REQUEST_ENABLE_BT = 1;
+	private static final int MY_PERMISSIONS_REQUEST_BLUETOOTH = 0;
 	private BluetoothAdapter mBluetoothAdapter;
 	private boolean lock = false;
 	int userId;
@@ -43,16 +51,40 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		final BluetoothManager bluetoothManager =
-                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-        mBluetoothAdapter = bluetoothManager.getAdapter();
-        if (!mBluetoothAdapter.isEnabled()) {
-            if (!mBluetoothAdapter.isEnabled()) {
-                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-            }
-        }
-        
-        Save_profile   = (Button)findViewById(R.id.button2);
+				(BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+		mBluetoothAdapter = bluetoothManager.getAdapter();
+		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			/***Android 6.0 and higher need to request permission*****/
+			if (ContextCompat.checkSelfPermission(this,
+					Manifest.permission.ACCESS_FINE_LOCATION)
+					!= PackageManager.PERMISSION_GRANTED) {
+
+				ActivityCompat.requestPermissions(this,
+						new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+						MY_PERMISSIONS_REQUEST_BLUETOOTH);
+			}
+			else{
+				if (!mBluetoothAdapter.isEnabled()) {
+					if (!mBluetoothAdapter.isEnabled()) {
+						/****Request turn on Bluetooth***************/
+						Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+						startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+					}
+				}
+			}
+		}
+		else {
+			if (!mBluetoothAdapter.isEnabled()) {
+				if (!mBluetoothAdapter.isEnabled()) {
+					/****Request turn on Bluetooth***************/
+					Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+					startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+				}
+			}
+		}
+
+
+		Save_profile   = (Button)findViewById(R.id.button2);
         Load_profile   = (Button)findViewById(R.id.button3);
         Delete_profile = (Button)findViewById(R.id.button1);
         Login_btn      = (Button)findViewById(R.id.button4);
@@ -176,9 +208,8 @@ public class MainActivity extends Activity {
 			    }
 			}
 		});
-      //Connect to emoEngine
-      		IEdk.IEE_EngineConnect(this,"");
-      		Thread processingThread=new Thread()
+
+      		 processingThread=new Thread()
       		{
       			@Override
       			public void run() {
@@ -199,8 +230,7 @@ public class MainActivity extends Activity {
       					}
       				}
       			}
-      		};		
-      		processingThread.start();
+      		};
       	}
       	
       	Handler handler = new Handler() {
@@ -248,6 +278,51 @@ public class MainActivity extends Activity {
       			}
       		   }
       		};
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode,
+										   String permissions[], int[] grantResults) {
+		switch (requestCode) {
+			case MY_PERMISSIONS_REQUEST_BLUETOOTH: {
+				// If request is cancelled, the result arrays are empty.
+				if (grantResults.length > 0
+						&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					if (!mBluetoothAdapter.isEnabled()) {
+						/****Request turn on Bluetooth***************/
+						if (!mBluetoothAdapter.isEnabled()) {
+							Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+							startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+						}
+					}
+
+				} else {
+
+					// permission denied, boo! Disable the
+					// functionality that depends on this permission.
+					Toast.makeText(this, "App can't run without this permission", Toast.LENGTH_SHORT).show();
+				}
+				return;
+			}
+
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		if (requestCode == REQUEST_ENABLE_BT) {
+			if(resultCode == Activity.RESULT_OK){
+				//Connect to emoEngine
+				IEdk.IEE_EngineConnect(this,"");
+				processingThread.start();
+			}
+			if (resultCode == Activity.RESULT_CANCELED) {
+				Toast.makeText(this, "You must be turn on bluetooth to connect with Emotiv devices"
+						, Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

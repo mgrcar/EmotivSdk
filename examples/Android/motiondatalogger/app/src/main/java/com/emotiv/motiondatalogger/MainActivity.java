@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import com.example.com.emotiv.eeglogger.R;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -20,6 +21,11 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.app.ActivityCompat;
+import android.content.pm.PackageManager;
+import android.Manifest;
+import android.widget.Toast;
 
 import com.emotiv.insight.IEdk;
 import com.emotiv.insight.IEdkErrorCode;
@@ -27,7 +33,9 @@ import com.emotiv.insight.IEdk.IEE_Event_t;;
 
 public class MainActivity extends Activity {
 
+	private Thread processingThread;
 	private static final int REQUEST_ENABLE_BT = 1;
+	private static final int MY_PERMISSIONS_REQUEST_BLUETOOTH = 0;
 	private BluetoothAdapter mBluetoothAdapter;
 	private boolean lock = false;
 	private boolean isEnablGetData = false;
@@ -42,16 +50,38 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
 		final BluetoothManager bluetoothManager =
-                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-        mBluetoothAdapter = bluetoothManager.getAdapter();
-        if (!mBluetoothAdapter.isEnabled()) {
-            if (!mBluetoothAdapter.isEnabled()) {
-                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-            }
-        }
+				(BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+		mBluetoothAdapter = bluetoothManager.getAdapter();
+		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			/***Android 6.0 and higher need to request permission*****/
+			if (ContextCompat.checkSelfPermission(this,
+					Manifest.permission.ACCESS_FINE_LOCATION)
+					!= PackageManager.PERMISSION_GRANTED) {
+
+					ActivityCompat.requestPermissions(this,
+							new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+							MY_PERMISSIONS_REQUEST_BLUETOOTH);
+			}
+			else{
+				if (!mBluetoothAdapter.isEnabled()) {
+					if (!mBluetoothAdapter.isEnabled()) {
+						/****Request turn on Bluetooth***************/
+						Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+						startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+					}
+				}
+			}
+		}
+		else {
+			if (!mBluetoothAdapter.isEnabled()) {
+				if (!mBluetoothAdapter.isEnabled()) {
+					/****Request turn on Bluetooth***************/
+					Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+					startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+				}
+			}
+		}
 		Start_button = (Button)findViewById(R.id.startbutton);
 		Stop_button  = (Button)findViewById(R.id.stopbutton);
 		
@@ -75,11 +105,8 @@ public class MainActivity extends Activity {
 				isEnableWriteFile = false;
 			}
 		});
-		
-		//Connect to emoEngine
-		IEdk.IEE_EngineConnect(this,"");
-		IEdk.IEE_MotionDataCreate();
-		Thread processingThread=new Thread()
+
+		processingThread=new Thread()
 		{
 			@Override
 			public void run() {
@@ -101,10 +128,54 @@ public class MainActivity extends Activity {
 					}
 				}
 			}
-		};		
-		processingThread.start();
+		};
 	}
-	
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode,
+										   String permissions[], int[] grantResults) {
+		switch (requestCode) {
+			case MY_PERMISSIONS_REQUEST_BLUETOOTH: {
+				// If request is cancelled, the result arrays are empty.
+				if (grantResults.length > 0
+						&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					if (!mBluetoothAdapter.isEnabled()) {
+						/****Request turn on Bluetooth***************/
+						if (!mBluetoothAdapter.isEnabled()) {
+							Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+							startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+						}
+					}
+
+				} else {
+
+					// permission denied, boo! Disable the
+					// functionality that depends on this permission.
+					Toast.makeText(this, "App can't run without this permission", Toast.LENGTH_SHORT).show();
+				}
+				return;
+			}
+
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		if (requestCode == REQUEST_ENABLE_BT) {
+			if(resultCode == Activity.RESULT_OK){
+				//Connect to emoEngine
+				IEdk.IEE_EngineConnect(this,"");
+				IEdk.IEE_MotionDataCreate();
+				processingThread.start();
+			}
+			if (resultCode == Activity.RESULT_CANCELED) {
+				Toast.makeText(this, "You must be turn on bluetooth to connect with Emotiv devices"
+						, Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
 	Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -199,11 +270,11 @@ public class MainActivity extends Activity {
 		}
 	}
 	/**
-	 * public void addEEGData(Double[][] eegs) Add EEG Data for write int the
-	 * EEG File
+	 * public void addData(double data) Add  Data for write int the
+	 * Motion File
 	 * 
-	 * @param eegs
-	 *            - double array of eeg data
+	 * @param
+	 *            - double motion data
 	 */
 	public void addData(double data) {
 
