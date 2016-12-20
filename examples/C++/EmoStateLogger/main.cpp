@@ -26,6 +26,8 @@
 #include "IEmoStateDLL.h"
 #include "Iedk.h"
 #include "IedkErrorCode.h"
+#include "EdfData.h"
+#include "IEmoStatePerformanceMetric.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -39,7 +41,21 @@ int _kbhit(void);
 void logEmoState(std::ostream& os, unsigned int userID,
                  EmoStateHandle eState, bool withHeader = false);
 
+void CaculateScale(double& rawScore, double& maxScale,
+    double& minScale, double& scaledScore){
 
+    if (rawScore<minScale)
+    {
+        scaledScore = 0;
+    }
+    else if (rawScore>maxScale)
+    {
+        scaledScore = 1;
+    }
+    else{
+        scaledScore = (rawScore - minScale) / (maxScale - minScale);
+    }
+}
 
 int main(int argc, char** argv) {
 
@@ -50,30 +66,9 @@ int main(int argc, char** argv) {
 	int option = 0;
 	int state  = 0;
 	std::string input;
-    std::string filename;
+    std::string filename = "Analuisa.csv";
 	try {
-
-		if (argc != 2) {
-#if __linux__
-            filename="/tmp/EmoStateLog.txt";
-            std::cout << "Write log to file " << filename
-                      << std::endl;         
-#else
-#ifdef __APPLE__
-            std::string home_path;
-            const char* home = getenv("HOME");
-            home_path.assign(home);
-            home_path.append("/Desktop/EmoStateLog.csv");
-            filename = home_path;
-#else
-            throw std::runtime_error("Please supply the log file name.\n"
-                                     "Usage: EmoStateLogger [log_file_name].");
-#endif
-#endif
-        } else {
-            filename = argv[1];
-        }
-
+		
         std::cout << "==================================================================="
                   << std::endl;
         std::cout << "Example to show how to log the EmoState from EmoEngine/EmoComposer."
@@ -92,9 +87,20 @@ int main(int argc, char** argv) {
 		switch (option) {
         case 1:
         {
-            if (IEE_EngineConnect() != EDK_OK) {
+            /*if (IEE_EngineConnect() != EDK_OK) {
                 throw std::runtime_error("Emotiv Driver start up failed.");
+            }*/
+
+            std::string edfFileName = "E:/GitHub_Community/bin/win32/Analuisa Cruz.edf";
+            int result = IEE_EngineLocalConnect(edfFileName.c_str(), "");
+
+            if (result != EDK_OK)
+            {
+                std::cout << "Cannot load file";
+                _getch();
+                return 0;
             }
+
             break;
         }
         case 2:
@@ -118,7 +124,15 @@ int main(int argc, char** argv) {
             break;
 		}
 		
-		
+        int result = IEE_EdfStart();
+
+        if (result != EDK_OK)
+        {
+            std::cout << "Cannot start reading file";
+            _getch();
+            return 0;
+        }
+
         std::cout << "Start receiving EmoState! Press any key to stop logging...\n"
                   << std::endl;
 
@@ -182,8 +196,12 @@ void logEmoState(std::ostream& os, unsigned int userID,
 	// Create the top header
 	if (withHeader) {
 		os << "Time,";
-		os << "UserID,";
 		os << "Wireless Signal Status,";
+
+        os << "AF3, F7, F3, FC5, T7, P7, O1, O2, P8, T8, FC6, F4, F8, AF4,";
+
+        os << "||,";
+
 		os << "Blink,";
 		os << "Wink Left,";
 		os << "Wink Right,";
@@ -191,6 +209,32 @@ void logEmoState(std::ostream& os, unsigned int userID,
 		os << "Frown,";
 		os << "Smile,";
 		os << "Clench,";
+
+        os << "||,";
+
+        os << "Stress raw score,";
+        os << "Stress min score,";
+        os << "Stress max score,";
+        os << "Stress scaled score,";
+        os << "Engagement boredom raw score,";
+        os << "Engagement boredom min score,";
+        os << "Engagement boredom max score,";
+        os << "Engagement boredom scaled score,";
+        os << "Relaxation raw score,";
+        os << "Relaxation min score,";
+        os << "Relaxation max score,";
+        os << "Relaxation scaled score,";
+        os << "Excitement raw score,";
+        os << "Excitement min score,";
+        os << "Excitement max score,";
+        os << "Excitement scaled score,";
+        os << "Interest raw score,";
+        os << "Interest min score,";
+        os << "Interest max score,";
+        os << "Interest scaled score,";
+
+        os << "||,";
+
 		os << "MentalCommand Action,";
 		os << "MentalCommand Power,";
 		os << std::endl;
@@ -198,15 +242,30 @@ void logEmoState(std::ostream& os, unsigned int userID,
 
 	// Log the time stamp and user ID
 	os << IS_GetTimeFromStart(eState) << ",";
-	os << userID << ",";
 	os << static_cast<int>(IS_GetWirelessSignalStatus(eState)) << ",";
+
+    //CQ 
+    os << IS_GetContactQuality(eState, IEE_CHAN_AF3) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_F7) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_F3) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_FC5) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_T7) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_P7) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_O1) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_O2) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_P8) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_T8) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_FC6) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_F4) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_F8) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_AF4) << ", ";
+
+    os << "||,";
 
 	// FacialExpression Suite results
 	os << IS_FacialExpressionIsBlink(eState) << ",";
 	os << IS_FacialExpressionIsLeftWink(eState) << ",";
 	os << IS_FacialExpressionIsRightWink(eState) << ",";
-
-
 
 	std::map<IEE_FacialExpressionAlgo_t, float> expressivStates;
 
@@ -226,11 +285,88 @@ void logEmoState(std::ostream& os, unsigned int userID,
 	os << expressivStates[ FE_SMILE   ] << ","; // smile
 	os << expressivStates[ FE_CLENCH  ] << ","; // clench
 
+    os << "||,";
+
+    // Performance Metric
+    double rawScore = 0;
+    double minScale = 0;
+    double maxScale = 0;
+    double scaledScore = 0;
+    IS_PerformanceMetricGetStressModelParams(eState, &rawScore, &minScale,
+        &maxScale);
+    os << rawScore << ",";
+    os << minScale << ",";
+    os << maxScale << ",";
+    if (minScale == maxScale)
+    {
+        os << "undefined" << ",";
+    }
+    else{
+        CaculateScale(rawScore, maxScale, minScale, scaledScore);
+        os << scaledScore << ",";
+    }
+    IS_PerformanceMetricGetEngagementBoredomModelParams(eState, &rawScore,
+        &minScale, &maxScale);
+    os << rawScore << ",";
+    os << minScale << ",";
+    os << maxScale << ",";
+    if (minScale == maxScale)
+    {
+        os << "undefined" << ",";
+    }
+    else{
+        CaculateScale(rawScore, maxScale, minScale, scaledScore);
+        os << scaledScore << ",";
+    }
+    IS_PerformanceMetricGetRelaxationModelParams(eState, &rawScore,
+        &minScale, &maxScale);
+    os << rawScore << ",";
+    os << minScale << ",";
+    os << maxScale << ",";
+    if (minScale == maxScale)
+    {
+        os << "undefined" << ",";
+    }
+    else{
+        CaculateScale(rawScore, maxScale, minScale, scaledScore);
+        os << scaledScore << ",";
+    }
+    IS_PerformanceMetricGetInstantaneousExcitementModelParams(eState,
+        &rawScore, &minScale,
+        &maxScale);
+    os << rawScore << ",";
+    os << minScale << ",";
+    os << maxScale << ",";
+    if (minScale == maxScale)
+    {
+        os << "undefined" << ",";
+    }
+    else{
+        CaculateScale(rawScore, maxScale, minScale, scaledScore);
+        os << scaledScore << ",";
+    }
+    IS_PerformanceMetricGetInterestModelParams(eState, &rawScore,
+        &minScale, &maxScale);
+    os << rawScore << ",";
+    os << minScale << ",";
+    os << maxScale << ",";
+    if (minScale == maxScale)
+    {
+        os << "undefined" << ",";
+    }
+    else{
+        CaculateScale(rawScore, maxScale, minScale, scaledScore);
+        os << scaledScore << ",";
+    }
+
+    os << "||,";
+
 	// MentalCommand Suite results
 	os << static_cast<int>(IS_MentalCommandGetCurrentAction(eState)) << ",";
 	os << IS_MentalCommandGetCurrentActionPower(eState);
 
 	os << std::endl;
+    os.flush();
 }
 
 #ifdef __linux__

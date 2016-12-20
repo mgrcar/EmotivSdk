@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EmoStateLogger", "EmoStateLogger\EmoStateLogger.vcxproj", "{5EF7DF22-CF68-47C3-8A79-4D49561F54F8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MotionDataLogger", "MotionDataLogger\MotionDataLogger.vcxproj", "{553701F4-926B-42B7-BCC1-D3637B5AC13B}"
@@ -20,6 +22,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultiDongleConnection", "MultiDongleConnection\MultiDongleConnection.vcxproj", "{EB30969B-5A96-4415-832E-FC61D0E1F092}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GyroData", "GyroData\GyroData.vcxproj", "{5411287C-7369-491F-81DD-9E7C42B79687}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProfileManagement", "ProfileManagement\ProfileManagement.vcxproj", "{872909AC-5F42-462D-9BE6-316C1E31A85A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MentalCommandWithLocalProfile", "MentalCommandWithLocalProfile\MentalCommandWithLocalProfile.vcxproj", "{74EE01B6-3E5F-427D-AFDD-9759EB85E128}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +115,21 @@ Global
 		{5411287C-7369-491F-81DD-9E7C42B79687}.Release|Win32.Build.0 = Release|Win32
 		{5411287C-7369-491F-81DD-9E7C42B79687}.Release|x64.ActiveCfg = Release|x64
 		{5411287C-7369-491F-81DD-9E7C42B79687}.Release|x64.Build.0 = Release|x64
+		{872909AC-5F42-462D-9BE6-316C1E31A85A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{872909AC-5F42-462D-9BE6-316C1E31A85A}.Debug|Win32.Build.0 = Debug|Win32
+		{872909AC-5F42-462D-9BE6-316C1E31A85A}.Debug|x64.ActiveCfg = Debug|x64
+		{872909AC-5F42-462D-9BE6-316C1E31A85A}.Debug|x64.Build.0 = Debug|x64
+		{872909AC-5F42-462D-9BE6-316C1E31A85A}.Release|Win32.ActiveCfg = Release|Win32
+		{872909AC-5F42-462D-9BE6-316C1E31A85A}.Release|Win32.Build.0 = Release|Win32
+		{872909AC-5F42-462D-9BE6-316C1E31A85A}.Release|x64.ActiveCfg = Release|x64
+		{872909AC-5F42-462D-9BE6-316C1E31A85A}.Release|x64.Build.0 = Release|x64
+		{74EE01B6-3E5F-427D-AFDD-9759EB85E128}.Debug|Win32.ActiveCfg = Debug|Win32
+		{74EE01B6-3E5F-427D-AFDD-9759EB85E128}.Debug|Win32.Build.0 = Debug|Win32
+		{74EE01B6-3E5F-427D-AFDD-9759EB85E128}.Debug|x64.ActiveCfg = Debug|x64
+		{74EE01B6-3E5F-427D-AFDD-9759EB85E128}.Debug|x64.Build.0 = Debug|x64
+		{74EE01B6-3E5F-427D-AFDD-9759EB85E128}.Release|Win32.ActiveCfg = Release|Win32
+		{74EE01B6-3E5F-427D-AFDD-9759EB85E128}.Release|Win32.Build.0 = Release|Win32
+		{74EE01B6-3E5F-427D-AFDD-9759EB85E128}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

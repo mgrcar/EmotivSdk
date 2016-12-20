@@ -38,9 +38,9 @@ extern "C" {
 #       endif
 #   endif
 #else
-#   include "IEmotivProfile.h"
 #   include "IEmoStatePerformanceMetric.h"
 #   include "IedkOptimization.h"
+#   include "IedkPrivate.h"
 #   define EDK_API extern
 #endif
 
@@ -48,6 +48,9 @@ extern "C" {
 #include "IEmoStateDLL.h"
 #include "FacialExpressionDetection.h"
 #include "MentalCommandDetection.h"
+#include "IEmotivProfile.h"
+#include "EmotivLicense.h"
+#include "EdfData.h"
 
 
     //! Handle to EmoState structure allocated by IEE_EmoStateCreate.
@@ -87,7 +90,7 @@ extern "C" {
         IED_GYROX,              //!< Gyroscope X-axis
         IED_GYROY,              //!< Gyroscope Y-axis
         IED_TIMESTAMP,          //!< System timestamp
-		IED_MARKER_HARDWARE,    //!< Marker from extender
+        IED_MARKER_HARDWARE,    //!< Marker from extender
         IED_ES_TIMESTAMP,       //!< EmoState timestamp
         IED_FUNC_ID,            //!< Reserved function id
         IED_FUNC_VALUE,         //!< Reserved function value
@@ -294,7 +297,7 @@ extern "C" {
         \param pUserIdOut - receives the user ID associated with the current event
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
 
         \sa IedkErrorCode.h
     */
@@ -309,7 +312,7 @@ extern "C" {
         \param hEmoState - a handle returned by IEE_EmoStateCreate()
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
 
         \sa IedkErrorCode.h
     */
@@ -355,7 +358,7 @@ extern "C" {
         \param pNumUserOut - receives number of users
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful.
+            - EDK_OK if successful.
 
         \sa IedkErrorCode.h
     */
@@ -370,7 +373,7 @@ extern "C" {
         \param userId - EmoEngine user ID
         \param playerNum - application assigned player number displayed on input device hardware (must be in the range 1-4)
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
 
         \sa IedkErrorCode.h
     */
@@ -404,13 +407,13 @@ extern "C" {
 	    \return EDK_ERROR_CODE
                 - EDK_OK if successful
 	*/
-	EDK_API int 
-		IEE_GetHeadsetSettings(unsigned int userId, 
-		                       unsigned int* EPOCmode, 
-							   unsigned int* eegRate, 
-							   unsigned int* eegRes, 
-							   unsigned int* memsRate, 
-							   unsigned int* memsRes);
+    EDK_API int 
+        IEE_GetHeadsetSettings(unsigned int userId, 
+                               unsigned int* EPOCmode, 
+                               unsigned int* eegRate, 
+                               unsigned int* eegRes, 
+                               unsigned int* memsRate, 
+                               unsigned int* memsRes);
 
 
 	//! Set headset setting for EPOC+ headset
@@ -422,26 +425,23 @@ extern "C" {
 	                        - If 1, then EPOC mode is EPOC+.
 	    \param eegRate      - If 0, then EEG sample rate is 128Hz.
 	                        - If 1, then EEG sample rate is 256Hz.
-	    \param eegRes       - If 0, then EEG resolution is 14bit.
-	                        - If 1, then EEG resolution is 16bit.
+	    \param eegRes       - If 1, then EEG resolution is 16bit. on EPOC+ mode
 	    \param memsRate     - If 0, then motion sample rate is OFF.
 	                        - If 1, then motion sample rate is 32Hz.
 	                        - If 2, then motion sample rate is 64Hz.
 	                        - If 3, then motion sample rate is 128Hz.
-	    \param memsRes      - If 0, then motion resolution is 12bit.
-	                        - If 1, then motion resolution is 14bit.
-	                        - If 2, then motion resolution is 16bit.
+	    \param memsRes      - If 2, then motion resolution is 16bit.
 
 	    \return EDK_ERROR_CODE
 	            - EDK_OK if successful
 	*/
-	EDK_API int 
-		IEE_SetHeadsetSettings(unsigned int userId, 
-		                       unsigned int EPOCmode, 
-							   unsigned int eegRate, 
-							   unsigned int eegRes, 
-							   unsigned int memsRate, 
-							   unsigned int memsRes);
+    EDK_API int 
+        IEE_SetHeadsetSettings(unsigned int userId, 
+                               unsigned int EPOCmode, 
+                               unsigned int eegRate, 
+                               unsigned int eegRes, 
+                               unsigned int memsRate, 
+                               unsigned int memsRes);
 
 
     //! Return a struct containing details about a specific channel
@@ -450,7 +450,7 @@ extern "C" {
         \param pDescriptorOut - provides detailed sensor location and other info
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
 
         \sa IEmoStateDll.h, IedkErrorCode.h
     */
@@ -474,7 +474,7 @@ extern "C" {
         - Lower 2 bytes: dongle version.
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
 
         \sa IEmoStateDll.h, IedkErrorCode.h
     */
@@ -489,7 +489,7 @@ extern "C" {
         \param pBuildNumOut  - Build number. Unique for each release.
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
 
         \sa IedkErrorCode.h
     */
@@ -505,7 +505,7 @@ extern "C" {
         \param pHwSerialOut - serial number for the headset pair.
        
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
 
         \sa IedkErrorCode.h
     */
@@ -521,7 +521,7 @@ extern "C" {
         \param pYOut  - vertical displacment
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
 
         \sa IEmoStateDll.h, IedkErrorCode.h
     */
@@ -536,7 +536,7 @@ extern "C" {
         \param userId - user ID for query
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
 
         \sa IEmoStateDll.h, IedkErrorCode.h
     */
@@ -567,7 +567,7 @@ extern "C" {
         \param hData - a handle returned by IEE_MotionDataCreate()
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
     */
     EDK_API int
         IEE_MotionDataUpdateHandle(unsigned int userId,
@@ -582,7 +582,7 @@ extern "C" {
         \param bufferSizeInSample - size of the pre-allocated buffer
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
     */
     EDK_API int
         IEE_MotionDataGet(DataHandle hData,
@@ -600,7 +600,7 @@ extern "C" {
         \param bufferSizeInSample - size of the pre-allocated buffer for each channel
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
     */
     EDK_API int
         IEE_MotionDataGetMultiChannels(DataHandle hData,
@@ -616,7 +616,7 @@ extern "C" {
         \param nSampleOut - receives the number of sample of data stored in the data handle
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
     */
     EDK_API int
         IEE_MotionDataGetNumberOfSample(DataHandle hData,
@@ -630,7 +630,7 @@ extern "C" {
         \param bufferSizeInSec - buffer size in second
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
     */
     EDK_API int
         IEE_MotionDataSetBufferSizeInSec(float bufferSizeInSec);
@@ -641,7 +641,7 @@ extern "C" {
         \param pBufferSizeInSecOut - receives the size of the data buffer
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
     */
     EDK_API int
         IEE_MotionDataGetBufferSizeInSec(float* pBufferSizeInSecOut);
@@ -653,7 +653,7 @@ extern "C" {
         \param samplingRateOut - receives the sampling rate
 
         \return EDK_ERROR_CODE
-        - EDK_OK if successful
+            - EDK_OK if successful
     */
     EDK_API int
         IEE_MotionDataGetSamplingRate(unsigned int userId,
@@ -706,7 +706,6 @@ extern "C" {
         IEE_GetAverageBandPowers(unsigned int userId, IEE_DataChannel_t channel,
                                  double* theta, double* alpha, double* low_beta, double* high_beta, double* gamma);
 
-    
     //! Set the current windowing type for band power calculation
     /*!
         \param userId - user ID
@@ -733,6 +732,17 @@ extern "C" {
     */
     EDK_API int
         IEE_FFTGetWindowingType(unsigned int userId, IEE_WindowingTypes *type);
+
+
+    //! Get the Edition name of Edk library. 
+    /*!
+        \param editionName - Edition Name
+
+        \return EDK_ERROR_CODE
+                    - EDK_OK if successful        
+    */
+    EDK_API int
+        IEE_GetEditionName(char** editionName);
     
     
     //!
@@ -756,6 +766,15 @@ extern "C" {
     
 #if defined(__APPLE__) || defined(__ANDROID__)
     
+    //! Disconnect current device
+    /*!
+        \remark Available on Mac/iOS/Android only.
+
+        \return true if connected successfully
+     */
+    EDK_API int
+        IEE_DisconnectDevice();
+
     //! Connect to an Insight device
     /*!
         \remark Available on Mac/iOS/Android only.
@@ -766,20 +785,6 @@ extern "C" {
      */
     EDK_API int
         IEE_ConnectInsightDevice(int indexDevice);
-    
-    
-    //! Get the signal strength of an Insight device
-    /*!
-        If there are multiple headsets around, you should choose to connect to the one with strongest signal.
-     
-        \remark Available on Mac/iOS/Android only.
-     
-        \param value       - -30 to 0 (weak to strong)
-        \param indexDevice - the index of device in list (start from 0)
-     */
-    EDK_API void
-        IEE_GetInsightSignalStrength(int* value, int indexDevice);
-    
     
     //! Get number of Insight devices nearby
     /*!
@@ -827,20 +832,6 @@ extern "C" {
      */
     EDK_API int
         IEE_ConnectEpocPlusDevice(int indexDevice, bool isSettingMode=false);
-    
-    
-    //! Get the signal strength of an EPOC+ device
-    /*!
-        If there are multiple headsets around, you should choose to connect to the one with strongest signal.
-     
-        \remark Available on Mac/iOS/Android only.
-     
-        \param value       - -30 to 0 (weak to strong)
-        \param indexDevice - the index of device in list (start from 0)
-     */
-    EDK_API void
-        IEE_GetEpocPlusSignalStrength(int* value, int indexDevice);
-    
     
     //! Get number of EPOC+ devices nearby
     /*!
