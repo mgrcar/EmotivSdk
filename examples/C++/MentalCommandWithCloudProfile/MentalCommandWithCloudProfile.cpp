@@ -43,35 +43,37 @@ int version	= -1; // Lastest version
 bool running = true;
 typedef unsigned long ulong;
 void help();
+
 void SavingLoadingFunction(int userCloudID, bool save = true)
 {
 	int getNumberProfile = EC_GetAllProfileName(userCloudID);
 	
 	if (save) {    // Save profile to cloud
-			int profileID = EC_GetProfileId(userCloudID, profileName.c_str());
+        int profileID = -1;
+        EC_GetProfileId(userCloudID, profileName.c_str(), &profileID);
 
-			if (profileID >= 0) {
-				std::cout << "Profile with " << profileName << " is existed." << std::endl;
-                if (EC_UpdateUserProfile(userCloudID, userID, profileID) == EDK_OK)
-					std::cout << "Updating finished" << std::endl;
-				else 
-					std::cout << "Updating failed" << std::endl;
-			}
-            else if (EC_SaveUserProfile(userCloudID, userID, profileName.c_str(), TRAINING) == EDK_OK)
-			{
-				std::cout << "Saving finished" << std::endl;
-			}
-			else std::cout << "Saving failed" << std::endl;
-			return;
+		if (profileID >= 0) {
+			std::cout << "Profile with " << profileName << " is existed." << std::endl;
+            if (EC_UpdateUserProfile(userCloudID, userID, profileID) == EDK_OK)
+				std::cout << "Updating finished" << std::endl;
+			else 
+				std::cout << "Updating failed" << std::endl;
+		}
+        else if (EC_SaveUserProfile(userCloudID, userID, profileName.c_str(), TRAINING) == EDK_OK)
+		{
+			std::cout << "Saving finished" << std::endl;
+		}
+		else std::cout << "Saving failed" << std::endl;
+		return;
 	} else { // Load profile from cloud
-			if (getNumberProfile > 0){
-                if (EC_LoadUserProfile(userCloudID, userID, EC_ProfileIDAtIndex(userCloudID, 0)) == EDK_OK)
-					std::cout << "Loading finished" << std::endl;
-				else
-					std::cout << "Loading failed" << std::endl;
+		if (getNumberProfile > 0){
+            if (EC_LoadUserProfile(userCloudID, userID, EC_ProfileIDAtIndex(userCloudID, 0)) == EDK_OK)
+				std::cout << "Loading finished" << std::endl;
+			else
+				std::cout << "Loading failed" << std::endl;
 
-			}
-			return;
+		}
+		return;
 	}
 }
 
@@ -165,8 +167,13 @@ static bool handleUserInput()
 	{
 	case '1':
 	{
+        int getNumberProfile = EC_GetAllProfileName(userCloudID);
+
         int profileOK = false;
-        int profileID = EC_GetProfileId(userCloudID, profileName.c_str());
+
+        int profileID = -1;
+        EC_GetProfileId(userCloudID, profileName.c_str(), &profileID);
+
         if (profileID >= 0) {
             if (EC_LoadUserProfile(userCloudID, userID, profileID) == EDK_OK) {
                 profileOK = true;
@@ -294,6 +301,11 @@ int main(int argc, char** argv)
 
 	std::cout<<"Logged in as " << userName << std::endl;
 
+    if (EC_GetUserDetail(&userCloudID) != EDK_OK) {
+        std::cout << "Error: Cannot get detail info, exit " << userName << std::endl;
+        return -1;
+    }
+
 	help();
 
 	while (true) {
@@ -350,6 +362,27 @@ int main(int argc, char** argv)
     return -1;
 }
 
+void help()
+{
+    std::cout << "===================================================================" << std::endl;
+    std::cout << "Please do follow steps:" << std::endl;
+    std::cout << "A. Press 1 to Active training session." << std::endl;
+    std::cout << "B. Press 2 to Start training NEUTRAL. When completed, press 3 ." << std::endl;
+    std::cout << "C. Press 3 to Start training RIGHT. When completed, press 4 ." << std::endl;
+    std::cout << "D. Press 4 to Start training LEFT." << std::endl;
+    std::cout << "E. Press 5 to Set ActivationLevel." << std::endl;
+    std::cout << "===================================================================" << std::endl;
+    std::cout << "Otherwise, press key below for more: " << std::endl;
+    std::cout << std::endl;
+    std::cout << "Press 6 to Read ActivationLevel." << std::endl;
+    std::cout << "Press 7 to Get OverallSkillRating." << std::endl;
+    std::cout << "Press 8 to Save Profile Data to cloud." << std::endl;
+    std::cout << "Press 9 to Load Profile Data from cloud." << std::endl;
+    std::cout << std::endl;
+    std::cout << "Press 0 for help." << std::endl;
+    std::cout << "Press ` to quit." << std::endl;
+    std::cout << "===================================================================" << std::endl;
+}
 
 #ifdef __linux__
 int _kbhit(void)
@@ -418,24 +451,3 @@ int _getch( void )
 }
 #endif
 
-void help()
-{
-	std::cout << "===================================================================" << std::endl;
-	std::cout << "Please do follow steps:" << std::endl;
-	std::cout << "A. Press 1 to Active training session." << std::endl;
-	std::cout << "B. Press 2 to Start training NEUTRAL. When completed, press 3 ." << std::endl;
-	std::cout << "C. Press 3 to Start training RIGHT. When completed, press 4 ." << std::endl;
-	std::cout << "D. Press 4 to Start training LEFT." << std::endl;
-	std::cout << "E. Press 5 to Set ActivationLevel." << std::endl;
-	std::cout << "===================================================================" << std::endl;
-	std::cout << "Otherwise, press key below for more: " << std::endl;
-	std::cout << std::endl;
-	std::cout << "Press 6 to Read ActivationLevel." << std::endl;
-	std::cout << "Press 7 to Get OverallSkillRating." << std::endl;
-	std::cout << "Press 8 to Save Profile Data to cloud." << std::endl;
-	std::cout << "Press 9 to Load Profile Data from cloud." << std::endl;
-	std::cout << std::endl;
-	std::cout << "Press 0 for help." << std::endl;
-	std::cout << "Press ` to quit." << std::endl;
-	std::cout << "===================================================================" << std::endl;
-}

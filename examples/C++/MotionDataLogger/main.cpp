@@ -50,40 +50,17 @@ int _kbhit(void);
 
 int main(int argc, char** argv) {
 
-	EmoEngineEventHandle eEvent			= IEE_EmoEngineEventCreate();
-	EmoStateHandle eState				= IEE_EmoStateCreate();
-	unsigned int userID					= 0;	
-	float secs							= 1;
-	unsigned int datarate				= 0;
-	bool readytocollect					= false;
-	int state							= 0;
-    std::string filename;
+	EmoEngineEventHandle eEvent = IEE_EmoEngineEventCreate();
+	EmoStateHandle eState       = IEE_EmoStateCreate();
+	unsigned int userID         = 0;	
+	float secs                  = 1;
+	unsigned int datarate       = 0;
+	bool readytocollect         = false;
+	int state                   = 0;
+    std::string filename        = "motionData.csv";
 
 	try {
-
-		if (argc != 2) {
-#if __linux__
-            filename="/tmp/MotionDataLog.txt";
-            std::cout << "Write log to file " << filename
-                      << std::endl;
-#else
-#ifdef __APPLE__
-            std::string home_path;
-            const char* home = getenv("HOME");
-            home_path.assign(home);
-            home_path.append("/Desktop/MotionDataLog.csv");
-            filename = home_path;
-            std::cout << "Write log to file " << filename
-                      << std::endl;
-#else
-            throw std::runtime_error("Please supply the log file name.\n"
-                                     "Usage: EmoStateLogger [log_file_name].");
-#endif
-#endif
-        } else {
-            filename = argv[1];
-        }
-
+		
         std::cout << "==================================================================="
                   << std::endl;
         std::cout << "Example to show how to log Motion Data from EmoDriver."
@@ -95,7 +72,7 @@ int main(int argc, char** argv) {
 		if (IEE_EngineConnect() != EDK_OK) 
 			throw std::runtime_error("Emotiv Driver start up failed.");
 		
-        std::cout << "Start receiving IEEG Data! "
+        std::cout << "Start receiving Motion Data! "
                   << "Press any key to stop logging...\n"
                   << std::endl;
 

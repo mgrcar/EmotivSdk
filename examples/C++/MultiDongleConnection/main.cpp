@@ -23,7 +23,6 @@ using namespace std;
 #endif
 
 #if __linux__ || __APPLE__
-#include <unistd.h>
 int _kbhit(void);
 #endif
 
