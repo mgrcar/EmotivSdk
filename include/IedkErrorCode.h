@@ -87,4 +87,87 @@
 //! Reserved return value.
 #define EDK_RESERVED1                       0x0900
 
+//! An internal error occurred.
+#define EDK_COULDNT_RESOLVE_PROXY           0x1001
+
+#define EDK_COULDNT_RESOLVE_HOST            0x1002
+
+#define EDK_COULDNT_CONNECT                 0x1003
+
+//! Profile created by EDK_SaveUserProfile() is existed in Emotiv Cloud.
+#define EDK_PROFILE_CLOUD_EXISTED           0x1010
+
+//! The file uploaded to cloud is failed
+#define EDK_UPLOAD_FAILED                   0x1011
+
+//! The cloud user ID supplied to the function is invalid.
+#define EDK_INVALID_CLOUD_USER_ID           0x1020
+
+//! The user ID supplied to the function is invalid
+#define EDK_INVALID_ENGINE_USER_ID          0x1021
+
+//! The user ID supplied to the function dont login, call EDK_Login() first
+#define EDK_CLOUD_USER_ID_DONT_LOGIN        0x1022
+
+//! The Emotiv Cloud needs to be initialized via EDK_Connect()
+#define EDK_EMOTIVCLOUD_UNINITIALIZED       0x1023
+
+
+#define EDK_FILE_EXISTS                     0x2000	
+
+//! The headset is not available to work
+#define EDK_HEADSET_NOT_AVAILABLE           0x2001
+
+//! The headset is off
+#define EDK_HEADSET_IS_OFF                  0x2002
+
+//! Other session of saving is running
+#define EDK_SAVING_IS_RUNNING               0x2003
+
+#define EDK_DEVICE_CODE_ERROR               0x2004
+
+//! The license error. 
+#define EDK_LICENSE_ERROR                   0x2010  
+
+//! The license expried
+#define EDK_LICENSE_EXPIRED                 0x2011
+
+//! The license was not found
+#define EDK_LICENSE_NOT_FOUND               0x2012
+
+//! The license is over quota
+#define EDK_OVER_QUOTA                      0x2013
+
+//! The license is over quota in day
+#define EDK_OVER_QUOTA_IN_DAY               0x2014
+
+//! The license is over quota in month
+#define EDK_OVER_QUOTA_IN_MONTH             0x2015
+
+
+#define EDK_APP_QUOTA_EXCEEDED              0x2016
+
+
+#define EDK_APP_INVALID_DATE                0x2017
+
+//! Application register device number is exceeded. 
+#define EDK_LICENSE_DEVICE_LIMITED          0x2019  
+
+//! The license registered with the device. 
+#define EDK_LICENSE_REGISTERED              0x2020
+
+//! No license is activated
+#define EDK_NO_ACTIVE_LICENSE               0x2021
+
+//! The license is not EEG data ouput
+#define EDK_LICENSE_NO_EEG                  0x2022
+
+//! The license is updated
+#define EDK_UPDATE_LICENSE                  0x2023
+
+//! The file was not found
+#define EDK_FILE_NOT_FOUND                  0x2030
+
+#define EDK_ACCESS_DENIED                   0x2031
+
 #endif
