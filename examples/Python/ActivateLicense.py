@@ -17,7 +17,7 @@ from ctypes import *
 
 try:
     if sys.platform.startswith('win32'):
-        libEDK = cdll.LoadLibrary("E:/GitHub_Community/bin/win32/edk.dll")
+        libEDK = cdll.LoadLibrary("../../bin/win32/edk.dll")
     elif sys.platform.startswith('linux'):
         srcDir = os.getcwd()
 	if platform.machine().startswith('arm'):
