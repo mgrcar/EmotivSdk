@@ -11,94 +11,16 @@ namespace EEG_Data_Logger
     {
         EmoEngine engine;   // Access to the EDK is via the EmoEngine 
         int userID = -1;    // userID is used to uniquely identify a user's headset
-        string filename = "EEG_Data_Logger.csv"; // output filename
-        static string licenseKey = "";           // Your License Key
-
-        static string format = "dd/MM/yyyy";
-
-        void activateLicense()
-        {
-            int result = EdkDll.IEE_ActivateLicense(licenseKey);
-            if (result == EdkDll.EDK_OK || result == EdkDll.EDK_LICENSE_REGISTERED)
-            {
-                Console.WriteLine("License activated.");
-            }
-            else Console.WriteLine("License Error. " + result);
-        }
-
-        public DateTime FromUnixTime(uint unixTime)
-        {
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            return epoch.AddSeconds(unixTime);
-        }
-
-        public long ToUnixTime(DateTime date)
-        {
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            return Convert.ToInt64((date - epoch).TotalSeconds);
-        }
-
-        void licenseInformation()
-        {
-            EdkDll.IEE_LicenseInfos_t licenseInfos = new EdkDll.IEE_LicenseInfos_t(); 
-            int result = EdkDll.IEE_LicenseInformation(ref licenseInfos);
-
-            Console.WriteLine();
-            Console.WriteLine("Date From  : " + FromUnixTime(licenseInfos.date_from).ToString(format));
-            Console.WriteLine("Date To    : " + FromUnixTime(licenseInfos.date_to).ToString(format));
-            Console.WriteLine();
-
-            Console.WriteLine( "Seat number: " + licenseInfos. seat_count );
-            Console.WriteLine();
-
-            Console.WriteLine( "Total Quota: " + licenseInfos.quota );
-            Console.WriteLine( "Total quota used    : " + licenseInfos.usedQuota );
-            Console.WriteLine();
-
-            Console.WriteLine( "Quota limit in day  : " + licenseInfos.quotaDayLimit );
-            Console.WriteLine( "Quota used in day   : " + licenseInfos.usedQuotaDay );
-            Console.WriteLine();
-
-            Console.WriteLine( "Quota limit in month: " + licenseInfos.quotaMonthLimit );
-            Console.WriteLine( "Quota used in month : " + licenseInfos.usedQuotaMonth );
-            Console.WriteLine();
-
-            switch ((int)licenseInfos.scopes)
-            {
-            case (int)EdkDll.IEE_LicenseType_t.IEE_EEG:
-
-                Console.WriteLine( "License type : EEG" );
-                Console.WriteLine();
-                break;
-            case (int)EdkDll.IEE_LicenseType_t.IEE_EEG_PM:
-
-                Console.WriteLine( "License type : EEG + PM" );
-                Console.WriteLine();
-                break;
-            case (int)EdkDll.IEE_LicenseType_t.IEE_PM:
-                Console.WriteLine( "License type : PM" );
-                Console.WriteLine();
-                break;
-            default:
-                Console.WriteLine( "License type : No type" );
-                Console.WriteLine();
-                break;
-            }
-        }
+        string filename = "EEG_Data_Logger.csv"; // output filename        
 
         EEG_Logger()
-        {
-            // Just 1 time with the Internet connection
-            activateLicense(); 
-
+        {            
             // create the engine
             engine = EmoEngine.Instance;
             engine.UserAdded += new EmoEngine.UserAddedEventHandler(engine_UserAdded_Event);
             
             // connect to Emoengine.            
             engine.Connect();
-
-            licenseInformation();
 
             // create a header for our output file
             WriteHeader();
