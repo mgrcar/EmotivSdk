@@ -8,8 +8,8 @@
     <ProjectGuid>{42F64FED-5022-4EA8-8C52-70481E90373B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MotionDataLogger</RootNamespace>
-    <AssemblyName>MotionDataLogger</AssemblyName>
+    <RootNamespace>AverageBandPowers</RootNamespace>
+    <AssemblyName>AverageBandPowers</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
