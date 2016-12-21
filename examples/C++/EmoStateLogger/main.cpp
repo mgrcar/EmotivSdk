@@ -26,8 +26,8 @@
 #include "IEmoStateDLL.h"
 #include "Iedk.h"
 #include "IedkErrorCode.h"
-#include "EdfData.h"
 #include "IEmoStatePerformanceMetric.h"
+
 
 #ifdef __cplusplus
 extern "C"
@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
 	int option = 0;
 	int state  = 0;
 	std::string input;
-    std::string filename = "Analuisa.csv";
+    std::string filename = "eeg_logger.csv";
 	try {
 		
         std::cout << "==================================================================="
@@ -87,18 +87,8 @@ int main(int argc, char** argv) {
 		switch (option) {
         case 1:
         {
-            /*if (IEE_EngineConnect() != EDK_OK) {
+            if (IEE_EngineConnect() != EDK_OK) {
                 throw std::runtime_error("Emotiv Driver start up failed.");
-            }*/
-
-            std::string edfFileName = "E:/GitHub_Community/bin/win32/Analuisa Cruz.edf";
-            int result = IEE_EngineLocalConnect(edfFileName.c_str(), "");
-
-            if (result != EDK_OK)
-            {
-                std::cout << "Cannot load file";
-                _getch();
-                return 0;
             }
 
             break;
@@ -124,14 +114,6 @@ int main(int argc, char** argv) {
             break;
 		}
 		
-        int result = IEE_EdfStart();
-
-        if (result != EDK_OK)
-        {
-            std::cout << "Cannot start reading file";
-            _getch();
-            return 0;
-        }
 
         std::cout << "Start receiving EmoState! Press any key to stop logging...\n"
                   << std::endl;
