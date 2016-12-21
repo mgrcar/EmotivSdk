@@ -48,8 +48,8 @@ extern "C" {
 #   define EMOSTATE_DLL_API extern
 #endif
 
-//! Defining EmoStateHandle as a void pointer
-typedef void* EmoStateHandle;
+    //! Defining EmoStateHandle as a void pointer
+    typedef void* EmoStateHandle;
 
 
     //! Emotiv Detection Suite enumerator

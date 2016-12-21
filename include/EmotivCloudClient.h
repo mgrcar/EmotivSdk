@@ -64,8 +64,8 @@ extern "C" {
 
 	//! Initialize connection to Emotiv Cloud Server
     /*!
-        \return EC_ERROR_CODE
-            - EC_OK if connect successfully
+        \return EDK_ERROR_CODE
+            - EDK_OK if connect successfully
 
         \sa EC_Disconnect()
     */
@@ -75,8 +75,8 @@ extern "C" {
 
     //! Terminate connection to Emotiv Cloud server
     /*!
-	    \return EC_ERROR_CODE
-            - EC_OK if connect successfully
+	    \return EDK_ERROR_CODE
+            - EDK_OK if connect successfully
 
         \sa EC_Connect()
     */
@@ -86,8 +86,8 @@ extern "C" {
 
     //! Reconnect Emotiv engine
     /*!
-        \return EC_ERROR_CODE
-            - EC_OK if Reconnect successfully
+        \return EDK_ERROR_CODE
+            - EDK_OK if Reconnect successfully
 
         \sa EC_DisconnectEngine()
     */
@@ -97,8 +97,8 @@ extern "C" {
 
     //! Disconnect Emotiv engine
     /*!
-        \return EC_ERROR_CODE
-            - EC_OK if Reconnect successfully
+        \return EDK_ERROR_CODE
+            - EDK_OK if Reconnect successfully
 
         \sa EC_ReconnectEngine()
     */
@@ -113,8 +113,8 @@ extern "C" {
         \param username  - username
         \param password  - password
 
-        \return EC_ERROR_CODE
-            - EC_OK if login successfully
+        \return EDK_ERROR_CODE
+            - EDK_OK if login successfully
 
         \sa EC_Logout()
     */
@@ -125,8 +125,8 @@ extern "C" {
 
     //! Logout Emotiv Cloud
     /*
-        \return EC_ERROR_CODE
-            - EC_OK if logout successfully
+        \return EDK_ERROR_CODE
+            - EDK_OK if logout successfully
 
         \sa EC_Login()
     */
@@ -138,8 +138,8 @@ extern "C" {
     /*!
         \param userCloudID - return user ID for subsequence requests
 
-        \return EC_ERROR_CODE
-            - EC_OK if fetched successfully
+        \return EDK_ERROR_CODE
+            - EDK_OK if fetched successfully
 
         \sa EC_Login()
     */
@@ -154,8 +154,8 @@ extern "C" {
         \param profileName  - profile name to be saved as
         \param ptype        - profile type
 
-        \return EC_ERROR_CODE
-            - EC_OK if saved successfully
+        \return EDK_ERROR_CODE
+            - EDK_OK if saved successfully
 
         \sa EC_UpdateUserProfile(), EC_DeleteUserProfile()
     */
@@ -172,8 +172,8 @@ extern "C" {
         \param engineUserID - user ID from current EmoEngine (first user will be 0)
         \param profileId    - profile ID to be updated, from EC_GetProfileId()
 
-        \return EC_ERROR_CODE
-            - EC_OK if updated successfully
+        \return EDK_ERROR_CODE
+            - EDK_OK if updated successfully
 
         \sa EC_SaveUserProfile(), EC_DeleteUserProfile()
      */
@@ -188,8 +188,8 @@ extern "C" {
         \param userCloudID  - user ID from EC_GetUserDetail()
         \param profileId    - profile ID to be deleted, from EC_GetProfileId()
 
-        \return EC_ERROR_CODE
-            - EC_OK if updated successfully
+        \return EDK_ERROR_CODE
+            - EDK_OK if updated successfully
 
         \sa EC_SaveUserProfile(), EC_UpdateUserProfile()
     */
@@ -202,11 +202,14 @@ extern "C" {
     /*!
         \param userCloudID  - user ID from EC_GetUserDetail()
         \param profileName  - profile name to look for
-        \return int - return profile ID if found, otherwise -1
+        \param profileID    - profile id with name
+        \return EDK_ERROR_CODE
+            - EDK_OK if updated successfully
     */
     EMOTIVCLOUD_API int
 		EC_GetProfileId(int userCloudID, 
-		                const char * profileName);
+		                const char * profileName,
+                        int * profileID);
 
 
     //! Load profile from Emotiv Cloud
@@ -218,8 +221,8 @@ extern "C" {
         \param profileId    - profile ID to be loaded, from EC_GetProfileId()
         \param version      - version of profile to download (default: -1 for lastest version)
 
-        \return EC_ERROR_CODE
-            - EC_OK if loaded successfully
+        \return EDK_ERROR_CODE
+            - EDK_OK if loaded successfully
     */
     EMOTIVCLOUD_API int
 		EC_LoadUserProfile(int userCloudID, 
@@ -287,6 +290,55 @@ extern "C" {
     EMOTIVCLOUD_API profileFileType
 		EC_ProfileTypeAtIndex(int userCloudID, 
 		                      int index);
+
+
+    //! Donwload file Profile
+    /*!
+        \param cloudUserID  - id of user
+        \param profileId
+        \param destPath
+        \param version      - default = -1 for download lastest version
+        \return EDK_ERROR_CODE
+                        - EDK_OK if success
+    */
+    EMOTIVCLOUD_API  
+        int EC_DownloadProfileFile(int cloudUserId, 
+                                   int profileId,
+                                   const char * destPath, 
+                                   int version = -1);
+
+
+    //! Upload file profile of user
+    /*!
+        \param cloudUserID   - id of user
+        \param profileName
+        \param filePath
+        \param ptype
+
+        \return EDK_ERROR_CODE
+                            - EDK_OK if success
+    */
+    EMOTIVCLOUD_API  
+        int EC_UploadProfileFile(int cloudUserId,
+                                 const char * profileName, 
+                                 const char * filePath, 
+                                 profileFileType ptype,
+                                 bool overwrite_if_exists = false);
+   
+
+    //! get lastest version of profile
+    /*
+        \param profileID    - profileID
+        \param pVersionInfo - receives array of version Informations
+        \param nVersion     - receives number of versions
+
+        \return EDK_ERROR_CODE
+                            - EDK_OK if success
+    */
+    EMOTIVCLOUD_API  
+        int EC_GetLastestProfileVersions(int cloudUserId,
+                                         int profileID, 
+                                         int * nVersion);
 
 #ifdef __cplusplus
 }
