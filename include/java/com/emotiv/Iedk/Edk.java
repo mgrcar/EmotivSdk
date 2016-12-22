@@ -1,5 +1,7 @@
 package com.emotiv.Iedk;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.sun.jna.Library;
@@ -163,7 +165,7 @@ public interface Edk extends Library {
 		IED_GYROX(17),             //!< Gyroscope X-axis
 		IED_GYROY(18),             //!< Gyroscope Y-axis
 		IED_TIMESTAMP(19),         //!< System timestamp
-		IED_MARKER_HARDWARE(20),   //!< Marker from extender
+		IED_MARKER_HARDWARE(20),    //!< Marker from extender
 		IED_ES_TIMESTAMP(21),      //!< EmoState timestamp
 		IED_FUNC_ID(22),           //!< Reserved function id
 		IED_FUNC_VALUE(23),        //!< Reserved function value
@@ -199,17 +201,85 @@ public interface Edk extends Library {
 	// ! Input sensor description
 	public static class InputSensorDescriptor_t extends Structure {
 		EmoState.IEE_InputChannels_t channelId; // logical channel id
-		int fExists; // does this sensor exist on this headset model
+		int fExists;     // does this sensor exist on this headset model
 		String pszLabel; // text label identifying this sensor
-		double xLoc; // x coordinate from center of head towards nose
-		double yLoc; // y coordinate from center of head towards ears
-		double zLoc; // z coordinate from center of head toward top of skull
+		double xLoc;     // x coordinate from center of head towards nose
+		double yLoc;     // y coordinate from center of head towards ears
+		double zLoc;     // z coordinate from center of head toward top of skull
 		@Override
 		protected List getFieldOrder() {
 			// TODO Auto-generated method stub
 			return null;
 		}
 	}
+	
+	public enum IEE_LicenseType_t {
+	        IEE_EEG(1),      // Enable EEG data
+	        IEE_PM(2),       // Enable Performance Metric detection   
+	        IEE_EEG_PM(3);   // Enable EEG data and Performance Metric detection  
+	        
+	        private int cType;
+
+		IEE_LicenseType_t(int val) {
+			cType = val;
+		}
+
+		public int getType() {
+			return cType;
+		}
+	} 
+	
+	public class LicenseInfos_t extends Structure {
+		
+		//public static class extends LicenseInfos_t implements Structure.ByReference {}
+		
+		public long scopes;            // license type
+        public long date_from;         // epoch time 
+        public long date_to;           // epoch time
+        public int  seat_count;        // number of seat
+
+        public int  quotaDayLimit;     // session limit in day
+        public int  usedQuotaDay;      // session used in day
+        public int  quotaMonthLimit;   // session limit in month
+        public int  usedQuotaMonth;    // session used in month
+        public int  usedQuota;         // total session used
+        public int  quota;             // total session in the license
+		//@Override
+
+		@Override
+		protected List getFieldOrder() {
+			// TODO Auto-generated method stub
+			return Arrays.asList(new String[] { "scopes", "date_from", "date_to", "seat_count","quotaDayLimit", "usedQuotaDay" , "quotaMonthLimit", 
+					"usedQuotaMonth","usedQuota","quota" });
+		}
+	}
+	
+	//! Check infos of the license
+    /*!    
+     * \param licenseInfo - License Information    
+     * \return    EDK_ERROR_CODE
+     *            EDK_OVER_QUOTA_IN_DAY
+     *            EDK_OVER_QUOTA_IN_MONTH
+     *            EDK_LICENSE_EXPIRED
+     *            EDK_OVER_QUOTA
+     *            EDK_ACCESS_DENIED
+     *            EDK_LICENSE_ERROR
+     *            EDK_NO_ACTIVE_LICENSE
+     *            EDK_OK
+     * \sa IedkErrorCode.h
+    */
+    public int IEE_LicenseInformation(LicenseInfos_t licenseInfo);
+
+
+    //! Activate a license with license ID    
+    /*
+     * \param licenseID - License ID
+     * \return EDK_ERROR_CODE
+     *                        - EDK_OK if the command succeeded
+     * \sa IedkErrorCode.h
+    */
+    int IEE_ActivateLicense(String licenseID);
+    
 
 	// ! Initializes the connection to EmoEngine. This function should be called
 	// at the beginning of programs that make use of EmoEngine, most probably in
@@ -1051,4 +1121,100 @@ public interface Edk extends Library {
      *                - EDK_OK if successful
     */
     int IEE_FFTGetWindowingType(int userId, IntByReference type);
+    
+    
+    // ! Returns a handle to memory that can hold a profile byte stream. This
+ 	// handle can be reused by the caller to retrieve subsequent profile bytes.
+ 	/*
+ 	 * ! \return Pointer
+ 	 */
+ 	Pointer IEE_ProfileEventCreate();
+    
+    // ! Loads an EmoEngine profile for the specified user.
+ 	/*
+ 	 * ! \param userId - user ID \param profileBuffer - pointer to buffer
+ 	 * containing a serialized user profile previously returned from EmoEngine.
+ 	 * \param length - buffer size (number of byte[]s)
+ 	 * 
+ 	 * \return EDK_ERROR_CODE - EDK_ERROR_CODE if the function succeeds in
+ 	 * loading this profile
+ 	 * 
+ 	 * \sa edkErrorCode.h
+ 	 */
+ 	int IEE_SetUserProfile(int userId, byte[] profileBuffer, int length);
+
+ 	// ! Returns user profile data in a synchronous manner.
+ 	/*
+ 	 * ! Fills in the event referred to by hEvent with an IEE_ProfileEvent event
+ 	 * that contains the profile data for the specified user.
+ 	 * 
+ 	 * \param userId - user ID \param hEvent - a handle returned by
+ 	 * IEE_EmoEngineEventCreate()
+ 	 * 
+ 	 * \return EDK_ERROR_CODE - EDK_ERROR_CODEEDK_OK if successful
+ 	 * 
+ 	 * \sa edkErrorCode.h
+ 	 */
+ 	int IEE_GetUserProfile(int userId, Pointer hEvent);
+
+ 	// ! Returns a serialized user profile for a default user in a synchronous
+ 	// manner.
+ 	/*
+ 	 * ! Fills in the event referred to by hEvent with an IEE_ProfileEvent event
+ 	 * that contains the profile data for the default user
+ 	 * 
+ 	 * \param hEvent - a handle returned by IEE_EmoEngineEventCreate()
+ 	 * 
+ 	 * \return EDK_ERROR_CODE - EDK_ERROR_CODEEDK_OK if successful
+ 	 * 
+ 	 * \sa edkErrorCode.h
+ 	 */
+ 	int IEE_GetBaseProfile(Pointer hEvent);
+
+ 	// ! Returns the number of bytes required to store a serialized version of
+ 	// the requested user profile.
+ 	/*
+ 	 * ! \param hEvt - an Pointer of type IEE_ProfileEvent \param
+ 	 * pProfileSizeOut - receives number of bytes required by the profile
+ 	 * 
+ 	 * \return EDK_ERROR_CODE - EDK_ERROR_CODEEDK_OK if successful
+ 	 * 
+ 	 * \sa edkErrorCode.h
+ 	 */
+ 	int IEE_GetUserProfileSize(Pointer hEvt, IntByReference pProfileSizeOut);
+
+ 	// ! Copies a serialized version of the requested user profile into the
+ 	// caller's buffer.
+ 	/*
+ 	 * ! \param hEvt - an Pointer returned in a IEE_ProfileEvent event \param
+ 	 * destBuffer - pointer to a destination buffer \param length - the size of
+ 	 * the destination buffer in byte[]s
+ 	 * 
+ 	 * \return EDK_ERROR_CODE - EDK_ERROR_CODEEDK_OK if successful
+ 	 * 
+ 	 * \sa edkErrorCode.h
+ 	 */
+ 	int IEE_GetUserProfileBytes(Pointer hEvt, byte[] destBuffer, int length);
+
+ 	// ! Loads a user profile from disk and assigns it to the specified user
+ 	/*
+ 	 * ! \param userID - a valid user ID \param szInputFilename -
+ 	 * platform-dependent filesystem path of saved user profile
+ 	 * 
+ 	 * \return EDK_ERROR_CODE - EDK_ERROR_CODEEDK_OK if successful
+ 	 * 
+ 	 * \sa edkErrorCode.h
+ 	 */
+ 	int IEE_LoadUserProfile(int userID, String szInputFilename);
+
+ 	// ! Saves a user profile for specified user to disk
+ 	/*
+ 	 * ! \param userID - a valid user ID \param szOutputFilename -
+ 	 * platform-dependent filesystem path for output file
+ 	 * 
+ 	 * \return EDK_ERROR_CODE - EDK_ERROR_CODEEDK_OK if successful
+ 	 * 
+ 	 * \sa edkErrorCode.h
+ 	 */
+ 	int IEE_SaveUserProfile(int userID, String szOutputFilename);
 }

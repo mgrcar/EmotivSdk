@@ -41,6 +41,87 @@ namespace Emotiv
 
         public const Int32 EDK_RESERVED1                    = 0x0900;
 
+        //! An internal error occurred.
+        public const Int32 EDK_COULDNT_RESOLVE_PROXY        = 0x1001;
+
+        public const Int32 EDK_COULDNT_RESOLVE_HOST         = 0x1002;
+
+        public const Int32 EDK_COULDNT_CONNECT              = 0x1003;
+
+        //! Profile created by EDK_SaveUserProfile() is existed in Emotiv Cloud.
+        public const Int32 EDK_PROFILE_CLOUD_EXISTED        = 0x1010;
+
+        //! The file uploaded to cloud is failed
+        public const Int32 EDK_UPLOAD_FAILED                = 0x1011;
+
+        //! The cloud user ID supplied to the function is invalid.
+        public const Int32 EDK_INVALID_CLOUD_USER_ID        = 0x1020;
+
+        //! The user ID supplied to the function is invalid
+        public const Int32 EDK_INVALID_ENGINE_USER_ID       = 0x1021;
+
+        //! The user ID supplied to the function dont login, call EDK_Login() first
+        public const Int32 EDK_CLOUD_USER_ID_DONT_LOGIN     = 0x1022;
+
+        //! The Emotiv Cloud needs to be initialized via EDK_Connect()
+        public const Int32 EDK_EMOTIVCLOUD_UNINITIALIZED    = 0x1023;
+
+
+        public const Int32 EDK_FILE_EXISTS                  = 0x2000;
+
+        //! The headset is not available to work
+        public const Int32 EDK_HEADSET_NOT_AVAILABLE        = 0x2001;
+
+        //! The headset is off
+        public const Int32 EDK_HEADSET_IS_OFF               = 0x2002;
+
+        //! Other session of saving is running
+        public const Int32 EDK_SAVING_IS_RUNNING            = 0x2003;
+
+        public const Int32 EDK_DEVICE_CODE_ERROR            = 0x2004;
+
+        //! The license error. 
+        public const Int32 EDK_LICENSE_ERROR                = 0x2010;
+
+        //! The license expried
+        public const Int32 EDK_LICENSE_EXPIRED              = 0x2011;
+
+        //! The license was not found
+        public const Int32 EDK_LICENSE_NOT_FOUND            = 0x2012;
+
+        //! The license is over quota
+        public const Int32 EDK_OVER_QUOTA                   = 0x2013;
+
+        //! The license is over quota in day
+        public const Int32 EDK_OVER_QUOTA_IN_DAY            = 0x2014;
+
+        //! The license is over quota in month
+        public const Int32 EDK_OVER_QUOTA_IN_MONTH          = 0x2015;
+
+
+        public const Int32 EDK_APP_QUOTA_EXCEEDED           = 0x2016;
+
+
+        public const Int32 EDK_APP_INVALID_DATE             = 0x2017;
+
+        //! Application register device number is exceeded. 
+        public const Int32 EDK_LICENSE_DEVICE_LIMITED       = 0x2019;
+
+        //! The license registered with the device. 
+        public const Int32 EDK_LICENSE_REGISTERED           = 0x2020;
+
+        //! No license is activated
+        public const Int32 EDK_NO_ACTIVE_LICENSE            = 0x2021;
+
+        //! The license is not EEG data ouput
+        public const Int32 EDK_LICENSE_NO_EEG               = 0x2022;
+
+        //! The file was not found
+        public const Int32 EDK_FILE_NOT_FOUND               = 0x2030;
+
+        public const Int32 EDK_ACCESS_DENIED                = 0x2031;
+
+
         public enum IEE_Event_t
         {
             IEE_UnknownEvent          = 0x0000,     //!< An unknown event.
@@ -237,7 +318,7 @@ namespace Emotiv
             IED_GYROX,              //!< Gyroscope X-axis
             IED_GYROY,              //!< Gyroscope Y-axis
             IED_TIMESTAMP,          //!< System timestamp
-			IED_MARKER_HARDWARE,    //!< Marker from extender
+            IED_MARKER_HARDWARE,    //!< Marker from extender
             IED_ES_TIMESTAMP,       //!< EmoState timestamp
             IED_FUNC_ID,            //!< Reserved function id
             IED_FUNC_VALUE,         //!< Reserved function value
@@ -262,6 +343,38 @@ namespace Emotiv
             IEEG_CQ_FAIR, 
             IEEG_CQ_GOOD 
         } ;
+
+
+        public enum IEE_LicenseType_t 
+        {
+            IEE_EEG = 0x001,      // Enable EEG data
+            IEE_PM  = 0x002,      // Enable Performance Metric detection   
+            IEE_EEG_PM = IEE_EEG | IEE_PM   // Enable EEG data and Performance Metric detection   
+        };
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)] 
+        public class IEE_LicenseInfos_t 
+        {
+            public UInt32 scopes;          // license type
+            public UInt32 date_from;       // epoch time 
+            public UInt32 date_to;         // epoch time
+            public Int32  seat_count;      // number of seat
+
+            public Int32 quotaDayLimit;    // session limit in day
+            public Int32 usedQuotaDay;     // session used in day
+            public Int32 quotaMonthLimit;  // session limit in month
+            public Int32 usedQuotaMonth;   // session used in month
+            public Int32 usedQuota;        // total session used
+            public Int32 quota;            // total session in the license
+        };
+
+
+        //static extern Int32 Unmanged_IEE_LicenseInformation(out IEE_LicenseInfos_t licenseInfo);
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_LicenseInformation")]        
+        static extern Int32 Unmanged_IEE_LicenseInformation(IntPtr licenseInfo);
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_ActivateLicense")]
+        static extern Int32 Unmanged_IEE_ActivateLicense(String licenseID);        
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_EngineConnect")]
         static extern Int32 Unmanged_IEE_EngineConnect(String security);
@@ -396,7 +509,7 @@ namespace Emotiv
         static extern Int32 Unmanged_IEE_FacialExpressionGetSignatureType(UInt32 userId, out IEE_FacialExpressionSignature_t pSigTypeOut);
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_MentalCommandSetActiveActions")]
-        static extern Int32 Unmanged_IEE_MentalCommandSetActiveActions(UInt32 userId, UInt32 activeActions);
+        static extern Int32 Unmanged_IEE_MentalCommandSetActiveActions(UInt32 userId, ulong activeActions);
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_MentalCommandGetActiveActions")]
         static extern Int32 Unmanged_IEE_MentalCommandGetActiveActions(UInt32 userId, out UInt32 pActiveActionsOut);
@@ -573,7 +686,49 @@ namespace Emotiv
 
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IS_GetBatteryChargeLevel")]
         static extern void Unmanaged_IS_GetBatteryChargeLevel(IntPtr state, out Int32 chargeLevel, out Int32 maxChargeLevel);
+
         
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_ProfileEventCreate")]
+        static extern IntPtr Unmanged_IEE_ProfileEventCreate();
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_SetUserProfile")]
+        static extern Int32 Unmanged_IEE_SetUserProfile(UInt32 userId, Byte[] profileBuffer, UInt32 length);
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_GetUserProfile")]
+        static extern Int32 Unmanged_IEE_GetUserProfile(UInt32 userId, IntPtr hEvent);
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_GetBaseProfile")]
+        static extern Int32 Unmanged_IEE_GetBaseProfile(IntPtr hEvent);
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_GetUserProfileSize")]
+        static extern Int32 Unmanged_IEE_GetUserProfileSize(IntPtr hEvt, out UInt32 pProfileSizeOut);
+
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_GetUserProfileBytes")]
+        static extern Int32 Unmanged_IEE_GetUserProfileBytes(IntPtr hEvt, Byte[] destBuffer, UInt32 length);
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_LoadUserProfile")]
+        static extern Int32 Unmanged_IEE_LoadUserProfile(UInt32 userID, String szInputFilename);
+
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_SaveUserProfile")]
+        static extern Int32 Unmanged_IEE_SaveUserProfile(UInt32 userID, String szOutputFilename);
+        
+        public static Int32 IEE_LicenseInformation(ref IEE_LicenseInfos_t licenseInfoOut)
+        {
+            IEE_LicenseInfos_t licenseInfo = new IEE_LicenseInfos_t();
+            int size = Marshal.SizeOf(licenseInfo);
+            IntPtr ptr = Marshal.AllocHGlobal(size);
+            int result = Unmanged_IEE_LicenseInformation(ptr);
+
+            licenseInfoOut = (IEE_LicenseInfos_t)Marshal.PtrToStructure(ptr, typeof(IEE_LicenseInfos_t));
+            return result;
+        }
+
+
+        public static Int32 IEE_ActivateLicense(String licenseID)
+        {
+            return Unmanged_IEE_ActivateLicense(licenseID);
+        }
 
 
         public static Int32 IEE_EngineConnect(String security)
@@ -859,7 +1014,7 @@ namespace Emotiv
             return Unmanged_IEE_FacialExpressionGetSignatureType(userId, out pSigTypeOut);
         }
 
-        public static Int32 IEE_MentalCommandSetActiveActions(UInt32 userId, UInt32 activeActions)
+        public static Int32 IEE_MentalCommandSetActiveActions(UInt32 userId, ulong activeActions)
         {
             return Unmanged_IEE_MentalCommandSetActiveActions(userId, activeActions);
         }
@@ -1087,6 +1242,47 @@ namespace Emotiv
         public static Boolean IS_MentalCommandEqual(IntPtr a, IntPtr b)
         {
             return Unmanaged_IS_MentalCommandEqual(a, b);
+        }
+
+        public static IntPtr IEE_ProfileEventCreate()
+        {
+            return Unmanged_IEE_ProfileEventCreate();
+        }
+
+        public static Int32 IEE_SetUserProfile(UInt32 userId, byte[] profileBuffer, UInt32 length)
+        {
+            return Unmanged_IEE_SetUserProfile(userId, profileBuffer, length);
+        }
+
+        public static Int32 IEE_GetUserProfile(UInt32 userId, IntPtr hEvent)
+        {
+            return Unmanged_IEE_GetUserProfile(userId, hEvent);
+        }
+
+        public static Int32 IEE_GetBaseProfile(IntPtr hEvent)
+        {
+            return Unmanged_IEE_GetBaseProfile(hEvent);
+        }
+
+        public static Int32 IEE_GetUserProfileSize(IntPtr hEvt, out UInt32 pProfileSizeOut)
+        {
+            return Unmanged_IEE_GetUserProfileSize(hEvt, out pProfileSizeOut);
+        }
+
+
+        public static Int32 IEE_GetUserProfileBytes(IntPtr hEvt, Byte[] destBuffer, UInt32 length)
+        {
+            return Unmanged_IEE_GetUserProfileBytes(hEvt, destBuffer, length);
+        }
+
+        public static Int32 IEE_LoadUserProfile(UInt32 userID, String szInputFilename)
+        {
+            return Unmanged_IEE_LoadUserProfile(userID, szInputFilename);
+        }
+
+        public static Int32 IEE_SaveUserProfile(UInt32 userID, String szOutputFilename)
+        {
+            return Unmanged_IEE_SaveUserProfile(userID, szOutputFilename);
         }
     }
 }
