@@ -15,16 +15,15 @@ SDK CHANGELOGS
     * New Local Training Profile API list in IEmotivProfile.h .
          Allow saving/loading a training profile to local
     * New Cloud Training Proflie API list in EmotivCloudClient.h .
-		
-	   * Improved timestamp for EEG and Motion data .
-	   * Improved marker time .
+    * Improved timestamp for EEG and Motion data .
+    * Improved marker time .
     * Changed EC_UpdateUserProfile to return Error_Code.
-	   * New API: IEE_HeadsetGetSerialNumber .
+    * New API: IEE_HeadsetGetSerialNumber .
     * New API: IEE_DisconnectDevice().
     * Merged EC_ error code in EmotivCloudErrorCode.h into EDK_ error code in IedkErrorCode.h .
     * Removed EmotivCloudErrorCode.h .
     * Removed IEE_GetInsightSignalStrength and IEE_GetEpocPlusSignalStrength API.
-	   * Added PM_INTEREST and PM_FOCUS for IS_PerformanceMetricIsActive API.
+    * Added PM_INTEREST and PM_FOCUS for IS_PerformanceMetricIsActive API.
 	
 * Issue:
     * BTLE connection is not stable on Windows. Sometime it is lost data packets .
