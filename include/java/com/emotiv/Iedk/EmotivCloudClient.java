@@ -40,7 +40,7 @@ public interface EmotivCloudClient extends Library {
     
     //! Initialize the connection to Emotiv Cloud Server
     /*!
-     *  \return bool
+     *  \return EDK_ERROR_CODE
      *              - true if connect successfully
      */
     int EC_Connect();
@@ -48,7 +48,7 @@ public interface EmotivCloudClient extends Library {
 
 	//! Reconnection to Emotiv engine
 	/*!
-	 *  \return bool
+	 *  \return EDK_ERROR_CODE
 	 *              - true if Reconnect successfully
 	*/
 	int EC_ReconnectEngine();
@@ -56,7 +56,7 @@ public interface EmotivCloudClient extends Library {
 
 	//! Disconnection to Emotiv engine
 	/*!
-	 *   \return bool
+	 *   \return EDK_ERROR_CODE
 	 *              - true if Reconnect successfully
 	*/
 	int EC_DisconnectEngine();
@@ -73,7 +73,7 @@ public interface EmotivCloudClient extends Library {
      *  To register a new EmotivID please visit https://id.emotivcloud.com/ .
      *  \param username  - username
      *  \param password  - password
-     *  \return bool
+     *  \return EDK_ERROR_CODE
      *              - true if login successfully
      */
     int EC_Login(String username, String password);
@@ -81,16 +81,16 @@ public interface EmotivCloudClient extends Library {
     
     //! Logout Emotiv Cloud
     /*
-     *  \return bool
+     *  \return EDK_ERROR_CODE
      *              - true if logout successfully
      */
-     int EC_Logout(int userCloudID);
+    int EC_Logout(int userCloudID);
 
     
     //! Get user ID after login
     /*!
      *  \param userCloudID - return user ID for subsequence requests
-     *  \return bool
+     *  \return EDK_ERROR_CODE
      *              - true if fetched successfully
      */
     int EC_GetUserDetail(IntByReference userCloudID);
@@ -102,7 +102,7 @@ public interface EmotivCloudClient extends Library {
      *  \param engineUserID - user ID from current EmoEngine (first user will be 0)
      *  \param profileName  - profile name to be saved as
      *  \param ptype        - profile type
-     *  \return bool
+     *  \return EDK_ERROR_CODE
      *              - true if saved successfully
      */
     int EC_SaveUserProfile(int userCloudID, int engineUserID, String profileName, int ptype);
@@ -114,7 +114,7 @@ public interface EmotivCloudClient extends Library {
      *  \param engineUserID - user ID from current EmoEngine (first user will be 0)
      *  \param profileId    - profile ID to be updated, from EC_GetProfileId()
      *  \param profileName  - profile name to be saved as
-     *  \return bool 
+     *  \return EDK_ERROR_CODE 
      *               - true if updated successfully
      */
     int EC_UpdateUserProfile(int userCloudID, int engineUserID, int profileId);
@@ -124,7 +124,7 @@ public interface EmotivCloudClient extends Library {
     /*!
      *  \param userCloudID  - user ID from EC_GetUserDetail()
      *  \param profileId    - profile ID to be deleted, from EC_GetProfileId()
-     *  \return bool
+     *  \return EDK_ERROR_CODE
      *                - true if updated successfully
      */
     int EC_DeleteUserProfile(int userCloudID, int profileId);
@@ -134,9 +134,10 @@ public interface EmotivCloudClient extends Library {
     /*!
      *  \param userCloudID  - user ID from EC_GetUserDetail()
      *  \param profileName  - profile name to look for
-     *  \return int - return profile ID if found, otherwise -1
+     *  \param profileID    - profile id with name
+     *  \return EDK_ERROR_CODE
      */
-    int EC_GetProfileId(int userCloudID, String profileName);
+    int EC_GetProfileId(int userCloudID, String profileName, IntByReference profileID);
     
 
     //! Load profile from Emotiv Cloud
@@ -146,7 +147,7 @@ public interface EmotivCloudClient extends Library {
      *  \param engineUserID - user ID from current EmoEngine (first user will be 0)
      *  \param profileId    - profile ID to be loaded, from EC_GetProfileId()
      *  \param version      - version of profile to download (default: -1 for lastest version)
-     *  \return bool
+     *  \return EDK_ERROR_CODE
      *               - true if loaded successfully
      */
     int EC_LoadUserProfile(int userCloudID, int engineUserID, int profileId, int version);
@@ -176,28 +177,66 @@ public interface EmotivCloudClient extends Library {
     //! Return the profile name of a profile in cache
     /*! \param userCloudID  - user ID from EC_GetUserDetail()
      *  \param index        - index of profile (starts from 0)
-     *  \return const char* 
+     *  \return String 
      *               - profile name
      */
     String EC_ProfileNameAtIndex(int userCloudID, int index);
-    
-    
-    //! Return the last modified timestamp of a profile in cache
+           
+   
+           
+  //! Return the last modified timestamp of a profile in cache
     /*!
-     *  \param userCloudID  - user ID from EC_GetUserDetail()
-     *  \param index        - index of profile (starts from 0)
-     *  \return const char* 
-     *              - last modified timestamp
+     * \param userCloudID  - user ID from EC_GetUserDetail()
+     * \param index        - index of profile (starts from 0)
+     * \return String - last modified timestamp
     */
     String EC_ProfileLastModifiedAtIndex(int userCloudID, int index);
-    
-    
+
+
     //! Return the type of a profile in cache
     /*!
-     *  \param userCloudID  - user ID from EC_GetUserDetail()
-     *  \param index        - index of profile (starts from 0)
-     *  \return profileFileType 
-     *               - profile type
-     */
+     * \param userCloudID  - user ID from EC_GetUserDetail()
+     * \param index        - index of profile (starts from 0)
+     * \return profileFileType - profile type
+    */
     int EC_ProfileTypeAtIndex(int userCloudID, int index);
+
+
+    //! Donwload file Profile
+    /*!
+     * \param cloudUserID  - id of user
+     * \param profileId
+     * \param destPath
+     * \param version      - default = -1 for download lastest version
+     * \return EDK_ERROR_CODE
+                        - EDK_OK if success
+    */
+    int EC_DownloadProfileFile(int cloudUserId, int profileId,
+    		                   String destPath, int version);
+
+
+    //! Upload file profile of user
+    /*!
+     * \param cloudUserID   - id of user
+     * \param profileName
+     * \param filePath
+     * \param ptype
+     * \return EDK_ERROR_CODE
+     *                      - EDK_OK if success
+    */
+    int EC_UploadProfileFile(int cloudUserId, String profileName, 
+    		                 String filePath, int ptype,
+    		                 Boolean overwrite_if_exists);
+   
+
+    //! get lastest version of profile
+    /*
+     * \param profileID    - profileID
+     * \param pVersionInfo - receives array of version Informations
+     * \param nVersion     - receives number of versions
+     * \return EDK_ERROR_CODE
+     *                     - EDK_OK if success
+    */
+    int EC_GetLastestProfileVersions(int userID, int profileID, 
+    		                         IntByReference nVersion);
 }
