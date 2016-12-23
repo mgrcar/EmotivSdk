@@ -6,6 +6,11 @@
 //  Copyright (c) 2015 emotiv. All rights reserved.
 //
 
+/**
+ ** This example receives the PerformanceMetric scores
+ ** It works if you have license subscription Performance Metrics
+ */
+
 #import "ViewController.h"
 #import <edk/Iedk.h>
 #import <edk/IEmoStatePerformanceMetric.h>
