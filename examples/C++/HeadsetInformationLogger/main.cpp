@@ -13,6 +13,10 @@
 #include <conio.h>
 #endif
 
+#if __linux__ || __APPLE__
+    #include <unistd.h>
+#endif
+
 #include "Iedk.h"
 #include "IedkErrorCode.h"
 #include "IEmoStateDLL.h"

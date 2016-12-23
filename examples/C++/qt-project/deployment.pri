@@ -228,7 +228,9 @@ win32 {
     LIBS += -ledk
 }else:ios {
 }else:macx{
-    LIBS += -framework edk
+    LIBS += -F/Library/Frameworks -framework edk
+    QMAKE_CXXFLAGS +=-stdlib=libc++
+    QMAKE_LFLAGS   +=-stdlib=libc++
 }else:unix{
     contains(QT_ARCH,arm){
         ARCH_EXT="arm"

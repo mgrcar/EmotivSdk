@@ -18,7 +18,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <glut.h>
-#elif _APPLE_
+#elif __APPLE__
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
