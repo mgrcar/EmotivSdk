@@ -1,0 +1,328 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9E623A8A1E0CDD4300B337EE /* edk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E623A891E0CDD4300B337EE /* edk.framework */; };
+		9E623A8B1E0CDD4300B337EE /* edk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E623A891E0CDD4300B337EE /* edk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9E97E87C1C634D9300C7EEF2 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E97E87B1C634D9300C7EEF2 /* AppDelegate.mm */; };
+		9E97E87F1C634D9300C7EEF2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E97E87E1C634D9300C7EEF2 /* main.m */; };
+		9E97E8821C634D9300C7EEF2 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E97E8811C634D9300C7EEF2 /* ViewController.mm */; };
+		9E97E8841C634D9300C7EEF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E97E8831C634D9300C7EEF2 /* Assets.xcassets */; };
+		9E97E8871C634D9300C7EEF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E97E8851C634D9300C7EEF2 /* Main.storyboard */; };
+		9E97E8961C63764A00C7EEF2 /* edk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E97E8951C63764A00C7EEF2 /* edk.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9E97E8941C634F3A00C7EEF2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9E623A8B1E0CDD4300B337EE /* edk.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		9E623A891E0CDD4300B337EE /* edk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = edk.framework; path = ../../../../lib/Mac/edk.framework; sourceTree = "<group>"; };
+		9E97E8771C634D9300C7EEF2 /* EEGLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EEGLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E97E87A1C634D9300C7EEF2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9E97E87B1C634D9300C7EEF2 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		9E97E87E1C634D9300C7EEF2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9E97E8801C634D9300C7EEF2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		9E97E8811C634D9300C7EEF2 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		9E97E8831C634D9300C7EEF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9E97E8861C634D9300C7EEF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9E97E8881C634D9300C7EEF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E97E8951C63764A00C7EEF2 /* edk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = edk.framework; path = "/Users/Emotiv/community-sdk/examples/ObjectiveC/Framework/edk.framework"; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9E97E8741C634D9300C7EEF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E97E8961C63764A00C7EEF2 /* edk.framework in Frameworks */,
+				9E623A8A1E0CDD4300B337EE /* edk.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9E97E86E1C634D9300C7EEF2 = {
+			isa = PBXGroup;
+			children = (
+				9E623A891E0CDD4300B337EE /* edk.framework */,
+				9E97E8791C634D9300C7EEF2 /* EEGLogger */,
+				9E97E8781C634D9300C7EEF2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9E97E8781C634D9300C7EEF2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9E97E8771C634D9300C7EEF2 /* EEGLogger.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9E97E8791C634D9300C7EEF2 /* EEGLogger */ = {
+			isa = PBXGroup;
+			children = (
+				9E97E87A1C634D9300C7EEF2 /* AppDelegate.h */,
+				9E97E87B1C634D9300C7EEF2 /* AppDelegate.mm */,
+				9E97E8801C634D9300C7EEF2 /* ViewController.h */,
+				9E97E8811C634D9300C7EEF2 /* ViewController.mm */,
+				9E97E8831C634D9300C7EEF2 /* Assets.xcassets */,
+				9E97E8851C634D9300C7EEF2 /* Main.storyboard */,
+				9E97E8881C634D9300C7EEF2 /* Info.plist */,
+				9E97E87D1C634D9300C7EEF2 /* Supporting Files */,
+			);
+			path = EEGLogger;
+			sourceTree = "<group>";
+		};
+		9E97E87D1C634D9300C7EEF2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9E97E87E1C634D9300C7EEF2 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9E97E8761C634D9300C7EEF2 /* EEGLogger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E97E88B1C634D9300C7EEF2 /* Build configuration list for PBXNativeTarget "EEGLogger" */;
+			buildPhases = (
+				9E97E8731C634D9300C7EEF2 /* Sources */,
+				9E97E8741C634D9300C7EEF2 /* Frameworks */,
+				9E97E8751C634D9300C7EEF2 /* Resources */,
+				9E97E8941C634F3A00C7EEF2 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EEGLogger;
+			productName = EEGLogger;
+			productReference = 9E97E8771C634D9300C7EEF2 /* EEGLogger.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9E97E86F1C634D9300C7EEF2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = Emotiv;
+				TargetAttributes = {
+					9E97E8761C634D9300C7EEF2 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 9E97E8721C634D9300C7EEF2 /* Build configuration list for PBXProject "EEGLogger" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9E97E86E1C634D9300C7EEF2;
+			productRefGroup = 9E97E8781C634D9300C7EEF2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9E97E8761C634D9300C7EEF2 /* EEGLogger */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9E97E8751C634D9300C7EEF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E97E8841C634D9300C7EEF2 /* Assets.xcassets in Resources */,
+				9E97E8871C634D9300C7EEF2 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9E97E8731C634D9300C7EEF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E97E8821C634D9300C7EEF2 /* ViewController.mm in Sources */,
+				9E97E87F1C634D9300C7EEF2 /* main.m in Sources */,
+				9E97E87C1C634D9300C7EEF2 /* AppDelegate.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9E97E8851C634D9300C7EEF2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E97E8861C634D9300C7EEF2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9E97E8891C634D9300C7EEF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9E97E88A1C634D9300C7EEF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9E97E88C1C634D9300C7EEF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../Framework",
+					"$(PROJECT_DIR)/../../../../lib/Mac",
+				);
+				INFOPLIST_FILE = EEGLogger/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.emotiv.EEGLogger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9E97E88D1C634D9300C7EEF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../Framework",
+					"$(PROJECT_DIR)/../../../../lib/Mac",
+				);
+				INFOPLIST_FILE = EEGLogger/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.emotiv.EEGLogger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9E97E8721C634D9300C7EEF2 /* Build configuration list for PBXProject "EEGLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E97E8891C634D9300C7EEF2 /* Debug */,
+				9E97E88A1C634D9300C7EEF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9E97E88B1C634D9300C7EEF2 /* Build configuration list for PBXNativeTarget "EEGLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E97E88C1C634D9300C7EEF2 /* Debug */,
+				9E97E88D1C634D9300C7EEF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9E97E86F1C634D9300C7EEF2 /* Project object */;
+}
