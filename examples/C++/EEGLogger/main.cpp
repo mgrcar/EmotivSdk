@@ -1,9 +1,10 @@
 /****************************************************************************
 **
-** Copyright 2015 by Emotiv. All rights reserved
+** Copyright 2016 by Emotiv. All rights reserved
 ** Example - EEGLogger
-** This Example to show how to log the EmoState from EmoEngine
-** It works with Emotiv premium libraries.
+** This Example to show how to log the EEG data from EmoEngine
+** It works if you have license subscription EEG
+** Example ActivateLicense need to run at least one time on your computer to active your license before run this example.
 ****************************************************************************/
 
 #include <iostream>
@@ -27,9 +28,6 @@
 #include "Iedk.h"
 #include "IEegData.h"
 #include "IedkErrorCode.h"
-
-void logEmoState(std::ostream& os, unsigned int userID,
-                 EmoStateHandle eState, bool withHeader = false);
 
 #if __linux__ || __APPLE__
     #include <unistd.h>
@@ -81,7 +79,7 @@ int main()
 	try {
 		std::cout << "==================================================================="
 			      << std::endl;
-		std::cout << "Example to show how to log the EmoState from EmoEngine."
+		std::cout << "Example to show how to log the EEG data from EmoEngine."
 			      << std::endl;
 		std::cout << "==================================================================="
 			      << std::endl;

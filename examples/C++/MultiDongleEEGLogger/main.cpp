@@ -4,6 +4,8 @@
 ** This sample is to get synchronized eeg data from two headsets.
 ** The data is only written to files as two headsets are in the good condition
 ** ( without noise, full of battery, ... )
+** It works if you have license subscription EEG
+** Example ActivateLicense need to run at least one time on your computer to active your license before run this example.
 ****************************************************************************/
 
 #include <iostream>
