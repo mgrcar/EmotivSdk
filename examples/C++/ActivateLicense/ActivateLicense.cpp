@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright 2015 by Emotiv. All rights reserved
+** Copyright 2016 by Emotiv. All rights reserved
 ** Example - ActivateLicense
 ** How to activate a license key and Get infomation of that license 
 **
@@ -9,6 +9,12 @@
 #ifdef _WIN32
     #include <windows.h>
     #include <conio.h>
+#endif
+
+#if __linux__ || __APPLE__
+#include <unistd.h>
+#include <termios.h>
+int _getch(void);
 #endif
 
 #include <iostream>
@@ -148,4 +154,18 @@ int main(int argc, char** argv)
     _getch();
 
 }
-
+#ifdef __APPLE__
+int _getch(void)
+{
+    int r;
+    unsigned char c;
+    if ((r = read(0, &c, sizeof(c))) < 0)
+    {
+        return r;
+    }
+    else
+    {
+        return c;
+    }
+}
+#endif

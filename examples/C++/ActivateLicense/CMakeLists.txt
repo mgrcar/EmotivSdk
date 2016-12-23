@@ -1,8 +1,9 @@
-cmake_minimum_required(VERSION 2.6.0)
-project (multi-dongle-logger)
-#For the shared library:
+cmake_minimum_required(VERSION 2.8.0)
 
-set ( EXAMPLES_DIR ../../../ )
+project (ActivateLicense)
+
+set ( EXAMPLES_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../ )
+
 if (WIN32)
         set ( PROJECT_LINK_LIBS edk.lib)
         if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "(amd64)|(AMD64)")
@@ -13,7 +14,7 @@ if (WIN32)
            link_directories( ${EXAMPLES_DIR}/../bin/winarm )
         endif()
 elseif(APPLE)
-       set ( PROJECT_LINK_LIBS "-framework edk" )
+		set ( PROJECT_LINK_LIBS "-framework edk" )
 elseif(UNIX)
         set ( PROJECT_LINK_LIBS libedk.so )
         if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86_64")
@@ -27,10 +28,10 @@ endif()
 
 include_directories(${EXAMPLES_DIR}/include)
  
-add_executable(multi-dongle-logger main.cpp)
-target_link_libraries(multi-dongle-logger ${PROJECT_LINK_LIBS} )
+add_executable(ActivateLicense ActivateLicense.cpp)
+target_link_libraries(ActivateLicense ${PROJECT_LINK_LIBS} )
 if (APPLE)
-  set_target_properties(multi-dongle-logger PROPERTIES LINK_FLAGS "-F/Library/Frameworks")
+	set_target_properties(ActivateLicense PROPERTIES LINK_FLAGS "-F/Library/Frameworks")
 endif(APPLE)
 
 
