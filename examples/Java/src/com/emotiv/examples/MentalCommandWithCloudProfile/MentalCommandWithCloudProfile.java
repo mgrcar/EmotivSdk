@@ -51,19 +51,19 @@ public class MentalCommandWithCloudProfile implements Runnable {
 			return;
 		}
 
-		if (EmotivCloudClient.INSTANCE.EC_Connect() != EmotivCloudErrorCode.EC_OK.ToInt()) {
+		if (EmotivCloudClient.INSTANCE.EC_Connect() != EdkErrorCode.EDK_OK.ToInt()) {
 			System.out.println("Cannot connect to Emotiv Cloud");
 			return;
 		}
 
-		if (EmotivCloudClient.INSTANCE.EC_Login(userName, password) != EmotivCloudErrorCode.EC_OK.ToInt()) {
+		if (EmotivCloudClient.INSTANCE.EC_Login(userName, password) != EdkErrorCode.EDK_OK.ToInt()) {
 			System.out.println("Your login attempt has failed. The username or password may be incorrect");
 			return;
 		}
 
 		System.out.println("Logged in as " + userName);
 
-		if (EmotivCloudClient.INSTANCE.EC_GetUserDetail(userCloudID) != EmotivCloudErrorCode.EC_OK.ToInt()) {
+		if (EmotivCloudClient.INSTANCE.EC_GetUserDetail(userCloudID) != EdkErrorCode.EDK_OK.ToInt()) {
 			return;
 		}
 
@@ -139,13 +139,13 @@ public class MentalCommandWithCloudProfile implements Runnable {
 			if (profileID.getValue() >= 0) {
 				System.out.println("Profile with " + profileName + " exists.");
 				if (EmotivCloudClient.INSTANCE.EC_UpdateUserProfile(userCloudID, engineUserID,
-						profileID.getValue()) == EmotivCloudErrorCode.EC_OK.ToInt()) {
+						profileID.getValue()) == EdkErrorCode.EDK_OK.ToInt()) {
 					System.out.println("Updating finished");
 				} else {
 					System.out.println("updating failed");
 				}
 			} else if (EmotivCloudClient.INSTANCE.EC_SaveUserProfile(userCloudID, engineUserID, profileName,
-					EmotivCloudClient.profileType_t.TRAINING.toInt()) == EmotivCloudErrorCode.EC_OK.ToInt())
+					EmotivCloudClient.profileType_t.TRAINING.toInt()) == EdkErrorCode.EDK_OK.ToInt())
 				System.out.println("Saving finished");
 			else
 				System.out.println("Saving failed");
@@ -153,7 +153,7 @@ public class MentalCommandWithCloudProfile implements Runnable {
 		} else {
 			if (getNumberProfile > 0) {
 				if (EmotivCloudClient.INSTANCE.EC_LoadUserProfile(userCloudID, engineUserID, profileID.getValue(),
-						-1) == EmotivCloudErrorCode.EC_OK.ToInt())
+						-1) == EdkErrorCode.EDK_OK.ToInt())
 					System.out.println("Loading finished");
 				else
 					System.out.println("Loading failed");
