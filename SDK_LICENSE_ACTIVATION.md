@@ -1,6 +1,6 @@
 ## SDK License
 
-#### EDK LICENSES
+#### SDK LICENSES
 * Allow a user / developer can get EEG data and PM from Emotiv Advance Library.
 * Allow a application which is linked to Advance Edk library can work with EEG and PM from emotiv headset.
 * Information of SDK license key:
