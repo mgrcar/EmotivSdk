@@ -1,3 +1,4 @@
+package com.emotiv.examples.MentalCommandWithCloudProfile;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,7 +8,7 @@ import com.sun.jna.Pointer;
 import com.sun.jna.ptr.*;
 
 
-public class EmotivSphero implements Runnable {
+public class MentalCommandWithCloudProfile implements Runnable {
 	public static final Pointer eEvent = Edk.INSTANCE.IEE_EmoEngineEventCreate();
 	public static final Pointer eState = Edk.INSTANCE.IEE_EmoStateCreate();
 	public static BufferedReader in;
@@ -15,6 +16,7 @@ public class EmotivSphero implements Runnable {
 	public static int state = 0;
 	public static IntByReference engineUserID = null;
 	public static IntByReference userCloudID = null;
+	public static IntByReference profileID = null;
 	public static String profileName = null;
 	public static int pending = 0;
 	public static String option = null;
@@ -41,7 +43,8 @@ public class EmotivSphero implements Runnable {
 
 		
 		engineUserID = new IntByReference(0);
-		userCloudID = new IntByReference(0);
+		userCloudID  = new IntByReference(0);
+		profileID 	 = new IntByReference(-1);
 
 		if (Edk.INSTANCE.IEE_EngineConnect("Emotiv Systems-5") != EdkErrorCode.EDK_OK.ToInt()) {
 			System.out.println("Emotiv Engine start up failed.");
@@ -67,7 +70,7 @@ public class EmotivSphero implements Runnable {
 		help();
 		
 		in = new BufferedReader(new InputStreamReader(System.in));
-		Thread t1 = new Thread(new EmotivSphero());
+		Thread t1 = new Thread(new MentalCommandWithCloudProfile());
 		t1.start();
 		
 		startLiveClassificationProcess();
@@ -129,14 +132,14 @@ public class EmotivSphero implements Runnable {
 	private static void SavingLoadingFunction(int userCloudID, int engineUserID, boolean save, String profileName) {
 		int getNumberProfile = EmotivCloudClient.INSTANCE.EC_GetAllProfileName(userCloudID);
 
-		int profileID = EmotivCloudClient.INSTANCE.EC_GetProfileId(userCloudID, profileName);
+		int result = EmotivCloudClient.INSTANCE.EC_GetProfileId(userCloudID, profileName, profileID);
 
 		if (save) {
 
-			if (profileID >= 0) {
+			if (profileID.getValue() >= 0) {
 				System.out.println("Profile with " + profileName + " exists.");
 				if (EmotivCloudClient.INSTANCE.EC_UpdateUserProfile(userCloudID, engineUserID,
-						profileID) == EmotivCloudErrorCode.EC_OK.ToInt()) {
+						profileID.getValue()) == EmotivCloudErrorCode.EC_OK.ToInt()) {
 					System.out.println("Updating finished");
 				} else {
 					System.out.println("updating failed");
@@ -149,7 +152,7 @@ public class EmotivSphero implements Runnable {
 			return;
 		} else {
 			if (getNumberProfile > 0) {
-				if (EmotivCloudClient.INSTANCE.EC_LoadUserProfile(userCloudID, engineUserID, profileID,
+				if (EmotivCloudClient.INSTANCE.EC_LoadUserProfile(userCloudID, engineUserID, profileID.getValue(),
 						-1) == EmotivCloudErrorCode.EC_OK.ToInt())
 					System.out.println("Loading finished");
 				else

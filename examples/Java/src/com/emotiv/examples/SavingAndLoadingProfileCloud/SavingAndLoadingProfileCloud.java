@@ -7,8 +7,11 @@ import com.sun.jna.Pointer;
 import com.sun.jna.ptr.IntByReference;
 
 public class SavingAndLoadingProfileCloud {
+	
+	
 	public static void main(String[] args) {
 		
+		String profileName = "EmotivProfile";
 		Pointer eEvent = Edk.INSTANCE.IEE_EmoEngineEventCreate();
 		Pointer eState = Edk.INSTANCE.IEE_EmoStateCreate();
 
@@ -21,7 +24,7 @@ public class SavingAndLoadingProfileCloud {
 		String password = input.nextLine();
 		
 		System.out.println("profileName: ");
-		String profileName = input.nextLine();
+		profileName = input.nextLine();
 		
 		input.close();
 
@@ -30,12 +33,14 @@ public class SavingAndLoadingProfileCloud {
 		
 		IntByReference engineUserID  = null;
 		IntByReference userCloudID	 = null;
+		IntByReference profileID = null;
 		int state     = 0;
 		boolean ready = false;
 		int option    = 2;       // 1 : Saving/ 2 : Loading
 
 		engineUserID  = new IntByReference(0);
 		userCloudID   = new IntByReference(0);
+		profileID = new IntByReference(-1);
 		
 		if (Edk.INSTANCE.IEE_EngineConnect("Emotiv Systems-5") != EdkErrorCode.EDK_OK
 				.ToInt()) {
@@ -86,11 +91,11 @@ public class SavingAndLoadingProfileCloud {
 
 				switch (option) {
 					case 1:{    
-						int profileID = EmotivCloudClient.INSTANCE.EC_GetProfileId(userCloudID.getValue(), profileName);
+						int result = EmotivCloudClient.INSTANCE.EC_GetProfileId(userCloudID.getValue(), profileName, profileID);
 
-						if (profileID >= 0) {
+						if (profileID.getValue() >= 0) {
 							System.out.println("Profile with " + profileName + " is existed");
-							if (EmotivCloudClient.INSTANCE.EC_UpdateUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileID) == EmotivCloudErrorCode.EC_OK.ToInt()) 
+							if (EmotivCloudClient.INSTANCE.EC_UpdateUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileID.getValue()) == EmotivCloudErrorCode.EC_OK.ToInt()) 
 							{
 								System.out.println("Updating finished");  
 							}
@@ -106,9 +111,9 @@ public class SavingAndLoadingProfileCloud {
 					}
 					case 2:{
 	                    if (getNumberProfile > 0){
-	                    	int profileID = EmotivCloudClient.INSTANCE.EC_GetProfileId(userCloudID.getValue(), profileName);
+	                    	int result = EmotivCloudClient.INSTANCE.EC_GetProfileId(userCloudID.getValue(), profileName, profileID);
 
-							if (EmotivCloudClient.INSTANCE.EC_LoadUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileID, version) == EmotivCloudErrorCode.EC_OK.ToInt())
+							if (EmotivCloudClient.INSTANCE.EC_LoadUserProfile(userCloudID.getValue(), engineUserID.getValue(), profileID.getValue(), version) == EmotivCloudErrorCode.EC_OK.ToInt())
 								System.out.println("Loading finished");
 	                        else
 	                        	System.out.println("Loading failed");
