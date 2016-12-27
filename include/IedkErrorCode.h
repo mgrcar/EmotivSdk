@@ -1,11 +1,11 @@
 /**
- * Emotiv SDK
- * Copyright (c) 2016 Emotiv Inc.
- *
- * This file is part of the Emotiv SDK.
- *
- * All the error codes that are returned by IEE_ functions are listed here.
- */
+* Emotiv SDK
+* Copyright (c) 2016 Emotiv Inc.
+*
+* This file is part of the Emotiv SDK.
+*
+* All the error codes that are returned by IEE_ functions are listed here.
+*/
 
 //! \file IedkErrorCode.h
 

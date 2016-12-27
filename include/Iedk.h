@@ -50,7 +50,6 @@ extern "C" {
 #include "MentalCommandDetection.h"
 #include "IEmotivProfile.h"
 #include "EmotivLicense.h"
-#include "EdfData.h"
 
 
     //! Handle to EmoState structure allocated by IEE_EmoStateCreate.
