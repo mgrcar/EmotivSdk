@@ -118,14 +118,13 @@ namespace MentalCommandWithCloudProfile
 
             if (mode == 0)
             {
-                int profileID = -1;
-                EmotivCloudClient.EC_GetProfileId(userCloudID, profileName, ref profileID);
+                int profileID = EmotivCloudClient.EC_GetProfileId(userCloudID, profileName);
 
                 if (profileID >= 0)
                 {
                     Console.WriteLine("Profile with " + profileName + " is existed");
                     Console.WriteLine("Updating....");
-                    if (EmotivCloudClient.EC_UpdateUserProfile(userCloudID, 0, profileID) == EdkDll.EDK_OK)
+                    if (EmotivCloudClient.EC_UpdateUserProfile(userCloudID, 0, profileID) == EmotivCloudClient.EC_OK)
                     {
                         Console.WriteLine("Updating finished");
                     }
@@ -136,7 +135,7 @@ namespace MentalCommandWithCloudProfile
                     Console.WriteLine("Saving...");
 
                     if (EmotivCloudClient.EC_SaveUserProfile(userCloudID, (int)0, profileName,
-                    EmotivCloudClient.profileFileType.TRAINING) == EdkDll.EDK_OK)
+                    EmotivCloudClient.profileFileType.TRAINING) == EmotivCloudClient.EC_OK)
                     {
                         Console.WriteLine("Saving finished");
                     }
@@ -151,10 +150,8 @@ namespace MentalCommandWithCloudProfile
                 {
                     Console.WriteLine("Loading...");
 
-                    int profileID = -1;
-                    EmotivCloudClient.EC_GetProfileId(userCloudID, profileName, ref profileID);
-
-                    if (EmotivCloudClient.EC_LoadUserProfile(userCloudID, 0, profileID, version) == EdkDll.EDK_OK)
+                    if (EmotivCloudClient.EC_LoadUserProfile(userCloudID, 0,
+                        EmotivCloudClient.EC_GetProfileId(userCloudID, profileName), version) == EmotivCloudClient.EC_OK)
                         Console.WriteLine("Loading finished");
                     else
                         Console.WriteLine("Loading failed");
@@ -252,14 +249,14 @@ namespace MentalCommandWithCloudProfile
 
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
                        
-            if (EmotivCloudClient.EC_Connect() != EdkDll.EDK_OK)
+            if (EmotivCloudClient.EC_Connect() != EmotivCloudClient.EC_OK)
             {
                 Console.WriteLine("Cannot connect to Emotiv Cloud.");
                 Thread.Sleep(2000);
                 return;
             }
 
-            if (EmotivCloudClient.EC_Login(userName, password) != EdkDll.EDK_OK)
+            if (EmotivCloudClient.EC_Login(userName, password) != EmotivCloudClient.EC_OK)
             {
                 Console.WriteLine("Your login attempt has failed. The username or password may be incorrect");
                 Thread.Sleep(2000);
@@ -268,7 +265,7 @@ namespace MentalCommandWithCloudProfile
 
             Console.WriteLine("Logged in as " + userName);
 
-            if (EmotivCloudClient.EC_GetUserDetail(ref userCloudID) != EdkDll.EDK_OK)
+            if (EmotivCloudClient.EC_GetUserDetail(ref userCloudID) != EmotivCloudClient.EC_OK)
                 return;            
 
             while (true)

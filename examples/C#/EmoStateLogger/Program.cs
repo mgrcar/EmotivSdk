@@ -210,11 +210,9 @@ namespace EmoStateLogger
         {
             switch (key)
             {
-                case ConsoleKey.F1:                    					
-					ulong action1 = (ulong)EdkDll.IEE_MentalCommandAction_t.MC_LEFT;
-                    ulong action2 = (ulong)EdkDll.IEE_MentalCommandAction_t.MC_RIGHT;
-                    ulong listAction = action1 | action2;
-                    EmoEngine.Instance.MentalCommandSetActiveActions(0, listAction);					
+                case ConsoleKey.F1:
+                    EmoEngine.Instance.MentalCommandSetActiveActions(0, (uint)EdkDll.IEE_MentalCommandAction_t.MC_LEFT);
+                    EmoEngine.Instance.MentalCommandSetActiveActions(0, (uint)EdkDll.IEE_MentalCommandAction_t.MC_RIGHT);
                     Console.WriteLine("Setting MentalCommand active actions for user");
                     break;
                 case ConsoleKey.F2:

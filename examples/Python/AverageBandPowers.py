@@ -8,14 +8,6 @@ from array import *
 from ctypes import *
 from __builtin__ import exit
 
-if sys.platform.startswith('win32'):
-    import msvcrt
-elif sys.platform.startswith('linux'):
-    import atexit
-    from select import select
-
-from ctypes import *
-
 try:
     if sys.platform.startswith('win32'):
         libEDK = cdll.LoadLibrary("../../bin/win32/edk.dll")

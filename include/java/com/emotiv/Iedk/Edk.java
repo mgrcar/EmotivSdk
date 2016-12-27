@@ -229,14 +229,14 @@ public interface Edk extends Library {
 		}
 	} 
 	
-	public class LicenseInfos_t extends Structure {
+	public static class LicenseInfos_t extends Structure {
 		
-		//public static class extends LicenseInfos_t implements Structure.ByReference {}
+		public static class ByReference extends LicenseInfos_t implements Structure.ByReference {}
 		
-		public long scopes;            // license type
-        public long date_from;         // epoch time 
-        public long date_to;           // epoch time
-        public int  seat_count;        // number of seat
+		public int scopes;            // license type
+        public int date_from;         // epoch time  //maximum date : 07 Feb 2106
+        public int date_to;           // epoch time
+        public int seat_count;        // number of seat
 
         public int  quotaDayLimit;     // session limit in day
         public int  usedQuotaDay;      // session used in day
@@ -244,15 +244,16 @@ public interface Edk extends Library {
         public int  usedQuotaMonth;    // session used in month
         public int  usedQuota;         // total session used
         public int  quota;             // total session in the license
+        
 		//@Override
-
 		@Override
-		protected List getFieldOrder() {
+		protected List<String> getFieldOrder() {
 			// TODO Auto-generated method stub
 			return Arrays.asList(new String[] { "scopes", "date_from", "date_to", "seat_count","quotaDayLimit", "usedQuotaDay" , "quotaMonthLimit", 
 					"usedQuotaMonth","usedQuota","quota" });
 		}
 	}
+	
 	
 	//! Check infos of the license
     /*!    
@@ -268,7 +269,7 @@ public interface Edk extends Library {
      *            EDK_OK
      * \sa IedkErrorCode.h
     */
-    public int IEE_LicenseInformation(LicenseInfos_t licenseInfo);
+    public int IEE_LicenseInformation(LicenseInfos_t.ByReference licenseInfo);
 
 
     //! Activate a license with license ID    

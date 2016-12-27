@@ -8,8 +8,8 @@
     <ProjectGuid>{FB2AB705-4466-4988-94DE-A3F324E109BA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HeadsetInformationLogger</RootNamespace>
-    <AssemblyName>HeadsetInformationLogger</AssemblyName>
+    <RootNamespace>MotionDataLogger</RootNamespace>
+    <AssemblyName>MotionDataLogger</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

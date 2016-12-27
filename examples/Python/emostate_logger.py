@@ -3,8 +3,6 @@ import os
 import platform
 import time
 import ctypes
-import serial
-
 
 if sys.platform.startswith('win32'):
     import msvcrt
@@ -19,15 +17,15 @@ try:
         libEDK = cdll.LoadLibrary("../../bin/win32/edk.dll")
     elif sys.platform.startswith('linux'):
         srcDir = os.getcwd()
-        if platform.machine().startswith('arm'):
+	if platform.machine().startswith('arm'):
             libPath = srcDir + "/../../bin/armhf/libedk.so"
-        else:
+	else:
             libPath = srcDir + "/../../bin/linux64/libedk.so"
         libEDK = CDLL(libPath)
     else:
         raise Exception('System not supported.')
 except Exception as e:
-    print ("Error: cannot load EDK lib:", e)
+    print 'Error: cannot load EDK lib:', e
     exit()
 
 write = sys.stdout.write
@@ -83,101 +81,15 @@ IS_FacialExpressionGetLowerFaceActionPower = \
 IS_FacialExpressionGetLowerFaceActionPower.restype = c_float
 IS_FacialExpressionGetLowerFaceActionPower.argtypes = [c_void_p]
 
-IS_FacialExpressionGetEyeLocation = libEDK.IS_FacialExpressionGetEyeLocation
-IS_FacialExpressionGetEyeLocation.restype = c_float
-IS_FacialExpressionGetEyeLocation.argtype = [c_void_p]
+IS_MentalCommandGetCurrentAction = libEDK.IS_MentalCommandGetCurrentAction
+IS_MentalCommandGetCurrentAction.restype = c_int
+IS_MentalCommandGetCurrentAction.argtypes = [c_void_p]
 
-IS_FacialExpressionGetEyelidState = libEDK.IS_FacialExpressionGetEyelidState
-IS_FacialExpressionGetEyelidState.restype = c_float
-IS_FacialExpressionGetEyelidState.argtype = [c_void_p]
+IS_MentalCommandGetCurrentActionPower = \
+    libEDK.IS_MentalCommandGetCurrentActionPower
+IS_MentalCommandGetCurrentActionPower.restype = c_float
+IS_MentalCommandGetCurrentActionPower.argtypes = [c_void_p]
 
-EyeX = c_float(0)
-EyeY = c_float(0)
-EyeLidLeft = c_float(0)
-EyeLidRight = c_float(0)
-
-X = pointer(EyeX)
-Y = pointer(EyeY)
-Left = pointer(EyeLidLeft)
-Right = pointer(EyeLidRight)
-
-#Perfomance metrics Model Parameters /long term excitement not present
-
-RawScore = c_double(0)
-MinScale = c_double(0)
-MaxScale = c_double(0)
-
-Raw = pointer(RawScore)
-Min = pointer(MinScale)
-Max = pointer(MaxScale)
-
-
-# short term excitement
-#IS_PerformanceMetricGetInstantaneousExcitementModelParams = libEDK.#IS_PerformanceMetricGetInstantaneousExcitementModelParams
-#IS_PerformanceMetricGetInstantaneousExcitementModelParams.restype = c_void_p
-#IS_PerformanceMetricGetInstantaneousExcitementModelParams.argtypes = [c_void_p]
-
-# relaxation
-IS_PerformanceMetricGetRelaxationModelParams = libEDK.IS_PerformanceMetricGetRelaxationModelParams
-IS_PerformanceMetricGetRelaxationModelParams.restype = c_void_p
-IS_PerformanceMetricGetRelaxationModelParams.argtypes = [c_void_p]
-
-# stress
-IS_PerformanceMetricGetStressModelParams = libEDK.IS_PerformanceMetricGetStressModelParams
-IS_PerformanceMetricGetStressModelParams.restype = c_void_p
-IS_PerformanceMetricGetStressModelParams.argtypes = [c_void_p]
-
-# boredom/engagement
-IS_PerformanceMetricGetEngagementBoredomModelParams = libEDK.IS_PerformanceMetricGetEngagementBoredomModelParams
-IS_PerformanceMetricGetEngagementBoredomModelParams.restype = c_void_p
-IS_PerformanceMetricGetEngagementBoredomModelParams.argtypes = [c_void_p]
-
-# interest
-IS_PerformanceMetricGetInterestModelParams = libEDK.IS_PerformanceMetricGetInterestModelParams
-IS_PerformanceMetricGetInterestModelParams.restype = c_void_p
-IS_PerformanceMetricGetInterestModelParams.argtypes = [c_void_p]
-
-# focus
-IS_PerformanceMetricGetFocusModelParams = libEDK.IS_PerformanceMetricGetFocusModelParams
-IS_PerformanceMetricGetFocusModelParams.restype = c_void_p
-IS_PerformanceMetricGetFocusModelParams.argtypes = [c_void_p]
-
-#Perfomance metrics Normalized Scores
-
-# long term excitement
-IS_PerformanceMetricGetExcitementLongTermScore = libEDK.IS_PerformanceMetricGetExcitementLongTermScore
-IS_PerformanceMetricGetExcitementLongTermScore.restype = c_float
-IS_PerformanceMetricGetExcitementLongTermScore.argtypes = [c_void_p]
-
-# short term excitement
-IS_PerformanceMetricGetInstantaneousExcitementScore = libEDK.IS_PerformanceMetricGetInstantaneousExcitementScore
-IS_PerformanceMetricGetInstantaneousExcitementScore.restype = c_float
-IS_PerformanceMetricGetInstantaneousExcitementScore.argtypes = [c_void_p]
-
-# relaxation
-IS_PerformanceMetricGetRelaxationScore = libEDK.IS_PerformanceMetricGetRelaxationScore
-IS_PerformanceMetricGetRelaxationScore.restype = c_float
-IS_PerformanceMetricGetRelaxationScore.argtypes = [c_void_p]
-
-# stress
-IS_PerformanceMetricGetStressScore = libEDK.IS_PerformanceMetricGetStressScore
-IS_PerformanceMetricGetStressScore.restype = c_float
-IS_PerformanceMetricGetStressScore.argtypes = [c_void_p]
-
-# boredom/engagement
-IS_PerformanceMetricGetEngagementBoredomScore = libEDK.IS_PerformanceMetricGetEngagementBoredomScore
-IS_PerformanceMetricGetEngagementBoredomScore.restype = c_float
-IS_PerformanceMetricGetEngagementBoredomScore.argtypes = [c_void_p]
-
-# interest
-IS_PerformanceMetricGetInterestScore = libEDK.IS_PerformanceMetricGetInterestScore
-IS_PerformanceMetricGetInterestScore.restype = c_float
-IS_PerformanceMetricGetInterestScore.argtypes = [c_void_p]
-
-# focus
-IS_PerformanceMetricGetFocusScore = libEDK.IS_PerformanceMetricGetFocusScore
-IS_PerformanceMetricGetFocusScore.restype = c_float
-IS_PerformanceMetricGetFocusScore.argtypes = [c_void_p]
 
 # -------------------------------------------------------------------------
 
@@ -207,46 +119,10 @@ def logEmoState(userID, eState):
     print >>f, FacialExpressionStates[FE_SMILE], ",",
     print >>f, FacialExpressionStates[FE_CLENCH], ",",
 
-    IS_FacialExpressionGetEyeLocation(eState,X,Y)
-    print >>f, EyeX.value, ",",
-    print >>f, EyeY.value, ",",
-    IS_FacialExpressionGetEyeLocation(eState,Left,Right)
-    print >>f, EyeLidLeft.value, ",",
-    print >>f, EyeLidRight.value, ",",
-
-    # Performance metrics Suite results
-    print >>f, IS_PerformanceMetricGetExcitementLongTermScore(eState), ",",
-    print >>f, IS_PerformanceMetricGetInstantaneousExcitementScore(eState), ",",    
-    #IS_PerformanceMetricGetInstantaneousExcitementModelParams(eState, Raw, Min, Max)
-    print >>f, RawScore.value, ",",
-    print >>f, MinScale.value, ",",
-    print >>f, MaxScale.value, ",",
-    print >>f, IS_PerformanceMetricGetStressScore(eState), ",",
-    IS_PerformanceMetricGetStressModelParams(eState, Raw, Min, Max)
-    print >>f, RawScore.value, ",",
-    print >>f, MinScale.value, ",",
-    print >>f, MaxScale.value, ",",
-    print >>f, IS_PerformanceMetricGetRelaxationScore(eState), ",",
-    IS_PerformanceMetricGetRelaxationModelParams(eState, Raw, Min, Max)
-    print >>f, RawScore.value, ",",
-    print >>f, MinScale.value, ",",
-    print >>f, MaxScale.value, ",",
-    print >>f, IS_PerformanceMetricGetEngagementBoredomScore(eState), ",",
-    IS_PerformanceMetricGetEngagementBoredomModelParams(eState, Raw, Min, Max)
-    print >>f, RawScore.value, ",",
-    print >>f, MinScale.value, ",",
-    print >>f, MaxScale.value, ",",
-    print >>f, IS_PerformanceMetricGetInterestScore(eState), ",",
-    IS_PerformanceMetricGetInterestModelParams(eState, Raw, Min, Max)
-    print >>f, RawScore.value, ",",
-    print >>f, MinScale.value, ",",
-    print >>f, MaxScale.value, ",",
-    print >>f, IS_PerformanceMetricGetFocusScore(eState), ",",
-    IS_PerformanceMetricGetFocusModelParams(eState, Raw, Min, Max)
-    print >>f, RawScore.value, ",",
-    print >>f, MinScale.value, ",",
-    print >>f, MaxScale.value, ",",
-    print >>f, '\n',
+    # MentalCommand Suite results
+    print >>f, IS_MentalCommandGetCurrentAction(eState), ",",
+    print >>f, IS_MentalCommandGetCurrentActionPower(eState)
+    print >>f, '\n'
     
 def kbhit():
     ''' Returns True if keyboard character was hit, False otherwise.
@@ -256,7 +132,6 @@ def kbhit():
     else:
         dr,dw,de = select([sys.stdin], [], [], 0)
         return dr != []
-
 # -------------------------------------------------------------------------
 
 userID = c_uint(0)
@@ -266,27 +141,16 @@ state  = c_int(0)
 composerPort = c_uint(1726)
 timestamp    = c_float(0.0)
 
-FE_SUPPRISE = 0x0020 
+FE_SUPPRISE = 0x0020
 FE_FROWN    = 0x0040
 FE_SMILE    = 0x0080
 FE_CLENCH   = 0x0100
 
-PM_EXCITEMENT = 0x0001,
-PM_RELAXATION = 0x0002,
-PM_STRESS     = 0x0004,
-PM_ENGAGEMENT = 0x0008,
-
-PM_INTEREST   = 0x0010,
-PM_FOCUS      = 0x0020
 
 # -------------------------------------------------------------------------
 header = ['Time', 'UserID', 'Wireless Signal Status', 'Blink', 'Wink Left', 'Wink Right',
           'Surprise', 'Furrow', 'Smile', 'Clench',
-          'EyeLocationHoriz', 'EyeLocationVert','EyelidStateLeft', 'EyelidStateRight', 'LongTermExcitementRawNorm', 
-          'ShortTermExcitementRawNorm','ShortTermExcitementRaw', 'ShortTermExcitementMin', 'ShortTermExcitementMax',
-          'RelaxationRawNorm','RelaxationRaw','RelaxationMin','RelaxationMax',
-          'StressRawNorm','StressRaw','StressMin','StressMax', 'EngagementRawNorm','EngagementRaw', 'EngagementMin','EngagementMax',
-          'InterestRawNorm','InterestRaw', 'InterestMin', 'InterestMax','FocusRawNorm','FocusRaw','FocusMin','FocusMax']
+          'MentalCommand Action', 'MentalCommand Power']
 
 input = ''
 print "==================================================================="
@@ -310,7 +174,6 @@ elif option == 2:
 else:
     print "option = ?"
 
-
 print "Start receiving Emostate! Press any key to stop logging...\n"
 f = file('ES.csv', 'w')
 f = open('ES.csv', 'w')
@@ -333,7 +196,7 @@ while (1):
             logEmoState(userID, eState)
     elif state != 0x0600:
         print "Internal error in Emotiv Engine ! "
-    time.sleep(0.1)
+    time.sleep(1)
 # -------------------------------------------------------------------------
 f.close()
 libEDK.IEE_EngineDisconnect()

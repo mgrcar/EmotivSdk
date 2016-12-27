@@ -88,11 +88,9 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="EdkDll.cs" />
-    <Compile Include="EEGData.cs" />
     <Compile Include="EmoEngine.cs" />
     <Compile Include="EmoState.cs" />
     <Compile Include="EmotivCloudClient.cs" />
-    <Compile Include="PerformanceMetric.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

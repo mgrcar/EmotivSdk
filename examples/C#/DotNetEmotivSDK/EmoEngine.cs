@@ -104,7 +104,6 @@ namespace Emotiv
         private IntPtr hEvent;
 
         private IntPtr hMotionData;
-        private IntPtr hEEGData;
         
         /// <summary>
         /// Function pointer of callback functions which will be called when EmoEngineConnectedEvent occurs
@@ -251,13 +250,6 @@ namespace Emotiv
         /// <param name="sender">Object which triggers the event</param>
         /// <param name="e">Contains metadata of the event</param>
         public delegate void EmoEngineEmoStateUpdatedEventHandler(object sender, EmoStateUpdatedEventArgs e);
-
-        /// <summary>
-        /// Function pointer of callback functions which will be called when PerformanceMetricEmoStateUpdatedEvent occurs
-        /// </summary>
-        /// <param name="sender">Object which triggers the event</param>
-        /// <param name="e">Contains metadata of the event</param>
-        public delegate void PerformanceMetricEmoStateUpdatedEventHandler(object sender, EmoStateUpdatedEventArgs e);
         
         /// <summary>
         /// Function pointer of callback functions which will be called when FacialExpressionEmoStateUpdatedEvent occurs
@@ -373,11 +365,6 @@ namespace Emotiv
         /// Raise when EmoEngine related EmoState is updated
         /// </summary>
         public event EmoEngineEmoStateUpdatedEventHandler EmoEngineEmoStateUpdated;
-
-        /// <summary>
-        /// Raise when PerformanceMetric related EmoState is updated
-        /// </summary>
-        public event PerformanceMetricEmoStateUpdatedEventHandler PerformanceMetricEmoStateUpdated;
         
         /// <summary>
         /// Raise when FacialExpression related EmoState is updated
@@ -391,8 +378,7 @@ namespace Emotiv
         private EmoEngine() 
         {
             hEvent = EdkDll.IEE_EmoEngineEventCreate();
-            hEEGData = EEGData.IEE_DataCreate();
-            hMotionData = EdkDll.IEE_MotionDataCreate();            
+            hMotionData = EdkDll.IEE_MotionDataCreate();
         }
 
         /// <summary>
@@ -402,8 +388,6 @@ namespace Emotiv
         {
             if (hEvent != IntPtr.Zero) EdkDll.IEE_EmoEngineEventFree(hEvent);
             if (hMotionData != IntPtr.Zero) EdkDll.IEE_MotionDataFree(hMotionData);
-            if (hEEGData != IntPtr.Zero) EEGData.IEE_DataFree(hEEGData);
-
         }
 
         /// <summary>
@@ -465,12 +449,6 @@ namespace Emotiv
                             emoStateUpdatedEventArgs = new EmoStateUpdatedEventArgs(userId, new EmoState(curEmoState));
                             OnEmoEngineEmoStateUpdated(emoStateUpdatedEventArgs);  
                         }
-                        if (!curEmoState.PerformanceMetricEqual(lastEmoState[userId]))
-                        {
-                            emoStateUpdatedEventArgs = new EmoStateUpdatedEventArgs(userId, new EmoState(curEmoState));
-                            OnPerformanceMetricEmoStateUpdated(emoStateUpdatedEventArgs);
-                        }
-
                         if (!curEmoState.MentalCommandEqual(lastEmoState[userId]))
                         {
                             emoStateUpdatedEventArgs = new EmoStateUpdatedEventArgs(userId, new EmoState(curEmoState));
@@ -788,15 +766,6 @@ namespace Emotiv
                 EmoEngineEmoStateUpdated(this, e);
         }
 
-        /// <summary>
-        /// Handler for PerformanceMetricEmoStateUpated event
-        /// </summary>
-        /// <param name="e">Contains metadata of the event, like userID</param>
-        protected virtual void OnPerformanceMetricEmoStateUpdated(EmoStateUpdatedEventArgs e)
-        {
-            if (PerformanceMetricEmoStateUpdated != null)
-                PerformanceMetricEmoStateUpdated(this, e);
-        }
 
         /// <summary>
         /// Handler for FacialExpressionEmoStateUpdated event
@@ -830,9 +799,6 @@ namespace Emotiv
             string errorStr = "";
             switch (errorCode)
             {
-                case EdkDll.EDK_UNKNOWN_ERROR:
-                    errorStr = "Unknown error";
-                    break;
                 case EdkDll.EDK_INVALID_PROFILE_ARCHIVE:
                     errorStr = "Invalid profile archive";
                     break;
@@ -874,7 +840,10 @@ namespace Emotiv
                     break;
                 case EdkDll.EDK_OPTIMIZATION_IS_ON:
                     errorStr = "The requested operation failed due to optimization settings.";
-                    break;                
+                    break;
+                case EdkDll.EDK_UNKNOWN_ERROR:
+                    errorStr = "Unknown error";
+                    break;
                 default:
                     errorStr = "Unknown error";
                     break;
@@ -882,7 +851,7 @@ namespace Emotiv
 
             EmoEngineException exception = new EmoEngineException(errorStr);
             exception.ErrorCode = errorCode;
-            //throw exception;
+            throw exception;
         }
 
         /// <summary>
@@ -1472,105 +1441,6 @@ namespace Emotiv
         public void IEE_FFTGetWindowingType(UInt32 userId, EdkDll.IEE_WindowingTypes type)
         {
             errorHandler(EdkDll.IEE_FFTGetWindowingType(userId, type));
-        }
-
-        /// <summary>
-        /// Sets the size of the data buffer. The size of the buffer affects how frequent GetData() needs to be called to prevent data loss.
-        /// </summary>
-        /// <param name="bufferSizeInSec">buffer size in second</param>
-        public void DataSetBufferSizeInSec(Single bufferSizeInSec)
-        {
-            errorHandler(EEGData.IEE_DataSetBufferSizeInSec(bufferSizeInSec));
-        }
-
-        /// <summary>
-        /// Returns the size of the data buffer
-        /// </summary>        
-        /// <returns>
-        /// the size of the data buffer
-        /// </returns>
-        public Single DataGetBufferSizeInSec()
-        {
-            Single bufferSizeInSecOut = 0;
-            errorHandler(EEGData.IEE_DataGetBufferSizeInSec(out bufferSizeInSecOut));
-            return bufferSizeInSecOut;
-        }
-
-        /// <summary>
-        /// Controls acquisition of data from EmoEngine (which is off by default).
-        /// </summary>
-        /// <param name="userId">user ID</param>
-        /// <param name="enable">If true, then enables data acquisition. If false, then disables data acquisition.</param>
-        public void DataAcquisitionEnable(UInt32 userId, bool enable)
-        {
-            errorHandler(EEGData.IEE_DataAcquisitionEnable(userId, enable));
-        }
-
-        /// <summary>
-        /// Returns whether data acquisition is enabled
-        /// </summary>
-        /// <param name="userId">user ID</param>     
-        /// <returns>
-        /// receives whether data acquisition is enabled
-        /// </returns>
-        public Boolean IsDataAcquisitionEnabled(UInt32 userId)
-        {
-            Boolean result = false;
-
-            errorHandler(EEGData.IEE_DataAcquisitionIsEnabled(userId, out result));
-
-            return result;
-        }
-
-        /// <summary>
-        /// Returns latest data since the last call
-        /// </summary>
-        /// <param name="userId">user ID</param>
-        /// <returns>
-        /// receives latest data since the last call
-        /// </returns>
-        public Dictionary<EdkDll.IEE_DataChannel_t, double[]> GetData(UInt32 userId)
-        {
-            Dictionary<EdkDll.IEE_DataChannel_t, double[]> result = new Dictionary<EdkDll.IEE_DataChannel_t, double[]>();
-
-            errorHandler(EEGData.IEE_DataUpdateHandle(userId, hEEGData));
-
-            UInt32 nSample = 0;
-            errorHandler(EEGData.IEE_DataGetNumberOfSample(hEEGData, out nSample));
-
-            if (nSample == 0)
-            {
-                return null;
-            }
-
-            foreach (EdkDll.IEE_DataChannel_t channel in Enum.GetValues(typeof(EdkDll.IEE_DataChannel_t)))
-            {
-                result.Add(channel, new double[nSample]);
-                errorHandler(EEGData.IEE_DataGet(hEEGData, channel, result[channel], nSample));
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Sets marker
-        /// </summary>
-        /// <param name="userId">user ID</param>            
-        /// <param name="marker">value of the marker</param>     
-        public void DataSetMarker(UInt32 userId, Int32 marker)
-        {
-            errorHandler(EEGData.IEE_DataSetMarker(userId, marker));
-        }
-
-        /// <summary>
-        /// Gets sampling rate
-        /// </summary>
-        /// <param name="userId">user ID</param>            
-        public UInt32 DataGetSamplingRate(UInt32 userId)
-        {
-            UInt32 samplingRate = 0;
-            errorHandler(EEGData.IEE_DataGetSamplingRate(userId, out samplingRate));
-            return samplingRate;
         }
     }
 }

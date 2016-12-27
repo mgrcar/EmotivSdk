@@ -15,7 +15,7 @@ public interface EmoState extends Library {
 	}
 
 	/**
-	 * FacialExpression type enumerator
+	 * FacialExpression facial expression type enumerator
 	 */
 	public enum IEE_FacialExpressionAlgo_t {
 

@@ -143,6 +143,31 @@ namespace Emotiv
             EdkDll.IS_GetBatteryChargeLevel(hEmoState, out chargeLevel, out maxChargeLevel);
         }
 
+                /// <summary>
+        /// Check whether two states are with identical EmoEngine state.
+        /// </summary>
+        /// <remarks>
+        /// This function is comparing the time since EmoEngine start,
+		/// the wireless signal strength and the signal quality of different channels
+        /// </remarks>
+        /// <param name="state">EmoState</param>
+        /// <returns>true: Equal, false: Different</returns>
+        public Boolean EmoEngineEqual(EmoState state)
+        {
+            return EdkDll.IS_EmoEngineEqual(GetHandle(), state.GetHandle());
+        }
+
+        /// <summary>
+        /// Check whether two EmoStateHandles are identical
+        /// </summary>
+        /// <param name="a">EmoState</param>
+        /// <param name="b">EmoState</param>
+        /// <returns></returns>
+        public Boolean Equals (EmoState a, EmoState b)
+        {
+            return EdkDll.IS_Equal(a.GetHandle(), b.GetHandle());
+        }
+
         /// <summary>
         /// Query whether the user is blinking at the time the EmoState is captured.
         /// </summary>
@@ -328,81 +353,6 @@ namespace Emotiv
         }
         
         /// <summary>
-        /// Returns the long term excitement level of the user
-        /// </summary>
-        /// <returns>excitement level (0.0 to 1.0)</returns>
-        public Single PerformanceMetricGetExcitementLongTermScore()
-        {
-            return PerformanceMetric.IS_PerformanceMetricGetExcitementLongTermScore(hEmoState);
-        }
-        
-        /// <summary>
-        /// Returns short term excitement level of the user
-        /// </summary>
-        /// <returns>excitement level (0.0 to 1.0)</returns>
-        
-        public Single PerformanceMetricInstantaneousExcitementTermScore()
-        {
-            return PerformanceMetric.IS_PerformanceMetricGetInstantaneousExcitementScore(hEmoState);
-        }
-
-
-        /// <summary>
-        /// Query whether the signal is too noisy for PerformanceMetric detection to be active
-        /// </summary>
-        /// <param name="type">PerformanceMetric detection type</param>
-        /// <returns>detection state (false: Not Active, true: Active)</returns>
-        public Boolean PerformanceMetricIsActive(PerformanceMetric.IEE_PerformanceMetricAlgo_t type)
-        {
-            return PerformanceMetric.IS_PerformanceMetricIsActive(hEmoState, type);
-        }
-
-        /// <summary>
-        /// Returns meditation level of the user
-        /// </summary>
-        /// <returns>meditation level (0.0 to 1.0)</returns>
-        public Single PerformanceMetricGetRelaxationScore()
-        {
-            return PerformanceMetric.IS_PerformanceMetricGetRelaxationScore(hEmoState);
-        }
-
-        /// <summary>
-        /// Returns focus level of the user
-        /// </summary>
-        /// <returns>focus level (0.0 to 1.0)</returns>
-        public Single PerformanceMetricGetFocusScore()
-        {
-            return PerformanceMetric.IS_PerformanceMetricGetFocusScore(hEmoState);
-        }
-
-        /// <summary>
-        /// Returns frustration level of the user
-        /// </summary>
-        /// <returns>frustration level (0.0 to 1.0)</returns>
-        public Single PerformanceMetricGetFrustrationScore()
-        {
-            return PerformanceMetric.IS_PerformanceMetricGetStressScore(hEmoState);
-        }
- 
-        /// <summary>
-        /// Returns engagement/boredom level of the user
-        /// </summary>
-        /// <returns>engagement/boredom level (0.0 to 1.0)</returns>
-        public Single PerformanceMetricGetEngagementBoredomScore()
-        {
-            return PerformanceMetric.IS_PerformanceMetricGetEngagementBoredomScore(hEmoState);
-        }
- 
-        /// <summary>
-        /// Returns Interest level of the user
-        /// </summary>
-        /// <returns>interest level (0.0 to 1.0)</returns>
-        public Single PerformanceMetricGetInterestScore()
-        {
-            return PerformanceMetric.IS_PerformanceMetricGetInterestScore(hEmoState);
-        }
-
-        /// <summary>
         /// Returns the detected Cognitiv action of the user
         /// </summary>
         /// <returns>Cognitiv action type</returns>
@@ -429,18 +379,6 @@ namespace Emotiv
             return EdkDll.IS_MentalCommandIsActive(hEmoState);
         }
 
-
-        /// <summary>
-        /// Check whether two states are with identical 'emotiv' state
-        /// </summary>
-        /// <param name="state">EmoState</param>
-        /// <returns>true: Equal, false: Different</returns>
-        public Boolean PerformanceMetricEqual(EmoState state)
-        {
-            return PerformanceMetric.IS_PerformanceMetricEqual(GetHandle(), state.GetHandle());
-        }
-
-
         /// <summary>
         /// Check whether two states are with identical Expressiv state, i.e. are both state representing the same facial expression
         /// </summary>
@@ -460,95 +398,5 @@ namespace Emotiv
         {
             return EdkDll.IS_MentalCommandEqual(GetHandle(), state.GetHandle());
         }
-
-        /// <summary>
-        /// Check whether two states are with identical EmoEngine state.
-        /// </summary>
-        /// <remarks>
-        /// This function is comparing the time since EmoEngine start,
-        /// the wireless signal strength and the signal quality of different channels
-        /// </remarks>
-        /// <param name="state">EmoState</param>
-        /// <returns>true: Equal, false: Different</returns>
-        public Boolean EmoEngineEqual(EmoState state)
-        {
-            return EdkDll.IS_EmoEngineEqual(GetHandle(), state.GetHandle());
-        }
-
-        /// <summary>
-        /// Check whether two EmoStateHandles are identical
-        /// </summary>
-        /// <param name="a">EmoState</param>
-        /// <param name="b">EmoState</param>
-        /// <returns></returns>
-        public Boolean Equals (EmoState a, EmoState b)
-        {
-            return EdkDll.IS_Equal(a.GetHandle(), b.GetHandle());
-        }
-
-        /// <summary>
-        /// Returns short term excitement model parameters
-        /// </summary>
-        /// <param name="rawScore"> return raw score</param>
-        /// <param name="minScale,maxScale"> return scale range</param>
-        /// <returns></returns>
-        public void PerformanceMetricGetInstantaneousExcitementModelParams(out Double rawScore, out Double minScale, out Double maxScale)
-        {
-            PerformanceMetric.IS_PerformanceMetricGetInstantaneousExcitementModelParams(hEmoState, out rawScore, out minScale, out maxScale);
-        }
-
-        /// <summary>
-        /// Returns Meditation model parameters
-        /// </summary>
-        /// <param name="rawScore"> return raw score</param>
-        /// <param name="minScale,maxScale"> return scale range</param>
-        /// <returns></returns>
-        public void PerformanceMetricGetRelaxationModelParams(out Double rawScore, out Double minScale, out Double maxScale)
-        {
-            PerformanceMetric.IS_PerformanceMetricGetRelaxationModelParams(hEmoState, out rawScore, out minScale, out maxScale);
-        }
-        /// <summary>
-        /// Returns EngagementBoredom model parameters
-        /// </summary>
-        /// <param name="rawScore"> return raw score</param>
-        /// <param name="minScale,maxScale"> return scale range</param>
-        /// <returns></returns>
-        public void PerformanceMetricGetEngagementBoredomModelParams(out Double rawScore, out Double minScale, out Double maxScale)
-        {
-            PerformanceMetric.IS_PerformanceMetricGetEngagementBoredomModelParams(hEmoState, out rawScore, out minScale, out maxScale);
-        }
-
-        /// <summary>
-        ///  Returns Frustration model parameters
-        /// </summary>
-        /// <param name="rawScore"> return raw score</param>
-        /// <param name="minScale,maxScale"> return scale range</param>
-        /// <returns></returns>
-        public void PerformanceMetricGetStressModelParams(out Double rawScore, out Double minScale, out Double maxScale)
-        {
-            PerformanceMetric.IS_PerformanceMetricGetStressModelParams(hEmoState, out rawScore, out minScale, out maxScale);
-        }
-
-        /// <summary>
-        ///  Returns Interest model parameters
-        /// </summary>
-        /// <param name="rawScore"> return raw score</param>
-        /// <param name="minScale,maxScale"> return scale range</param>
-        /// <returns></returns>
-        public void PerformanceMetricGetInterestModelParams(out Double rawScore, out Double minScale, out Double maxScale)
-        {
-            PerformanceMetric.IS_PerformanceMetricGetInterestModelParams(hEmoState, out rawScore, out minScale, out maxScale);
-        }
-
-        /// <summary>
-        ///  Returns Focus model parameters
-        /// </summary>
-        /// <param name="rawScore"> return raw score</param>
-        /// <param name="minScale,maxScale"> return scale range</param>
-        /// <returns></returns>
-        public void PerformanceMetricGetFocusModelParams(out Double rawScore, out Double minScale, out Double maxScale)
-        {
-            PerformanceMetric.IS_PerformanceMetricGetFocusModelParams(hEmoState, out rawScore, out minScale, out maxScale);
-        }   
     }
 }

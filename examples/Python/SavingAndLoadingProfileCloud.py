@@ -14,7 +14,7 @@ from ctypes import *
 
 try:
     if sys.platform.startswith('win32'):
-        libEDK = cdll.LoadLibrary("E:/GitHub_Community/bin/win32/edk.dll")
+        libEDK = cdll.LoadLibrary("../../bin/win32/edk.dll")
     elif sys.platform.startswith('linux'):
         srcDir = os.getcwd()
 	if platform.machine().startswith('arm'):
@@ -85,11 +85,11 @@ option = int(raw_input())
 
 if libEDK.EC_Connect() != 0:
     print "Cannot connect to Emotiv Cloud"
-    #exit()
+    exit()
 
 if libEDK.EC_Login(userName, password) != 0:
     print "Your login attempt has failed. The username or password may be incorrect"
-    #exit()
+    exit()
 
 print "Logged in as %s" % userName
 

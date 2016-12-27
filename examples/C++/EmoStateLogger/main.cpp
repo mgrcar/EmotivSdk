@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
 	int option = 0;
 	int state  = 0;
 	std::string input;
-    std::string filename = "emostate_logger.csv";
+    std::string filename = "eeg_logger.csv";
 	try {
 		
         std::cout << "==================================================================="
@@ -214,7 +214,11 @@ void logEmoState(std::ostream& os, unsigned int userID,
         os << "Interest min score,";
         os << "Interest max score,";
         os << "Interest scaled score,";
-        
+
+        os << "||,";
+
+		os << "MentalCommand Action,";
+		os << "MentalCommand Power,";
 		os << std::endl;
 	}
 
@@ -224,18 +228,18 @@ void logEmoState(std::ostream& os, unsigned int userID,
 
     //CQ 
     os << IS_GetContactQuality(eState, IEE_CHAN_AF3) << ", ";
-    os << IS_GetContactQuality(eState, IEE_CHAN_F7)  << ", ";
-    os << IS_GetContactQuality(eState, IEE_CHAN_F3)  << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_F7) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_F3) << ", ";
     os << IS_GetContactQuality(eState, IEE_CHAN_FC5) << ", ";
-    os << IS_GetContactQuality(eState, IEE_CHAN_T7)  << ", ";
-    os << IS_GetContactQuality(eState, IEE_CHAN_P7)  << ", ";
-    os << IS_GetContactQuality(eState, IEE_CHAN_O1)  << ", ";
-    os << IS_GetContactQuality(eState, IEE_CHAN_O2)  << ", ";
-    os << IS_GetContactQuality(eState, IEE_CHAN_P8)  << ", ";
-    os << IS_GetContactQuality(eState, IEE_CHAN_T8)  << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_T7) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_P7) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_O1) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_O2) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_P8) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_T8) << ", ";
     os << IS_GetContactQuality(eState, IEE_CHAN_FC6) << ", ";
-    os << IS_GetContactQuality(eState, IEE_CHAN_F4)  << ", ";
-    os << IS_GetContactQuality(eState, IEE_CHAN_F8)  << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_F4) << ", ";
+    os << IS_GetContactQuality(eState, IEE_CHAN_F8) << ", ";
     os << IS_GetContactQuality(eState, IEE_CHAN_AF4) << ", ";
 
     os << "||,";
@@ -336,6 +340,12 @@ void logEmoState(std::ostream& os, unsigned int userID,
         CaculateScale(rawScore, maxScale, minScale, scaledScore);
         os << scaledScore << ",";
     }
+
+    os << "||,";
+
+	// MentalCommand Suite results
+	os << static_cast<int>(IS_MentalCommandGetCurrentAction(eState)) << ",";
+	os << IS_MentalCommandGetCurrentActionPower(eState);
 
 	os << std::endl;
     os.flush();

@@ -80,6 +80,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\DotNetEmotivSDK\DotNetEmotivSDK.csproj">
       <Project>{d3337309-9682-425e-8edc-2ecfacf79565}</Project>
       <Name>DotNetEmotivSDK</Name>
