@@ -3,7 +3,6 @@ import os
 import platform
 import time
 import ctypes
-import serial
 
 
 if sys.platform.startswith('win32'):

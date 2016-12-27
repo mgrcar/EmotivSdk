@@ -22,7 +22,7 @@ namespace SavingAndLoadingProfileCloud
         static string userName  = "your_EmotivID";
         static string password  = "your_password";
         static string profileName = "profile_name";
-        static int version	= -1; // Lastest version
+        static int version = -1; // last version
 
         static void engine_UserAdded_Event(object sender, EmoEngineEventArgs e)
         {
