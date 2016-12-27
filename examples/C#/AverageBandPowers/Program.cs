@@ -49,8 +49,11 @@ namespace AverageBandPowers
             file.WriteLine(header);
             file.WriteLine("");
 
-            EdkDll.IEE_DataChannel_t[] channelList = new EdkDll.IEE_DataChannel_t[5] { EdkDll.IEE_DataChannel_t.IED_AF3, EdkDll.IEE_DataChannel_t.IED_AF4, EdkDll.IEE_DataChannel_t.IED_T7, 
-                                                                                       EdkDll.IEE_DataChannel_t.IED_T8, EdkDll.IEE_DataChannel_t.IED_O1 };
+            EdkDll.IEE_DataChannel_t[] channelList = new EdkDll.IEE_DataChannel_t[5] { EdkDll.IEE_DataChannel_t.IED_AF3, 
+                                                                                       EdkDll.IEE_DataChannel_t.IED_AF4, 
+                                                                                       EdkDll.IEE_DataChannel_t.IED_T7, 
+                                                                                       EdkDll.IEE_DataChannel_t.IED_T8, 
+                                                                                       EdkDll.IEE_DataChannel_t.IED_O1 };
 
             while (true)
             {
@@ -61,22 +64,25 @@ namespace AverageBandPowers
                 if (Console.KeyAvailable)
                     break;
                 
-                double[] alpha = new double[1];
-                double[] low_beta = new double[1];
+                double[] alpha     = new double[1];
+                double[] low_beta  = new double[1];
                 double[] high_beta = new double[1];
-                double[] gamma = new double[1];
-                double[] theta = new double[1];
+                double[] gamma     = new double[1];
+                double[] theta     = new double[1];
                 
                 for(int i = 0 ; i < 5 ; i ++)
                 {
-                    engine.IEE_GetAverageBandPowers((uint)userID, channelList[i], theta, alpha, low_beta, high_beta, gamma);
-                    file.Write(theta[0] + ",");
-                    file.Write(alpha[0] + ",");
-                    file.Write(low_beta[0] + ",");
-                    file.Write(high_beta[0] + ",");
-                    file.WriteLine(gamma[0] + ",");
+                    Int32 result = engine.IEE_GetAverageBandPowers((uint)userID, channelList[i], theta, alpha, low_beta, high_beta, gamma);
+                    if (result == EdkDll.EDK_OK)
+                    {
+                        file.Write(theta[0] + ",");
+                        file.Write(alpha[0] + ",");
+                        file.Write(low_beta[0] + ",");
+                        file.Write(high_beta[0] + ",");
+                        file.WriteLine(gamma[0] + ",");
 
-                    Console.WriteLine("Theta: " + theta[0]);
+                        Console.WriteLine("Theta: " + theta[0]);
+                    }
                 }
             }
 

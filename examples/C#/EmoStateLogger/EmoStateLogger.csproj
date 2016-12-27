@@ -8,8 +8,8 @@
     <ProjectGuid>{374D51CD-5F57-4145-8A61-9CBAB5E0F6D7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MotionDataLogger</RootNamespace>
-    <AssemblyName>MotionDataLogger</AssemblyName>
+    <RootNamespace>EmoStateLogger</RootNamespace>
+    <AssemblyName>EmoStateLogger</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
