@@ -185,11 +185,12 @@ def parsecommand(inputs):
                 print "Updating finished"      
             else:
                 print "Updating failed"
-        elif libEDK.EC_SaveUserProfile(userCloudID.value, userEngineID.value, profileName, 0) == 0:  # 0: libEDK.profileType.TRAINING
-            print "Saving finished"
-        else:
-            print "Saving failed"
-            exit()
+                if libEDK.EC_SaveUserProfile(userCloudID.value, userEngineID.value, profileName, 0) == 0:  # 0: libEDK.profileType.TRAINING
+                    print "Saving finished"
+                else:
+                    print "Saving failed"
+			
+        exit()
                 
     elif commands[0] == "load_profile":
     
@@ -337,10 +338,8 @@ def getcommand():
 		
 # -------------------------------------------------------------------------
 
-#userName    = "Your account name"
-#password    = "Your password"
-userName    = "thuyvy"
-password    = "Tnt140583"
+userName    = "Your account name"
+password    = "Your password"
 
 profileName = "EmotivProfile"
 version     = -1    # Lastest version

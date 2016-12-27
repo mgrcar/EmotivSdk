@@ -35,8 +35,8 @@ int _kbhit(void);
 
 
 int  main() {
-	std::string userName = "thuyvy";
-	std::string password = "Tnt140583";
+	std::string userName = "EmotivID";
+	std::string password = "Password";
 	std::string profileName = "EmotivProfile";
     std::string pathOfProfile;
 
