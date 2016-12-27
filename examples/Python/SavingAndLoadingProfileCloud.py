@@ -53,8 +53,8 @@ def kbhit():
 
 # -------------------------------------------------------------------------
 
-userName    = "Your account name"
-password    = "Your password"
+#userName    = "Your account name"
+#password    = "Your password"
 
 profileName = "EmotivProfile"
 version     = -1    # Lastest version
@@ -64,8 +64,13 @@ ready  = 0
 
 userEngineID  = c_uint(0)
 userEngineIDP = pointer(userEngineID)
+
 userCloudID   = c_uint(0)
 userCloudIDP  = pointer(userCloudID)
+
+profileID     = c_int(0)
+profileIDP    = pointer(profileID)
+
 state         = c_int(0)
 
 # -------------------------------------------------------------------------
@@ -96,8 +101,7 @@ print "Logged in as %s" % userName
 if libEDK.EC_GetUserDetail(userCloudIDP) != 0:
     exit()
 
-while True:    
-      
+while True:          
     state = libEDK.IEE_EngineGetNextEvent(eEvent)
     if state == 0:
         eventType = libEDK.IEE_EmoEngineEventGetType(eEvent)
@@ -106,40 +110,36 @@ while True:
         if eventType == 16:  # libEDK.IEE_Event_enum.IEE_UserAdded
             print "User ID: %d have added" % userEngineID.value
             ready = 1
+            break
             
-        if ready == 1:
-            getNumberProfile = libEDK.EC_GetAllProfileName(userCloudID.value)
+if ready == 1:
+    getNumberProfile = libEDK.EC_GetAllProfileName(userCloudID.value)
 
-            if option == 1: 
-                profileID = libEDK.EC_GetProfileId(userCloudID, profileName)
+    if option == 1: 
+        getNumberProfile = libEDK.EC_GetAllProfileName(userCloudID.value)
+        libEDK.EC_GetProfileId(userCloudID, profileName, profileIDP)       
                 
-                if profileID >= 0:
-                    print "Profile with %s is existed" % profileName
-                    if libEDK.EC_UpdateUserProfile(userCloudID.value, userEngineID.value, profileID, profileName) == 0:
-                        print "Updating finished"      
-                    else:
-                        print "Updating failed"
-                elif libEDK.EC_SaveUserProfile(userCloudID.value, userEngineID.value, profileName, 0) == 0:  # 0: libEDK.profileType.TRAINING
+        if profileID.value >= 0:
+            print "Profile with %s is existed" % profileName
+            if libEDK.EC_UpdateUserProfile(userCloudID.value, userEngineID.value, profileID.value, profileName) == 0:
+                print "Updating finished"      
+            else:
+                print "Updating failed"
+                if libEDK.EC_SaveUserProfile(userCloudID.value, userEngineID.value, profileName, 0) == 0:  # 0: libEDK.profileType.TRAINING
                     print "Saving finished"
                 else:
-                    print "Saving failed"
-                        
-                exit()
+                    print "Saving failed"                
                 
-                
-            if option == 2:                                    
-                    if getNumberProfile > 0:
-                        profileID = libEDK.EC_ProfileIDAtIndex(userCloudID.value, 0)
-                        if libEDK.EC_LoadUserProfile(userCloudID.value, userEngineID.value, profileID, version) == 0:
-                            print "Loading finished"
-                        else:
-                            print "Loading failed"
-                            
-                    exit()
+    if option == 2:                                    
+        if getNumberProfile > 0:
+            profileID = libEDK.EC_ProfileIDAtIndex(userCloudID.value, 0)
+            if libEDK.EC_LoadUserProfile(userCloudID.value, userEngineID.value, profileID, version) == 0:
+                print "Loading finished"
+            else:
+                print "Loading failed"
+        exit()
             
-    elif state != 0x0600:
-        print "Internal error in Emotiv Engine ! "
-    time.sleep(1)
+time.sleep(5)
 # -------------------------------------------------------------------------
 libEDK.IEE_EngineDisconnect()
 libEDK.IEE_EmoStateFree(eState)

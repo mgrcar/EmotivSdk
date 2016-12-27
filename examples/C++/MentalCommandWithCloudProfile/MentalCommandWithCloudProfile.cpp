@@ -31,8 +31,8 @@
 #endif
 
 
-const std::string userName = "Your account name";
-const std::string password = "Your password";
+const std::string userName = "YourEmotivID";
+const std::string password = "YourPassword";
 const std::string profileName = "Profile_1";
 
 unsigned int userID = 0;

@@ -2,7 +2,7 @@
 **
 ** Copyright 2015 by Emotiv. All rights reserved
 ** Example - SavingAndLoadingProfileCloud
-** How to saving and loading prfile from Emotiv Cloud
+** How to save and load prfile from Emotiv Cloud
 **
 ****************************************************************************/
 
@@ -18,10 +18,10 @@ namespace SavingAndLoadingProfileCloud
     class SavingAndLoadingProfileCloud
     {
         static int engineUserID = -1;
-        static int userCloudID  = 0;
-        static string userName  = "Your account name";
-        static string password  = "Your password";
-        static string profileName = "EmotivProfile";
+        static int cloudUserID  = 0;
+        static string userName  = "your_EmotivID";
+        static string password  = "your_password";
+        static string profileName = "profile_name";
         static int version	= -1; // Lastest version
 
         static void engine_UserAdded_Event(object sender, EmoEngineEventArgs e)
@@ -33,58 +33,52 @@ namespace SavingAndLoadingProfileCloud
         }
 
 
-        static void SavingLoadingFunction(int mode)
+        static void ProfileSaving()
         {
-            int getNumberProfile = EmotivCloudClient.EC_GetAllProfileName(userCloudID);
-
-            if (mode == 0)
-            {
-                int profileID = -1;
-                EmotivCloudClient.EC_GetProfileId(userCloudID, profileName, ref profileID);
+            
+            int profileID = -1;
+            EmotivCloudClient.EC_GetProfileId(cloudUserID, profileName, ref profileID);
                 
-                if (profileID >= 0) {
-                    Console.WriteLine("Updating...");
+            if (profileID >= 0) {
+                Console.WriteLine("Updating...");
 
-                    Console.WriteLine("Profile with " + profileName + " is existed");
-                    if (EmotivCloudClient.EC_UpdateUserProfile(userCloudID, engineUserID, profileID) == EdkDll.EDK_OK ) 
-                    {
-                        Console.WriteLine("Updating finished");
-                    }
-                    else Console.WriteLine("Updating failed");                    
-                }
-                else{
-                    Console.WriteLine("Saving...");
-
-                    if (EmotivCloudClient.EC_SaveUserProfile(userCloudID, 0, profileName,
-                    EmotivCloudClient.profileFileType.TRAINING) == EdkDll.EDK_OK)
-                    {
-                        Console.WriteLine("Saving finished");
-                    }
-                    else Console.WriteLine("Saving failed");
-                }
-
-                Thread.Sleep(5000);
-                return;
-            }
-            if (mode == 1)
-            {
-                if (getNumberProfile > 0)
+                Console.WriteLine("Profile with " + profileName + " is existed");
+                if (EmotivCloudClient.EC_UpdateUserProfile(cloudUserID, engineUserID, profileID) == EdkDll.EDK_OK ) 
                 {
-                    Console.WriteLine("Loading...");
-
-                    int profileID = -1;
-                    EmotivCloudClient.EC_GetProfileId(userCloudID, profileName, ref profileID);
-
-                    if (EmotivCloudClient.EC_LoadUserProfile(userCloudID, 0, profileID, version) == EdkDll.EDK_OK)
-                        Console.WriteLine("Loading finished");
-                    else
-                        Console.WriteLine("Loading failed");
-
+                    Console.WriteLine("Updating finished");
                 }
-
-                Thread.Sleep(5000);
-                return;
+                else Console.WriteLine("Updating failed");                    
             }
+            else{
+                Console.WriteLine("Saving...");
+
+                if (EmotivCloudClient.EC_SaveUserProfile(cloudUserID, 0, profileName,
+                EmotivCloudClient.profileFileType.TRAINING) == EdkDll.EDK_OK)
+                {
+                    Console.WriteLine("Saving finished");
+                }
+                else Console.WriteLine("Saving failed");
+            }
+
+            Thread.Sleep(5000);
+            return;
+        }
+
+        static void ProfileLoading()
+        {
+
+            Console.WriteLine("Loading...");
+
+            int profileID = -1;
+            EmotivCloudClient.EC_GetProfileId(cloudUserID, profileName, ref profileID);
+
+            if (EmotivCloudClient.EC_LoadUserProfile(cloudUserID, 0, profileID, version) == EdkDll.EDK_OK)
+                Console.WriteLine("Loading finished");
+            else
+                Console.WriteLine("Loading failed");
+
+            Thread.Sleep(5000);
+            return;                    
         }
 
         static void Main(string[] args)
@@ -120,8 +114,12 @@ namespace SavingAndLoadingProfileCloud
 
             Console.WriteLine("Logged in as " + userName);
 
-            if (EmotivCloudClient.EC_GetUserDetail(ref userCloudID) != EdkDll.EDK_OK)
-                return;            
+            if (EmotivCloudClient.EC_GetUserDetail(ref cloudUserID) != EdkDll.EDK_OK)
+                return;
+
+            // Loading information of all profiles from Cloud to buffer. 
+            // and return number of profile in the list. 
+            int getNumberProfile = EmotivCloudClient.EC_GetAllProfileName(cloudUserID);
 
             while (true)
             {
@@ -137,7 +135,10 @@ namespace SavingAndLoadingProfileCloud
                         Console.WriteLine("No headset is connected.");
                         continue;
                     }
-                    SavingLoadingFunction(0);
+
+                    // If your profile is new profile. You need call this function
+                    // before want to train Mental Command detections. 
+                    ProfileSaving();
                     break;
                 }
                 if (cki.Key == ConsoleKey.F2)
@@ -147,9 +148,13 @@ namespace SavingAndLoadingProfileCloud
                         Console.WriteLine("No headset is connected.");
                         continue;
                     }
-                    SavingLoadingFunction(1);
-                    break;
-                }                
+
+                    if (getNumberProfile > 0)
+                    {
+                        ProfileLoading();
+                        break;
+                    }
+                }
             }
 
             engine.Disconnect();
