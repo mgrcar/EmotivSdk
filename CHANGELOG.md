@@ -6,27 +6,24 @@ SDK CHANGELOGS
 #### Version 3.4.0
 * Bug fixes:
     * Fixed bug: cannot login with special symbol in EmotivID or password
-    * Fixed bug: Battery level is not stable	
+    * Fixed bug: battery level is not stable	
 	
 * New features and improvement:
-    * Support legacy EDK , which support EE_ API.
-    * New License API list. EmotivLicense.h .
-         Allow accessing EEG and Performance Metric (license key's required). 
-    * New Local Training Profile API list in IEmotivProfile.h .
-         Allow saving/loading a training profile to local
-    * New Cloud Training Proflie API list in EmotivCloudClient.h .
-    * Improved timestamp for EEG and Motion data .
-    * Improved marker time .
-    * Changed EC_UpdateUserProfile to return Error_Code.
-    * New API: IEE_HeadsetGetSerialNumber .
-    * New API: IEE_DisconnectDevice().
-    * Merged EC_ error code in EmotivCloudErrorCode.h into EDK_ error code in IedkErrorCode.h .
-    * Removed EmotivCloudErrorCode.h .
-    * Removed IEE_GetInsightSignalStrength and IEE_GetEpocPlusSignalStrength API.
-    * Added PM_INTEREST and PM_FOCUS for IS_PerformanceMetricIsActive API.
+    * Support legacy EDK, which includes `EE_` API
+    * New License API in `EmotivLicense.h`- allow accessing EEG and Performance Metric with license key
+    * New Local Training Profile API in `IEmotivProfile.h` - allow saving/loading a training profile to local device
+    * New Cloud Training Profile API in `EmotivCloudClient.h`
+    * Improved timestamp accuracy for EEG and Motion data
+    * Improved marker timestamp accuracy
+    * Changed `EC_UpdateUserProfile` to return `EDK_` error code
+    * New API: `IEE_HeadsetGetSerialNumber` and `IEE_DisconnectDevice()`
+    * Merged `EC_` error code in `EmotivCloudErrorCode.h` into `EDK_` error code in `IedkErrorCode.h`
+    * Deprecated `EmotivCloudErrorCode.h`
+    * Removed `IEE_GetInsightSignalStrength()` and `IEE_GetEpocPlusSignalStrength()`
+    * Added `PM_INTEREST` and `PM_FOCUS` for `IS_PerformanceMetricIsActive()`
 	
-* Issue:
-    * BTLE connection is not stable on Windows. Sometime it is lost data packets .
+* Known issues:
+    * BTLE connection is not stable on Windows 10 due to intermediate packet lost
 
 #### Version 3.3.3
 * Bug fixes:
