@@ -265,9 +265,8 @@ SocketServer::SocketServer(int port, int connections, SocketStream stream,
         ioctl(s_, FIONBIO, &arg);
 #endif
 	}
-
-	/* bind the socket to the internet address */
-	if (bind(s_, (sockaddr *)&sa, sizeof(sockaddr_in)) == SOCKET_ERROR) {
+    /* bind the socket to the internet address */
+    if (::bind(s_, (const sockaddr *)&sa, sizeof(sockaddr_in)) == SOCKET_ERROR) {
 #ifdef _WIN32
         closesocket(s_);
 #endif

@@ -5,6 +5,10 @@
 //  Created by emotiv on 4/23/15.
 //  Copyright (c) 2015 emotiv. All rights reserved.
 //
+/**
+ ** This example receives the PerformanceMetric scores
+ ** It works if you have license subscription Performance Metrics
+ */
 
 #import "ViewController.h"
 #import <edk/Iedk.h>
