@@ -6,6 +6,8 @@
 ** It logs all Emotiv detection results for the attached users after
 ** successfully establishing a connection to Emotiv EmoEngineTM or
 ** EmoComposerTM
+** The Performance Metrics detection works if you have license subscription Performance Metrics
+** Example ActivateLicense need to run at least one time on your computer to active your license before run this example.
 ****************************************************************************/
 
 #include <iostream>

@@ -9,17 +9,18 @@
 #import "ViewController.h"
 #import <edk/Iedk.h>
 
+#include <fstream>
 
 BOOL isConnected = NO;
 
 IEE_DataChannel_t ChannelList[] = {
-    IED_AF3, IED_AF4, IED_T7, IED_T8, IED_Pz
+    IED_AF3, IED_F7, IED_F3, IED_FC5, IED_T7, IED_P7, IED_O1, IED_O2,
+    IED_P8, IED_T8, IED_FC6, IED_F4, IED_F8, IED_AF4
 };
 
 const char header[] = "Channel , Theta ,Alpha ,Low beta ,High beta , Gamma ";
+std::ofstream ofs;
 
-const char *newLine = "\n";
-const char *comma = ",";
 @implementation ViewController
 
 EmoEngineEventHandle eEvent;
@@ -45,24 +46,19 @@ NSMutableData *data;
                                                          YES);
     documentDirectory = [paths lastObject];
     
-    name_channel = [[NSArray alloc]initWithObjects:@"AF3",@"AF4",@"T7",@"T8",@"Pz", nil];
+    name_channel = [[NSArray alloc]initWithObjects:@"AF3",@"F7",@"F3",@"FC5",@"T7"
+                    ,@"P7",@"O1",@"O2",@"P8",@"T8",@"FC6",@"F4",@"F8",@"AF4", nil];
     IEE_EmoInitDevice();
     if( IEE_EngineConnect() != EDK_OK ) {
         self.labelStatus.stringValue = @"Can't connect engine";
     }
     
     NSString* fileName = [NSString stringWithFormat:@"%@/BandPowerValue.csv",documentDirectory];
-    NSString* createFile = @"";
-    [createFile writeToFile:fileName atomically:YES encoding:NSUnicodeStringEncoding error:nil];
+    ofs.open([fileName UTF8String],std::ios::trunc);
+    ofs << header << std::endl;
     
-    file = [NSFileHandle fileHandleForUpdatingAtPath:fileName];
-    [self saveStr:file data:data value:header];
-    [self saveStr:file data:data value:newLine];
-    
-    //IEE_MotionDataSetBufferSizeInSec(secs);
-    
-    [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(getNextEvent) userInfo:nil repeats:YES];
-
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(ConnectDevice) userInfo:nil repeats:YES];
+    [NSThread detachNewThreadSelector:@selector(getNextEvent) toTarget:self withObject:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -73,86 +69,78 @@ NSMutableData *data;
 }
 
 -(void) getNextEvent {
-    /*Connect with Insight headset in mode Bluetooth*/
-    int numberDevice = IEE_GetInsightDeviceCount();
-    if(numberDevice > 0 && !isConnected) {
-        IEE_ConnectInsightDevice(0);
-        isConnected = YES;
-    }
-    /************************************************/
-    //    /*Connect with Epoc Plus headset in mode Bluetooth*/
-    //    int numberDevice = IEE_GetEpocPlusDeviceCount();
-    //    if(numberDevice > 0 && !isConnected) {
-    //        IEE_ConnectEpocPlusDevice(0);
-    //        isConnected = YES;
-    //    }
-    /************************************************/
-    else isConnected = NO;
-    int state = IEE_EngineGetNextEvent(eEvent);
-    unsigned int userID = 0;
+    while (true) {
+        int state = IEE_EngineGetNextEvent(eEvent);
+        unsigned int userID = 0;
     
-    if (state == EDK_OK)
-    {
+        if (state == EDK_OK)
+        {
         
-        IEE_Event_t eventType = IEE_EmoEngineEventGetType(eEvent);
-        IEE_EmoEngineEventGetUserId(eEvent, &userID);
+            IEE_Event_t eventType = IEE_EmoEngineEventGetType(eEvent);
+            IEE_EmoEngineEventGetUserId(eEvent, &userID);
         
-        // Log the EmoState if it has been updated
-        if (eventType == IEE_UserAdded)
-        {
-            NSLog(@"User Added");
-            IEE_FFTSetWindowingType(userID, IEE_HANN);
-            self.labelStatus.stringValue = @"Connected";
-            readytocollect = TRUE;
-        }
-        else if (eventType == IEE_UserRemoved)
-        {
-            NSLog(@"User Removed");
-            isConnected = NO;
-            self.labelStatus.stringValue = @"Disconnected";
-            readytocollect = FALSE;
-        }
-        else if (eventType == IEE_EmoStateUpdated)
-        {
+            // Log the EmoState if it has been updated
+            if (eventType == IEE_UserAdded)
+            {
+                NSLog(@"User Added");
+                IEE_FFTSetWindowingType(userID, IEE_HANN);
+                self.labelStatus.stringValue = @"Connected";
+                readytocollect = TRUE;
+            }
+            else if (eventType == IEE_UserRemoved)
+            {
+                NSLog(@"User Removed");
+                isConnected = NO;
+                self.labelStatus.stringValue = @"Disconnected";
+                readytocollect = FALSE;
+            }
+            else if (eventType == IEE_EmoStateUpdated)
+            {
             
-        }
-    }
-    if (readytocollect)
-    {
-        double value[5];
-        memset(value, 0, 5*sizeof(double));
-        for(int i=0 ; i< sizeof(ChannelList)/sizeof(IEE_DataChannel_t) ; ++i)
-        {
-            int result = IEE_GetAverageBandPowers(userID, ChannelList[i], &value[0], &value[1], &value[2], &value[3], &value[4]);
-            if(result == EDK_OK){
-                [self saveStr:file data:data value:[[name_channel objectAtIndex:i]UTF8String]];
-                [self saveStr:file data:data value:comma];
-                for(int j =0; j < 5; j++){
-                    [self saveDoubleVal:file data:data value:value[j]];
-                    [self saveStr:file data:data value:comma];
-                }
-                [self saveStr:file data:data value:newLine];
-                NSLog(@"Chanel %@ %f %f %f %f %f",[name_channel objectAtIndex:i],value[0],value[1],value[2],value[3],value[4]);
-                
             }
         }
+        if (readytocollect)
+        {
+            double value[5];
+            memset(value, 0, 5*sizeof(double));
+            for(int i=0 ; i< sizeof(ChannelList)/sizeof(IEE_DataChannel_t) ; ++i)
+            {
+                int result = IEE_GetAverageBandPowers(userID, ChannelList[i], &value[0], &value[1], &value[2], &value[3], &value[4]);
+                if(result == EDK_OK){
+                    ofs << [[name_channel objectAtIndex:i]UTF8String] << ",";
+                    for(int j =0; j < 5; j++){
+                        ofs << value[j] << ",";
+                    }
+                    ofs << std::endl;
+                    NSLog(@"Chanel %@ %f %f %f %f %f",[name_channel objectAtIndex:i],value[0],value[1],value[2],value[3],value[4]);
+                
+                }
+            }
 
+        }
+        usleep(2000);
     }
 }
 
-
--(void) saveStr : (NSFileHandle * )file data : (NSMutableData *) data value : (const char*) str
-{
-    [file seekToEndOfFile];
-    data = [NSMutableData dataWithBytes:str length:strlen(str)];
-    [file writeData:data];
+-(void)ConnectDevice{
+    /**This function to connect headset in mode Bluetooth*/
+    /*Connect with Insight headset in mode Bluetooth*/
+        int numberDevice = IEE_GetInsightDeviceCount();
+        if(numberDevice > 0 && !isConnected) {
+            IEE_ConnectInsightDevice(0);
+            isConnected = YES;
+        }
+    /************************************************/
+    /*Connect with Epoc Plus headset in mode Bluetooth*/
+//    int numberDevice = IEE_GetEpocPlusDeviceCount();
+//    if(numberDevice > 0 && !isConnected) {
+//        IEE_ConnectEpocPlusDevice(0);
+//        isConnected = YES;
+//    }
+    /************************************************/
+    else isConnected = NO;
+    
 }
 
--(void) saveDoubleVal : (NSFileHandle * )file data : (NSMutableData *) data value : (const double) val
-{
-    NSString* str = [NSString stringWithFormat:@"%f",val];
-    const char* myValStr = (const char*)[str UTF8String];
-    [self saveStr:file data:data value:myValStr];
-}
 
 @end

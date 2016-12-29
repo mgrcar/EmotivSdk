@@ -13,8 +13,8 @@
 		9E41F66C1AE8206B00158617 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E41F66B1AE8206B00158617 /* Images.xcassets */; };
 		9E41F66F1AE8206B00158617 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E41F66D1AE8206B00158617 /* Main.storyboard */; };
 		9E41F68C1AE88ED700158617 /* EngineWidget.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E41F68B1AE88ED700158617 /* EngineWidget.mm */; };
-		9E5F805E1BC3747E00BFD1D7 /* edk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5F805D1BC3747E00BFD1D7 /* edk.framework */; };
-		9E5F805F1BC3747E00BFD1D7 /* edk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5F805D1BC3747E00BFD1D7 /* edk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9E623A961E0CE01B00B337EE /* edk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E623A951E0CE01B00B337EE /* edk.framework */; };
+		9E623A971E0CE01B00B337EE /* edk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E623A951E0CE01B00B337EE /* edk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +24,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9E5F805F1BC3747E00BFD1D7 /* edk.framework in Embed Frameworks */,
+				9E623A971E0CE01B00B337EE /* edk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,7 +43,7 @@
 		9E41F66E1AE8206B00158617 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E41F68A1AE88ED700158617 /* EngineWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineWidget.h; sourceTree = "<group>"; };
 		9E41F68B1AE88ED700158617 /* EngineWidget.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EngineWidget.mm; sourceTree = "<group>"; };
-		9E5F805D1BC3747E00BFD1D7 /* edk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = edk.framework; path = ../../../../lib/Mac/edk.framework; sourceTree = "<group>"; };
+		9E623A951E0CE01B00B337EE /* edk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = edk.framework; path = ../../../../lib/Mac/edk.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E5F805E1BC3747E00BFD1D7 /* edk.framework in Frameworks */,
+				9E623A961E0CE01B00B337EE /* edk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +61,7 @@
 		9E41F6551AE8206B00158617 = {
 			isa = PBXGroup;
 			children = (
-				9E5F805D1BC3747E00BFD1D7 /* edk.framework */,
+				9E623A951E0CE01B00B337EE /* edk.framework */,
 				9E41F6601AE8206B00158617 /* MentalCommand */,
 				9E41F65F1AE8206B00158617 /* Products */,
 			);
@@ -274,8 +274,8 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					../../../../lib/Mac,
+					"$(PROJECT_DIR)/../../Framework",
+					"$(PROJECT_DIR)/../../../../lib/Mac",
 				);
 				INFOPLIST_FILE = MentalCommand/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -290,8 +290,8 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					../../../../lib/Mac,
+					"$(PROJECT_DIR)/../../Framework",
+					"$(PROJECT_DIR)/../../../../lib/Mac",
 				);
 				INFOPLIST_FILE = MentalCommand/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

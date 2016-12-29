@@ -13,8 +13,8 @@
 		9E41F5F41AE8097900158617 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E41F5F31AE8097900158617 /* Images.xcassets */; };
 		9E41F5F71AE8097900158617 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E41F5F51AE8097900158617 /* Main.storyboard */; };
 		9E41F6131AE809B300158617 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E41F6121AE809B300158617 /* CoreBluetooth.framework */; };
-		9E5F80611BC374C800BFD1D7 /* edk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5F80601BC374C800BFD1D7 /* edk.framework */; };
-		9E5F80621BC374C800BFD1D7 /* edk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5F80601BC374C800BFD1D7 /* edk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9E623A991E0CE06800B337EE /* edk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E623A981E0CE06800B337EE /* edk.framework */; };
+		9E623A9A1E0CE06800B337EE /* edk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E623A981E0CE06800B337EE /* edk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +24,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9E5F80621BC374C800BFD1D7 /* edk.framework in Embed Frameworks */,
+				9E623A9A1E0CE06800B337EE /* edk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -42,7 +42,7 @@
 		9E41F5F31AE8097900158617 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9E41F5F61AE8097900158617 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E41F6121AE809B300158617 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		9E5F80601BC374C800BFD1D7 /* edk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = edk.framework; path = ../../../../lib/Mac/edk.framework; sourceTree = "<group>"; };
+		9E623A981E0CE06800B337EE /* edk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = edk.framework; path = ../../../../lib/Mac/edk.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E41F6131AE809B300158617 /* CoreBluetooth.framework in Frameworks */,
-				9E5F80611BC374C800BFD1D7 /* edk.framework in Frameworks */,
+				9E623A991E0CE06800B337EE /* edk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +61,7 @@
 		9E41F5DD1AE8097900158617 = {
 			isa = PBXGroup;
 			children = (
-				9E5F80601BC374C800BFD1D7 /* edk.framework */,
+				9E623A981E0CE06800B337EE /* edk.framework */,
 				9E41F6121AE809B300158617 /* CoreBluetooth.framework */,
 				9E41F5E81AE8097900158617 /* MotionData */,
 				9E41F5E71AE8097900158617 /* Products */,
@@ -273,8 +273,8 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					../../../../lib/Mac,
+					"$(PROJECT_DIR)/../../Framework",
+					"$(PROJECT_DIR)/../../../../lib/Mac",
 				);
 				INFOPLIST_FILE = MotionDataLogger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -289,8 +289,8 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					../../../../lib/Mac,
+					"$(PROJECT_DIR)/../../Framework",
+					"$(PROJECT_DIR)/../../../../lib/Mac",
 				);
 				INFOPLIST_FILE = MotionDataLogger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

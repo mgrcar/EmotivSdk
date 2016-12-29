@@ -12,8 +12,8 @@
 		9E3AB44F1BFDB334007ED3E9 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E3AB44E1BFDB334007ED3E9 /* ViewController.mm */; };
 		9E3AB4511BFDB334007ED3E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E3AB4501BFDB334007ED3E9 /* Assets.xcassets */; };
 		9E3AB4541BFDB334007ED3E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E3AB4521BFDB334007ED3E9 /* Main.storyboard */; };
-		9E3AB45F1BFDC5AE007ED3E9 /* edk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3AB45E1BFDC5AE007ED3E9 /* edk.framework */; };
-		9E3AB4601BFDC5AE007ED3E9 /* edk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3AB45E1BFDC5AE007ED3E9 /* edk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9E623A9C1E0CE0BC00B337EE /* edk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E623A9B1E0CE0BC00B337EE /* edk.framework */; };
+		9E623A9D1E0CE0BC00B337EE /* edk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E623A9B1E0CE0BC00B337EE /* edk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,7 +23,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9E3AB4601BFDC5AE007ED3E9 /* edk.framework in Embed Frameworks */,
+				9E623A9D1E0CE0BC00B337EE /* edk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -40,7 +40,7 @@
 		9E3AB4501BFDB334007ED3E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E3AB4531BFDB334007ED3E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E3AB4551BFDB334007ED3E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9E3AB45E1BFDC5AE007ED3E9 /* edk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = edk.framework; path = ../../../../lib/Mac/edk.framework; sourceTree = "<group>"; };
+		9E623A9B1E0CE0BC00B337EE /* edk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = edk.framework; path = ../../../../lib/Mac/edk.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E3AB45F1BFDC5AE007ED3E9 /* edk.framework in Frameworks */,
+				9E623A9C1E0CE0BC00B337EE /* edk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +58,7 @@
 		9E3AB43B1BFDB334007ED3E9 = {
 			isa = PBXGroup;
 			children = (
-				9E3AB45E1BFDC5AE007ED3E9 /* edk.framework */,
+				9E623A9B1E0CE0BC00B337EE /* edk.framework */,
 				9E3AB4461BFDB334007ED3E9 /* ProfileCloudExample */,
 				9E3AB4451BFDB334007ED3E9 /* Products */,
 			);
@@ -270,7 +270,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = ../../../../lib/Mac;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../Framework",
+					"$(PROJECT_DIR)/../../../../lib/Mac",
+				);
 				INFOPLIST_FILE = ProfileCloudExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.emotiv.ProfileCloudExample;
@@ -284,7 +287,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = ../../../../lib/Mac;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../Framework",
+					"$(PROJECT_DIR)/../../../../lib/Mac",
+				);
 				INFOPLIST_FILE = ProfileCloudExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.emotiv.ProfileCloudExample;

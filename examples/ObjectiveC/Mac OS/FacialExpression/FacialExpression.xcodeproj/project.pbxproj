@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E5F805B1BC3730500BFD1D7 /* edk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5F805A1BC3730500BFD1D7 /* edk.framework */; };
-		9E5F805C1BC3730500BFD1D7 /* edk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5F805A1BC3730500BFD1D7 /* edk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9E623A901E0CDE9A00B337EE /* edk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E623A8F1E0CDE9A00B337EE /* edk.framework */; };
+		9E623A911E0CDE9A00B337EE /* edk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E623A8F1E0CDE9A00B337EE /* edk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9EC9E8491AE8A37700987851 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC9E8481AE8A37700987851 /* AppDelegate.m */; };
 		9EC9E84B1AE8A37700987851 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC9E84A1AE8A37700987851 /* main.m */; };
 		9EC9E84E1AE8A37700987851 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9EC9E84D1AE8A37700987851 /* ViewController.mm */; };
@@ -24,7 +24,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9E5F805C1BC3730500BFD1D7 /* edk.framework in Embed Frameworks */,
+				9E623A911E0CDE9A00B337EE /* edk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -32,7 +32,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9E5F805A1BC3730500BFD1D7 /* edk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = edk.framework; path = ../../../../lib/Mac/edk.framework; sourceTree = "<group>"; };
+		9E623A8F1E0CDE9A00B337EE /* edk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = edk.framework; path = ../../../../lib/Mac/edk.framework; sourceTree = "<group>"; };
 		9EC9E8421AE8A37700987851 /* FacialExpression.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacialExpression.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EC9E8461AE8A37700987851 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9EC9E8471AE8A37700987851 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E5F805B1BC3730500BFD1D7 /* edk.framework in Frameworks */,
+				9E623A901E0CDE9A00B337EE /* edk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +61,7 @@
 		9EC9E8391AE8A37700987851 = {
 			isa = PBXGroup;
 			children = (
-				9E5F805A1BC3730500BFD1D7 /* edk.framework */,
+				9E623A8F1E0CDE9A00B337EE /* edk.framework */,
 				9EC9E8441AE8A37700987851 /* FacialExpression */,
 				9EC9E8431AE8A37700987851 /* Products */,
 			);
@@ -274,8 +274,8 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					../../../../lib/Mac,
+					"$(PROJECT_DIR)/../../Framework",
+					"$(PROJECT_DIR)/../../../../lib/Mac",
 				);
 				INFOPLIST_FILE = FacialExpression/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -290,8 +290,8 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					../../../../lib/Mac,
+					"$(PROJECT_DIR)/../../Framework",
+					"$(PROJECT_DIR)/../../../../lib/Mac",
 				);
 				INFOPLIST_FILE = FacialExpression/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

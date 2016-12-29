@@ -12,8 +12,8 @@
 		9E3AB4271BFD8DE1007ED3E9 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9E3AB4261BFD8DE1007ED3E9 /* ViewController.mm */; };
 		9E3AB4291BFD8DE1007ED3E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E3AB4281BFD8DE1007ED3E9 /* Assets.xcassets */; };
 		9E3AB42C1BFD8DE1007ED3E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E3AB42A1BFD8DE1007ED3E9 /* Main.storyboard */; };
-		9E3AB45C1BFDC45A007ED3E9 /* edk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3AB45B1BFDC45A007ED3E9 /* edk.framework */; };
-		9E3AB45D1BFDC45A007ED3E9 /* edk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3AB45B1BFDC45A007ED3E9 /* edk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9E623A931E0CDFD600B337EE /* edk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E623A921E0CDFD600B337EE /* edk.framework */; };
+		9E623A941E0CDFD600B337EE /* edk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E623A921E0CDFD600B337EE /* edk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,7 +23,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9E3AB45D1BFDC45A007ED3E9 /* edk.framework in Embed Frameworks */,
+				9E623A941E0CDFD600B337EE /* edk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -40,7 +40,7 @@
 		9E3AB4281BFD8DE1007ED3E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E3AB42B1BFD8DE1007ED3E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E3AB42D1BFD8DE1007ED3E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9E3AB45B1BFDC45A007ED3E9 /* edk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = edk.framework; path = ../../../../lib/Mac/edk.framework; sourceTree = "<group>"; };
+		9E623A921E0CDFD600B337EE /* edk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = edk.framework; path = ../../../../lib/Mac/edk.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E3AB45C1BFDC45A007ED3E9 /* edk.framework in Frameworks */,
+				9E623A931E0CDFD600B337EE /* edk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +58,7 @@
 		9E3AB4131BFD8DE1007ED3E9 = {
 			isa = PBXGroup;
 			children = (
-				9E3AB45B1BFDC45A007ED3E9 /* edk.framework */,
+				9E623A921E0CDFD600B337EE /* edk.framework */,
 				9E3AB41E1BFD8DE1007ED3E9 /* FFTExample */,
 				9E3AB41D1BFD8DE1007ED3E9 /* Products */,
 			);
@@ -270,7 +270,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = ../../../../lib/Mac;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../Framework",
+					"$(PROJECT_DIR)/../../../../lib/Mac",
+				);
 				INFOPLIST_FILE = FFTExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.emotiv.FFTExample;
@@ -284,7 +287,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = ../../../../lib/Mac;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../Framework",
+					"$(PROJECT_DIR)/../../../../lib/Mac",
+				);
 				INFOPLIST_FILE = FFTExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.emotiv.FFTExample;
