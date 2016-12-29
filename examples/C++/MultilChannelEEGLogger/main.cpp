@@ -5,6 +5,8 @@
 ** IEE_DataGetMultiChannels function instead for IEE_DataGet().
 ** It gets all data from all channels in channel list and logs to file
 ** (ie mydata.csv)
+** It works if you have license subscription EEG
+** Example ActivateLicense need to run at least one time on your computer to active your license before run this example.
 ****************************************************************************/
 
 #include <iostream>

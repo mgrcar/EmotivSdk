@@ -23,7 +23,8 @@ using namespace std;
 #endif
 
 #if __linux__ || __APPLE__
-int _kbhit(void);
+    #include <unistd.h>
+    int _kbhit(void);
 #endif
 
 int main(int argc,char* argv[])

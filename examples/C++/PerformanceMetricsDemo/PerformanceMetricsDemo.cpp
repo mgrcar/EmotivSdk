@@ -5,6 +5,8 @@
 ** This example receives the PerformanceMetric scores
 ** then calculates the scaled scores
 ** and writes them to the data file( .csv file ...ie)
+** It works if you have license subscription Performance Metrics
+** Example ActivateLicense need to run at least one time on your computer to active your license before run this example.
 ****************************************************************************/
 
 #include <iostream>

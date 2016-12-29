@@ -4,6 +4,8 @@
 ** This sample is to get synchronized eeg data from two headsets.
 ** The data is only written to files as two headsets are in the good condition
 ** ( without noise, full of battery, ... )
+** It works if you have license subscription EEG
+** Example ActivateLicense need to run at least one time on your computer to active your license before run this example.
 ****************************************************************************/
 
 #include <iostream>
@@ -48,7 +50,6 @@ const char header[] = "COUNTER, INTERPOLATED, RAW_CQ, AF3,"
 bool IsHeadset1On  = false;
 bool IsHeadset2On  = false;
 bool onetime       = true;
-int  write         =  0;
 double* data1[100]     ;
 double* data2[100]     ;
 
@@ -62,7 +63,7 @@ unsigned int numberOfSample2 = 0;
     int _getch(void);
 #endif
 
-int main(int argc,char** argv[])
+int main(int argc,char** argv)
 {
 	// Create some structures to hold the data
 	EmoEngineEventHandle eEvent = IEE_EmoEngineEventCreate();
@@ -173,7 +174,6 @@ int main(int argc,char** argv[])
 					{
 						IsHeadset1On = true;
                         if( onetime) {
-                            write = userID;
                             onetime = false;
                         }
                         for (int c = 0 ;
@@ -195,7 +195,6 @@ int main(int argc,char** argv[])
 					{
 						IsHeadset2On = true;
                         if( onetime) {
-                            write = userID;
                             onetime = false;
                         }
                         for (int c = 0 ;

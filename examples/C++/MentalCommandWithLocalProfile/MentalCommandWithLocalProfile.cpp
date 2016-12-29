@@ -9,15 +9,64 @@
 
 #include <iostream>
 #include <fstream>
-#include <conio.h>
 #include <sstream>
-#include <windows.h>
+
+#ifdef _WIN32
+    #include <conio.h>
+    #include <windows.h>
+#endif
+
+#if __linux__ || __APPLE__
+#include <unistd.h>
+int _kbhit(void);
+#endif
+
 #include <map>
 #include <cassert>
 
 #include "IEmoStateDLL.h"
 #include "Iedk.h"
 #include "IedkErrorCode.h"
+
+#ifdef __APPLE__
+int _kbhit (void)
+{
+    struct timeval tv;
+    fd_set rdfs;
+    
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+    
+    FD_ZERO(&rdfs);
+    FD_SET (STDIN_FILENO, &rdfs);
+    
+    select(STDIN_FILENO+1, &rdfs, NULL, NULL, &tv);
+    return FD_ISSET(STDIN_FILENO, &rdfs);
+}
+#endif
+
+#ifdef __linux__
+int _kbhit(void)
+{
+    struct timeval tv;
+    fd_set read_fd;
+    
+    tv.tv_sec=0;
+    tv.tv_usec=0;
+    
+    FD_ZERO(&read_fd);
+    FD_SET(0,&read_fd);
+    
+    if(select(1, &read_fd,NULL, NULL, &tv) == -1)
+        return 0;
+    
+    if(FD_ISSET(0,&read_fd))
+        return 1;
+    
+    return 0;
+}
+#endif
+
 
 using namespace std;
 
@@ -58,7 +107,7 @@ int main(int argc, char** argv) {
 	option = atoi(input.c_str());
 
 	if (IEE_EngineConnect() != EDK_OK) {
-		throw std::exception("Emotiv Engine start up failed.");
+		throw std::runtime_error("Emotiv Engine start up failed.");
 	}
 		
 	while (!_kbhit()) {
@@ -129,7 +178,7 @@ void loadProfile(int userID)
     if (IEE_LoadUserProfile(userID, profileNameForLoading.c_str()) == EDK_OK)
         std::cout << "Load Profile : done" << std::endl;
 	else
-		throw std::exception("Can't load profile.");
+		throw std::runtime_error("Can't load profile.");
 }
 
 const char *byte_to_binary(long x)
@@ -232,7 +281,12 @@ void handleMentalCommandEvent(std::ostream& os, EmoEngineEventHandle MentalComma
 		{
 			os << std::endl << "MentalCommand training for user " << userID << " SUCCEEDED!" << std::endl;
 			IEE_MentalCommandSetTrainingControl(userID, MC_ACCEPT);
-			Sleep(3000);
+#ifdef _WIN32
+            Sleep(3000);
+#endif
+#if linux || __APPLE__
+            sleep(3);
+#endif
 			break;
 		}
 
