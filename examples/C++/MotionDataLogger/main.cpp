@@ -1,156 +1,138 @@
 /****************************************************************************
-**
-** Copyright 2015 by Emotiv. All rights reserved
-** Example - MotionDataLogger
-** This example demonstrates how to extract live Motion data using the EmoEngineTM
-** in C++. Data is read from the headset and sent to an output file for
-** later analysis
-**
-****************************************************************************/
-
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <map>
-#include <cstdlib>
-#include <stdexcept>
-
-#ifdef _WIN32
-    #include <conio.h>
-    #include <windows.h>
-#endif
-#if __linux__ || __APPLE__
-    #include <unistd.h>
-#endif
-
+ **
+ ** Copyright 2015 by Emotiv. All rights reserved
+ ** Example - MotionDataLogger
+ ** This example demonstrates how to extract live Motion data using the EmoEngineTM
+ ** in C++. Data is read from the headset and sent to an output file for
+ ** later analysis
+ **
+ ****************************************************************************/
 #include "IEmoStateDLL.h"
 #include "Iedk.h"
 #include "IedkErrorCode.h"
 
-IEE_MotionDataChannel_t targetChannelList[] = {
-        IMD_COUNTER,      
-        IMD_GYROX, 
-        IMD_GYROY, 
-        IMD_GYROZ, 
-        IMD_ACCX,  
-        IMD_ACCY,  
-        IMD_ACCZ,  
-        IMD_MAGX,  
-        IMD_MAGY,  
-        IMD_MAGZ,  
-        IMD_TIMESTAMP
-	};
+#include <iostream>
+#include <fstream>
+#include <memory>
+#include <stdexcept>
+#include <thread>
+#include <vector>
+
+#ifdef _WIN32
+#include <conio.h>
+#include <windows.h>
+#endif
+#if __linux__ || __APPLE__
+#include <unistd.h>
+#endif
+
+
+namespace {
+
+const IEE_MotionDataChannel_t targetChannelList[] = {
+    IMD_COUNTER,
+    IMD_GYROX,
+    IMD_GYROY,
+    IMD_GYROZ,
+    IMD_ACCX,
+    IMD_ACCY,
+    IMD_ACCZ,
+    IMD_MAGX,
+    IMD_MAGY,
+    IMD_MAGZ,
+    IMD_TIMESTAMP
+};
 
 const char header[] = "COUNTER, GYROX, GYROY, GYROZ, ACCX, ACCY, ACCZ, MAGX, "
-	"MAGY, MAGZ, TIMESTAMP";
+    "MAGY, MAGZ, TIMESTAMP";
+
+}
 
 #if __linux__ || __APPLE__
 int _kbhit(void);
 #endif
 
+using std::cout;
+using std::cerr;
+using std::unique_ptr;
+
+
 int main(int argc, char** argv) {
+    unique_ptr<void, void (*)(EmoEngineEventHandle)> eEvent(IEE_EmoEngineEventCreate(), &IEE_EmoEngineEventFree);
+    unique_ptr<void, void (*)(EmoStateHandle)> eState(IEE_EmoStateCreate(), &IEE_EmoStateFree);
+    float secs                  = 1;
+    bool readytocollect         = false;
+    char const * filename        = "motionData.csv";
 
-	EmoEngineEventHandle eEvent = IEE_EmoEngineEventCreate();
-	EmoStateHandle eState       = IEE_EmoStateCreate();
-	unsigned int userID         = 0;	
-	float secs                  = 1;
-	unsigned int datarate       = 0;
-	bool readytocollect         = false;
-	int state                   = 0;
-    std::string filename        = "motionData.csv";
+    try {
+        cout << "===================================================================\n";
+        cout << "Example to show how to log Motion Data from EmoDriver.\n"; 
+        cout << "===================================================================" << std::endl;
 
-	try {
-		
-        std::cout << "==================================================================="
-                  << std::endl;
-        std::cout << "Example to show how to log Motion Data from EmoDriver."
-                  << std::endl;
-        std::cout << "==================================================================="
-                  << std::endl;
+        if (IEE_EngineConnect() != EDK_OK)
+            throw std::runtime_error("Emotiv Driver start up failed.");
 
-        
-		if (IEE_EngineConnect() != EDK_OK) 
-			throw std::runtime_error("Emotiv Driver start up failed.");
-		
-        std::cout << "Start receiving Motion Data! "
+        cout << "Start receiving Motion Data! "
                   << "Press any key to stop logging...\n"
                   << std::endl;
 
-        std::ofstream ofs(filename.c_str(),std::ios::trunc);
-		ofs << header << std::endl;
-		
-		DataHandle hMotionData = IEE_MotionDataCreate();
-		IEE_MotionDataSetBufferSizeInSec(secs);
+        std::ofstream ofs(filename, std::ios::trunc);
+        ofs << header << std::endl;
 
-		std::cout << "Buffer size in secs:" << secs << std::endl;
-		
-		while (!_kbhit()) {
+        unique_ptr<void, void (*)(DataHandle)> hMotionData(IEE_MotionDataCreate(), &IEE_MotionDataFree);
+        IEE_MotionDataSetBufferSizeInSec(secs);
 
-			state = IEE_EngineGetNextEvent(eEvent);
-			if (state == EDK_OK) {
+        cout << "Buffer size in secs:" << secs << std::endl;
 
-				IEE_Event_t eventType = IEE_EmoEngineEventGetType(eEvent);
-				IEE_EmoEngineEventGetUserId(eEvent, &userID);
+        while (!_kbhit()) {
+            auto state = IEE_EngineGetNextEvent(eEvent.get());
+            if (state == EDK_OK) {
 
-				// Log the EmoState if it has been updated
-				if (eventType == IEE_UserAdded) {
-					std::cout << "User added";
-					readytocollect = true;
-				}
-			}
+                IEE_Event_t eventType = IEE_EmoEngineEventGetType(eEvent.get());
 
-			if (readytocollect) {
-						
-                IEE_MotionDataUpdateHandle(0, hMotionData);
+                // Log the EmoState if it has been updated
+                if (eventType == IEE_UserAdded) {
+                    cout << "User added";
+                    readytocollect = true;
+                }
+            }
 
+            if (readytocollect) {
+                IEE_MotionDataUpdateHandle(0, hMotionData.get());
                 unsigned int nSamplesTaken=0;
-                IEE_MotionDataGetNumberOfSample(hMotionData, &nSamplesTaken);
+                IEE_MotionDataGetNumberOfSample(hMotionData.get(), &nSamplesTaken);
 
-                std::cout << "Updated " << nSamplesTaken << std::endl;
+                cout << "Updated " << nSamplesTaken << std::endl;
 
                 if (nSamplesTaken != 0) {
-
-                    double* data = new double[nSamplesTaken];
+                    std::vector<double> data(nSamplesTaken);
                     for (int sampleIdx=0 ; sampleIdx<(int)nSamplesTaken ; ++ sampleIdx) {
                         for (int i = 0 ;
                              i<sizeof(targetChannelList)/sizeof(IEE_MotionDataChannel_t) ;
                              i++) {
 
-                            IEE_MotionDataGet(hMotionData, targetChannelList[i],
-                                        data, nSamplesTaken);
+                            IEE_MotionDataGet(hMotionData.get(), targetChannelList[i],
+                                              data.data(), data.size());
                             ofs << data[sampleIdx] << ",";
                         }
                         ofs << std::endl;
                     }
-                    delete[] data;
+
                 }
 
-			}
-
-#ifdef _WIN32
-            Sleep(1);
-#endif
-#if __linux__ || __APPLE__
-            usleep(10000);
-#endif
-		}
-
-		ofs.close();
-		IEE_MotionDataFree(hMotionData);
-		
-
-	}
+            }
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+        ofs.close();
+    }
     catch (const std::runtime_error& e) {
-		std::cerr << e.what() << std::endl;
-		std::cout << "Press any key to exit..." << std::endl;
-		getchar();
-	}
+        cerr << e.what() << std::endl;
+        cout << "Press any key to exit..." << std::endl;
+        getchar();
+    }
+    IEE_EngineDisconnect();
 
-	IEE_EngineDisconnect();
-	IEE_EmoStateFree(eState);
-	IEE_EmoEngineEventFree(eEvent);
-
-	return 0;
+    return 0;
 }
 
 #ifdef __linux__
@@ -166,7 +148,7 @@ int _kbhit(void)
     FD_SET(0,&read_fd);
 
     if(select(1, &read_fd,NULL, NULL, &tv) == -1)
-    return 0;
+        return 0;
 
     if(FD_ISSET(0,&read_fd))
         return 1;
