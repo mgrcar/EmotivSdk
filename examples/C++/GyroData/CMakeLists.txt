@@ -1,41 +1,29 @@
-cmake_minimum_required(VERSION 2.8.0)
-
+cmake_minimum_required(VERSION 3.0.0)
 project (gyro)
 
-set ( EXAMPLES_DIR ../../../ )
+set(GYRO_EXE Gyro)
 
+add_executable(${GYRO_EXE} main.cpp)
+target_link_libraries(${GYRO_EXE} PRIVATE
+                      ${PROJECT_LINK_LIBS}
+                      ${GLUT_LIBS})
+                      
+target_include_directories(${GYRO_EXE}
+    PRIVATE
+    ${COMMUNITY_SDK_INCLUDE_DIR})
 if (WIN32)
-        if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "(amd64)|(AMD64)")
-           set ( PROJECT_LINK_LIBS edk.lib glut64.lib)
-           link_directories( ${EXAMPLES_DIR}/../bin/win64 )
-        elseif(${CMAKE_SYSTEM_PROCESSOR} MATCHES "(x86)|(X86)")
-            set ( PROJECT_LINK_LIBS edk.lib glut32.lib)
-            link_directories( ${EXAMPLES_DIR}/../bin/win32 )
-        else()
-           link_directories( ${EXAMPLES_DIR}/../bin/winarm )
-        endif()
-elseif(APPLE)
-        set ( PROJECT_LINK_LIBS "-framework edk" )
-elseif(UNIX)
-        set ( PROJECT_LINK_LIBS libedk.so libglut.so libGLU.so libGL.so)
-        if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86_64")
-           link_directories( ${EXAMPLES_DIR}/../bin/linux64 )
-        elseif(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86")
-           link_directories( ${EXAMPLES_DIR}/../bin/linux32 )
-        else()
-           link_directories( ${EXAMPLES_DIR}/../bin/armhf )
-        endif()
+    if(MSVC)
+        set_target_properties(${GYRO_EXE} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH}/$<CONFIG>)
+    else()
+        set_target_properties(${GYRO_EXE} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH})
+    endif()
+    
+    add_custom_command(TARGET ${GYRO_EXE} POST_BUILD
+              COMMAND ${CMAKE_COMMAND} -E copy_if_different
+              ${SDK_DLLS} ${THIRD_PARTY_DLLS} $<TARGET_FILE_DIR:${GYRO_EXE}>)
+              
+elseif (APPLE)
+    set_target_properties(${GYRO_EXE} PROPERTIES LINK_FLAGS "-F/Library/Frameworks")
+    target_link_libraries(${GYRO_EXE} "-framework OpenGL" )
+    target_link_libraries(${GYRO_EXE} "-framework GLUT" )
 endif()
-
-include_directories(${EXAMPLES_DIR}/include)
- 
-add_executable(gyro main.cpp)
-target_link_libraries(gyro ${PROJECT_LINK_LIBS} )
-if (APPLE)
-  set_target_properties(gyro PROPERTIES LINK_FLAGS "-F/Library/Frameworks")
-  target_link_libraries(gyro "-framework OpenGL" )
-  target_link_libraries(gyro "-framework GLUT" )
-endif(APPLE)
-
-
-

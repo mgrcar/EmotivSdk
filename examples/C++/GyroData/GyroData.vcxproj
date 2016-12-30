@@ -106,7 +106,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)/$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>../../../lib/win64;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>edk.lib;</AdditionalDependencies>
+      <AdditionalDependencies>edk.lib;glut64.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
