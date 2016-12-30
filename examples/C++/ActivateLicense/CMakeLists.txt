@@ -1,38 +1,25 @@
-cmake_minimum_required(VERSION 2.8.0)
+cmake_minimum_required(VERSION 3.0.0)
 
-project (ActivateLicense)
+project (activatelicense)
 
-set ( EXAMPLES_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../ )
-
+set(ACTIVATE_LICENSE_EXE ActivateLicense)
+ 
+add_executable(${ACTIVATE_LICENSE_EXE} ActivateLicense.cpp)
+target_link_libraries(${ACTIVATE_LICENSE_EXE} ${PROJECT_LINK_LIBS})
+target_include_directories(${ACTIVATE_LICENSE_EXE}
+    PRIVATE
+    ${COMMUNITY_SDK_INCLUDE_DIR})
 if (WIN32)
-        set ( PROJECT_LINK_LIBS edk.lib)
-        if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "(amd64)|(AMD64)")
-           link_directories( ${EXAMPLES_DIR}/../bin/win64 )
-        elseif(${CMAKE_SYSTEM_PROCESSOR} MATCHES "(x86)|(X86)")
-           link_directories( ${EXAMPLES_DIR}/../bin/win32 )
-        else()
-           link_directories( ${EXAMPLES_DIR}/../bin/winarm )
-        endif()
-elseif(APPLE)
-		set ( PROJECT_LINK_LIBS "-framework edk" )
-elseif(UNIX)
-        set ( PROJECT_LINK_LIBS libedk.so )
-        if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86_64")
-           link_directories( ${EXAMPLES_DIR}/../bin/linux64 )
-        elseif(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86")
-           link_directories( ${EXAMPLES_DIR}/../bin/linux32 )
-        else()
-           link_directories( ${EXAMPLES_DIR}/../bin/armhf )
-        endif()
+    if(MSVC)
+        set_target_properties(${ACTIVATE_LICENSE_EXE} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH}/$<CONFIG>)
+    else()
+        set_target_properties(${ACTIVATE_LICENSE_EXE} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH})
+    endif()
+    add_custom_command(TARGET ${ACTIVATE_LICENSE_EXE} POST_BUILD
+              COMMAND ${CMAKE_COMMAND} -E copy_if_different
+              ${SDK_DLLS} $<TARGET_FILE_DIR:${ACTIVATE_LICENSE_EXE}>)
 endif()
 
-include_directories(${EXAMPLES_DIR}/include)
- 
-add_executable(ActivateLicense ActivateLicense.cpp)
-target_link_libraries(ActivateLicense ${PROJECT_LINK_LIBS} )
 if (APPLE)
-	set_target_properties(ActivateLicense PROPERTIES LINK_FLAGS "-F/Library/Frameworks")
+    set_target_properties(${ACTIVATE_LICENSE_EXE} PROPERTIES LINK_FLAGS "-F/Library/Frameworks")
 endif(APPLE)
-
-
-
