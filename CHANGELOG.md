@@ -24,6 +24,10 @@ SDK CHANGELOGS
 	
 * Known issues:
     * BTLE connection is not stable on Windows 10 due to intermediate packet lost
+    
+* Platforms: 
+    * SDK v3.4.0 support Windows, MAC OS
+    * Linux, Android, IOS: still use SDK version 3.3.3
 
 #### Version 3.3.3
 * Bug fixes:
