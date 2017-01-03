@@ -60,21 +60,22 @@ using std::unique_ptr;
 int main(int argc, char** argv) {
     unique_ptr<void, void (*)(EmoEngineEventHandle)> eEvent(IEE_EmoEngineEventCreate(), &IEE_EmoEngineEventFree);
     unique_ptr<void, void (*)(EmoStateHandle)> eState(IEE_EmoStateCreate(), &IEE_EmoStateFree);
-    float secs                  = 1;
-    bool readytocollect         = false;
-    char const * filename        = "motionData.csv";
+    float secs            = 1;
+    bool readytocollect   = false;
+    char const * filename = "motionData.csv";
 
     try {
         cout << "===================================================================\n";
         cout << "Example to show how to log Motion Data from EmoDriver.\n"; 
+        cout << "This example is used for single headset connection.\n";
         cout << "===================================================================" << std::endl;
 
         if (IEE_EngineConnect() != EDK_OK)
             throw std::runtime_error("Emotiv Driver start up failed.");
 
         cout << "Start receiving Motion Data! "
-                  << "Press any key to stop logging...\n"
-                  << std::endl;
+             << "Press any key to stop logging...\n"
+             << std::endl;
 
         std::ofstream ofs(filename, std::ios::trunc);
         ofs << header << std::endl;
@@ -101,10 +102,11 @@ int main(int argc, char** argv) {
                 IEE_MotionDataUpdateHandle(0, hMotionData.get());
                 unsigned int nSamplesTaken=0;
                 IEE_MotionDataGetNumberOfSample(hMotionData.get(), &nSamplesTaken);
-
-                cout << "Updated " << nSamplesTaken << std::endl;
-
+                
                 if (nSamplesTaken != 0) {
+
+                    cout << "Updated " << nSamplesTaken << std::endl;
+
                     std::vector<double> data(nSamplesTaken);
                     for (int sampleIdx=0 ; sampleIdx<(int)nSamplesTaken ; ++ sampleIdx) {
                         for (int i = 0 ;
@@ -117,12 +119,10 @@ int main(int argc, char** argv) {
                         }
                         ofs << std::endl;
                     }
-
                 }
-
-            }
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+            }            
         }
+
         ofs.close();
     }
     catch (const std::runtime_error& e) {
@@ -130,6 +130,9 @@ int main(int argc, char** argv) {
         cout << "Press any key to exit..." << std::endl;
         getchar();
     }
+
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+
     IEE_EngineDisconnect();
 
     return 0;

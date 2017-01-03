@@ -79,8 +79,8 @@ int main()
 	try {
 		std::cout << "==================================================================="
 			      << std::endl;
-		std::cout << "Example to show how to log the EEG data from EmoEngine."
-			      << std::endl;
+        std::cout << "Example to show how to log the EEG data from EmoEngine. \n";
+        std::cout << "This example is used for single headset connection.\n";
 		std::cout << "==================================================================="
 			      << std::endl;
 
@@ -105,14 +105,18 @@ int main()
 				}
 			}
 
-			if (readytocollect) {
-				IEE_DataUpdateHandle(0, hData);
+            if (readytocollect) {
+                int result = IEE_DataUpdateHandle(0, hData);
+
+                if (result != EDK_OK)
+                    continue;
+
 				unsigned int nSamplesTaken = 0;
-				IEE_DataGetNumberOfSample(hData, &nSamplesTaken);
-				
-				std::cout << "Updated " << nSamplesTaken << std::endl;
+				IEE_DataGetNumberOfSample(hData, &nSamplesTaken);							
 				
 				if (nSamplesTaken != 0) {
+                    std::cout << "Updated " << nSamplesTaken << std::endl;
+
 					double* data = new double[nSamplesTaken];
 					for (int sampleIdx = 0; sampleIdx < (int)nSamplesTaken; ++sampleIdx) {
 						for (int i = 0; i < sizeof(EpocChannelList) / sizeof(IEE_DataChannel_t); i++) {
