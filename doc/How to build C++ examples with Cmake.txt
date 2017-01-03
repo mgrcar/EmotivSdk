@@ -1,0 +1,23 @@
+# Emotiv SDK - Community Edition
+
+HOW TO BUILD C++ EXAMPLES WITH CMAKE?
+
+Please follow the below steps:
+
+1) Create a build folder inside community-sdk folder
+2) Enter the build folder. Then run command to configure for all project:
+      Example: use Visual Studio Generators
+        - Cmake ..\    #for Win32
+        - Cmake ..\ -DWIN64=1 -G "Visual Studio 14 2015 Win64" ## for Win64.
+      
+                            
+3) After configuring done. Run build command to generate all of exectutable file
+      Example:
+        - Cmake --build . --config Release  # configuration whether Debug or Release, the default is Debug
+
+
+Note:
+    1) You can use other IDE or Command-Line Build Tools Generators.
+    2) Cmake minimum version 3.3.0 used here.
+    3) After configuring, you can build all project as above command 
+       or add "--target target_name" for build a certain target.
