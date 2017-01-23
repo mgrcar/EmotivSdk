@@ -42,23 +42,20 @@ public class CreateUser extends Activity {
 						MY_PERMISSIONS_REQUEST_BLUETOOTH);
 			}
 			else{
-				if (!mBluetoothAdapter.isEnabled()) {
 					if (!mBluetoothAdapter.isEnabled()) {
 						/****Request turn on Bluetooth***************/
 						Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 						startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 					}
-				}
 			}
 		}
 		else {
-			if (!mBluetoothAdapter.isEnabled()) {
+
 				if (!mBluetoothAdapter.isEnabled()) {
 					/****Request turn on Bluetooth***************/
 					Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 					startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 				}
-			}
 		}
 
 		EngineConnector.setContext(this);
@@ -73,13 +70,11 @@ public class CreateUser extends Activity {
 				// If request is cancelled, the result arrays are empty.
 				if (grantResults.length > 0
 						&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-					if (!mBluetoothAdapter.isEnabled()) {
 						/****Request turn on Bluetooth***************/
 						if (!mBluetoothAdapter.isEnabled()) {
 							Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 							startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 						}
-					}
 
 				} else {
 

@@ -64,23 +64,11 @@ public class MainActivity extends Activity {
 							MY_PERMISSIONS_REQUEST_BLUETOOTH);
 			}
 			else{
-				if (!mBluetoothAdapter.isEnabled()) {
-					if (!mBluetoothAdapter.isEnabled()) {
-						/****Request turn on Bluetooth***************/
-						Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-						startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-					}
-				}
+				checkConnect();
 			}
 		}
 		else {
-			if (!mBluetoothAdapter.isEnabled()) {
-				if (!mBluetoothAdapter.isEnabled()) {
-					/****Request turn on Bluetooth***************/
-					Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-					startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-				}
-			}
+			checkConnect();
 		}
 		Start_button = (Button)findViewById(R.id.startbutton);
 		Stop_button  = (Button)findViewById(R.id.stopbutton);
@@ -129,6 +117,7 @@ public class MainActivity extends Activity {
 				}
 			}
 		};
+		processingThread.start();
 	}
 
 	@Override
@@ -139,13 +128,7 @@ public class MainActivity extends Activity {
 				// If request is cancelled, the result arrays are empty.
 				if (grantResults.length > 0
 						&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-					if (!mBluetoothAdapter.isEnabled()) {
-						/****Request turn on Bluetooth***************/
-						if (!mBluetoothAdapter.isEnabled()) {
-							Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-							startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-						}
-					}
+					checkConnect();
 
 				} else {
 
@@ -167,7 +150,6 @@ public class MainActivity extends Activity {
 				//Connect to emoEngine
 				IEdk.IEE_EngineConnect(this,"");
 				IEdk.IEE_MotionDataCreate();
-				processingThread.start();
 			}
 			if (resultCode == Activity.RESULT_CANCELED) {
 				Toast.makeText(this, "You must be turn on bluetooth to connect with Emotiv devices"
@@ -219,6 +201,7 @@ public class MainActivity extends Activity {
 				else lock = false;
 				break;
 			case 2:
+				if(motion_writer == null) return;
 				IEdk.IEE_MotionDataUpdateHandle(userId);
 				int sample = IEdk.IEE_MotionDataGetNumberOfSample(userId);
 				if(sample > 0){
@@ -265,6 +248,7 @@ public class MainActivity extends Activity {
 		try {
 			motion_writer.flush();
 			motion_writer.close();
+			motion_writer = null;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -291,6 +275,21 @@ public class MainActivity extends Activity {
 				e.printStackTrace();
 			}
 
+	}
+
+	private void checkConnect(){
+		if (!mBluetoothAdapter.isEnabled()) {
+			/****Request turn on Bluetooth***************/
+			Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 		}
+		else
+		{
+			//Connect to emoEngine
+			IEdk.IEE_EngineConnect(this,"");
+			IEdk.IEE_MotionDataCreate();
+		}
+	}
+
 
 }
