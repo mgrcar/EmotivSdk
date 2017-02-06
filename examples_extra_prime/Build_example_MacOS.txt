@@ -1,0 +1,3 @@
+Build example C++ and Java on MacOS:
+
+You need to copy edk framework to folder /Library/Framework.
