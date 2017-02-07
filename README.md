@@ -80,11 +80,11 @@ Table below describe examples indetail :
 | SavingAndLoadingProfileCloud | Yes | C++, C#, Java, Python |Win, Mac, Ubuntu|
 | ProfileCloudExample | Yes | Objective-C, Java | Mac, Android, iOS|
 | RollingBall  | Yes | Unity | Win, Mac |
-| ActivateLicense  | No | C++, C#, Java, Python | Win, Mac, Ubuntu |
-| EEGLogger  | No | C++, C#, Objective-C, Java, Python, Matlab | Win, Mac, Ubuntu |
-| MultiDongleEEGLogger  | No | C++ | Win, Mac, Ubuntu |
-| MultilChannelEEGLogger  | No | C++ | Win, Mac, Ubuntu |
-| PerformanceMetricsDemo  | No | C++, C# | Win, Mac, Ubuntu |
+| ActivateLicense  | No | C++, C#, Java, Python | Win, Mac |
+| EEGLogger  | No | C++, C#, Objective-C, Java, Python, Matlab | Win, Mac |
+| MultiDongleEEGLogger  | No | C++ | Win, Mac |
+| MultilChannelEEGLogger  | No | C++ | Win, Mac |
+| PerformanceMetricsDemo  | No | C++, C# | Win, Mac |
 | EmotionalState  | No | Objective-C | iOS, Mac |
 
 ### Doesn't support Python 64bit. 
