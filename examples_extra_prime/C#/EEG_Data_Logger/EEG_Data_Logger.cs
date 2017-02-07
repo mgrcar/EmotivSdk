@@ -80,7 +80,7 @@ namespace EEG_Data_Logger
             TextWriter file = new StreamWriter(filename, false);
 
             string header = "COUNTER, INTERPOLATED, RAW_CQ, AF3, F7, F3, FC5, T7, P7, O1, O2, P8," +
-                "T8, FC6, F4, F8, AF4, GYROX, GYROY, TIMESTAMP, ES_TIMESTAMP, FUNC_ID, FUNC_VALUE, MARKER, SYNC_SIGNAL";
+                "T8, FC6, F4, F8, AF4, GYROX, GYROY, TIMESTAMP, MARKER_HARDWARE, ES_TIMESTAMP, FUNC_ID, FUNC_VALUE, MARKER, SYNC_SIGNAL";
             
             file.WriteLine(header);
             file.Close();
@@ -94,6 +94,12 @@ namespace EEG_Data_Logger
 
             for (int i = 0; i < 5000; i++)
             {
+                //Example for set marker to data stream
+                //if (i % 37 == 0)
+                //{
+                //    p.engine.DataSetMarker((uint)p.userID, i);
+                //}
+                
                 p.Run();
                 Thread.Sleep(10);
             }
