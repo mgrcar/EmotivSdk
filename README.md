@@ -71,8 +71,7 @@ Table below describe examples indetail :
 | FacialExpression | Yes | Objective-C, Java | Mac, iOS, Android |
 | GyroData | Yes | C++ | Win, Mac, Ubuntu |
 | HeadsetInformationLogger | Yes | C++, C#, Java, Python | Win, Mac, Ubuntu |
-| MentalCommandDemo | Yes | C++ | Win, Mac, Ubuntu |
-| MentalCommand | Yes | Objective-C, Java | Mac, iOS, Android |
+| MentalCommand | Yes | C++, Objective-C, Java | Win, Mac, Ubuntu, Android, iOS |
 | MentalCommandWithCloudProfile | Yes | C++, C#, Java, Python | Win, Mac, Ubuntu |
 | MentalCommandWithLocalProfile | Yes | C++ | Win, Mac, Ubuntu |
 | MotionDataLogger | Yes | C++, C#, Java, Python, Objective-C | Win, Mac, Ubuntu, Android, iOS |
@@ -87,7 +86,7 @@ Table below describe examples indetail :
 | PerformanceMetricsDemo  | No | C++, C# | Win, Mac |
 | EmotionalState  | No | Objective-C | iOS, Mac |
 
-### Doesn't support Python 64bit. 
+Doesn't support Python 64bit. 
 
 ## Apps and Tools
 
