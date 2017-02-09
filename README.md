@@ -99,12 +99,12 @@ Table below describe examples indetail :
  * [Xavier EmoKey](tools) translates Emotiv detection results to predefined sequences of keystrokes according to logical rules defined by the user.
  * Available for Windows 7 or above and Mac OS X 10.8 or above
 
-#### Insight App for Android
+#### MyEmotiv App for Android
 Requires Android 4.4.3 or later
 
 https://play.google.com/store/apps/details?id=com.emotiv.insightapp
 
-#### Insight App for iOS
+#### MyEmotiv App for iOS
 Requires iOS 8.0 or later, **excluding iOS 8.3/8.4 due to BTLE data transmission limitation in those versions**
 
 https://itunes.apple.com/us/app/emotiv-insight/id1031805596
