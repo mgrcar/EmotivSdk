@@ -98,27 +98,12 @@ Doesn't support Python 64bit.
  * [Xavier EmoKey](tools) translates Emotiv detection results to predefined sequences of keystrokes according to logical rules defined by the user.
  * Available for Windows 7 or above and Mac OS X 10.8 or above
 
-#### CPanel
-A web-based Emotiv Control Panel:
-
-https://cpanel.emotivinsight.com
-
-Compatible with Insight / EPOC / EPOC+ via:
-* BTLE:
-  * Windows 8 or above, with Firefox 43.0
-  * Mac OS X 10.10 or above, with Safari 9.0 / Firefox 43.0 / Opera 34.0
-* [Emotiv USB Universal Receiver](https://emotiv.com/store/product_9.html):
-  * Windows 7 or above, with Firefox 43.0
-  * Mac OS X 10.8 or above, with Safari 9.0 / Firefox 43.0 / Opera 34.0
-
-Please follow the instructions to install the Emotiv browser plugin before using the CPanel.
-
-#### Insight App for Android
+#### MyEmotiv App for Android
 Requires Android 4.4.3 or later
 
 https://play.google.com/store/apps/details?id=com.emotiv.insightapp
 
-#### Insight App for iOS
+#### MyEmotiv App for iOS
 Requires iOS 8.0 or later, **excluding iOS 8.3/8.4 due to BTLE data transmission limitation in those versions**
 
 https://itunes.apple.com/us/app/emotiv-insight/id1031805596
