@@ -1563,6 +1563,16 @@ namespace Emotiv
         }
 
         /// <summary>
+        /// Sets a sychronization signal 
+        /// </summary>
+        /// <param name="userId">user ID</param>            
+        /// <param name="signal">value of the synchronization signal</param>     
+        public void DataSetSychronizationSignal(UInt32 userId, Int32 signal)
+        {
+            errorHandler(EEGData.IEE_DataSetSychronizationSignal(userId, signal));
+        }
+
+        /// <summary>
         /// Gets sampling rate
         /// </summary>
         /// <param name="userId">user ID</param>            
