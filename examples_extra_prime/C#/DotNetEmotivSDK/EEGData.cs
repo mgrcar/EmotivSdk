@@ -41,6 +41,9 @@ namespace Emotiv
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_DataSetMarker")]
         static extern Int32 Unmanaged_IEE_DataSetMarker(UInt32 userId, Int32 marker);
 
+        [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_DataSetSychronizationSignal")]
+        static extern Int32 Unmanaged_IEE_DataSetSychronizationSignal(UInt32 userId, Int32 signal);
+
         [DllImport("edk.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "IEE_DataGetSamplingRate")]
         static extern Int32 Unmanaged_IEE_DataGetSamplingRate(UInt32 userId, out UInt32 pSamplingRate);
 
@@ -98,6 +101,10 @@ namespace Emotiv
         public static Int32 IEE_DataSetMarker(UInt32 userId, Int32 marker)
         {
             return Unmanaged_IEE_DataSetMarker(userId, marker);
+        }
+        public static Int32 IEE_DataSetSychronizationSignal(UInt32 userId, Int32 signal)
+        {
+            return Unmanaged_IEE_DataSetSychronizationSignal(userId, signal);
         }
 
         public static Int32 IEE_DataGetSamplingRate(UInt32 userId, out UInt32 pSamplingRateOut)
