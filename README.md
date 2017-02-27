@@ -73,7 +73,7 @@ Table below describe examples indetail :
 | HeadsetInformationLogger | Yes | C++, C#, Java, Python | Win, Mac, Ubuntu |
 | MentalCommand | Yes | C++, Objective-C, Java | Win, Mac, Ubuntu, Android, iOS |
 | MentalCommandWithCloudProfile | Yes | C++, C#, Java, Python | Win, Mac, Ubuntu |
-| MentalCommandWithLocalProfile | Yes | C++ | Win, Mac, Ubuntu |
+| MentalCommandWithLocalProfile | Yes | C++ | Win, Mac |
 | MotionDataLogger | Yes | C++, C#, Java, Python, Objective-C | Win, Mac, Ubuntu, Android, iOS |
 | MultiDongleConnection | Yes | C++, C#, Python | Win, Mac, Ubuntu |
 | SavingAndLoadingProfileCloud | Yes | C++, C#, Java, Python |Win, Mac, Ubuntu|
