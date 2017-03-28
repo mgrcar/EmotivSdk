@@ -68,7 +68,7 @@ Table below describe examples indetail :
 | AverageBandPowers (FFTSample) | Yes | C++, C#, Java, Python, Objective-C |Win, Mac, Ubuntu, Android, iOS|
 | EmoStateLogger | Yes | C++, C#, Java, Python | Win, Mac, Ubuntu |
 | FacialExpressionDemo | Yes | C++, Matlab | Win, Mac, Ubuntu |
-| FacialExpression | Yes | Objective-C, Java | Mac, iOS, Android |
+| FacialExpression | Yes | Objective-C, Java, Matlab | Mac, iOS, Android |
 | GyroData | Yes | C++ | Win, Mac, Ubuntu |
 | HeadsetInformationLogger | Yes | C++, C#, Java, Python | Win, Mac, Ubuntu |
 | MentalCommand | Yes | C++, Objective-C, Java | Win, Mac, Ubuntu, Android, iOS |
@@ -79,11 +79,11 @@ Table below describe examples indetail :
 | SavingAndLoadingProfileCloud | Yes | C++, C#, Java, Python |Win, Mac, Ubuntu|
 | ProfileCloudExample | Yes | Objective-C, Java | Mac, Android, iOS|
 | RollingBall  | Yes | Unity | Win, Mac |
-| ActivateLicense  | No | C++, C#, Java, Python | Win, Mac |
+| ActivateLicense  | No | C++, C#, Java, Python, Matlab | Win, Mac |
 | EEGLogger  | No | C++, C#, Objective-C, Java, Python, Matlab | Win, Mac |
 | MultiDongleEEGLogger  | No | C++ | Win, Mac |
 | MultilChannelEEGLogger  | No | C++ | Win, Mac |
-| PerformanceMetricsDemo  | No | C++, C# | Win, Mac |
+| PerformanceMetricsDemo  | No | C++, C#, Matlab | Win, Mac |
 | EmotionalState  | No | Objective-C | iOS, Mac |
 
 Doesn't support Python 64bit. 
