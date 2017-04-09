@@ -392,7 +392,7 @@ namespace Emotiv
         {
             hEvent = EdkDll.IEE_EmoEngineEventCreate();
             hEEGData = EEGData.IEE_DataCreate();
-            hMotionData = EdkDll.IEE_MotionDataCreate();            
+            //hMotionData = EdkDll.IEE_MotionDataCreate();
         }
 
         /// <summary>
